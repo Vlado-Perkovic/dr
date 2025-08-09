@@ -1,0 +1,958 @@
+\documentclass[diplomskirad]{fer}
+% Dodaj opciju upload za generiranje konačne verzije koja se učitava na FERWeb
+% Add the option upload to generate the final version which is uploaded to FERWeb
+
+
+\usepackage{blindtext}
+\usepackage[siunitx, fulldiodes, americanvoltages]{circuitikz}
+\usepackage{tikz}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage[colorinlistoftodos]{todonotes}
+\usetikzlibrary{shapes.geometric, calc, positioning}
+\usepackage{pgfplots}
+% \usepackage[T1]{fontenc} % Ensures proper font encoding
+% \usepackage[utf8]{inputenc} % For UTF-8 input encoding (if not already using LuaLaTeX/XeLaTeX)
+\usepackage{hyperref}    % For hyperlinks and PDF features
+% \usepackage{xmpincl}     % Required by pdfx for XMP metadata
+% \usepackage[a-2b,mathxmp]{pdfx}[2018/12/22]
+\pgfplotsset{compat=1.18}
+
+\begin{filecontents*}[overwrite]{\jobname.xmpdata}
+	\Title{Electronic speed control of a brushless DC motor for drones}
+	\Author{Vlado Perković}
+	\Language{hr-HR} % Set appropriate language code
+	\Subject{Diplomski rad - Upravljanje brzinom vrtnje istosmjernih motora bez četkica kod bespilotnih letjelica}
+	\Keywords{istosmjerni motor bez četkica\sep BLDC\sep elektroničko upravljanje brzinom\sep ESC\sep bespilotne letjelice\sep dronovi\sep komutacija u šest koraka\sep protuelektromotorna sila\sep PEMS\sep bezosjetilno upravljanje}
+\end{filecontents*}
+%--- PODACI O RADU / THESIS INFORMATION ----------------------------------------
+
+% Naslov na engleskom jeziku / Title in English
+\title{Electronic speed control of a brushless DC motor for drones}
+
+% Naslov na hrvatskom jeziku / Title in Croatian
+\naslov{Upravljanje brzinom vrtnje istosmjernih motora bez četkica kod bespilotnih letjelica}
+
+% Broj rada / Thesis number
+\brojrada{1150}
+
+% Autor / Author
+\author{Vlado Perković}
+
+% Mentor 
+\mentor{doc. dr. sc. Leonardo Jelenković}
+
+% Datum rada na engleskom jeziku / Date in English
+\date{June, 2025}
+
+% Datum rada na hrvatskom jeziku / Date in Croatian
+\datum{lipanj, 2025.}
+
+%-------------------------------------------------------------------------------
+
+% tikz postavke
+\tikzset{dot/.style={fill,circle,minimum size=4pt,inner sep=0pt}}
+
+\begin{document}
+
+% Naslovnica se automatski generira / Titlepage is automatically generated
+\maketitle
+
+%--- ZADATAK / THESIS ASSIGNMENT -----------------------------------------------
+
+% Zadatak se ubacuje iz vanjske datoteke / Thesis assignment is included from external file
+% Upiši ime PDF datoteke preuzete s FERWeb-a / Enter the filename of the PDF downloaded from FERWeb
+\zadatak{hr_0036535500_90.pdf}
+
+%--- ZAHVALE / ACKNOWLEDGMENT --------------------------------------------------
+
+\begin{zahvale}
+	% Ovdje upišite zahvale / Write in the acknowledgment
+	Hvala na čaju...
+\end{zahvale}
+
+% Odovud započinje numeriranje stranica / Page numbering starts from here
+\mainmatter
+
+% Sadržaj se automatski generira / Table of contents is automatically generated
+\tableofcontents
+\listoftodos{}
+\newpage
+
+%--- UVOD / INTRODUCTION -------------------------------------------------------
+\chapter{Uvod}
+\label{pog:uvod}
+
+Bespilotne letjelice (eng. \textit{Unmanned Aerial Vehicle, UAV}), popularno
+zvane dronovi, danas se široko primjenjuju u brojnim industrijama, od filmske
+produkcije i poljoprivrede do dostave i rekreacijskog letenja
+\cite{cite:primjena}. Osnovu njihova pogona čini istosmjerni motor bez četkica,
+čije karakteristike poput visoke učinkovitosti, pouzdanosti i dobrog omjera
+snage i mase omogućuju razvoj agilnih i energetski učinkovitih letjelica.
+Performance drona, uključujući stabilnost, vrijeme leta i agilnost, izravno
+ovise o sposobnosti preciznog i brzog upravljanja brzinom vrtnje ovih motora
+\cite{cite:karakteristike_motora}.
+
+Ovaj rad bavi se analizom, modeliranjem, simulacijom i implementacijom sustava
+za upravljanje brzinom vrtnje motora BLDC s naglaskom na primjenu kod
+bespilotnih letjelica. Cilj je istražiti i implementirati sustav upravljanja
+bez korištenja osjetila, temeljen na metodi komutacije u šest koraka, koja je
+zbog svoje jednostavnosti čest odabir u komercijalnim rješenjima. Kroz rad će
+se analizirati i temeljni kompromisi u dizajnu motora, poput izbora
+konfiguracije namotaja, kako bi se razumio njihov utjecaj na konačne
+performance.
+
+Drugo poglavlje daje teorijsku podlogu o motorima BLDC. Treće poglavlje
+detaljno opisuje upravljanje motora BLDC bez osjetila, s fokusom na komutaciju
+u šest koraka. Četvrto poglavlje prikazuje sklopovlje sustava, opisuje odabrani
+elektronički sklop za upravljanje brzinom (eng. \textit{Electronic Speed
+	Controller, ESC}) te odabrani motor i mikrokontroler za upravljanje sklopom
+ESC. Peto poglavlje opisuje implementaciju razvijenog algoritma na odabranom
+sklopovlju, dok šesto poglavlje donosi zaključak i sažima rezultate rada.
+%-------------------------------------------------------------------------------
+\chapter{Istosmjerni elektromotor bez četkica}
+\label{pog:bldc}
+
+Istosmjerni elektromotor bez četkica, poznat i kao beskolektorski istosmjerni
+motor ili elektronički komutirani motor (eng. \textit{Brushless DC motor,
+	BLDC}), vrsta je elektromotora sa stalnim magnetima čija je temeljna značajka
+rad bez mehaničkog kolektora i četkica. Sastoji se od statora i rotora.
+Armaturni namoti, kroz koje teče električna struja, nalaze se na statoru, dok
+je rotor najčešće izrađen od stalnih magneta koji stvaraju uzbudno magnetsko
+polje \cite{elektromotor-beskolektorski}. \missingfigure{umetni sliku presjeka
+	motora}
+
+Valja spomenuti kako uz motore BLDC usko se vežu sinkroni elektromotori sa
+stalnim magnetima (\textit{Permanent Magnet Synchronous Motor, PMSM}). Takvi
+motori također su vrsta elektromotora sa stalnim magnetima i glavna je razlika
+valni oblik protuelektromotorne sile gdje motor BLDC ima trapezni oblik, a
+motor PMSM ima sinusni oblik. Dalje u radu oslanjat će se na motore BLDC iako
+većina stvari vrijedi i za motore PMSM
+\cite{elektromotor-sa-stalnim-magnetima}.
+
+Rad motora bez četkica temelji se na kontroliranoj interakciji između rotora s
+permanentnim magnetima i magnetskog polja statora. Umjesto mehaničkog kolektora
+za komutaciju, koji je podložan trošenju i zahtijeva održavanje, koristi
+elektroničku komutaciju, kojom upravlja sklop ESC, za sekvencijalno napajanje
+namota statora i generiranje rotacije \cite{cite:disertacija}.
+
+Stator tipičnog trofaznog motora BLDC sadrži namote koji su prostorno
+raspoređeni pod kutom od 120 električnih stupnjeva. Da bi se izazvala rotacija,
+sklop ESC primjenjuje struju na te namote u određenom slijedu. Ovo
+sekvencijalno napajanje generira magnetsko polje koje se rotira oko unutarnjeg
+oboda statora. Stalne magnete na rotoru kontinuirano privlače polovi ovog
+rotirajućeg polja statora. Rezultirajuća magnetska sila stvara moment koji
+prisiljava rotor da se okreće, neprestano prateći pokretno polje. Da bi se ova
+rotacija učinkovito održavala, sklop ESC mora prebaciti struju na sljedeći skup
+namota u točno određenom trenutku u odnosu na kutni položaj rotora (poglavlje
+\ref{sec:six-step}) \cite{MicrochipAN885}.
+
+Kako se pokazalo da trofazni motori nude najbolji omjer učinkovitosti i
+kompleksnosti sklopa za upravljanje, koriste se kao industrijski standard
+\cite{cite:trofazni}. Dalje u radu kada se spomene motor BLDC, odnosit će se na
+trofaznu inačicu.
+
+Potpunim uklanjanjem kolektora i četkica izbjegavaju se najveći nedostaci
+klasičnih istosmjernih strojeva kao što su, osim već navedenog mehaničkog
+trošenja i čestog održavanja, iskrenje, i ograničen vijek trajanja. Zbog svoje
+pouzdanosti, učinkovitosti često i preko 80\% \cite{motor-ucinkovitost} i
+mogućnosti postizanja iznimno velikih brzina (preko 70 000 okretaja u minuti
+\cite{motor-rpm}), beskolektorski se motori danas široko primjenjuju u
+sustavima kao što su bespilotne letjelice, servopogoni, pogoni tvrdih diskova u
+računalima, medicinski uređaji, moderni alatni strojevi te u audio i video
+tehnici.
+
+\newpage
+\section{Klasifikacija motora BLDC}
+Istosmjerni motori bez četkica mogu se klasificirati na nekoliko načina: po
+konstrukciji, po valnom obliku protuelektromotorne sile, po posjedovanju
+osjetila te po konfiguraciji namotaja na statoru. Ove klasifikacije pomažu u
+odabiru odgovarajućeg motora za određenu primjenu \cite{cite:bldc}.
+
+\subsection{Raspored rotora i statora}
+Konstrukcija motora BLDC obično se sastoji od stacionarnog dijela, statora, i
+rotirajućeg dijela, rotora. U statoru su smještene zavojnice, bakreni namotaji
+koji djeluju kao elektromagneti. Na rotoru su stalni magneti. Dva glavna tipa
+rasporeda ovih komponenti čine:
+\subsubsection{Unutarnji ili \textit{ Inrunner } motor} Rotor se nalazi unutar statora. Unutarnji motori općenito imaju manji
+moment tromosti i sposobni su za veće brzine vrtnje \cite{cite:bldc}.
+\missingfigure{figura inrunner}
+\subsubsection{Vanjski ili \textit{ Outrunner } motor} Rotor je izvana i okružuje stator. Outrunner motori obično daju veći
+okretni moment pri nižim brzinama vrtnje \cite{cite:bldc}.
+\missingfigure{figura outrunner}
+
+\subsection{Valni oblik protuelektromotorne sile}
+
+Protuelektromotorna sila (eng. \textit {Counter-electromotive force,
+	Back-electromotive force, back-EMF}) je napon koji se stvara u zavojnicama
+motora dok se rotor rotira, a suprotstavlja se glavnom naponu koji se dovodi u
+motor. Ovaj se napon inducira u skladu s Faradayevim zakonom elektromagnetske
+indukcije. Postoje trapezoidalni valni oblik (slika \ref{fig:trapezoid}) i
+sinusoidalni valni oblik (slika \ref{fig:sine}) protuelektromotorne sile.
+
+\begin{figure}[h!]
+	\centering
+	\captionsetup[subfigure]{skip=10pt}
+
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\begin{tikzpicture}[yscale=0.5]
+			\begin{scope}[local bounding box=trapezoid]
+				\draw [densely dotted] (0,0)  -- +(6,0);
+				\draw (0,-1) foreach \x in {1,2,3} { -- ++(0.4,2) -- ++(0.6,0) -- ++(0.4,-2) -- ++(0.6,0) };
+			\end{scope}
+		\end{tikzpicture}
+		\subcaption{Trapezoidalni valni oblik}
+		\label{fig:trapezoid}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\begin{tikzpicture}[yscale=0.5]
+			\begin{scope}[local bounding box=sine]
+				\draw [densely dotted] (0,0)  -- +(6,0);
+				\draw plot[domain=0:6,variable=\x,samples=51,smooth] (\x,{sin(deg(\x*pi))});
+			\end{scope}
+		\end{tikzpicture}
+		\subcaption{Sinusoidalni valni oblik}
+		\label{fig:sine}
+	\end{subfigure}
+
+	\caption{Usporedba valnih oblika PEMS-a}
+	\label{fig:waveforms}
+\end{figure}
+
+Poznavanje valnog oblika protuelektromotorne sile postaje važno pri upravljanju
+okretanja elektromotora jer se valni oblici pokretačkog signala i PEMS-a moraju
+poklapati za minimizaciju valovitosti momenta (odjeljak
+\ref{trap:torque-ripple}) \cite{MicrochipAN885}.
+
+\subsection{Motori s i bez osjetila}
+
+Kako bi se postigla pravilna komutacija, upravljač mora znati točan položaj
+rotora u svakom trenutku. To se može postići osjetilima te bez osjetila uz
+naprednije tehnike poput detekcije protuelektromotorne sile. Od osjetila
+najčešće se koriste osjetila Hallovog učinka za pružanje povratnih informacija
+upravljaču o položaju rotora. Tri takva osjetila obično se postavljaju na
+stator. Dok magneti rotora prolaze preko ovih osjetila, oni stvaraju digitalni
+signal koji pokazuje položaj rotora. Osim njih, također se koriste enkoderi i
+optička osjetila.
+
+S druge strane, radi smanjenja troškova i složenosti, koriste se tehnike
+upravljanja motorom bez osjetila. Kod metode komutacije u šest koraka, često se
+naziva i trapezna komutacija, popularna je tehnika praćenja PEMS-a u kojoj
+upravljač zaključuje položaj rotora praćenjem PEMS-a koji se inducira u fazi
+bez napona (odjeljak \ref{sec:six-step}). Složenije metode komutacije poput
+sinusne komutacije i vektorskog upravljanja koriste algoritme za estimaciju
+položaja rotora jer nemaju mogućnost mjerenja PEMS-a \cite{NXP_AN2355}.
+
+\subsection{Konfiguracija namotaja na statoru}
+\label{sec:konfiguracija_namotaja}
+Na trofaznom motoru BLDC namotaji na statoru mogu biti u dvije glavne
+konfiguracije:
+
+U \textbf{zvjezdastom spoju (eng. \textit{Wye, Star connection})} tri zavojnice
+spojene su u zajedničkoj središnjoj točki, zvjezdištu (točka \textit{n} na
+slici \ref{fig:wye}). Fazni napon niži je od mrežnog napona ($V_{\text{faza}} =
+	V_{\text{mreža}} / \sqrt{3}$), a fazna struja jednaka je mrežnoj struji.
+
+U \textbf{trokutnom spoju (eng. \textit{Delta connection})} zavojnice su
+spojene međusobno u trokut (slika \ref{fig:delta}). Fazni napon jednak je
+mrežnom naponu ($V_{\text{faza}} = V_{\text{mreža}}$), a fazna struja niža je
+od mrežne struje ($I_{\text{faza}} = I_{\text{mreža}} / \sqrt{3}$).
+
+Zbog ove razlike u faznim naponima, za dva motora s ovim konfiguracijama i
+pripadnim konstantama motora $K_{t, Z}$ i $K_{t, T}$ za proizvesti jednak
+moment $\tau$ vrijedi: \\
+
+Moment se može izraziti preko izraza $\tau = K_t \cdot I_{\text{faza}}$, a
+odnos konstanti momenta je $K_{t, T} = K_{t, Z} / \sqrt{3}$
+\cite{cite:disertacija}.
+
+Da bi se proizveo jednak moment, odnos faznih struja mora biti:
+
+\begin{align*}
+	K_{t,Z} \cdot I_{\text{faza},Z}  & = K_{t,T} \cdot I_{\text{faza},T}                                 \\
+	K_{t,Z} \cdot I_{\text{faza},Z}  & = \left( \frac{K_{t,Z}}{\sqrt{3}} \right) \cdot I_{\text{faza},T} \\
+	\sqrt{3} \cdot I_{\text{faza},Z} & = I_{\text{faza},T}
+\end{align*}
+Ovaj rezultat pokazuje da za isti moment, fazna struja u trokutnom spoju mora biti $\sqrt{3}$ puta veća od fazne struje u zvjezdastom spoju.
+Koristeći ovaj odnos, sada se mogu usporediti linijske struje ($I_L$) koje motori vuku iz izvora napajanja.
+\begin{align*}
+	I_{L,T} & = \sqrt{3} \cdot I_{\text{faza},T}                  &  & \text{(Definicija linijske struje za trokut)}              \\
+	        & = \sqrt{3} \cdot (\sqrt{3} \cdot I_{\text{faza},Z}) &  & \text{(Uvrštavanje odnosa faznih struja)}                  \\
+	        & = 3 \cdot I_{\text{faza},Z}                                                                                         \\
+	        & = 3 \cdot I_{L,Z}                                   &  & \text{(Budući da je } I_{\text{faza},Z} = I_{L,Z} \text{)}
+\end{align*}
+
+Izvod pokazuje da za proizvodnju istog momenta, motor spojen u trokut zahtijeva
+tri puta veću linijsku struju od motora spojenog u zvijezdu. Ova temeljna
+razlika u potrebnoj struji definira njihovu primjenu koja je opisana u
+sljedećem odjeljku \ref{sec:moment_brzina}.
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\begin{circuitikz}[american, cute inductors]
+			\path (0,0) coordinate(n) node[above,red]{$n$};
+			\draw(n) to[L , L=$L$, *-o] ++(-90:3) coordinate(c) node[left,red]{$c$};
+			\draw(n) to[L , L=$L$, *-o] ++(30:3)  coordinate(b) node[above,red]{$b$};
+			\draw(n) to[L , L=$L$, *-o] ++(150:3) coordinate(a) node[left,red]{$a$};
+			\draw (a) node[dot] {};
+			\draw (b) node[dot] {};
+			\draw (c) node[dot] {};
+			\draw (n) node[dot] {};
+		\end{circuitikz}
+		\caption{Zvijezda}
+		\label{fig:wye}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\begin{circuitikz}[american, cute inductors]
+
+			\begin{scope}[yshift=-7cm]
+				\path (0,0) coordinate(n) ;
+				\draw (n) ++( -30:2) coordinate(a) node[below,red]{$a$};
+				\draw (n) ++(  90:2) coordinate(c) node[above,red]{$c$};
+				\draw (n) ++(-150:2) coordinate(b) node[left,red]{$b$};
+				\draw (c) to[L , L=$L$, o-o] (a);
+				\draw (a) to[L , L=$L$, o-o] (b);
+				\draw (b) to[L , L=$L$, o-o] (c);
+				\draw (a) node[dot] {};
+				\draw (b) node[dot] {};
+				\draw (c) node[dot] {};
+			\end{scope}
+		\end{circuitikz}
+		\caption{Trokut}
+		\label{fig:delta}
+	\end{subfigure}
+	\caption{Konfiguracije namotaja}
+	\label{fig:wye-delta}
+\end{figure}
+
+\newpage
+\section{Odnos momenta i brzine vrtnje}
+\label{sec:moment_brzina}
+
+Performance motora BLDC temelje se na kompromisu između okretnog momenta i
+brzine vrtnje.
+
+S jedne strane, okretni moment ($\tau$) izravno je proporcionalan struji ($I$)
+prema izrazu $\tau = K_t \cdot I$ (odjeljak \ref{sec:konfiguracija_namotaja}).
+S druge strane, rotacijom se inducira PEMS ($V_{\text{pems}}$) koji se
+suprotstavlja naponu napajanja i proporcionalan je kutnoj brzini ($\omega$)
+prema izrazu $V_{\text{pems}} = K_e \cdot \omega$. Porast brzine uzrokuje
+porast $V_{\text{pems}}$, što smanjuje efektivni napon na namotajima, a time i
+struju i raspoloživi moment. Motor dostiže svoju maksimalnu brzinu, odnosno
+brzinu praznog hoda, kada se $V_{\text{pems}}$ približi naponu napajanja, čime
+se moment smanjuje na nulu (zanemarujući trenje) što se može vidjeti na slici
+\ref{fig:torque_speed}. U zoni kontinuiranog momenta porast brzine ne utječe na
+moment i to područje je omeđeno nazivnim momentom i nazivnom brzinom.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{Figures/microchip_torque_speed.png}
+	\caption{Graf omjera momenta i brzine (prilagođeno prema \cite{MicrochipAN885})}
+	\label{fig:torque_speed}
+\end{figure}
+
+Na ovaj kompromis presudno utječe konfiguracija namotaja statora, kao što je
+opisano u odjeljku \ref{sec:konfiguracija_namotaja}. Budući da su konstante
+$K_t$ i $K_e$ povezane, izbor konfiguracije definira momentnu karakteristiku
+motora.
+
+\begin{itemize}
+	\item \textbf{Zvjezdasti spoj -} Zbog veće efektivne duljine namotaja, ova konfiguracija ima višu konstantu momenta ($K_t$) i posljedično višu konstantu protuelektromotorne sile ($K_e$). To rezultira visokom momentnom učinkovitošću (veći moment po amperu), ali i nižom maksimalnom brzinom jer $V_{\text{pems}}$ brže doseže napon napajanja.
+
+	\item \textbf{Trokutni spoj -} Ova konfiguracija ima niži $K_t$ i $K_e$ (za faktor $\sqrt{3}$). Kao što je spomenuto u odjeljku \ref{sec:konfiguracija_namotaja}, za isti moment zahtijeva znatno veću struju, što smanjuje učinkovitost. Međutim, niži $K_e$ omogućuje motoru postizanje veće maksimalne brzine prije nego što $V_{\text{pems}}$ postane ograničavajući faktor.
+\end{itemize}
+
+Izbor između ove dvije konfiguracije stoga predstavlja inženjerski kompromis.
+Zvjezdasti spoj preferira se u primjenama gdje su prioritet visoki moment pri
+nižim brzinama i energetska učinkovitost, poput dronova za snimanje. S druge
+strane, trokutni spoj odabire se za primjene gdje je cilj postizanje maksimalne
+brzine, kao kod trkaćih dronova FPV, čak i po cijenu veće potrošnje struje.
+
+\newpage
+\section{Matematički model motora}
+\label{sec:mat_model}
+\todo[inline]{matlab sim nije gotova pa ne znam sto mi sve treba ovdje, mozda stavit ovo kod ZCD}
+
+\begin{figure}[h!]
+	\centering
+	\begin{circuitikz}[european, cute inductors]
+		\path (0,0) coordinate(n) node[above,red]{$n$};
+		\draw(n)
+		to[short] ++(-90:0.4)
+		to[V , V>=$V_{ec}$] ++(-90:1.2)
+		to[L , L=$L_c$] ++(-90:1.2)
+		to[R , R=$R_c$] ++(-90:1.2)
+		to[short] ++(-90:0.4)
+		coordinate(c) node[left,red]{$c$};
+		\draw(n)
+		to[short] ++(30:0.4)
+		to[V , V>=$V_{eb}$] ++(30:1.2)
+		to[L , L=$L_b$] ++(30:1.2)
+		to[R , R=$R_b$] ++(30:1.2)
+		to[short] ++(30:0.4)
+		coordinate(b) node[above,red]{$b$};
+		\draw(n)
+		to[short] ++(150:0.4)
+		to[V , V>=$V_{ea}$] ++(150:1.2)
+		to[L , L=$L_a$] ++(150:1.2)
+		to[R , R=$R_a$] ++(150:1.2)
+		to[short] ++(150:0.4)
+		coordinate(a) node[left,red]{$a$};
+		\draw (a) node[dot] {};
+		\draw (b) node[dot] {};
+		\draw (c) node[dot] {};
+		\draw (n) node[dot] {};
+	\end{circuitikz}
+	\caption{Model motora}
+	\label{fig:wye-math}
+\end{figure}
+\newpage
+
+\chapter{Upravljanje motorom BLDC bez osjetila}
+\label{pog:bldc_upravljanje_bez_senzora}
+
+Metoda koja se koristi za upravljanje motorom BLDC utječe na izvedbu motora,
+njegovu učinkovitost i glatkoću rada. Odabir metode upravljanja ovisi o
+karakteristikama motora kao što je valni oblik PEMS-a i zahtjevima primjene
+\cite{cite:bldc}. Ovaj rad koristi metodu komutacije u šest koraka s detekcijom
+PEMS-a.
+
+\section{Metoda komutacije u šest koraka}
+\label{sec:six-step}
+
+Metoda komutacije u šest koraka, poznata i kao trapezno upravljanje, stvara
+rotirajuće magnetsko polje statora sekvencijalnim napajanjem parova namotaja. U
+svakom trenutku, struja teče kroz dva od tri fazna namotaja, dok je treći
+namotaj neopterećen, to jest u stanju visoke impedancije. Jedan električni
+ciklus rotacije sastoji se od šest ovakvih koraka, pri čemu se vektor
+magnetskog polja statora zakreće za 60 električnih stupnjeva pri svakom
+prijelazu \cite{cite:bldc, NXP_AN2355}.
+
+Slijed komutacije osmišljen je tako da magnetsko polje rotora, odnosno stalni
+magneti, uvijek zaostaje za poljem statora, što stvara moment koji pokreće
+rotor. Za ilustraciju, prva dva koraka u tipičnom slijedu su:
+
+\begin{itemize}
+	\item \textbf{Korak 1:} Struja teče iz faze A u fazu B. Faza C je neopterećena. Magnetsko polje statora zauzima određeni položaj.
+	      \missingfigure{a+/b-, neka je 3 navoja, 2 para magneta}
+
+	\item \textbf{Korak 2:} Struja teče iz faze C u fazu B. Faza A je sada neopterećena. Magnetsko polje statora zakreće se za 60 električnih stupnjeva u odnosu na prethodni korak.
+	      \missingfigure{b-/c+, neka je 3 navoja, 2 para magneta}
+\end{itemize}
+
+Ovaj se proces nastavlja kroz preostala četiri koraka (C->A, B->A, B->C, A->C),
+čime se zatvara puni električni ciklus od 360 stupnjeva. \todo[inline]{ovdje
+	objasni razliku izmedju elektricnih i mehanickih stupnjeva na temelju 2
+	dijagrama iznad}
+
+Budući da se magnetsko polje mijenja u diskretnim koracima, generirani moment
+nije u potpunosti gladak, već sadrži male oscilacije poznate kao valovitost
+momenta. Te se oscilacije pojavljuju prilikom svake komutacije \cite{TI2015}.
+\label{trap:torque-ripple} \missingfigure{slika valovitosti momenta, probat cu
+	u matlabu odsimulirat}
+
+\newpage
+\section{Upravljanje naponom i strujom pomoću PWM-a}
+
+Za pogon motora BLDC koristi se trofazni mosni pretvarač (eng.
+\textit{three-phase inverter}), koji se sastoji od tri polumosta, po jedan za
+svaku fazu motora. Svaki polumost čine dva tranzistora, gornji i donji, koji
+omogućuju spajanje faze na pozitivni ili negativni pol napajanja (slika
+\ref{fig:inverter}) \cite{TI2015,ST_AN1946,MicrochipAN885}.
+
+\begin{figure}[h]
+	\centering
+	\resizebox{\textwidth}{!}{
+		\begin{circuitikz}[european, cute inductors]
+			\draw[V<={$e_a$},/tikz/circuitikz/bipoles/length=1.1cm](14.0,-6.0)to(15.0,-6.0);
+			\draw[V<={$e_b$},/tikz/circuitikz/bipoles/length=1.1cm](14.0,-7.5)to(15.0,-7.5);
+			\draw[V<={$e_c$},/tikz/circuitikz/bipoles/length=1.1cm](14.0,-9.0)to(15.0,-9.0);
+			\draw[L={$L_a$},/tikz/circuitikz/bipoles/length=1.1cm](12.5,-6.0)to(13.5,-6.0);
+			\draw[L={$L_b$},/tikz/circuitikz/bipoles/length=1.1cm](12.5,-7.5)to(13.5,-7.5);
+			\draw[L={$L_c$},/tikz/circuitikz/bipoles/length=1.1cm](12.5,-9.0)to(13.5,-9.0);
+			\draw[R={$R_a$},/tikz/circuitikz/bipoles/length=1.1cm](11.0,-6.0)to(12.0,-6.0);
+			\draw[R={$R_b$},/tikz/circuitikz/bipoles/length=1.1cm](11.0,-7.5)to(12.0,-7.5);
+			\draw[R={$R_c$},/tikz/circuitikz/bipoles/length=1.1cm](11.0,-9.0)to(12.0,-9.0);
+			\draw[short={}](15.0,-6.0)to(15.0,-6.0);
+			\draw[short={}](15.0,-6.0)to(15.5,-6.0);
+			\draw[short={}](15.5,-6.0)to(15.5,-6.0);
+			\draw[short={}](15.5,-6.0)to(15.5,-9.0);
+			\draw[short={}](15.5,-9.0)to(15.5,-9.0);
+			\draw[short={}](15.0,-9.0)to(15.5,-9.0);
+			\draw[short={}](15.0,-7.5)to(15.5,-7.5);
+			\draw[short={}](13.5,-7.5)to(14.0,-7.5);
+			\draw[short={}](14.0,-7.5)to(14.0,-7.5);
+			\draw[short={}](13.5,-6.0)to(14.0,-6.0);
+			\draw[short={}](13.5,-9.0)to(14.0,-9.0);
+			\draw[short={}](12.0,-9.0)to(12.5,-9.0);
+			\draw[short={}](12.0,-7.5)to(12.5,-7.5);
+			\draw[short={}](12.0,-6.0)to(12.5,-6.0);
+			\draw[short={}](11.0,-9.0)to(10.0,-9.0);
+			\ctikzset{tripoles/mos style/arrows}
+			\draw node[nmos,scale=0.59,xscale=1,yscale=1,rotate=0](Q25) at (10.0,-10.0) {} node[anchor=west,scale=0.9] at (Q25.text){}
+			node[left=5mm,scale=0.9] at (Q25.text) {$S_{6}$};
+			\draw (Q25.C) -- ++(0.6,0) to[D,invert,*-*, /tikz/circuitikz/bipoles/length=0.9cm] ++(0,-0.9) -- (Q25.E);
+			\draw[short](Q25.C)to(10.0,-9.5);
+			\draw[short](Q25.E)to(10.0,-10.5);
+			\ctikzset{tripoles/mos style/arrows}
+			\draw node[nmos,scale=0.59,xscale=1,yscale=1,rotate=0](Q26) at (10.0,-5.0) {} node[anchor=west,scale=0.9] at (Q26.text){}
+			node[left=5mm,scale=0.9] at (Q26.text) {$S_{5}$};
+			\draw (Q26.C) -- ++(0.6,0) to[D,invert,*-*, /tikz/circuitikz/bipoles/length=0.9cm] ++(0,-0.9) -- (Q26.E);
+			\draw[short](Q26.C)to(10.0,-4.5);
+			\draw[short](Q26.E)to(10.0,-5.5);
+			\ctikzset{tripoles/mos style/arrows}
+			\draw node[nmos,scale=0.59,xscale=1,yscale=1,rotate=0](Q27) at (7.5,-5.0) {} node[anchor=west,scale=0.9] at (Q27.text){}
+			node[left=5mm,scale=0.9] at (Q27.text) {$S_{3}$};
+			\draw (Q27.C) -- ++(0.6,0) to[D,invert,*-*, /tikz/circuitikz/bipoles/length=0.9cm] ++(0,-0.9) -- (Q27.E);
+			\draw[short](Q27.C)to(7.5,-4.5);
+			\draw[short](Q27.E)to(7.5,-5.5);
+			\ctikzset{tripoles/mos style/arrows}
+			\draw node[nmos,scale=0.59,xscale=1,yscale=1,rotate=0](Q28) at (7.5,-5.0) {} node[anchor=west,scale=0.9] at (Q28.text){};
+			\draw[short](Q28.C)to(7.5,-4.5);
+			\draw[short](Q28.E)to(7.5,-5.5);
+			\ctikzset{tripoles/mos style/arrows}
+			\draw node[nmos,scale=0.59,xscale=1,yscale=1,rotate=0](Q29) at (7.5,-10.0) {} node[anchor=west,scale=0.9] at (Q29.text){}
+			node[left=5mm,scale=0.9] at (Q29.text) {$S_{4}$};
+			\draw (Q29.C) -- ++(0.6,0) to[D,invert,*-*, /tikz/circuitikz/bipoles/length=0.9cm] ++(0,-0.9) -- (Q29.E);
+			\draw[short](Q29.C)to(7.5,-9.5);
+			\draw[short](Q29.E)to(7.5,-10.5);
+			\ctikzset{tripoles/mos style/arrows}
+			\draw node[nmos,scale=0.59,xscale=1,yscale=1,rotate=0](Q30) at (5.0,-10.0) {} node[anchor=west,scale=0.9] at (Q30.text){}
+			node[left=5mm,scale=0.9] at (Q30.text) {$S_{2}$};
+			\draw (Q30.C) -- ++(0.6,0) to[D,invert,*-*, /tikz/circuitikz/bipoles/length=0.9cm] ++(0,-0.9) -- (Q30.E);
+			\draw[short](Q30.C)to(5.0,-9.5);
+			\draw[short](Q30.E)to(5.0,-10.5);
+			\ctikzset{tripoles/mos style/arrows}
+			\draw node[nmos,scale=0.59,xscale=1,yscale=1,rotate=0](Q31) at (5.0,-5.0) {} node[anchor=west,scale=0.9] at (Q31.text){};
+			\draw[short](Q31.C)to(5.0,-4.5);
+			\draw[short](Q31.E)to(5.0,-5.5);
+			\ctikzset{tripoles/mos style/arrows}
+			\draw node[nmos,scale=0.59,xscale=1,yscale=1,rotate=0](Q32) at (5.0,-5.0) {} node[anchor=west,scale=0.9] at (Q32.text){}
+			node[left=5mm,scale=0.9] at (Q32.text) {$S_{1}$};
+			\draw (Q32.C) -- ++(0.6,0) to[D,invert,*-*, /tikz/circuitikz/bipoles/length=0.9cm] ++(0,-0.9) -- (Q32.E);
+			\draw[short](Q32.C)to(5.0,-4.5);
+			\draw[short](Q32.E)to(5.0,-5.5);
+			\draw node[ground] (G33) at (5.0, -10.5) {} node[anchor=north] at ([yshift=-0.6cm]G33.text){};
+			\draw node[ground] (G34) at (7.5, -10.5) {} node[anchor=north] at ([yshift=-0.6cm]G34.text){};
+			\draw node[ground] (G35) at (10.0, -10.5) {} node[anchor=north] at ([yshift=-0.6cm]G35.text){};
+			\draw(5.0,-4.5)to(5.0,-4.5) node[vcc] {};
+			\draw(7.5,-4.5)to(7.5,-4.5) node[vcc] {};
+			\draw(10.0,-4.5)to(10.0,-4.5) node[vcc] {};
+			\draw[short={}](7.5,-5.5)to(7.5,-5.5);
+			\draw[short={}](7.5,-9.5)to(7.5,-5.5);
+			\draw[short={}](5.0,-9.5)to(5.0,-5.5);
+			\draw[short={}](10.0,-9.5)to(10.0,-5.5);
+			\draw[crossing={},/tikz/circuitikz/bipoles/length=1.1cm](9.5,-7.5)to(10.5,-7.5);
+			\draw[crossing={},/tikz/circuitikz/bipoles/length=1.1cm](9.5,-6.0)to(10.5,-6.0);
+			\draw[crossing={},/tikz/circuitikz/bipoles/length=1.1cm](7.0,-6.0)to(8.0,-6.0);
+			\draw[short={}](5.0,-6.0)to(5.0,-6.0);
+			\draw[short={}](7.0,-6.0)to(5.0,-6.0);
+			\draw[short={}](9.5,-6.0)to(8.0,-6.0);
+			\draw[short={}](11.0,-6.0)to(10.5,-6.0);
+			\draw[short={}](10.5,-6.0)to(10.5,-6.0);
+			\draw[short={}](11.0,-7.5)to(10.5,-7.5);
+			\draw[short={}](10.5,-7.5)to(10.5,-7.5);
+			\draw[short={}](9.5,-7.5)to(7.5,-7.5);
+			\draw[short={}](7.5,-7.5)to(7.5,-7.5);
+			\draw node[circ] (S55) at (5.0, -6.0) {} node[anchor=south] at ([yshift=-0.6cm]S55.text){};
+			\draw node[circ] (S56) at (7.5, -7.5) {} node[anchor=south] at ([yshift=-0.6cm]S56.text){};
+			\draw node[circ] (S57) at (10.0, -9.0) {} node[anchor=south] at ([yshift=-0.6cm]S57.text){};
+			\draw node[circ] (S58) at (15.5, -7.5) {} node[anchor=south] at ([yshift=-0.6cm]S58.text){};
+
+		\end{circuitikz}
+	}
+	\caption{Shema trofaznog mosnog spoja na motor}
+	\label{fig:inverter}
+\end{figure}
+
+Brzina vrtnje i moment motora upravljaju se regulacijom srednje vrijednosti
+napona na namotajima, što se postiže primjenom pulsno-širinske modulacije (eng.
+\textit{Pulse-Width Modulation, PWM}). Umjesto stalnog napona, na sklopke
+pretvarača dovodi se signal PWM-a visoke frekvencije. Promjenom faktora ispune
+(eng. \textit{duty cycle}) tog signala mijenja se efektivni napon na motoru, a
+time i struja koja teče kroz namotaje.
+
+\subsubsection{Tehnike primjene PWM-a za upravljanje}
+\todo[inline]{treba ponovno evaluirat, nije bas precizno}
+\begin{itemize}
+
+	\item \textbf{Oštro preklapanje (eng. \textit{hard chopping}):}
+
+	      Signal PWM-a primjenjuje se istovremeno na gornju sklopku jedne aktivne faze
+	      (npr. $S_1$ na slici \ref{fig:inverter}) i na donju sklopku druge aktivne faze
+	      (npr. $S_4$ na slici \ref{fig:inverter}). Obje sklopke se uključuju i
+	      isključuju u isto vrijeme. Kada je signal PWM-a visok, struja teče kroz $S_1$
+	      pa preko motora do $S_4$. Kada je nizak, obje se sklopke istovremeno
+	      isključuju. Zbog induktivnosti namota, struja nastavlja teći, ali sada
+	      recirkulira kroz poredne diode (eng. \textit{freewheeling diode}) suprotnih
+	      sklopki (diodu uz $S_2$ i diodu uz $S_3$) natrag prema istosmjernom izvoru.
+	      Ovakav način rada rezultira većom valovitošću struje u usporedbi s metodom
+	      glatkog preklapanja, no nudi jednostavnu izvedbu \cite{TI2015}.
+
+	\item \textbf{Glatko preklapanje (eng. \textit{soft chopping}):}
+
+	      Signal PWM-a primjenjuje se na gornju sklopku jedne aktivne faze (npr. $S_1$ na
+	      slici \ref{fig:inverter}), dok je donja sklopka druge aktivne faze (npr. $S_4$
+	      na slici \ref{fig:inverter}) stalno uključena. Kada je signal PWM-a visok,
+	      struja teče kroz $S_1$ pa preko motora do $S_4$. Kada je nizak, struja
+	      recirkulira kroz diodu uparenu uz $S_2$, što dovodi do manjih promjena struje u
+	      usporedbi s metodom oštrog preklapanja jer je pad napona duplo manji. Na slici
+	      \ref{fig:hard_chopping} prikazan je odnos signala PWM-a na tranzistorima $S_1$
+	      u zelenoj boji i $S_2$ u crvenoj boji. Za vrijeme niskog signala PWM-a, $S_2$
+	      ostaje nisko \cite{TI2015}. \todo[inline]{fale osi na slici, ponovi}
+	      \begin{figure}[h!]
+		      \centering
+		      \includegraphics[width=0.95\textwidth]{Figures/hard_chopping1.png}
+		      \caption{Glatko preklapanje u alatu LTspice}
+		      \label{fig:hard_chopping}
+	      \end{figure}
+
+	\item \textbf{Komplementarni signal PWM-a:}
+
+	      Isti scenarij kao i na prošlom primjeru, ali na nizak signal PWM-a struja
+	      recirkulira kroz tranzistor $S_2$ a kada je on nizak, uključuje se donja
+	      sklopka u istom polumostu što se može vidjeti na slici \ref{fig:soft_chopping}.
+	      Kada se zeleni signal na tranzistoru $S_1$ spusti u nisko stanje, crveni signal
+	      na tranzistoru $S_2$ sa malom stankom podigne se u visoko stanje. Ova mala
+	      stanka naziva se mrtvo vrijeme (eng. \textit{dead time}) i sprječava kratki
+	      spoj na polumostu (eng. \textit{shoot-through}). Uključivanjem donjeg
+	      tranzistora na ovaj način postiže se da struja recirkulira kroz tranzistor
+	      \cite{TI2015}. \todo[inline]{fale osi na slici}
+	      \begin{figure}[h!]
+		      \centering
+		      \includegraphics[width=0.95\textwidth]{Figures/soft_chopping.png}
+		      \caption{Komplementarni signal PWM-a u alatu LTspice}
+		      \label{fig:soft_chopping}
+	      \end{figure}
+
+\end{itemize}
+
+Izbor metode upravljanja strujom u ciklusu PWM-a utječe na dinamiku struje i
+razinu elektromagnetskih smetnji. Od metode oštrog preklapanja do metode
+komplementarnog signala PWM-a postepena je gradacija sa većih gubitaka na manje
+gubitke energije. Isto tako složenost izvedbe raste tim redoslijedom. Na
+slikama \ref{fig:hard_soft_current} mogu se vidjeti valni oblici struje kroz
+zavojnice u metodama glatkog preklapanja i komplementarnog signala PWM-a. Slika
+\ref{fig:hard_current} prikazuje brži pad struje pri niskom signalu PWM-a te
+samim time i nižu prosječnu struju od struje pri metodi komplementarnog signala
+PWM-a prikazane na slici \ref{fig:soft_current}.
+\begin{figure}[h!]
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Figures/soft_chopping_new.png}
+		\caption{Glatko preklapanje}
+		\label{fig:hard_current}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Figures/comp_pwm_new.png}
+		\caption{komplementarni signal PWM-a}
+		\label{fig:soft_current}
+	\end{subfigure}
+	\caption{
+		\begin{tabular}[t]{@{}l l@{}}
+			\textcolor{red}{\rule{1ex}{1ex}}   & Valni oblik struje \\
+			\textcolor{green}{\rule{1ex}{1ex}} & Prosječna struja   \\
+			\textcolor{blue}{\rule{1ex}{1ex}}  & Valni oblik napona \\
+		\end{tabular}
+	}	\label{fig:hard_soft_current}
+\end{figure}
+\newpage
+
+\section{Detekcija položaja rotora s pomoću PEMS-a}
+
+U sustavima bez osjetila, informacija o položaju rotora dobiva se mjerenjem
+napona protuelektromotorne sile na neopterećenoj fazi.
+
+U konfiguraciji sa zvjezdastim spojem, PEMS se idealno mjeri u odnosu na
+potencijal zvjezdišta. Budući da zvjezdište motora najčešće nije fizički
+dostupno za mjerenje, njegov se potencijal mora rekonstruirati. To se postiže
+stvaranjem virtualnog zvjezdišta (slika \ref{fig:rekonstrukcija}). Tri
+otpornika jednakog, visokog otpora $R_v$ spajaju se u zvijezdu, pri čemu je
+svaki otpornik spojen na po jednu fazu motora. Zajednička točka ta tri
+otpornika stvara virtualno zvjezdište $V_{virtual}$ čiji je potencijal jednak
+aritmetičkoj sredini napona sve tri faze. Taj se stabilni referentni napon tada
+koristi za usporedbu s naponom neopterećene faze \cite{ST_AN1946}.
+
+\begin{figure}[h]
+	\centering
+	\resizebox{\textwidth}{!}{
+		\begin{circuitikz}[european, cute inductors]
+			\draw[R={$R_a$},/tikz/circuitikz/bipoles/length=1.1cm](13.0,-6.0)to(14.5,-6.0);
+			\draw[R={$R_b$},/tikz/circuitikz/bipoles/length=1.1cm](13.0,-8.0)to(14.5,-8.0);
+			\draw[R={$R_c$},/tikz/circuitikz/bipoles/length=1.1cm](13.0,-10.0)to(14.5,-10.0);
+			\draw[short={}](14.5,-6.0)to(14.5,-6.0);
+			\draw[short={}](13.0,-10.0)to(13.0,-12.0);
+			\draw[short={}](13.0,-12.0)to(13.0,-12.0);
+			\draw[short={}](13.0,-8.0)to(11.5,-8.0);
+			\draw[short={}](11.5,-8.0)to(11.5,-8.0);
+			\draw[short={}](11.5,-8.0)to(11.5,-12.0);
+			\draw[short={}](13.0,-6.0)to(10.0,-6.0);
+			\draw[short={}](10.0,-6.0)to(10.0,-12.0);
+			\draw[short={}](10.0,-12.0)to(10.0,-12.0);
+			\draw[R={$R_v$},/tikz/circuitikz/bipoles/length=1.1cm](10.0,-12.0)to(10.0,-13.5);
+			\draw[R={$R_v$},/tikz/circuitikz/bipoles/length=1.1cm](11.5,-12.0)to(11.5,-13.5);
+			\draw[R={$R_v$},/tikz/circuitikz/bipoles/length=1.1cm](13.0,-12.0)to(13.0,-13.5);
+			\draw[short={}](10.0,-13.5)to(10.0,-14.0);
+			\draw[short={}](10.0,-14.0)to(10.0,-14.0);
+			\draw[short={}](10.0,-14.0)to(13.0,-14.0);
+			\draw[short={}](13.0,-13.5)to(13.0,-14.0);
+			\draw[short={}](13.0,-14.0)to(13.0,-14.0);
+			\draw[short={}](11.5,-13.5)to(11.5,-14.0);
+			\draw node[circ] (S38) at (11.5, -14.0) {} node[anchor=south] at ([yshift=-0.6cm]S38.text){$V_{virtual}$};
+			\ctikzset{tripoles/mos style/arrows}
+			\draw node[nmos,scale=0.59,xscale=1,yscale=1,rotate=0](Q40) at (8.0,-4.5) {} node[anchor=west,scale=0.9] at (Q40.text){}
+			node[left=5mm,scale=0.9] at (Q40.text) {$S_{5}$};
+			\draw[short](Q40.C)to(8.0,-4.0);
+			\draw[short](Q40.E)to(8.0,-5.0);
+			\ctikzset{tripoles/mos style/arrows}
+			\draw node[nmos,scale=0.59,xscale=1,yscale=1,rotate=0](Q41) at (8.0,-11.0) {} node[anchor=west,scale=0.9] at (Q41.text){}
+			node[left=5mm,scale=0.9] at (Q41.text) {$S_{6}$};
+			\draw[short](Q41.C)to(8.0,-10.5);
+			\draw[short](Q41.E)to(8.0,-11.5);
+			\ctikzset{tripoles/mos style/arrows}
+			\draw node[nmos,scale=0.59,xscale=1,yscale=1,rotate=0](Q42) at (5.0,-11.0) {} node[anchor=west,scale=0.9] at (Q42.text){}
+			node[left=5mm,scale=0.9] at (Q42.text) {$S_{4}$};
+			\draw[short](Q42.C)to(5.0,-10.5);
+			\draw[short](Q42.E)to(5.0,-11.5);
+			\ctikzset{tripoles/mos style/arrows}
+			\draw node[nmos,scale=0.59,xscale=1,yscale=1,rotate=0](Q43) at (5.0,-4.5) {} node[anchor=west,scale=0.9] at (Q43.text){}
+			node[left=5mm,scale=0.9] at (Q43.text) {$S_{3}$};
+			\draw[short](Q43.C)to(5.0,-4.0);
+			\draw[short](Q43.E)to(5.0,-5.0);
+			\ctikzset{tripoles/mos style/arrows}
+			\draw node[nmos,scale=0.59,xscale=1,yscale=1,rotate=0](Q44) at (2.0,-4.5) {} node[anchor=west,scale=0.9] at (Q44.text){}
+			node[left=5mm,scale=0.9] at (Q44.text) {$S_{1}$};
+			\draw[short](Q44.C)to(2.0,-4.0);
+			\draw[short](Q44.E)to(2.0,-5.0);
+			\ctikzset{tripoles/mos style/arrows}
+			\draw node[nmos,scale=0.59,xscale=1,yscale=1,rotate=0](Q45) at (2.0,-11.0) {} node[anchor=west,scale=0.9] at (Q45.text){}
+			node[left=5mm,scale=0.9] at (Q45.text) {$S_{2}$};
+			\draw[short](Q45.C)to(2.0,-10.5);
+			\draw[short](Q45.E)to(2.0,-11.5);
+			\draw[short={}](2.0,-5.0)to(2.0,-5.0);
+			\draw[short={}](2.0,-5.0)to(2.0,-10.5);
+			\draw[short={}](5.0,-5.0)to(5.0,-10.5);
+			\draw[short={}](8.0,-5.0)to(8.0,-10.5);
+			\draw node[ground] (G50) at (2.0, -12.5) {} node[anchor=north] at ([yshift=-0.6cm]G50.text){};
+			\draw node[ground] (G51) at (5.0, -12.5) {} node[anchor=north] at ([yshift=-0.6cm]G51.text){};
+			\draw node[ground] (G52) at (8.0, -12.5) {} node[anchor=north] at ([yshift=-0.6cm]G52.text){};
+			\draw(2.0,-3.5)to(2.0,-3.5) node[vcc] {};
+			\draw(5.0,-3.5)to(5.0,-3.5) node[vcc] {};
+			\draw(8.0,-3.5)to(8.0,-3.5) node[vcc] {};
+			\draw[short={}](2.0,-3.5)to(2.0,-4.0);
+			\draw[short={}](5.0,-3.5)to(5.0,-4.0);
+			\draw[short={}](8.0,-3.5)to(8.0,-4.0);
+			\draw[short={}](8.0,-11.5)to(8.0,-12.5);
+			\draw[short={}](5.0,-11.5)to(5.0,-12.5);
+			\draw[short={}](2.0,-11.5)to(2.0,-12.5);
+			\draw[crossing={},/tikz/circuitikz/bipoles/length=1.1cm](4.5,-6.0)to(5.5,-6.0);
+			\draw[crossing={},/tikz/circuitikz/bipoles/length=1.1cm](7.5,-6.0)to(8.5,-6.0);
+			\draw[crossing={},/tikz/circuitikz/bipoles/length=1.1cm](7.5,-8.0)to(8.5,-8.0);
+			\draw[short={}](2.0,-6.0)to(4.5,-6.0);
+			\draw[short={}](4.5,-6.0)to(4.5,-6.0);
+			\draw[short={}](5.5,-6.0)to(7.5,-6.0);
+			\draw[short={}](8.5,-6.0)to(10.0,-6.0);
+			\draw[short={}](5.0,-8.0)to(7.5,-8.0);
+			\draw[short={}](8.5,-8.0)to(8.5,-8.0);
+			\draw[crossing={},/tikz/circuitikz/bipoles/length=1.1cm](9.5,-8.0)to(10.5,-8.0);
+			\draw[crossing={},/tikz/circuitikz/bipoles/length=1.1cm](9.5,-10.0)to(10.5,-10.0);
+			\draw[crossing={},/tikz/circuitikz/bipoles/length=1.1cm](11.0,-10.0)to(12.0,-10.0);
+			\draw[short={}](8.0,-10.0)to(9.5,-10.0);
+			\draw[short={}](10.5,-10.0)to(11.0,-10.0);
+			\draw[short={}](12.0,-10.0)to(13.0,-10.0);
+			\draw[short={}](13.0,-10.0)to(13.0,-10.0);
+			\draw[short={}](8.5,-8.0)to(9.5,-8.0);
+			\draw[short={}](10.5,-8.0)to(11.5,-8.0);
+			\draw node[circ] (S80) at (10.0, -6.0) {} node[anchor=south] at ([yshift=-0.6cm]S80.text){};
+			\draw node[circ] (S81) at (11.5, -8.0) {} node[anchor=south] at ([yshift=-0.6cm]S81.text){};
+			\draw node[circ] (S82) at (13.0, -10.0) {} node[anchor=south] at ([yshift=-0.6cm]S82.text){};
+			\draw[D={},/tikz/circuitikz/bipoles/length=1.1cm](2.5,-5.0)to(2.5,-4.0);
+			\draw[D={},/tikz/circuitikz/bipoles/length=1.1cm](2.5,-11.5)to(2.5,-10.5);
+			\draw[D={},/tikz/circuitikz/bipoles/length=1.1cm](5.5,-11.5)to(5.5,-10.5);
+			\draw[D={},/tikz/circuitikz/bipoles/length=1.1cm](5.5,-5.0)to(5.5,-4.0);
+			\draw[D={},/tikz/circuitikz/bipoles/length=1.1cm](8.5,-5.0)to(8.5,-4.0);
+			\draw[D={},/tikz/circuitikz/bipoles/length=1.1cm](8.5,-11.5)to(8.5,-10.5);
+			\draw[short={}](5.0,-10.5)to(5.5,-10.5);
+			\draw[short={}](5.0,-11.5)to(5.5,-11.5);
+			\draw[short={}](2.0,-10.5)to(2.5,-10.5);
+			\draw[short={}](2.0,-11.5)to(2.5,-11.5);
+			\draw[short={}](2.0,-4.0)to(2.5,-4.0);
+			\draw[short={}](2.0,-5.0)to(2.5,-5.0);
+			\draw[short={}](2.5,-4.5)to(2.5,-4.5);
+			\draw[short={}](5.0,-4.0)to(5.5,-4.0);
+			\draw[short={}](5.0,-5.0)to(5.5,-5.0);
+			\draw[short={}](8.0,-4.0)to(8.5,-4.0);
+			\draw[short={}](8.0,-5.0)to(8.5,-5.0);
+			\draw[short={}](8.0,-10.5)to(8.5,-10.5);
+			\draw[short={}](8.0,-11.5)to(8.5,-11.5);
+			\draw[short={}](8.5,-11.5)to(8.5,-11.5);
+			\draw[L={$L_a$},/tikz/circuitikz/bipoles/length=1.1cm](15.0,-6.0)to(16.0,-6.0);
+			\draw[L={$L_b$},/tikz/circuitikz/bipoles/length=1.1cm](15.0,-8.0)to(16.0,-8.0);
+			\draw[L={$L_c$},/tikz/circuitikz/bipoles/length=1.1cm](15.0,-10.0)to(16.0,-10.0);
+			\draw[V<={$e_a$},/tikz/circuitikz/bipoles/length=1.1cm](16.5,-6.0)to(17.5,-6.0);
+			\draw[V<={$e_b$},/tikz/circuitikz/bipoles/length=1.1cm](16.5,-8.0)to(17.5,-8.0);
+			\draw[V<={$e_c$},/tikz/circuitikz/bipoles/length=1.1cm](16.5,-10.0)to(17.5,-10.0);
+			\draw[short={}](17.5,-6.0)to(18.0,-6.0);
+			\draw[short={}](18.0,-6.0)to(18.0,-10.0);
+			\draw[short={}](17.5,-10.0)to(18.0,-10.0);
+			\draw[short={}](17.5,-8.0)to(18.0,-8.0);
+			\draw node[circ] (S96) at (18.0, -8.0) {} node[anchor=south] at ([yshift=-0.6cm]S96.text){$V_{neutral}$};
+			\draw[short={}](14.5,-6.0)to(15.0,-6.0);
+			\draw[short={}](16.0,-6.0)to(16.5,-6.0);
+			\draw[short={}](16.0,-8.0)to(16.5,-8.0);
+			\draw[short={}](16.0,-10.0)to(16.5,-10.0);
+			\draw[short={}](14.5,-10.0)to(15.0,-10.0);
+			\draw[short={}](14.5,-8.0)to(15.0,-8.0);
+		\end{circuitikz}
+	}
+	\caption{Rekonstrukcija zvjezdišta}
+	\label{fig:rekonstrukcija}
+\end{figure}
+
+Za preciznu detekciju trenutka u kojem protuelektromotorna sila prolazi kroz
+nulu koristi se sklop komparatora, no točna implementacija ovisi o metodi
+uzorkovanja koja je usko vezana za signal PWM-a. "Klasična" metoda uzorkuje
+napon faze za vrijeme visokog stanja signala PWM-a, što omogućuje postizanje
+100\% radnog ciklusa, ali zahtijeva filtriranje signala i referentnog napona
+zbog šuma uzrokovanog sklapanjem tranzistora vidljivog na slici
+\ref{fig:pwm_sum} \cite{ST_AN1946}.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.95\textwidth]{Figures/pwm_sum.png}
+	\caption{Prikaz napona na neopterećenoj fazi u alatu LTspice}
+	\label{fig:pwm_sum}
+\end{figure}
+
+Alternativna i cjenovno učinkovitija strategija je uzorkovanje na kraju niskog
+stanja signala PWM-a. U tom intervalu, kada struja recirkulira kroz diodu ili
+tranzistor, mjerenje je jednostavnije i otpornije na šum jer se potencijal
+zvjezdišta može smatrati uzemljenim, no nedostatak je nemogućnost postizanja
+100\% radnog ciklusa. Postoje i hibridne metode koje kombiniraju ova dva
+pristupa kako bi iskoristile prednosti obiju strategija ovisno o brzini i
+opterećenju motora \cite{ST_AN1946}.
+
+Ovaj događaj prolaska kroz nulu događa se točno na polovici trajanja jednog
+komutacijskog koraka kao što se može vidjeti na slici \ref{fig:pwm_drive}.
+Drugim riječima, od trenutka detekcije presijecanja nule do idealnog trenutka
+za sljedeću komutaciju potrebno je pričekati vrijeme koje odgovara zakretu od
+30 električnih stupnjeva.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.95\textwidth]{Figures/pwm_drive_deg.png}
+	\caption{Prikaz signala PWM-a na jednoj fazi u alatu LTspice}
+	\label{fig:pwm_drive}
+\end{figure}
+
+\newpage
+
+\section{Faze pokretanja i rada motora}
+
+Pokretanje motora bez osjetila ne može se izvesti isključivo detektiranjem
+PEMS-a jer nije prisutan pri mirovanju i vrlo malim brzinama ili je preslab za
+detekciju. Potrebno je motor dovesti do stanja gdje može očitavati PEMS.
+
+Prije pokretanja, položaj rotora je nepoznat. Kako bi se postavio u poznati
+početni položaj, na kratko se vrijeme uključe dva fazna namotaja. To stvara
+statično magnetsko polje koje poravnava rotor u određenom smjeru. Ova faza se
+naziva poravnanje (eng. \textit{alignment}). Nakon poravnanja, motor se pokreće
+u otvorenoj petlji (eng. \textit{open-loop}). Sklop ESC forsira komutaciju
+namotaja prema unaprijed definiranom, postupno rastućem vremenskom slijedu, bez
+ikakve povratne informacije o stvarnom položaju. Cilj je ubrzati motor do
+brzine na kojoj će inducirani PEMS biti dovoljno velik za pouzdanu detekciju.
+Kada brzina dosegne prag na kojem detekcija prolaska kroz nulu postaje
+pouzdana, sustav prelazi u rad sa zatvorenom petljom (eng.
+\textit{closed-loop}). Od ovog trenutka, komutacija se više ne temelji na
+fiksnom vremenu, već je sinkronizirana sa stvarnim položajem rotora
+detektiranim prolaskom PEMS-a kroz nulu \cite{Recasens2021}.
+
+\section{Model regulacije brzine}
+\todo[inline, color=yellow]{preko Matlab simulacije prikazi ovo}
+
+%-------------------------------------------------------------------------------
+\chapter{Sklopovlje}
+\label{pog:sklopovlje}
+\section{Elektronički sklop za upravljanje brzinom}
+\todo[inline]{ opis ESC-a }
+\section{Elektromotor A2212\/13T 1000KV}
+\todo[inline]{ opis motora }
+\section{Razvojna ploča FRDM-MCXA 153}
+\todo[inline]{ opis mikrokontrolera NXP }
+
+%-------------------------------------------------------------------------------
+\chapter{Implementacija}
+\label{pog:implementacija}
+
+%--- ZAKLJUČAK / CONCLUSION ----------------------------------------------------
+\chapter{Zaključak}
+\label{pog:zakljucak}
+
+%--- LITERATURA / REFERENCES ---------------------------------------------------
+
+% Literatura se automatski generira iz zadane .bib datoteke / References are automatically generated from the supplied .bib file
+% Upiši ime BibTeX datoteke bez .bib nastavka / Enter the name of the BibTeX file without .bib extension
+\bibliography{literatura}
+
+%--- SAŽETAK / ABSTRACT --------------------------------------------------------
+
+% Sažetak na hrvatskom
+\begin{sazetak}
+
+	Ovaj diplomski rad obrađuje elektroničko upravljanje brzinom istosmjernih
+	motora bez četkica prvenstveno namijenjenih za bespilotne letjelice. Fokus je
+	na razvoju i implementaciji upravljanja motorom bez osjetila korištenjem metode
+	komutacije u šest koraka.
+
+	Detaljno je opisana metoda komutacije u šest koraka te tehnike pulsno-širinske
+	modulacije za upravljanje naponom i strujom motora. Objašnjena je detekcija
+	protuelektromotorne sile za dobivanje informacije o položaju rotora, te su
+	opisane faze pokretanja i rada motora, od početnog poravnanja do prelaska na
+	zatvorenu petlju. Implementirano je rješenje upravljanja brzinom na odabranom
+	sklopovlju koje uključuje sklop za elektroničko upravljanje brzine, motor
+	A2212/13T 1000KV i razvojnu ploču FRDM-MCXA 153 s mikrokontrolerom NXP.
+\end{sazetak}
+
+\begin{kljucnerijeci}
+	istosmjerni motor bez četkica; BLDC; elektroničko upravljanje brzinom; ESC; bespilotne letjelice; dronovi; komutacija u šest koraka; protuelektromotorna sila; PEMS; upravljanje bez osjetila
+\end{kljucnerijeci}
+
+% Abstract in English
+\begin{abstract}
+
+	This thesis addresses the electronic speed
+	control of brushless DC motors, primarily intended for unmanned aerial
+	vehicles. The focus is on the development and implementation of sensorless
+	motor control using the six-step commutation method.
+
+	The six-step commutation method and pulse-width modulation techniques for
+	motor voltage and current control are described in detail. Counter-electromotive
+	force detection for obtaining rotor position information is
+	explained, and the motor's startup and operating phases, from initial alignment
+	to closed-loop transition, are detailed. The speed control solution is
+	implemented on selected hardware, which includes an electronic speed
+	controller, an A2212/13T 1000KV motor, and an FRDM-MCXA 153 development board
+	with an NXP microcontroller.
+\end{abstract}
+
+\begin{keywords}
+	brushless DC motor; BLDC; electronic speed control; ESC; unmanned aerial vehicles; UAV; drones; six-step commutation; back-electromotive force; back-EMF; sensorless control
+\end{keywords}
+
+%--- PRIVITCI / APPENDIX -------------------------------------------------------
+
+% Sva poglavlja koja slijede će biti označena slovom i riječi privitak / All following chapters will be denoted with an appendix and a letter
+\backmatter
+
+% \chapter{The Code}
+
+\end{document}

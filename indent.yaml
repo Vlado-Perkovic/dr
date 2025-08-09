@@ -1,0 +1,9 @@
+# indent.yaml
+modifyLineBreaks:
+  textWrapOptions:
+    columns: 80
+    # The 'removeBlockLineBreaks' is often useful; it removes existing line breaks
+    # within text blocks before re-wrapping, which gives a cleaner result.
+    removeBlockLineBreaks: 1
+  # You might also want to set this to ensure multiple blank lines are condensed
+  condenseMultipleBlankLinesInto: 1

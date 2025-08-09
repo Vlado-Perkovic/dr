@@ -1,0 +1,5 @@
+ \Title{Electronic speed control of a brushless DC motor for drones}
+ \Author{Vlado Perković}
+ \Language{hr-HR} % Set appropriate language code
+ \Subject{Diplomski rad - Upravljanje brzinom vrtnje istosmjernih motora bez četkica kod bespilotnih letjelica}
+ \Keywords{istosmjerni motor bez četkica\sep BLDC\sep elektroničko upravljanje brzinom\sep ESC\sep bespilotne letjelice\sep dronovi\sep komutacija u šest koraka\sep protuelektromotorna sila\sep PEMS\sep bezosjetilno upravljanje}
