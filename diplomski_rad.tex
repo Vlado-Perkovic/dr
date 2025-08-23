@@ -44,10 +44,10 @@
 \mentor{doc. dr. sc. Leonardo Jelenković}
 
 % Datum rada na engleskom jeziku / Date in English
-\date{June, 2025}
+\date{September, 2025}
 
 % Datum rada na hrvatskom jeziku / Date in Croatian
-\datum{lipanj, 2025.}
+\datum{rujan, 2025.}
 
 %-------------------------------------------------------------------------------
 
@@ -84,22 +84,26 @@
 \chapter{Uvod}
 \label{pog:uvod}
 
+% --- KRATKI UVOD U TEMATIKU ---
 Bespilotne letjelice (eng. \textit{Unmanned Aerial Vehicle, UAV}), popularno
 zvane dronovi, danas se široko primjenjuju u brojnim industrijama, od filmske
 produkcije i poljoprivrede do dostave i rekreacijskog letenja
-\cite{cite:primjena}. Osnovu njihova pogona čini istosmjerni motor bez četkica,
+\cite{cite:primjena}. Iako postoje različite konstrukcije, poput bespilotnih
+letjelica s fiksnim krilima, bespilotne letjelice s više rotora prevladavaju u
+modernim primjenama. Osnovu njihovog pogona čini istosmjerni motor bez četkica,
 čije karakteristike poput visoke učinkovitosti, pouzdanosti i dobrog omjera
 snage i mase omogućuju razvoj agilnih i energetski učinkovitih letjelica.
 Performance drona, uključujući stabilnost, vrijeme leta i agilnost, izravno
 ovise o sposobnosti preciznog i brzog upravljanja brzinom vrtnje ovih motora
 \cite{cite:karakteristike_motora}.
 
+% --- OPIS RADA I CILJA ---
 Ovaj rad bavi se analizom, modeliranjem, simulacijom i implementacijom sustava
 za upravljanje brzinom vrtnje motora BLDC s naglaskom na primjenu kod
 bespilotnih letjelica. Cilj je istražiti i implementirati sustav upravljanja
 bez korištenja osjetila, temeljen na metodi komutacije u šest koraka, koja je
-zbog svoje jednostavnosti čest odabir u komercijalnim rješenjima. Kroz rad će
-se analizirati i temeljni kompromisi u dizajnu motora, poput izbora
+zbog svoje jednostavnosti i cijene čest odabir u komercijalnim rješenjima. Kroz
+rad će se analizirati i temeljni kompromisi u dizajnu motora, poput izbora
 konfiguracije namotaja, kako bi se razumio njihov utjecaj na konačne
 performance.
 
@@ -107,9 +111,9 @@ Drugo poglavlje daje teorijsku podlogu o motorima BLDC. Treće poglavlje
 detaljno opisuje upravljanje motora BLDC bez osjetila, s fokusom na komutaciju
 u šest koraka. Četvrto poglavlje prikazuje sklopovlje sustava, opisuje odabrani
 elektronički sklop za upravljanje brzinom (eng. \textit{Electronic Speed
-	Controller, ESC}) te odabrani motor i mikrokontroler za upravljanje sklopom
-ESC. Peto poglavlje opisuje implementaciju razvijenog algoritma na odabranom
-sklopovlju, dok šesto poglavlje donosi zaključak i sažima rezultate rada.
+	Controller, ESC}) te odabrani motor. Peto poglavlje opisuje implementaciju
+razvijenog algoritma na odabranom sklopovlju, dok šesto poglavlje donosi
+zaključak i sažima rezultate rada.
 %-------------------------------------------------------------------------------
 \chapter{Istosmjerni elektromotor bez četkica}
 \label{pog:bldc}
@@ -119,8 +123,8 @@ motor ili elektronički komutirani motor (eng. \textit{Brushless DC motor,
 	BLDC}), vrsta je elektromotora sa stalnim magnetima čija je temeljna značajka
 rad bez mehaničkog kolektora i četkica. Sastoji se od statora i rotora.
 Armaturni namoti, kroz koje teče električna struja, nalaze se na statoru, dok
-je rotor najčešće izrađen od stalnih magneta koji stvaraju uzbudno magnetsko
-polje \cite{elektromotor-beskolektorski}. \missingfigure{umetni sliku presjeka
+je rotor izrađen od stalnih magneta koji stvaraju uzbudno magnetsko polje
+\cite{elektromotor-beskolektorski}. \missingfigure{umetni sliku presjeka
 	motora}
 
 Valja spomenuti kako uz motore BLDC usko se vežu sinkroni elektromotori sa
@@ -134,8 +138,8 @@ većina stvari vrijedi i za motore PMSM
 Rad motora bez četkica temelji se na kontroliranoj interakciji između rotora s
 permanentnim magnetima i magnetskog polja statora. Umjesto mehaničkog kolektora
 za komutaciju, koji je podložan trošenju i zahtijeva održavanje, koristi
-elektroničku komutaciju, kojom upravlja sklop ESC, za sekvencijalno napajanje
-namota statora i generiranje rotacije \cite{cite:disertacija}.
+elektroničku komutaciju, kojom upravlja sklop ESC, za stvaranje rotirajućeg
+magnetskog polja \cite{cite:disertacija}.
 
 Stator tipičnog trofaznog motora BLDC sadrži namote koji su prostorno
 raspoređeni pod kutom od 120 električnih stupnjeva. Da bi se izazvala rotacija,
@@ -147,6 +151,7 @@ prisiljava rotor da se okreće, neprestano prateći pokretno polje. Da bi se ova
 rotacija učinkovito održavala, sklop ESC mora prebaciti struju na sljedeći skup
 namota u točno određenom trenutku u odnosu na kutni položaj rotora (poglavlje
 \ref{sec:six-step}) \cite{MicrochipAN885}.
+\todo{popravi}
 
 Kako se pokazalo da trofazni motori nude najbolji omjer učinkovitosti i
 kompleksnosti sklopa za upravljanje, koriste se kao industrijski standard
@@ -165,12 +170,14 @@ tehnici.
 
 \newpage
 \section{Klasifikacija motora BLDC}
+\todo[inline]{izbrisi}
 Istosmjerni motori bez četkica mogu se klasificirati na nekoliko načina: po
 konstrukciji, po valnom obliku protuelektromotorne sile, po posjedovanju
 osjetila te po konfiguraciji namotaja na statoru. Ove klasifikacije pomažu u
 odabiru odgovarajućeg motora za određenu primjenu \cite{cite:bldc}.
 
 \subsection{Raspored rotora i statora}
+\todo[inline]{mergeaj u odlomak iznad}
 Konstrukcija motora BLDC obično se sastoji od stacionarnog dijela, statora, i
 rotirajućeg dijela, rotora. U statoru su smještene zavojnice, bakreni namotaji
 koji djeluju kao elektromagneti. Na rotoru su stalni magneti. Dva glavna tipa
@@ -183,7 +190,7 @@ okretni moment pri nižim brzinama vrtnje \cite{cite:bldc}.
 \missingfigure{figura outrunner}
 
 \subsection{Valni oblik protuelektromotorne sile}
-
+\todo[inline]{zaseban section}
 Protuelektromotorna sila (eng. \textit {Counter-electromotive force,
 	Back-electromotive force, back-EMF}) je napon koji se stvara u zavojnicama
 motora dok se rotor rotira, a suprotstavlja se glavnom naponu koji se dovodi u
@@ -229,6 +236,7 @@ poklapati za minimizaciju valovitosti momenta (odjeljak
 \ref{trap:torque-ripple}) \cite{MicrochipAN885}.
 
 \subsection{Motori s i bez osjetila}
+\todo[inline]{premjesti u uvod}
 
 Kako bi se postigla pravilna komutacija, upravljač mora znati točan položaj
 rotora u svakom trenutku. To se može postići osjetilima te bez osjetila uz
@@ -929,19 +937,18 @@ detektiranim prolaskom PEMS-a kroz nulu \cite{Recasens2021}.
 % Abstract in English
 \begin{abstract}
 
-	This thesis addresses the electronic speed
-	control of brushless DC motors, primarily intended for unmanned aerial
-	vehicles. The focus is on the development and implementation of sensorless
-	motor control using the six-step commutation method.
+	This thesis addresses the electronic speed control of brushless DC motors,
+	primarily intended for unmanned aerial vehicles. The focus is on the
+	development and implementation of sensorless motor control using the six-step
+	commutation method.
 
-	The six-step commutation method and pulse-width modulation techniques for
-	motor voltage and current control are described in detail. Counter-electromotive
-	force detection for obtaining rotor position information is
-	explained, and the motor's startup and operating phases, from initial alignment
-	to closed-loop transition, are detailed. The speed control solution is
-	implemented on selected hardware, which includes an electronic speed
-	controller, an A2212/13T 1000KV motor, and an FRDM-MCXA 153 development board
-	with an NXP microcontroller.
+	The six-step commutation method and pulse-width modulation techniques for motor
+	voltage and current control are described in detail. Counter-electromotive
+	force detection for obtaining rotor position information is explained, and the
+	motor's startup and operating phases, from initial alignment to closed-loop
+	transition, are detailed. The speed control solution is implemented on selected
+	hardware, which includes an electronic speed controller, an A2212/13T 1000KV
+	motor, and an FRDM-MCXA 153 development board with an NXP microcontroller.
 \end{abstract}
 
 \begin{keywords}
