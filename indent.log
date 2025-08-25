@@ -1,17 +1,17 @@
-INFO:  latexindent version 3.24.4, 2024-07-18, a script to indent .tex files
-       latexindent lives here: /usr/local/texlive/2025/texmf-dist/scripts/latexindent/
-       Sat Aug 23 18:01:05 2025
+INFO:  latexindent version 3.20.3, 2023-02-19, a script to indent .tex files
+       latexindent lives here: /usr/share/texlive/texmf-dist/scripts/latexindent/
+       Mon Aug 25 16:00:37 2025
        Filename: diplomski_rad.tex
 INFO:  Processing switches:
        -w|--overwrite: Overwrite mode active, will make a back up before overwriting
        -l|--localSettings: Read localSettings YAML file
        -m|--modifylinebreaks: modify line breaks
-INFO:  Directory for backup files and log file indent.log:
+INFO:  Directory for backup files and indent.log:
        .
 INFO:  YAML settings read: defaultSettings.yaml
-       Reading defaultSettings.yaml from /usr/local/texlive/2025/texmf-dist/scripts/latexindent/defaultSettings.yaml
+       Reading defaultSettings.yaml from /usr/share/texlive/texmf-dist/scripts/latexindent/defaultSettings.yaml
 INFO:  YAML reading settings
-       Home directory is /Users/vladoperkovic
+       Home directory is /home/vlado
        latexindent.pl didn't find indentconfig.yaml or .indentconfig.yaml
        see all possible locations: https://latexindentpl.readthedocs.io/en/latest/sec-appendices.html#indentconfig-options)
 INFO:  YAML settings read: -l switch
@@ -26,10 +26,76 @@ INFO:  YAML settings, reading from the following files:
            removeBlockLineBreaks: '1'
 
 INFO:  Backup procedure (-w flag active):
-       ./diplomski_rad.bak0 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       ./diplomski_rad.bak1 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       ./diplomski_rad.bak2 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up diplomski_rad.tex to ./diplomski_rad.bak3...
+       ./diplomski_rad.bak0 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak1 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak2 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak3 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak4 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak5 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak6 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak7 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak8 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak9 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak10 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak11 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak12 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak13 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak14 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak15 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak16 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak17 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak18 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak19 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak20 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak21 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak22 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak23 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak24 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak25 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak26 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak27 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak28 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak29 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak30 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak31 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak32 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak33 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak34 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak35 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak36 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak37 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak38 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak39 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak40 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak41 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak42 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak43 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak44 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak45 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak46 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak47 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak48 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak49 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak50 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak51 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak52 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak53 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak54 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak55 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak56 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak57 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak58 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak59 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak60 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak61 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak62 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak63 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak64 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak65 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak66 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       ./diplomski_rad.bak67 already exists, incrementing by 1... (see maxNumberOfBackUps and onlyOneBackUp)
+       copying diplomski_rad.tex to ./diplomski_rad.bak68
+       Backup file: ./diplomski_rad.bak68
        diplomski_rad.tex will be overwritten after indentation
 INFO:  Phase 1: searching for objects
 INFO:  Phase 2: finding surrounding indentation

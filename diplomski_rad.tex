@@ -89,7 +89,7 @@ Bespilotne letjelice (eng. \textit{Unmanned Aerial Vehicle, UAV}), popularno
 zvane dronovi, danas se široko primjenjuju u brojnim industrijama, od filmske
 produkcije i poljoprivrede do dostave i rekreacijskog letenja
 \cite{cite:primjena}. Iako postoje različite konstrukcije, poput bespilotnih
-letjelica s fiksnim krilima, bespilotne letjelice s više rotora prevladavaju u
+letjelica s fiksnim krilima, višerotorske bespilotne letjelice prevladavaju u
 modernim primjenama. Osnovu njihovog pogona čini istosmjerni motor bez četkica
 (eng. \textit{Brushless DC motor, BLDC}), čije karakteristike poput visoke
 učinkovitosti, pouzdanosti i dobrog omjera snage i mase omogućuju razvoj
@@ -101,13 +101,11 @@ brzog upravljanja brzinom vrtnje ovih motora \cite{cite:karakteristike_motora}.
 
 Upravljanje brzinom vrtnje motora BLDC postiže se pravilnom komutacijom za koju
 upravljač mora znati položaj rotora. To se obično postiže osjetilima Hallovog
-učinka.
-
-Postoje i metode upravljanja koje ne koriste osjetila za određivanje položaja
-rotora. One smanjuju troškove, složenost i masu sustava što ih čini pogodnijim
-izborom za dronove. Kod metode komutacije u šest koraka popularna je tehnika
-praćenja protuelektromotorne sile (PEMS) u kojoj upravljač zaključuje položaj
-rotora praćenjem PEMS-a koji se inducira u fazi bez napona (odjeljak
+učinka. Postoje i metode upravljanja koje ne koriste osjetila za određivanje
+položaja rotora. One smanjuju troškove, složenost i masu sustava što ih čini
+pogodnijim izborom za dronove. Kod metode komutacije u šest koraka popularna je
+tehnika praćenja protuelektromotorne sile (PEMS) u kojoj upravljač zaključuje
+položaj rotora praćenjem PEMS-a koji se inducira u fazi bez napona (odjeljak
 \ref{sec:six-step}). Složenije metode komutacije poput sinusne komutacije i
 vektorskog upravljanja koriste algoritme za estimaciju položaja rotora jer
 nemaju mogućnost mjerenja PEMS-a \cite{NXP_AN2355}.
@@ -128,11 +126,12 @@ detaljno opisuje upravljanje motora BLDC bez osjetila, s fokusom na komutaciju
 u šest koraka. Četvrto poglavlje prikazuje sklopovlje sustava, opisuje odabrani
 elektronički sklop za upravljanje brzinom (eng. \textit{Electronic Speed
 	Controller, ESC}) te odabrani motor. Peto poglavlje opisuje implementaciju
-razvijenog algoritma na odabranom sklopovlju, dok šesto poglavlje donosi
-zaključak i sažima rezultate rada.
+razvijenog algoritma na odabranom sklopovlju, dok šesto poglavlje donosi zaključak i sažima rezultate rada.
 %-------------------------------------------------------------------------------
 \chapter{Istosmjerni elektromotor bez četkica}
 \label{pog:bldc}
+\section{Uvod}
+\label{sec:bldc:uvod}
 
 Istosmjerni elektromotor bez četkica, poznat i kao beskolektorski istosmjerni
 motor ili elektronički komutirani motor, vrsta je elektromotora sa stalnim
@@ -140,10 +139,13 @@ magnetima čija je temeljna značajka rad bez mehaničkog kolektora i četkica.
 
 Konstrukcija motora BLDC sastoji se od stacionarnog dijela, statora, i
 rotirajućeg dijela, rotora. U statoru su smještene zavojnice, bakreni namotaji
-koji djeluju kao elektromagneti. Na rotoru su stalni magneti \cite{elektromotor-beskolektorski}. Postoji unutarnji ili \textit{ inrunner } motor kod kojeg se rotor nalazi unutar statora. Unutarnji motori općenito imaju manji
-moment tromosti i sposobni su za veće brzine vrtnje \cite{cite:bldc}.
-Isto tako postoji i vanjski ili \textit{ outrunner } motor kojem je rotor izvana i okružuje stator. Ovakvi motori obično daju veći
-okretni moment pri nižim brzinama vrtnje \cite{cite:bldc}.
+koji djeluju kao elektromagneti. Na rotoru su stalni magneti
+\cite{elektromotor-beskolektorski}. Postoji unutarnji ili \textit{ inrunner }
+motor kod kojeg se rotor nalazi unutar statora. Unutarnji motori općenito imaju
+manji moment tromosti i sposobni su za veće brzine vrtnje \cite{cite:bldc}.
+Isto tako postoji i vanjski ili \textit{ outrunner } motor kojem je rotor
+izvana i okružuje stator. Ovakvi motori obično daju veći okretni moment pri
+nižim brzinama vrtnje \cite{cite:bldc}.
 
 \missingfigure{umetni sliku presjeka motora}
 
@@ -154,49 +156,6 @@ valni oblik protuelektromotorne sile gdje motor BLDC ima trapezni oblik, a
 motor PMSM ima sinusni oblik. Dalje u radu oslanjat će se na motore BLDC iako
 većina stvari vrijedi i za motore PMSM
 \cite{elektromotor-sa-stalnim-magnetima}.
-Protuelektromotorna sila (eng. \textit {Counter-electromotive force,
-	Back-electromotive force, back-EMF}) je napon koji se stvara u zavojnicama
-motora dok se rotor rotira, a suprotstavlja se glavnom naponu koji se dovodi u
-motor. Ovaj se napon inducira u skladu s Faradayevim zakonom elektromagnetske
-indukcije. Postoje trapezoidalni valni oblik (slika \ref{fig:trapezoid}) i
-sinusoidalni valni oblik (slika \ref{fig:sine}) protuelektromotorne sile.
-
-\begin{figure}[h!]
-	\centering
-	\captionsetup[subfigure]{skip=10pt}
-
-	\begin{subfigure}[b]{0.48\textwidth}
-		\centering
-		\begin{tikzpicture}[yscale=0.5]
-			\begin{scope}[local bounding box=trapezoid]
-				\draw [densely dotted] (0,0)  -- +(6,0);
-				\draw (0,-1) foreach \x in {1,2,3} { -- ++(0.4,2) -- ++(0.6,0) -- ++(0.4,-2) -- ++(0.6,0) };
-			\end{scope}
-		\end{tikzpicture}
-		\subcaption{Trapezoidalni valni oblik}
-		\label{fig:trapezoid}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{0.48\textwidth}
-		\centering
-		\begin{tikzpicture}[yscale=0.5]
-			\begin{scope}[local bounding box=sine]
-				\draw [densely dotted] (0,0)  -- +(6,0);
-				\draw plot[domain=0:6,variable=\x,samples=51,smooth] (\x,{sin(deg(\x*pi))});
-			\end{scope}
-		\end{tikzpicture}
-		\subcaption{Sinusoidalni valni oblik}
-		\label{fig:sine}
-	\end{subfigure}
-
-	\caption{Usporedba valnih oblika PEMS-a}
-	\label{fig:waveforms}
-\end{figure}
-
-Poznavanje valnog oblika protuelektromotorne sile postaje važno pri upravljanju
-okretanja elektromotora jer se valni oblici pokretačkog signala i PEMS-a moraju
-poklapati za minimizaciju valovitosti momenta (odjeljak
-\ref{trap:torque-ripple}) \cite{MicrochipAN885}.
 
 Rad motora bez četkica temelji se na kontroliranoj interakciji između rotora s
 permanentnim magnetima i magnetskog polja statora. Umjesto mehaničkog kolektora
@@ -234,8 +193,45 @@ tehnici.
 
 \section{Matematički model motora}
 \label{sec:mat_model}
-\todo[inline]{matlab sim nije gotova pa ne znam sto mi sve treba ovdje, mozda stavit ovo kod ZCD}
-
+Za trofazne motore, električni odnosi mogu se modelirati sljedećim nizom jednadžbi izvedenih iz reference \cite{}. Jednadžbe prate sliku \ref{fig:wye-math}.
+\begin{align}
+	V_{an} & = R \cdot i_a + \frac{d}{dt}(L_{aa}i_a + L_{ab}i_b + L_{ac}i_c) + V_{ea} \\
+	V_{bn} & = R \cdot i_b + \frac{d}{dt}(L_{ba}i_a + L_{bb}i_b + L_{bc}i_c) + V_{eb} \\
+	V_{cn} & = R \cdot i_c + \frac{d}{dt}(L_{ca}i_a + L_{cb}i_b + L_{cc}i_c) + V_{ec}
+\end{align}
+pri čemu su:
+\begin{itemize}
+	\item $V_{an}, V_{bn}, V_{cn}$ -- fazni naponi u odnosu na neutralnu točku motora $n$,
+	\item $i_a, i_b, i_c$ -- fazne struje,
+	\item $V_{ea}, V_{eb}, V_{ec}$ -- protuelektromotorne sile,
+	\item $R$ -- otpori statorskog namota po fazi, koji su jednaki za sve tri faze,
+	\item $L_{aa}, L_{bb}, L_{cc}$ -- vlastiti induktiviteti,
+	\item $L_{ab}, L_{ba}, L_{ac}, L_{ca}, L_{bc}, L_{cb}$ -- međusobni induktiviteti.
+\end{itemize}
+Ako se pretpostavi da su faze simetrične i da magnetska reluktancija ne ovisi o
+električnom kutu rotora, tada su tri vlastita induktiviteta jednaka, a šest
+međusobnih induktiviteta također je međusobno jednako:
+\begin{equation}
+	L_{aa} = L_{bb} = L_{cc} = L_v \tag{2.4}
+\end{equation}
+\begin{equation}
+	L_{ab} = L_{ba} = L_{ac} = L_{ca} = L_{bc} = L_{cb} = M \tag{2.5}
+\end{equation}
+Ekvivalentni induktivitet $L$ može se izračunati kao:
+\begin{equation}
+	L = L_v - M \tag{2.6}
+\end{equation}
+Uz pretpostavku simetričnih faznih struja, vrijedi:
+\begin{equation}
+	i_a + i_b + i_c = 0 \tag{2.7}
+\end{equation}
+Tada se električni odnosi mogu pojednostavniti, a motor BLDC modelirati na
+sljedeći način:
+\begin{align}
+	V_{an} & = R \cdot i_a + L\frac{di_a}{dt} + V_{ea} \\
+	V_{bn} & = R \cdot i_b + L\frac{di_b}{dt} + V_{eb} \\
+	V_{cn} & = R \cdot i_c + L\frac{di_c}{dt} + V_{ec}
+\end{align}
 \begin{figure}[h!]
 	\centering
 	\begin{circuitikz}[european, cute inductors]
@@ -266,9 +262,59 @@ tehnici.
 		\draw (c) node[dot] {};
 		\draw (n) node[dot] {};
 	\end{circuitikz}
-	\caption{Model motora}
+	\caption{Električna shema motora}
 	\label{fig:wye-math}
 \end{figure}
+\newpage
+\section{Protuelektromotorna sila}
+Protuelektromotorna sila (eng. \textit {Counter-electromotive force,
+	Back-electromotive force, back-EMF}) je napon koji se stvara u zavojnicama
+statora prilikom vrtnje rotora, a suprotstavlja se glavnom naponu koji se
+dovodi u motor. Ovaj se napon inducira u skladu s Faradayevim zakonom
+elektromagnetske indukcije.
+
+Oblik protuelektromotorne sile ovisi o mehaničkoj konstrukciji motora,
+ponajviše o raspodjeli i obliku permanentnih magneta na rotoru te o izvedbi
+statorskih namota. Ovisno o tome, postoje trapezoidalni valni oblik (slika
+\ref{fig:trapezoid}) i sinusoidalni valni oblik (slika \ref{fig:sine})
+protuelektromotorne sile.
+
+Poznavanje valnog oblika protuelektromotorne sile postaje važno pri upravljanju
+okretanja elektromotora jer se valni oblici pokretačkog signala i PEMS-a moraju
+poklapati za minimizaciju valovitosti momenta (odjeljak
+\ref{trap:torque-ripple}) \cite{MicrochipAN885}.
+
+\begin{figure}[h!]
+	\centering
+	\captionsetup[subfigure]{skip=10pt}
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\begin{tikzpicture}[yscale=0.5]
+			\begin{scope}[local bounding box=trapezoid]
+				\draw [densely dotted] (0,0)  -- +(6,0);
+				\draw (0,-1) foreach \x in {1,2,3} { -- ++(0.4,2) -- ++(0.6,0) -- ++(0.4,-2) -- ++(0.6,0) };
+			\end{scope}
+		\end{tikzpicture}
+		\subcaption{Trapezoidalni valni oblik}
+		\label{fig:trapezoid}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\begin{tikzpicture}[yscale=0.5]
+			\begin{scope}[local bounding box=sine]
+				\draw [densely dotted] (0,0)  -- +(6,0);
+				\draw plot[domain=0:6,variable=\x,samples=51,smooth] (\x,{sin(deg(\x*pi))});
+			\end{scope}
+		\end{tikzpicture}
+		\subcaption{Sinusoidalni valni oblik}
+		\label{fig:sine}
+	\end{subfigure}
+
+	\caption{Usporedba valnih oblika PEMS-a}
+	\label{fig:waveforms}
+\end{figure}
+
 \newpage
 
 \section{Konfiguracija namotaja na statoru}
