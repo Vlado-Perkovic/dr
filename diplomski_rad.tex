@@ -90,23 +90,39 @@ zvane dronovi, danas se široko primjenjuju u brojnim industrijama, od filmske
 produkcije i poljoprivrede do dostave i rekreacijskog letenja
 \cite{cite:primjena}. Iako postoje različite konstrukcije, poput bespilotnih
 letjelica s fiksnim krilima, bespilotne letjelice s više rotora prevladavaju u
-modernim primjenama. Osnovu njihovog pogona čini istosmjerni motor bez četkica,
-čije karakteristike poput visoke učinkovitosti, pouzdanosti i dobrog omjera
-snage i mase omogućuju razvoj agilnih i energetski učinkovitih letjelica.
-Performance drona, uključujući stabilnost, vrijeme leta i agilnost, izravno
-ovise o sposobnosti preciznog i brzog upravljanja brzinom vrtnje ovih motora
-\cite{cite:karakteristike_motora}.
+modernim primjenama. Osnovu njihovog pogona čini istosmjerni motor bez četkica
+(eng. \textit{Brushless DC motor, BLDC}), čije karakteristike poput visoke
+učinkovitosti, pouzdanosti i dobrog omjera snage i mase omogućuju razvoj
+agilnih i energetski učinkovitih letjelica. Performanse drona, uključujući
+stabilnost, vrijeme leta i agilnost, izravno ovise o sposobnosti preciznog i
+brzog upravljanja brzinom vrtnje ovih motora \cite{cite:karakteristike_motora}.
+
+% --- UPRAVLJANJE BRZINOM VRTNJE ---
+
+Upravljanje brzinom vrtnje motora BLDC postiže se pravilnom komutacijom za koju
+upravljač mora znati položaj rotora. To se obično postiže osjetilima Hallovog
+učinka.
+
+Postoje i metode upravljanja koje ne koriste osjetila za određivanje položaja
+rotora. One smanjuju troškove, složenost i masu sustava što ih čini pogodnijim
+izborom za dronove. Kod metode komutacije u šest koraka popularna je tehnika
+praćenja protuelektromotorne sile (PEMS) u kojoj upravljač zaključuje položaj
+rotora praćenjem PEMS-a koji se inducira u fazi bez napona (odjeljak
+\ref{sec:six-step}). Složenije metode komutacije poput sinusne komutacije i
+vektorskog upravljanja koriste algoritme za estimaciju položaja rotora jer
+nemaju mogućnost mjerenja PEMS-a \cite{NXP_AN2355}.
 
 % --- OPIS RADA I CILJA ---
+\todo[inline]{nadopuni opis rada}
 Ovaj rad bavi se analizom, modeliranjem, simulacijom i implementacijom sustava
 za upravljanje brzinom vrtnje motora BLDC s naglaskom na primjenu kod
 bespilotnih letjelica. Cilj je istražiti i implementirati sustav upravljanja
-bez korištenja osjetila, temeljen na metodi komutacije u šest koraka, koja je
-zbog svoje jednostavnosti i cijene čest odabir u komercijalnim rješenjima. Kroz
+bez korištenja osjetila temeljen na metodi komutacije u šest koraka. Kroz
 rad će se analizirati i temeljni kompromisi u dizajnu motora, poput izbora
 konfiguracije namotaja, kako bi se razumio njihov utjecaj na konačne
 performance.
 
+\todo[inline]{popravi pregled poglavlja}
 Drugo poglavlje daje teorijsku podlogu o motorima BLDC. Treće poglavlje
 detaljno opisuje upravljanje motora BLDC bez osjetila, s fokusom na komutaciju
 u šest koraka. Četvrto poglavlje prikazuje sklopovlje sustava, opisuje odabrani
@@ -119,13 +135,17 @@ zaključak i sažima rezultate rada.
 \label{pog:bldc}
 
 Istosmjerni elektromotor bez četkica, poznat i kao beskolektorski istosmjerni
-motor ili elektronički komutirani motor (eng. \textit{Brushless DC motor,
-	BLDC}), vrsta je elektromotora sa stalnim magnetima čija je temeljna značajka
-rad bez mehaničkog kolektora i četkica. Sastoji se od statora i rotora.
-Armaturni namoti, kroz koje teče električna struja, nalaze se na statoru, dok
-je rotor izrađen od stalnih magneta koji stvaraju uzbudno magnetsko polje
-\cite{elektromotor-beskolektorski}. \missingfigure{umetni sliku presjeka
-	motora}
+motor ili elektronički komutirani motor, vrsta je elektromotora sa stalnim
+magnetima čija je temeljna značajka rad bez mehaničkog kolektora i četkica.
+
+Konstrukcija motora BLDC sastoji se od stacionarnog dijela, statora, i
+rotirajućeg dijela, rotora. U statoru su smještene zavojnice, bakreni namotaji
+koji djeluju kao elektromagneti. Na rotoru su stalni magneti \cite{elektromotor-beskolektorski}. Postoji unutarnji ili \textit{ inrunner } motor kod kojeg se rotor nalazi unutar statora. Unutarnji motori općenito imaju manji
+moment tromosti i sposobni su za veće brzine vrtnje \cite{cite:bldc}.
+Isto tako postoji i vanjski ili \textit{ outrunner } motor kojem je rotor izvana i okružuje stator. Ovakvi motori obično daju veći
+okretni moment pri nižim brzinama vrtnje \cite{cite:bldc}.
+
+\missingfigure{umetni sliku presjeka motora}
 
 Valja spomenuti kako uz motore BLDC usko se vežu sinkroni elektromotori sa
 stalnim magnetima (\textit{Permanent Magnet Synchronous Motor, PMSM}). Takvi
@@ -134,63 +154,6 @@ valni oblik protuelektromotorne sile gdje motor BLDC ima trapezni oblik, a
 motor PMSM ima sinusni oblik. Dalje u radu oslanjat će se na motore BLDC iako
 većina stvari vrijedi i za motore PMSM
 \cite{elektromotor-sa-stalnim-magnetima}.
-
-Rad motora bez četkica temelji se na kontroliranoj interakciji između rotora s
-permanentnim magnetima i magnetskog polja statora. Umjesto mehaničkog kolektora
-za komutaciju, koji je podložan trošenju i zahtijeva održavanje, koristi
-elektroničku komutaciju, kojom upravlja sklop ESC, za stvaranje rotirajućeg
-magnetskog polja \cite{cite:disertacija}.
-
-Stator tipičnog trofaznog motora BLDC sadrži namote koji su prostorno
-raspoređeni pod kutom od 120 električnih stupnjeva. Da bi se izazvala rotacija,
-sklop ESC primjenjuje struju na te namote u određenom slijedu. Ovo
-sekvencijalno napajanje generira magnetsko polje koje se rotira oko unutarnjeg
-oboda statora. Stalne magnete na rotoru kontinuirano privlače polovi ovog
-rotirajućeg polja statora. Rezultirajuća magnetska sila stvara moment koji
-prisiljava rotor da se okreće, neprestano prateći pokretno polje. Da bi se ova
-rotacija učinkovito održavala, sklop ESC mora prebaciti struju na sljedeći skup
-namota u točno određenom trenutku u odnosu na kutni položaj rotora (poglavlje
-\ref{sec:six-step}) \cite{MicrochipAN885}.
-\todo{popravi}
-
-Kako se pokazalo da trofazni motori nude najbolji omjer učinkovitosti i
-kompleksnosti sklopa za upravljanje, koriste se kao industrijski standard
-\cite{cite:trofazni}. Dalje u radu kada se spomene motor BLDC, odnosit će se na
-trofaznu inačicu.
-
-Potpunim uklanjanjem kolektora i četkica izbjegavaju se najveći nedostaci
-klasičnih istosmjernih strojeva kao što su, osim već navedenog mehaničkog
-trošenja i čestog održavanja, iskrenje, i ograničen vijek trajanja. Zbog svoje
-pouzdanosti, učinkovitosti često i preko 80\% \cite{motor-ucinkovitost} i
-mogućnosti postizanja iznimno velikih brzina (preko 70 000 okretaja u minuti
-\cite{motor-rpm}), beskolektorski se motori danas široko primjenjuju u
-sustavima kao što su bespilotne letjelice, servopogoni, pogoni tvrdih diskova u
-računalima, medicinski uređaji, moderni alatni strojevi te u audio i video
-tehnici.
-
-\newpage
-\section{Klasifikacija motora BLDC}
-\todo[inline]{izbrisi}
-Istosmjerni motori bez četkica mogu se klasificirati na nekoliko načina: po
-konstrukciji, po valnom obliku protuelektromotorne sile, po posjedovanju
-osjetila te po konfiguraciji namotaja na statoru. Ove klasifikacije pomažu u
-odabiru odgovarajućeg motora za određenu primjenu \cite{cite:bldc}.
-
-\subsection{Raspored rotora i statora}
-\todo[inline]{mergeaj u odlomak iznad}
-Konstrukcija motora BLDC obično se sastoji od stacionarnog dijela, statora, i
-rotirajućeg dijela, rotora. U statoru su smještene zavojnice, bakreni namotaji
-koji djeluju kao elektromagneti. Na rotoru su stalni magneti. Dva glavna tipa
-rasporeda ovih komponenti čine:
-\subsubsection{Unutarnji ili \textit{ Inrunner } motor} Rotor se nalazi unutar statora. Unutarnji motori općenito imaju manji
-moment tromosti i sposobni su za veće brzine vrtnje \cite{cite:bldc}.
-\missingfigure{figura inrunner}
-\subsubsection{Vanjski ili \textit{ Outrunner } motor} Rotor je izvana i okružuje stator. Outrunner motori obično daju veći
-okretni moment pri nižim brzinama vrtnje \cite{cite:bldc}.
-\missingfigure{figura outrunner}
-
-\subsection{Valni oblik protuelektromotorne sile}
-\todo[inline]{zaseban section}
 Protuelektromotorna sila (eng. \textit {Counter-electromotive force,
 	Back-electromotive force, back-EMF}) je napon koji se stvara u zavojnicama
 motora dok se rotor rotira, a suprotstavlja se glavnom naponu koji se dovodi u
@@ -235,27 +198,80 @@ okretanja elektromotora jer se valni oblici pokretačkog signala i PEMS-a moraju
 poklapati za minimizaciju valovitosti momenta (odjeljak
 \ref{trap:torque-ripple}) \cite{MicrochipAN885}.
 
-\subsection{Motori s i bez osjetila}
-\todo[inline]{premjesti u uvod}
+Rad motora bez četkica temelji se na kontroliranoj interakciji između rotora s
+permanentnim magnetima i magnetskog polja statora. Umjesto mehaničkog kolektora
+za komutaciju, koji je podložan trošenju i zahtijeva održavanje, koristi
+elektroničku komutaciju, kojom upravlja sklop ESC, za stvaranje rotirajućeg
+magnetskog polja \cite{cite:disertacija}.
 
-Kako bi se postigla pravilna komutacija, upravljač mora znati točan položaj
-rotora u svakom trenutku. To se može postići osjetilima te bez osjetila uz
-naprednije tehnike poput detekcije protuelektromotorne sile. Od osjetila
-najčešće se koriste osjetila Hallovog učinka za pružanje povratnih informacija
-upravljaču o položaju rotora. Tri takva osjetila obično se postavljaju na
-stator. Dok magneti rotora prolaze preko ovih osjetila, oni stvaraju digitalni
-signal koji pokazuje položaj rotora. Osim njih, također se koriste enkoderi i
-optička osjetila.
+Stator tipičnog trofaznog motora BLDC sadrži namote koji su prostorno
+raspoređeni pod kutom od 120 električnih stupnjeva. Da bi se izazvala rotacija,
+sklop ESC primjenjuje struju na te namote u određenom slijedu. Ovo
+sekvencijalno napajanje generira magnetsko polje koje se rotira oko unutarnjeg
+oboda statora. Stalne magnete na rotoru kontinuirano privlače polovi ovog
+rotirajućeg polja statora. Rezultirajuća magnetska sila stvara moment koji
+prisiljava rotor da se okreće, neprestano prateći pokretno polje. Da bi se ova
+rotacija učinkovito održavala, sklop ESC mora prebaciti struju na sljedeći skup
+namota u točno određenom trenutku u odnosu na kutni položaj rotora (poglavlje
+\ref{sec:six-step}) \cite{MicrochipAN885}. \todo{popravi}
 
-S druge strane, radi smanjenja troškova i složenosti, koriste se tehnike
-upravljanja motorom bez osjetila. Kod metode komutacije u šest koraka, često se
-naziva i trapezna komutacija, popularna je tehnika praćenja PEMS-a u kojoj
-upravljač zaključuje položaj rotora praćenjem PEMS-a koji se inducira u fazi
-bez napona (odjeljak \ref{sec:six-step}). Složenije metode komutacije poput
-sinusne komutacije i vektorskog upravljanja koriste algoritme za estimaciju
-položaja rotora jer nemaju mogućnost mjerenja PEMS-a \cite{NXP_AN2355}.
+Kako se pokazalo da trofazni motori nude najbolji omjer učinkovitosti i
+kompleksnosti sklopa za upravljanje, koriste se kao industrijski standard
+\cite{cite:trofazni}. Dalje u radu kada se spomene motor BLDC, odnosit će se na
+trofaznu inačicu.
 
-\subsection{Konfiguracija namotaja na statoru}
+Potpunim uklanjanjem kolektora i četkica izbjegavaju se najveći nedostaci
+klasičnih istosmjernih strojeva kao što su, osim već navedenog mehaničkog
+trošenja i čestog održavanja, iskrenje, i ograničen vijek trajanja. Zbog svoje
+pouzdanosti, učinkovitosti često i preko 80\% \cite{motor-ucinkovitost} i
+mogućnosti postizanja iznimno velikih brzina (preko 70 000 okretaja u minuti
+\cite{motor-rpm}), beskolektorski se motori danas široko primjenjuju u
+sustavima kao što su bespilotne letjelice, servopogoni, pogoni tvrdih diskova u
+računalima, medicinski uređaji, moderni alatni strojevi te u audio i video
+tehnici.
+
+\newpage
+
+\section{Matematički model motora}
+\label{sec:mat_model}
+\todo[inline]{matlab sim nije gotova pa ne znam sto mi sve treba ovdje, mozda stavit ovo kod ZCD}
+
+\begin{figure}[h!]
+	\centering
+	\begin{circuitikz}[european, cute inductors]
+		\path (0,0) coordinate(n) node[above,red]{$n$};
+		\draw(n)
+		to[short] ++(-90:0.4)
+		to[V , V>=$V_{ec}$] ++(-90:1.2)
+		to[L , L=$L_c$] ++(-90:1.2)
+		to[R , R=$R_c$] ++(-90:1.2)
+		to[short] ++(-90:0.4)
+		coordinate(c) node[left,red]{$c$};
+		\draw(n)
+		to[short] ++(30:0.4)
+		to[V , V>=$V_{eb}$] ++(30:1.2)
+		to[L , L=$L_b$] ++(30:1.2)
+		to[R , R=$R_b$] ++(30:1.2)
+		to[short] ++(30:0.4)
+		coordinate(b) node[above,red]{$b$};
+		\draw(n)
+		to[short] ++(150:0.4)
+		to[V , V>=$V_{ea}$] ++(150:1.2)
+		to[L , L=$L_a$] ++(150:1.2)
+		to[R , R=$R_a$] ++(150:1.2)
+		to[short] ++(150:0.4)
+		coordinate(a) node[left,red]{$a$};
+		\draw (a) node[dot] {};
+		\draw (b) node[dot] {};
+		\draw (c) node[dot] {};
+		\draw (n) node[dot] {};
+	\end{circuitikz}
+	\caption{Model motora}
+	\label{fig:wye-math}
+\end{figure}
+\newpage
+
+\section{Konfiguracija namotaja na statoru}
 \label{sec:konfiguracija_namotaja}
 Na trofaznom motoru BLDC namotaji na statoru mogu biti u dvije glavne
 konfiguracije:
@@ -345,7 +361,7 @@ sljedećem odjeljku \ref{sec:moment_brzina}.
 \section{Odnos momenta i brzine vrtnje}
 \label{sec:moment_brzina}
 
-Performance motora BLDC temelje se na kompromisu između okretnog momenta i
+Performanse motora BLDC temelje se na kompromisu između okretnog momenta i
 brzine vrtnje.
 
 S jedne strane, okretni moment ($\tau$) izravno je proporcionalan struji ($I$)
@@ -384,44 +400,6 @@ nižim brzinama i energetska učinkovitost, poput dronova za snimanje. S druge
 strane, trokutni spoj odabire se za primjene gdje je cilj postizanje maksimalne
 brzine, kao kod trkaćih dronova FPV, čak i po cijenu veće potrošnje struje.
 
-\newpage
-\section{Matematički model motora}
-\label{sec:mat_model}
-\todo[inline]{matlab sim nije gotova pa ne znam sto mi sve treba ovdje, mozda stavit ovo kod ZCD}
-
-\begin{figure}[h!]
-	\centering
-	\begin{circuitikz}[european, cute inductors]
-		\path (0,0) coordinate(n) node[above,red]{$n$};
-		\draw(n)
-		to[short] ++(-90:0.4)
-		to[V , V>=$V_{ec}$] ++(-90:1.2)
-		to[L , L=$L_c$] ++(-90:1.2)
-		to[R , R=$R_c$] ++(-90:1.2)
-		to[short] ++(-90:0.4)
-		coordinate(c) node[left,red]{$c$};
-		\draw(n)
-		to[short] ++(30:0.4)
-		to[V , V>=$V_{eb}$] ++(30:1.2)
-		to[L , L=$L_b$] ++(30:1.2)
-		to[R , R=$R_b$] ++(30:1.2)
-		to[short] ++(30:0.4)
-		coordinate(b) node[above,red]{$b$};
-		\draw(n)
-		to[short] ++(150:0.4)
-		to[V , V>=$V_{ea}$] ++(150:1.2)
-		to[L , L=$L_a$] ++(150:1.2)
-		to[R , R=$R_a$] ++(150:1.2)
-		to[short] ++(150:0.4)
-		coordinate(a) node[left,red]{$a$};
-		\draw (a) node[dot] {};
-		\draw (b) node[dot] {};
-		\draw (c) node[dot] {};
-		\draw (n) node[dot] {};
-	\end{circuitikz}
-	\caption{Model motora}
-	\label{fig:wye-math}
-\end{figure}
 \newpage
 
 \chapter{Upravljanje motorom BLDC bez osjetila}
