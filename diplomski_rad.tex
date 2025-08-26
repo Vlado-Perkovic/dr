@@ -10,7 +10,7 @@
 \usepackage{enumitem}
 \usepackage{amsmath}
 \usepackage[colorinlistoftodos]{todonotes}
-\usetikzlibrary{shapes.geometric, calc, positioning}
+\usetikzlibrary{shapes, calc, positioning, arrows.meta}
 \usepackage{pgfplots}
 % \usepackage[T1]{fontenc} % Ensures proper font encoding
 % \usepackage[utf8]{inputenc} % For UTF-8 input encoding (if not already using LuaLaTeX/XeLaTeX)
@@ -99,13 +99,14 @@ brzog upravljanja brzinom vrtnje ovih motora \cite{cite:karakteristike_motora}.
 
 % --- UPRAVLJANJE BRZINOM VRTNJE ---
 
-Upravljanje brzinom vrtnje motora BLDC postiže se pravilnom komutacijom za koju
-upravljač mora znati položaj rotora. To se obično postiže osjetilima Hallovog
-učinka. Postoje i metode upravljanja koje ne koriste osjetila za određivanje
-položaja rotora. One smanjuju troškove, složenost i masu sustava što ih čini
-pogodnijim izborom za dronove. Kod metode komutacije u šest koraka popularna je
-tehnika praćenja protuelektromotorne sile (PEMS) u kojoj upravljač zaključuje
-položaj rotora praćenjem PEMS-a koji se inducira u fazi bez napona (odjeljak
+Upravljanje brzinom vrtnje motora BLDC postiže se održavanjem kuta između polja
+rotora i statora. Za to upravljač mora znati položaj rotora što se obično
+postiže osjetilima Hallovog učinka ili enkoderima pozicije. Postoje i metode
+upravljanja koje ne koriste osjetila za određivanje položaja rotora. One
+smanjuju troškove, složenost i masu sustava što ih čini pogodnijim izborom za
+dronove. Kod metode komutacije u šest koraka popularna je tehnika praćenja
+protuelektromotorne sile (PEMS) u kojoj upravljač zaključuje položaj rotora
+praćenjem PEMS-a koji se inducira u nevođenoj fazi (odjeljak
 \ref{sec:six-step}). Složenije metode komutacije poput sinusne komutacije i
 vektorskog upravljanja koriste algoritme za estimaciju položaja rotora jer
 nemaju mogućnost mjerenja PEMS-a \cite{NXP_AN2355}.
@@ -130,7 +131,7 @@ razvijenog algoritma na odabranom sklopovlju, dok šesto poglavlje donosi zaklju
 %-------------------------------------------------------------------------------
 \chapter{Istosmjerni elektromotor bez četkica}
 \label{pog:bldc}
-\section{Uvod}
+\section{Osnove i konstrukcija}
 \label{sec:bldc:uvod}
 
 Istosmjerni elektromotor bez četkica, poznat i kao beskolektorski istosmjerni
@@ -157,27 +158,17 @@ motor PMSM ima sinusni oblik. Dalje u radu oslanjat će se na motore BLDC iako
 većina stvari vrijedi i za motore PMSM
 \cite{elektromotor-sa-stalnim-magnetima}.
 
-Rad motora bez četkica temelji se na kontroliranoj interakciji između rotora s
-permanentnim magnetima i magnetskog polja statora. Umjesto mehaničkog kolektora
-za komutaciju, koji je podložan trošenju i zahtijeva održavanje, koristi
-elektroničku komutaciju, kojom upravlja sklop ESC, za stvaranje rotirajućeg
-magnetskog polja \cite{cite:disertacija}.
-
-Stator tipičnog trofaznog motora BLDC sadrži namote koji su prostorno
-raspoređeni pod kutom od 120 električnih stupnjeva. Da bi se izazvala rotacija,
-sklop ESC primjenjuje struju na te namote u određenom slijedu. Ovo
-sekvencijalno napajanje generira magnetsko polje koje se rotira oko unutarnjeg
-oboda statora. Stalne magnete na rotoru kontinuirano privlače polovi ovog
-rotirajućeg polja statora. Rezultirajuća magnetska sila stvara moment koji
-prisiljava rotor da se okreće, neprestano prateći pokretno polje. Da bi se ova
-rotacija učinkovito održavala, sklop ESC mora prebaciti struju na sljedeći skup
-namota u točno određenom trenutku u odnosu na kutni položaj rotora (poglavlje
-\ref{sec:six-step}) \cite{MicrochipAN885}. \todo{popravi}
-
-Kako se pokazalo da trofazni motori nude najbolji omjer učinkovitosti i
-kompleksnosti sklopa za upravljanje, koriste se kao industrijski standard
-\cite{cite:trofazni}. Dalje u radu kada se spomene motor BLDC, odnosit će se na
-trofaznu inačicu.
+Rad motora bez četkica temelji se na kontroliranoj interakciji između
+magnetskog polja rotora, kojeg čine permanentni magneti, i rotirajućeg
+magnetskog polja statora. Za razliku od klasičnih istosmjernih motora,
+rotirajuće polje statora ovdje se stvara elektronički, bez mehaničkog kolektora
+i četkica. Taj zadatak obavlja upravljački sklop ESC, koji sekvencijalnim
+napajanjem statorskih namota precizno sinkronizira polje statora s položajem
+rotora \cite{cite:disertacija}. Cilj je održavati optimalan kut između njihovih
+magnetskih vektora kako bi se maksimizirao okretni moment. Zbog dobrog
+kompromisa između performansi i složenosti izvedbe, u praksi se najčešće
+koriste trofazni motori \cite{cite:trofazni}, čiji su namoti prostorno
+razmaknuti za 120 električnih stupnjeva \cite{MicrochipAN885}.
 
 Potpunim uklanjanjem kolektora i četkica izbjegavaju se najveći nedostaci
 klasičnih istosmjernih strojeva kao što su, osim već navedenog mehaničkog
@@ -266,12 +257,12 @@ sljedeći način:
 	\label{fig:wye-math}
 \end{figure}
 \newpage
+
 \section{Protuelektromotorna sila}
 Protuelektromotorna sila (eng. \textit {Counter-electromotive force,
 	Back-electromotive force, back-EMF}) je napon koji se stvara u zavojnicama
-statora prilikom vrtnje rotora, a suprotstavlja se glavnom naponu koji se
-dovodi u motor. Ovaj se napon inducira u skladu s Faradayevim zakonom
-elektromagnetske indukcije.
+statora prilikom vrtnje rotora, a suprotstavlja se naponu napajanja. Ovaj se
+napon inducira u skladu s Faradayevim zakonom elektromagnetske indukcije.
 
 Oblik protuelektromotorne sile ovisi o mehaničkoj konstrukciji motora,
 ponajviše o raspodjeli i obliku permanentnih magneta na rotoru te o izvedbi
@@ -322,22 +313,27 @@ poklapati za minimizaciju valovitosti momenta (odjeljak
 Na trofaznom motoru BLDC namotaji na statoru mogu biti u dvije glavne
 konfiguracije:
 
-U \textbf{zvjezdastom spoju (eng. \textit{Wye, Star connection})} tri zavojnice
+U \textbf{zvjezdastom spoju (eng. \textit{wye, star connection})} tri zavojnice
 spojene su u zajedničkoj središnjoj točki, zvjezdištu (točka \textit{n} na
-slici \ref{fig:wye}). Fazni napon niži je od mrežnog napona ($V_{\text{faza}} =
-	V_{\text{mreža}} / \sqrt{3}$), a fazna struja jednaka je mrežnoj struji.
+slici \ref{fig:wye}). Fazni napon, $V_{\text{faza}}$ [V], niži je od mrežnog
+napona, $V_{\text{mreža}}$ [V], prema izrazu $V_{\text{faza}} =
+	V_{\text{mreža}} / \sqrt{3}$, a fazna struja, $I_{\text{faza}}$ [A], jednaka je
+mrežnoj struji.
 
 U \textbf{trokutnom spoju (eng. \textit{Delta connection})} zavojnice su
-spojene međusobno u trokut (slika \ref{fig:delta}). Fazni napon jednak je
-mrežnom naponu ($V_{\text{faza}} = V_{\text{mreža}}$), a fazna struja niža je
-od mrežne struje ($I_{\text{faza}} = I_{\text{mreža}} / \sqrt{3}$).
+spojene međusobno u trokut (slika \ref{fig:delta}). Fazni napon,
+$V_{\text{faza}}$ [V], jednak je mrežnom naponu, $V_{\text{mreža}}$ [V], a
+fazna struja, $I_{\text{faza}}$ [A], niža je od mrežne struje,
+$I_{\text{mreža}}$ [A], prema izrazu $I_{\text{faza}} = I_{\text{mreža}} /
+	\sqrt{3}$.
 
 Zbog ove razlike u faznim naponima, za dva motora s ovim konfiguracijama i
 pripadnim konstantama motora $K_{t, Z}$ i $K_{t, T}$ za proizvesti jednak
-moment $\tau$ vrijedi: \\
+moment vrijedi:
 
-Moment se može izraziti preko izraza $\tau = K_t \cdot I_{\text{faza}}$, a
-odnos konstanti momenta je $K_{t, T} = K_{t, Z} / \sqrt{3}$
+Moment, $\tau$ [Nm], može se izraziti preko izraza $\tau = K_t \cdot
+	I_{\text{faza}}$, gdje je $K_t$ konstanta momenta [Nm/A], a $I_{\text{faza}}$
+fazna struja [A]. Odnos konstanti momenta je $K_{t, T} = K_{t, Z} / \sqrt{3}$
 \cite{cite:disertacija}.
 
 Da bi se proizveo jednak moment, odnos faznih struja mora biti:
@@ -360,7 +356,6 @@ Izvod pokazuje da za proizvodnju istog momenta, motor spojen u trokut zahtijeva
 tri puta veću linijsku struju od motora spojenog u zvijezdu. Ova temeljna
 razlika u potrebnoj struji definira njihovu primjenu koja je opisana u
 sljedećem odjeljku \ref{sec:moment_brzina}.
-
 \begin{figure}[h!]
 	\centering
 	\begin{subfigure}[b]{0.48\textwidth}
@@ -448,7 +443,7 @@ brzine, kao kod trkaćih dronova FPV, čak i po cijenu veće potrošnje struje.
 
 \newpage
 
-\chapter{Upravljanje motorom BLDC bez osjetila}
+\chapter{Upravljanje motorom BLDC bez osjetila položaja}
 \label{pog:bldc_upravljanje_bez_senzora}
 
 Metoda koja se koristi za upravljanje motorom BLDC utječe na izvedbu motora,
@@ -606,11 +601,11 @@ omogućuju spajanje faze na pozitivni ili negativni pol napajanja (slika
 \end{figure}
 
 Brzina vrtnje i moment motora upravljaju se regulacijom srednje vrijednosti
-napona na namotajima, što se postiže primjenom pulsno-širinske modulacije (eng.
-\textit{Pulse-Width Modulation, PWM}). Umjesto stalnog napona, na sklopke
-pretvarača dovodi se signal PWM-a visoke frekvencije. Promjenom faktora ispune
-(eng. \textit{duty cycle}) tog signala mijenja se efektivni napon na motoru, a
-time i struja koja teče kroz namotaje.
+napona ili struje na namotajima, što se postiže primjenom pulsno-širinske
+modulacije (eng. \textit{Pulse-Width Modulation, PWM}). Umjesto stalnog napona,
+na sklopke pretvarača dovodi se signal PWM-a visoke frekvencije. Promjenom
+faktora ispune (eng. \textit{duty cycle}) tog signala mijenja se efektivni
+napon na motoru, a time i struja koja teče kroz namotaje.
 
 \subsubsection{Tehnike primjene PWM-a za upravljanje}
 \todo[inline]{treba ponovno evaluirat, nije bas precizno}
@@ -704,15 +699,15 @@ PWM-a prikazane na slici \ref{fig:soft_current}.
 U sustavima bez osjetila, informacija o položaju rotora dobiva se mjerenjem
 napona protuelektromotorne sile na neopterećenoj fazi.
 
-U konfiguraciji sa zvjezdastim spojem, PEMS se idealno mjeri u odnosu na
-potencijal zvjezdišta. Budući da zvjezdište motora najčešće nije fizički
-dostupno za mjerenje, njegov se potencijal mora rekonstruirati. To se postiže
-stvaranjem virtualnog zvjezdišta (slika \ref{fig:rekonstrukcija}). Tri
-otpornika jednakog, visokog otpora $R_v$ spajaju se u zvijezdu, pri čemu je
-svaki otpornik spojen na po jednu fazu motora. Zajednička točka ta tri
-otpornika stvara virtualno zvjezdište $V_{virtual}$ čiji je potencijal jednak
-aritmetičkoj sredini napona sve tri faze. Taj se stabilni referentni napon tada
-koristi za usporedbu s naponom neopterećene faze \cite{ST_AN1946}.
+U konfiguraciji sa zvjezdastim spojem, PEMS se mjeri u odnosu na potencijal
+zvjezdišta. Budući da zvjezdište motora najčešće nije fizički dostupno za
+mjerenje, njegov se potencijal mora rekonstruirati. To se postiže stvaranjem
+virtualnog zvjezdišta (slika \ref{fig:rekonstrukcija}). Tri otpornika jednakog,
+visokog otpora $R_v$ spajaju se u zvijezdu, pri čemu je svaki otpornik spojen
+na po jednu fazu motora. Zajednička točka ta tri otpornika stvara virtualno
+zvjezdište $V_{virtual}$ čiji je potencijal jednak aritmetičkoj sredini napona
+sve tri faze. Taj se stabilni referentni napon tada koristi za usporedbu s
+naponom neopterećene faze \cite{ST_AN1946}.
 
 \begin{figure}[h]
 	\centering
@@ -910,7 +905,48 @@ detektiranim prolaskom PEMS-a kroz nulu \cite{Recasens2021}.
 
 \section{Model regulacije brzine}
 \todo[inline, color=yellow]{preko Matlab simulacije prikazi ovo}
-
+\begin{tikzpicture}[
+		auto,
+		node distance=2.5cm and 2cm, % Default distance between nodes (vertical and horizontal)
+		>=Latex, % Use LaTeX-style arrows
+		block/.style={
+				draw,
+				rectangle,
+				fill=blue!10,
+				minimum height=1cm,
+				minimum width=2cm,
+				text width=1.8cm, % Ensures text wraps if needed
+				align=center
+			},
+		sum/.style={
+				draw,
+				circle,
+				fill=blue!10,
+				minimum size=0.7cm,
+				node distance=1.5cm
+			},
+		io/.style={
+				coordinate
+			},
+		pinstyle/.style={
+				pin edge={to-,thin,black}
+			}
+	]
+	\node[io, name=input] {};
+	\node[sum, right=of input, name=sum] {};
+	\node[block, right=of sum, name=controller] {PI Regulator};
+	\node[block, right=of controller, name=plant] {BLDC Motor};
+	\node[io, right=of plant, name=output] {};
+	\node[io, below=of plant, name=feedback_point] {};
+	\draw[->] (input) -- node[above] {$\omega_{ref}(s)$} (sum);
+	\draw[->] (sum) -- node[above] {$e(s)$} (controller);
+	\draw[->] (controller) -- node[above] {$u(s)$} (plant);
+	\draw[->] (plant) -- node[above] {$\omega(s)$} (output);
+	\draw[->] (output) -- ++(0.5,0) |- (feedback_point) -| (sum);
+	\node at (sum.north) [above=0.1cm] {$+$};
+	\node at (sum.west) [left=0.1cm] {}; % Empty node for alignment if needed
+	\node at (sum.south) [below=0.1cm] {$-$};
+\end{tikzpicture}
 %-------------------------------------------------------------------------------
 \chapter{Sklopovlje}
 \label{pog:sklopovlje}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2025.6.22)  25 AUG 2025 16:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2025.6.22)  26 AUG 2025 14:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1009,6 +1009,10 @@ File: tikzlibrarypositioning.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \c@@todonotes@numberoftodonotes=\count360
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryshapes.code.tex
+File: tikzlibraryshapes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
 zlibraryshapes.geometric.code.tex
 File: tikzlibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
 
@@ -1016,6 +1020,62 @@ File: tikzlibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
 s.geometric.code.tex
 File: pgflibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryshapes.misc.code.tex
+File: tikzlibraryshapes.misc.code.tex 2023-01-15 v3.1.10 (3.1.10)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshape
+s.misc.code.tex
+File: pgflibraryshapes.misc.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryshapes.symbols.code.tex
+File: tikzlibraryshapes.symbols.code.tex 2023-01-15 v3.1.10 (3.1.10)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshape
+s.symbols.code.tex
+File: pgflibraryshapes.symbols.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryshapes.arrows.code.tex
+File: tikzlibraryshapes.arrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshape
+s.arrows.code.tex
+File: pgflibraryshapes.arrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryshapes.callouts.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshape
+s.callouts.code.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryshapes.multipart.code.tex
+File: tikzlibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshape
+s.multipart.code.tex
+File: pgflibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfnodepartlowerbox=\box78
+\pgfnodeparttwobox=\box79
+\pgfnodepartthreebox=\box80
+\pgfnodepartfourbox=\box81
+\pgfnodeparttwentybox=\box82
+\pgfnodepartnineteenbox=\box83
+\pgfnodeparteighteenbox=\box84
+\pgfnodepartseventeenbox=\box85
+\pgfnodepartsixteenbox=\box86
+\pgfnodepartfifteenbox=\box87
+\pgfnodepartfourteenbox=\box88
+\pgfnodepartthirteenbox=\box89
+\pgfnodeparttwelvebox=\box90
+\pgfnodepartelevenbox=\box91
+\pgfnodeparttenbox=\box92
+\pgfnodepartninebox=\box93
+\pgfnodeparteightbox=\box94
+\pgfnodepartsevenbox=\box95
+\pgfnodepartsixbox=\box96
+\pgfnodepartfivebox=\box97
+)))
 (/usr/share/texlive/texmf-dist/tex/latex/pgfplots/pgfplots.sty
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.revision.tex)
 Package: pgfplots 2021/05/15 v1.18.1 Data Visualization (1.18.1)
@@ -1104,7 +1164,7 @@ e.tex
 \pgfdecorationsegmentamplitude=\dimen323
 \pgfdecorationsegmentlength=\dimen324
 )
-\tikz@lib@dec@box=\box78
+\tikz@lib@dec@box=\box98
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
 zlibrarydecorations.pathmorphing.code.tex
@@ -1149,7 +1209,7 @@ File: t1stix2.fd 2018/04/02 v2.0.0-latex stix2 T1 font definitions
 (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count368
-\l__pdf_internal_box=\box79
+\l__pdf_internal_box=\box99
 )
 (./diplomski_rad.aux)
 \openout1 = `diplomski_rad.aux'.
@@ -1229,7 +1289,7 @@ LaTeX Font Info:    ... okay on input line 57.
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count371
 \scratchdimen=\dimen331
-\scratchbox=\box80
+\scratchbox=\box100
 \nofMPsegments=\count372
 \nofMParguments=\count373
 \everyMPshowfont=\toks52
@@ -1420,7 +1480,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.26 ...e {chapter}{Sa\v {z}etak}{29}{chapter*.31}
+l.26 ...e {chapter}{Sa\v {z}etak}{29}{chapter*.30}
                                                   % [1
 
 
@@ -1449,40 +1509,30 @@ l.81 \newpage
 ]
 Poglavlje 1..
 Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
-ine 114.
+ine 115.
 [4
 
 ] [5]
 Poglavlje 2..
 
-Underfull \hbox (badness 10000) in paragraph at lines 131--131
+Underfull \hbox (badness 10000) in paragraph at lines 132--132
 []\T1/opensans-TLF/b/n/18 Istosmjerni elek-tro-mo-tor bez
  []
 
 LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <16> not availabl
 e
 (Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input lin
-e 133.
+e 134.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
-(Font)              scaled to size 16.0pt on input line 133.
+(Font)              scaled to size 16.0pt on input line 134.
 [6
 
-]
-Overfull \hbox (4.15036pt too wide) in paragraph at lines 175--175
-[][][]\T1/stix2/m/n/12 popravi[]  
- []
+] [7]
 
-
-Overfull \hbox (4.15036pt too wide) in paragraph at lines 175--175
-[][][]\T1/stix2/m/n/12 popravi[]  
- []
-
-[7]
-
-LaTeX Warning: Citation `' on page 8 undefined on input line 196.
+LaTeX Warning: Citation `' on page 8 undefined on input line 187.
 
 LaTeX Font Info:    Trying to load font information for TS1+stix2 on input line
- 204.
+ 195.
 (/usr/share/texlive/texmf-dist/tex/latex/stix2-type1/ts1stix2.fd
 File: ts1stix2.fd 2018/04/02 v2.0.0-latex stix2 TS1 font definitions
 ) [8{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathit.enc
@@ -1493,83 +1543,83 @@ pdfTeX warning (ext4): destination with the same identifier (name{equation.2.2.
 4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.227 \end{equation}
+l.218 \end{equation}
                     
 pdfTeX warning (ext4): destination with the same identifier (name{equation.2.2.
 4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.227 \end{equation}
+l.218 \end{equation}
                     ]
 pdfTeX warning (ext4): destination with the same identifier (name{equation.2.2.
 4}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.234 \end{align}
+l.225 \end{align}
                   [9
 pdfTeX warning (ext4): destination with the same identifier (name{equation.2.2.
 4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.268 \newpage
+l.259 \newpage
               ]
-Overfull \hbox (4.37367pt too wide) in paragraph at lines 270--275
+Overfull \hbox (4.37367pt too wide) in paragraph at lines 262--266
 \T1/stix2/m/n/12 Protuelektromotorna sila (eng. \T1/stix2/m/it/12 Counter-elect
 romotive force, Back-electromotive force, back-
  []
 
 
-Overfull \hbox (4.46666pt too wide) in paragraph at lines 282--286
+Overfull \hbox (4.46666pt too wide) in paragraph at lines 273--277
 []\T1/stix2/m/n/12 Poznavanje val-nog oblika pro-tu-elek-tro-mo-torne sile pos-
 taje vaºno pri uprav-lja-nju okre-
  []
 
-[10]
-Underfull \hbox (badness 10000) in paragraph at lines 335--338
-
- []
-
-[11{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathex.enc}
-] [12]
-<Figures/microchip_torque_speed.png, id=285, 1063.975pt x 611.28375pt>
+[10] [11{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathex
+.enc}] [12]
+<Figures/microchip_torque_speed.png, id=282, 1063.975pt x 611.28375pt>
 File: Figures/microchip_torque_speed.png Graphic file (type png)
 <use Figures/microchip_torque_speed.png>
 Package pdftex.def Info: Figures/microchip_torque_speed.png  used on input line
- 427.
+ 422.
 (pdftex.def)             Requested size: 441.01773pt x 253.37022pt.
  [13 <./Figures/microchip_torque_speed.png>] [14]
 Poglavlje 3..
 [15
 
 ] [16]
+Overfull \hbox (3.9731pt too wide) in paragraph at lines 603--609
+\T1/stix2/m/n/12 ili struje na na-mo-ta-jima, ²to se pos-tiºe pri-mje-nom pulsn
+o-²irinske mo-du-la-cije (eng. \T1/stix2/m/it/12 Pulse-
+ []
+
 LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <12> not availabl
 e
 (Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input lin
-e 615.
+e 610.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
-(Font)              scaled to size 12.0pt on input line 615.
- [17]
-<Figures/hard_chopping1.png, id=334, 1548.78625pt x 837.1275pt>
+(Font)              scaled to size 12.0pt on input line 610.
+[17]
+<Figures/hard_chopping1.png, id=331, 1548.78625pt x 837.1275pt>
 File: Figures/hard_chopping1.png Graphic file (type png)
 <use Figures/hard_chopping1.png>
-Package pdftex.def Info: Figures/hard_chopping1.png  used on input line 645.
+Package pdftex.def Info: Figures/hard_chopping1.png  used on input line 640.
 (pdftex.def)             Requested size: 418.96548pt x 226.44897pt.
  [18 <./Figures/hard_chopping1.png>]
-<Figures/soft_chopping.png, id=343, 1622.06pt x 757.83125pt>
+<Figures/soft_chopping.png, id=340, 1622.06pt x 757.83125pt>
 File: Figures/soft_chopping.png Graphic file (type png)
 <use Figures/soft_chopping.png>
-Package pdftex.def Info: Figures/soft_chopping.png  used on input line 663.
+Package pdftex.def Info: Figures/soft_chopping.png  used on input line 658.
 (pdftex.def)             Requested size: 418.96548pt x 195.73636pt.
-<Figures/soft_chopping_new.png, id=347, 1921.1775pt x 1057.9525pt>
+<Figures/soft_chopping_new.png, id=344, 1921.1775pt x 1057.9525pt>
 File: Figures/soft_chopping_new.png Graphic file (type png)
 <use Figures/soft_chopping_new.png>
-Package pdftex.def Info: Figures/soft_chopping_new.png  used on input line 682.
+Package pdftex.def Info: Figures/soft_chopping_new.png  used on input line 677.
 
 (pdftex.def)             Requested size: 211.68661pt x 116.56885pt.
-<Figures/comp_pwm_new.png, id=348, 1922.18124pt x 1059.96pt>
+<Figures/comp_pwm_new.png, id=345, 1922.18124pt x 1059.96pt>
 File: Figures/comp_pwm_new.png Graphic file (type png)
 <use Figures/comp_pwm_new.png>
-Package pdftex.def Info: Figures/comp_pwm_new.png  used on input line 688.
+Package pdftex.def Info: Figures/comp_pwm_new.png  used on input line 683.
 (pdftex.def)             Requested size: 211.68661pt x 116.72534pt.
 
 
@@ -1579,22 +1629,21 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Figures/pwm_sum.png, id=360, 1848.9075pt x 1030.85126pt>
+<Figures/pwm_sum.png, id=357, 1848.9075pt x 1030.85126pt>
 File: Figures/pwm_sum.png Graphic file (type png)
 <use Figures/pwm_sum.png>
-Package pdftex.def Info: Figures/pwm_sum.png  used on input line 863.
+Package pdftex.def Info: Figures/pwm_sum.png  used on input line 858.
 (pdftex.def)             Requested size: 418.96548pt x 233.58311pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[20 <./Figures/soft_chopping_new.png> <./Figures/comp_pwm_new.png>] [21 <./Figu
-res/pwm_sum.png>]
-<Figures/pwm_drive_deg.png, id=377, 1847.90375pt x 1015.795pt>
+[20 <./Figures/soft_chopping_new.png> <./Figures/comp_pwm_new.png>]
+<Figures/pwm_drive_deg.png, id=368, 1847.90375pt x 1015.795pt>
 File: Figures/pwm_drive_deg.png Graphic file (type png)
 <use Figures/pwm_drive_deg.png>
-Package pdftex.def Info: Figures/pwm_drive_deg.png  used on input line 884.
+Package pdftex.def Info: Figures/pwm_drive_deg.png  used on input line 879.
 (pdftex.def)             Requested size: 418.96548pt x 230.29549pt.
- [22 <./Figures/pwm_drive_deg.png>] [23]
+ [21 <./Figures/pwm_sum.png>] [22 <./Figures/pwm_drive_deg.png>] [23]
 Poglavlje 4..
 [24
 
@@ -1617,7 +1666,7 @@ Underfull \hbox (badness 1803) in paragraph at lines 28--31
 ]) [28] [29
 
 ]
-Overfull \hbox (1.8657pt too wide) in paragraph at lines 978--981
+Overfull \hbox (1.8657pt too wide) in paragraph at lines 1014--1017
 \T1/stix2/m/n/12 aerial ve-hi-cles; UAV; drones; six-step com-mu-ta-tion; back-
 electromotive force; back-EMF;
  []
@@ -1781,16 +1830,16 @@ diplomski_rad.bbl
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `diplomski_rad.out' has not changed.
-(rerunfilecheck)             Checksum: F6BD0C0EF015D81F235E804B2CAA0BBE;3836.
+(rerunfilecheck)             Checksum: 119788B678F3B16505B26F7A76671E56;3927.
  ) 
 Here is how much of TeX's memory you used:
- 64456 strings out of 476034
- 1628213 string characters out of 5792864
- 2338697 words of memory out of 6000000
- 84036 multiletter control sequences out of 15000+600000
+ 65815 strings out of 476034
+ 1670475 string characters out of 5792864
+ 2398776 words of memory out of 6000000
+ 85363 multiletter control sequences out of 15000+600000
  635840 words of font info for 155 fonts, out of 8000000 for 9000
  1137 hyphenation exceptions out of 8191
- 99i,17n,131p,767b,1374s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,17n,131p,767b,1378s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Bold.pf
 b></usr/share/texlive/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Regular
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2Math.pf
@@ -1799,10 +1848,10 @@ pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Bol
 dItalic.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2
 Text-Italic.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/S
 TIX2Text-Regular.pfb>
-Output written on diplomski_rad.pdf (33 pages, 1252745 bytes).
+Output written on diplomski_rad.pdf (33 pages, 1253076 bytes).
 PDF statistics:
- 514 PDF objects out of 1000 (max. 8388607)
- 433 compressed objects within 5 object streams
- 102 named destinations out of 1000 (max. 500000)
+ 511 PDF objects out of 1000 (max. 8388607)
+ 430 compressed objects within 5 object streams
+ 101 named destinations out of 1000 (max. 500000)
  244 words of extra memory for PDF output out of 10000 (max. 10000000)
 
