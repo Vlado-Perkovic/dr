@@ -22,6 +22,9 @@
 - bemf
 - torque vs speed
 
+## upravljanje brzinom vrtnje bez osjetila polozaja
+- ovo sve sta je vec tamo
+
 ## eksperimentalni postav
 - esc
 - motor

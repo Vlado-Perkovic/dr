@@ -904,26 +904,25 @@ fiksnom vremenu, već je sinkronizirana sa stvarnim položajem rotora
 detektiranim prolaskom PEMS-a kroz nulu \cite{Recasens2021}.
 
 \section{Model regulacije brzine}
-\todo[inline, color=yellow]{preko Matlab simulacije prikazi ovo}
 \begin{tikzpicture}[
 		auto,
-		node distance=2.5cm and 2cm, % Default distance between nodes (vertical and horizontal)
+		node distance=1.8cm and 1.5cm, % Reduced distance between nodes (vertical and horizontal)
 		>=Latex, % Use LaTeX-style arrows
 		block/.style={
 				draw,
 				rectangle,
 				fill=blue!10,
-				minimum height=1cm,
-				minimum width=2cm,
-				text width=1.8cm, % Ensures text wraps if needed
+				minimum height=0.8cm, % Slightly reduced height
+				minimum width=1.8cm, % Reduced width
+				text width=1.6cm, % Ensures text wraps if needed, corresponds to minimum width
 				align=center
 			},
 		sum/.style={
 				draw,
 				circle,
 				fill=blue!10,
-				minimum size=0.7cm,
-				node distance=1.5cm
+				minimum size=0.6cm, % Slightly reduced size
+				node distance=1.2cm % Reduced distance for sum node
 			},
 		io/.style={
 				coordinate
@@ -932,30 +931,113 @@ detektiranim prolaskom PEMS-a kroz nulu \cite{Recasens2021}.
 				pin edge={to-,thin,black}
 			}
 	]
+	% Nodes
 	\node[io, name=input] {};
 	\node[sum, right=of input, name=sum] {};
-	\node[block, right=of sum, name=controller] {PI Regulator};
-	\node[block, right=of controller, name=plant] {BLDC Motor};
-	\node[io, right=of plant, name=output] {};
-	\node[io, below=of plant, name=feedback_point] {};
+	\node[block, right=of sum, name=pi_regulator] {PI Regulator};
+	\node[block, right=of pi_regulator, name=comm_block] {Comm Block};
+	\node[block, right=of comm_block, name=inverter] {3 Phase Inverter};
+	\node[block, right=of inverter, name=motor] {Motor};
+	%\node[io, right=of motor, name=output_motor] {}; % Output from motor
+	\node[block, below=of motor,xshift=-6.0cm, yshift=-2.0cm, name=estimate_speed] {Estimate Speed}; % Adjusted yshift
+
+	% Paths
 	\draw[->] (input) -- node[above] {$\omega_{ref}(s)$} (sum);
-	\draw[->] (sum) -- node[above] {$e(s)$} (controller);
-	\draw[->] (controller) -- node[above] {$u(s)$} (plant);
-	\draw[->] (plant) -- node[above] {$\omega(s)$} (output);
-	\draw[->] (output) -- ++(0.5,0) |- (feedback_point) -| (sum);
-	\node at (sum.north) [above=0.1cm] {$+$};
-	\node at (sum.west) [left=0.1cm] {}; % Empty node for alignment if needed
-	\node at (sum.south) [below=0.1cm] {$-$};
-\end{tikzpicture}
-%-------------------------------------------------------------------------------
-\chapter{Sklopovlje}
-\label{pog:sklopovlje}
+	\draw[->] (sum) -- (pi_regulator);
+	\draw[->] (pi_regulator) -- (comm_block);
+	\draw[->] (comm_block) -- (inverter);
+	\draw[->] (inverter) -- (motor);
+	%\draw[->] (motor) -- (output_motor);
+	\draw[->] (motor) |- (estimate_speed);
+	\draw[->] (estimate_speed) -| (sum);
+
+	% Summing Junction Signs
+	\node at (sum.north) [above=0.05cm] {$+$}; % Slightly adjusted for smaller sum node
+	\node at (sum.west) [left=0.05cm] {};
+	\node at (sum.south) [below=0.05cm] {$-$};
+\end{tikzpicture}%-------------------------------------------------------------------------------
+\chapter{Eksperimentalni postav}
+\label{pog:postav}
+
+Kako bi se provela validacija teorijskih koncepata i testirala implementacija
+algoritma za upravljanje brzinom vrtnje, sastavljen je eksperimentalni postav.
+Ovaj postav objedinjuje sve sklopovske i programske komponente potrebne za
+pogon i analizu rada istosmjernog motora bez četkica. U nastavku su opisane
+komponente korištene u radu.
+
 \section{Elektronički sklop za upravljanje brzinom}
-\todo[inline]{ opis ESC-a }
-\section{Elektromotor A2212\/13T 1000KV}
-\todo[inline]{ opis motora }
-\section{Razvojna ploča FRDM-MCXA 153}
-\todo[inline]{ opis mikrokontrolera NXP }
+\label{sec:esc}
+
+Središnji element eksperimentalnog postava je elektronički sklop za upravljanje
+brzinom motora. On objedinjuje digitalnu upravljačku logiku i pogonski sklop na
+dvije odvojene tiskane pločice (eng. \textit{Printed Circuit Board, PCB}).
+
+Digitalna upravljačka logika implementirana je na razvojnoj pločici
+\textit{Nucleo G071RB}, čija je središnja komponenta mikrokontroler
+\textit{STM32G071RB}. Njegova zadaća je izvršavanje upravljačkog algoritma što
+obuhvaća generiranje signala pulsno-širinske modulacije (eng.
+\textit{Pulse-Width Modulation}, PWM) za upravljanje tranzistorima snage te
+akviziciju i obradu signala protuelektromotorne sile za određivanje položaja
+rotora.
+
+Pogonski sklop, zadužen za isporuku energije motoru, realiziran je na zasebnoj,
+ručno zalemljenoj tiskanoj pločici\footnote{Dizajn tiskane pločice za potrebe
+	ovog rada ustupio je kolega Boris Šnajder}. Njegovu osnovu čine tri polumosta
+koja pogone tri faze motora. Svaki polumost sastoji se od para komplementarnih
+tranzistora snage tipa MOSFET. Na istoj pločici nalaze se i sklopovi za
+kondicioniranje signala koji obavljaju filtriranje i prilagodbu naponskih
+razina faznih napona. Za mjerenje PEMS-a zaslužan je sklop komparatora preko
+kojeg je moguće detektirati trenutak prolaska signala kroz referentni napon
+virtualnog zvjezdišta. \missingfigure{slika esc}
+
+\section{Elektromotor \textit{ A2212/13T  1000KV}}
+\label{sec:motor}
+
+U eksperimentu je korišten komercijalno dostupan trofazni istosmjerni motor bez
+četkica modela \textit{ A2212/13T }. Oznaka \textit{ A2212/13T } odnosi se na
+njegove konstrukcijske značajke. Oznaka \textit{ 2212 } specificira dimenzije
+statora: promjer od 22 mm i visinu od 12 mm. Motor ima 14 magnetskih polova na
+rotoru i 12 utora na statoru, što odgovara uobičajenoj konfiguraciji 14P12N za
+ovu vrstu motora. Riječ je o vanjskom motoru konstante brzine od 1000 KV, što
+specificira da motor teoretski, u neopterećenom stanju, postiže brzinu vrtnje
+od 1000 okretaja u minuti za svaki volt napona napajanja. Oznaka \textit{ 13T }
+odnosi se na broj namotaja na svakom polu statora, što utječe na njegove
+momentne i brzinske karakteristike. \missingfigure{slika motora}
+
+\section{Enkoder}
+\label{sec:enkoder}
+
+Za precizno mjerenje stvarne brzine vrtnje i položaja rotora motora korišten je
+apsolutni magnetski enkoder \textit{ CUI Devices AMT223C-V }. Iako se primarni
+algoritam upravljanja opisan u ovom radu temelji na metodi bez osjetila
+položaja, enkoder je u eksperimentalnom postavu imao ulogu referentnog mjernog
+uređaja. Podaci dobiveni s enkodera služili su za praćenje kuta između statora
+i rotora, za praćenje trajanja pojedinog koraka te za praćenje trenutaka
+detektiranih prolazaka kroz nulu. \missingfigure{slika enkodera}
+
+Kako bi se osigurala mehanička stabilnost i pouzdano centriranje enkodera na
+osovinu motora, pomoću tehnologije 3D tiska izrađeno je prilagođeno kućište
+koje fiksira enkoder i motor u koaksijalan položaj. \missingfigure{slika
+	enkodera na motoru + kuciste}
+
+\section{Mjerni instrumenti}
+\label{sec:mjerni_instrumenti}
+
+Tijekom razvoja, testiranja i analize sustava korištena je standardna
+laboratorijska mjerna oprema. Kao izvor napajanja za elektronički sklop i motor
+služilo je laboratorijsko napajanje, koje je osiguravalo stabilan i podesiv
+istosmjerni napon. Za analizu signala korišteni su digitalni osciloskop i
+logički analizator. Digitalnim osciloskopom obavljena je vizualizacija i
+mjerenje analognih signala, kao što su valni oblici faznih napona, signali
+protuelektromotorne sile i izlazi komparatora. Za praćenje i analizu digitalnih
+signala upotrijebljen je logički analizator \textit{Saleae}, primarno za
+dekodiranje podataka o položaju s enkodera te praćenje pomoćnih signala tijekom
+otklanjanja pogrešaka. Uz navedene instrumente, digitalni multimetar korišten
+je za osnovna mjerenja istosmjernog napona, struje i otpora prilikom
+sastavljanja i provjere ispravnosti elektroničkog sklopa.
+
+\section{Programska podrška}
+\label{sec:programska_podrska}
 
 %-------------------------------------------------------------------------------
 \chapter{Implementacija}
@@ -987,7 +1069,8 @@ detektiranim prolaskom PEMS-a kroz nulu \cite{Recasens2021}.
 	opisane faze pokretanja i rada motora, od početnog poravnanja do prelaska na
 	zatvorenu petlju. Implementirano je rješenje upravljanja brzinom na odabranom
 	sklopovlju koje uključuje sklop za elektroničko upravljanje brzine, motor
-	A2212/13T 1000KV i razvojnu ploču FRDM-MCXA 153 s mikrokontrolerom NXP.
+	\textit{ A2212/13T } 1000KV i razvojnu ploču FRDM-MCXA 153 s mikrokontrolerom
+	NXP.
 \end{sazetak}
 
 \begin{kljucnerijeci}
@@ -1007,8 +1090,9 @@ detektiranim prolaskom PEMS-a kroz nulu \cite{Recasens2021}.
 	force detection for obtaining rotor position information is explained, and the
 	motor's startup and operating phases, from initial alignment to closed-loop
 	transition, are detailed. The speed control solution is implemented on selected
-	hardware, which includes an electronic speed controller, an A2212/13T 1000KV
-	motor, and an FRDM-MCXA 153 development board with an NXP microcontroller.
+	hardware, which includes an electronic speed controller, an \textit{ A2212/13T
+	} 1000KV motor, and an FRDM-MCXA 153 development board with an NXP
+	microcontroller.
 \end{abstract}
 
 \begin{keywords}

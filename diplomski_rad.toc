@@ -8,27 +8,29 @@
 \contentsline {section}{\numberline {2.3.}Protuelektromotorna sila}{10}{section.2.3}%
 \contentsline {section}{\numberline {2.4.}Konfiguracija namotaja na statoru}{11}{section.2.4}%
 \contentsline {section}{\numberline {2.5.}Odnos momenta i brzine vrtnje}{13}{section.2.5}%
-\contentsline {chapter}{\numberline {3.}Upravljanje motorom BLDC bez osjetila}{15}{chapter.3}%
+\contentsline {chapter}{\numberline {3.}Upravljanje motorom BLDC bez osjetila položaja}{15}{chapter.3}%
 \contentsline {section}{\numberline {3.1.}Metoda komutacije u šest koraka}{15}{section.3.1}%
 \contentsline {section}{\numberline {3.2.}Upravljanje naponom i strujom pomoću PWM-a}{17}{section.3.2}%
 \contentsline {subsubsection}{Tehnike primjene PWM-a za upravljanje}{17}{section*.15}%
 \contentsline {section}{\numberline {3.3.}Detekcija položaja rotora s pomoću PEMS-a}{20}{section.3.3}%
 \contentsline {section}{\numberline {3.4.}Faze pokretanja i rada motora}{23}{section.3.4}%
 \contentsline {section}{\numberline {3.5.}Model regulacije brzine}{23}{section.3.5}%
-\contentsline {chapter}{\numberline {4.}Sklopovlje}{24}{chapter.4}%
+\contentsline {chapter}{\numberline {4.}Eksperimentalni postav}{24}{chapter.4}%
 \contentsline {section}{\numberline {4.1.}Elektronički sklop za upravljanje brzinom}{24}{section.4.1}%
-\contentsline {section}{\numberline {4.2.}Elektromotor A2212\/13T 1000KV}{24}{section.4.2}%
-\contentsline {section}{\numberline {4.3.}Razvojna ploča FRDM-MCXA 153}{24}{section.4.3}%
-\contentsline {chapter}{\numberline {5.}Implementacija}{25}{chapter.5}%
-\contentsline {chapter}{\numberline {6.}Zaključak}{26}{chapter.6}%
-\contentsline {chapter}{Literatura}{27}{chapter*.29}%
+\contentsline {section}{\numberline {4.2.}Elektromotor \textit { A2212/13T 1000KV}}{25}{section.4.2}%
+\contentsline {section}{\numberline {4.3.}Enkoder}{25}{section.4.3}%
+\contentsline {section}{\numberline {4.4.}Mjerni instrumenti}{26}{section.4.4}%
+\contentsline {section}{\numberline {4.5.}Programska podrška}{26}{section.4.5}%
+\contentsline {chapter}{\numberline {5.}Implementacija}{27}{chapter.5}%
+\contentsline {chapter}{\numberline {6.}Zaključak}{28}{chapter.6}%
+\contentsline {chapter}{Literatura}{29}{chapter*.25}%
 \babel@toc {croatian}{}\relax 
-\contentsline {chapter}{Sa\v {z}etak}{29}{chapter*.30}%
+\contentsline {chapter}{Sa\v {z}etak}{31}{chapter*.26}%
 \babel@toc {croatian}{}\relax 
 \babel@toc {croatian}{}\relax 
 \babel@toc {croatian}{}\relax 
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{Abstract}{30}{chapter*.31}%
+\contentsline {chapter}{Abstract}{32}{chapter*.27}%
 \babel@toc {croatian}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {croatian}{}\relax 
