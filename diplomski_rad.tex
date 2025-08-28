@@ -982,8 +982,8 @@ rotora.
 
 Pogonski sklop, zadužen za isporuku energije motoru, realiziran je na zasebnoj,
 ručno zalemljenoj tiskanoj pločici\footnote{Dizajn tiskane pločice za potrebe
-	ovog rada ustupio je kolega Boris Šnajder}. Njegovu osnovu čine tri polumosta
-koja pogone tri faze motora. Svaki polumost sastoji se od para komplementarnih
+	ovog rada ustupio je Boris Šnajder}. Njegovu osnovu čine tri polumosta koja
+pogone tri faze motora. Svaki polumost sastoji se od para komplementarnih
 tranzistora snage tipa MOSFET. Na istoj pločici nalaze se i sklopovi za
 kondicioniranje signala koji obavljaju filtriranje i prilagodbu naponskih
 razina faznih napona. Za mjerenje PEMS-a zaslužan je sklop komparatora preko
@@ -1038,6 +1038,19 @@ sastavljanja i provjere ispravnosti elektroničkog sklopa.
 
 \section{Programska podrška}
 \label{sec:programska_podrska}
+
+Uz sklopovske komponente i mjerne instrumente, u radu je korištena i programska
+podrška za simulaciju elektroničkih krugova te za obradu i vizualizaciju
+mjernih podataka. U fazi istraživanja teme, ponašanje ključnih dijelova
+pogonskog sklopa simulirano je u alatu \textit{LTspice}. To je omogućilo bolje
+razumijevanje koncepata poput ponašanja struje pri komplementarnom signalu
+PWM-a \todo{referenciraj}.
+
+Podaci prikupljeni s enkodera su uvezeni, obrađeni i vizualizirani pomoću
+programskog paketa \textit{MATLAB}. Obrada u \textit{MATLAB}-u omogućila je
+uvid u promjene kuta kroz vrijeme, trajanje svakog pojedinačnog koraka,
+trenutke detektiranog prolaska kroz nulu te odziv brzine kroz vrijeme što je
+uvelike ubrzalo proces razvoja algoritma.
 
 %-------------------------------------------------------------------------------
 \chapter{Implementacija}

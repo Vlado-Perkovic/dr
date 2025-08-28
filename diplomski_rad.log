@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.8.21)  27 AUG 2025 13:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.8.21)  27 AUG 2025 20:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1455,12 +1455,12 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
 al/texlive/2025/texmf-dist/fonts/enc/dvips/opensans/a_jg4h6q.enc}]
-<hr_0036535500_90.pdf, id=105, 598.235pt x 845.1575pt>
+<hr_0036535500_90.pdf, id=109, 598.235pt x 845.1575pt>
 File: hr_0036535500_90.pdf Graphic file (type pdf)
 <use hr_0036535500_90.pdf>
 Package pdftex.def Info: hr_0036535500_90.pdf  used on input line 66.
 (pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
-<hr_0036535500_90.pdf, id=107, page=1, 598.235pt x 845.1575pt>
+<hr_0036535500_90.pdf, id=111, page=1, 598.235pt x 845.1575pt>
 File: hr_0036535500_90.pdf Graphic file (type pdf)
 <use hr_0036535500_90.pdf, page 1>
 Package pdftex.def Info: hr_0036535500_90.pdf , page1 used on input line 66.
@@ -1506,7 +1506,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.27 ...e {chapter}{Sa\v {z}etak}{31}{chapter*.26}
+l.26 ...ine {chapter}{Literatura}{29}{chapter*.25}
                                                   % [1
 
 
@@ -1625,7 +1625,7 @@ taje vaºno pri uprav-lja-nju okre-
 .enc}]
 
 [12]
-<Figures/microchip_torque_speed.png, id=282, 1063.975pt x 611.28375pt>
+<Figures/microchip_torque_speed.png, id=287, 1063.975pt x 611.28375pt>
 File: Figures/microchip_torque_speed.png Graphic file (type png)
 <use Figures/microchip_torque_speed.png>
 Package pdftex.def Info: Figures/microchip_torque_speed.png  used on input line
@@ -1658,7 +1658,7 @@ LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
 
 
 [17]
-<Figures/hard_chopping1.png, id=331, 1548.78625pt x 837.1275pt>
+<Figures/hard_chopping1.png, id=336, 1548.78625pt x 837.1275pt>
 File: Figures/hard_chopping1.png Graphic file (type png)
 <use Figures/hard_chopping1.png>
 Package pdftex.def Info: Figures/hard_chopping1.png  used on input line 640.
@@ -1666,18 +1666,18 @@ Package pdftex.def Info: Figures/hard_chopping1.png  used on input line 640.
 
 
 [18 <./Figures/hard_chopping1.png>]
-<Figures/soft_chopping.png, id=340, 1622.06pt x 757.83125pt>
+<Figures/soft_chopping.png, id=345, 1622.06pt x 757.83125pt>
 File: Figures/soft_chopping.png Graphic file (type png)
 <use Figures/soft_chopping.png>
 Package pdftex.def Info: Figures/soft_chopping.png  used on input line 658.
 (pdftex.def)             Requested size: 418.96548pt x 195.73636pt.
-<Figures/soft_chopping_new.png, id=344, 1921.1775pt x 1057.9525pt>
+<Figures/soft_chopping_new.png, id=349, 1921.1775pt x 1057.9525pt>
 File: Figures/soft_chopping_new.png Graphic file (type png)
 <use Figures/soft_chopping_new.png>
 Package pdftex.def Info: Figures/soft_chopping_new.png  used on input line 677.
 
 (pdftex.def)             Requested size: 211.68661pt x 116.56885pt.
-<Figures/comp_pwm_new.png, id=345, 1922.18124pt x 1059.96pt>
+<Figures/comp_pwm_new.png, id=350, 1922.18124pt x 1059.96pt>
 File: Figures/comp_pwm_new.png Graphic file (type png)
 <use Figures/comp_pwm_new.png>
 Package pdftex.def Info: Figures/comp_pwm_new.png  used on input line 683.
@@ -1692,7 +1692,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Figures/pwm_sum.png, id=357, 1848.9075pt x 1030.85126pt>
+<Figures/pwm_sum.png, id=362, 1848.9075pt x 1030.85126pt>
 File: Figures/pwm_sum.png Graphic file (type png)
 <use Figures/pwm_sum.png>
 Package pdftex.def Info: Figures/pwm_sum.png  used on input line 858.
@@ -1703,7 +1703,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 [20 <./Figures/soft_chopping_new.png> <./Figures/comp_pwm_new.png>]
-<Figures/pwm_drive_deg.png, id=368, 1847.90375pt x 1015.795pt>
+<Figures/pwm_drive_deg.png, id=373, 1847.90375pt x 1015.795pt>
 File: Figures/pwm_drive_deg.png Graphic file (type png)
 <use Figures/pwm_drive_deg.png>
 Package pdftex.def Info: Figures/pwm_drive_deg.png  used on input line 879.
@@ -1747,18 +1747,30 @@ a je stan-dardna la-bo-ra-to-rij-ska mjerna
  []
 
 
+Overfull \hbox (24.31033pt too wide) in paragraph at lines 1047--1047
+[][][]\T1/stix2/m/n/12 referenciraj[]  
+ []
+
+
+Overfull \hbox (24.31033pt too wide) in paragraph at lines 1047--1047
+[][][]\T1/stix2/m/n/12 referenciraj[]  
+ []
+
+
 
 [26]
+
+[27]
 Poglavlje 5..
 
 
-[27
+[28
 
 ]
 Poglavlje 6..
 (./diplomski_rad.bbl
 
-[28
+[29
 
 ]
 Underfull \hbox (badness 1803) in paragraph at lines 28--31
@@ -1768,23 +1780,23 @@ Underfull \hbox (badness 1803) in paragraph at lines 28--31
 
 
 
-[29
+[30
 
 ])
 
-[30]
+[31]
 
-[31
+[32
 
 ]
-Overfull \hbox (1.8657pt too wide) in paragraph at lines 1098--1101
+Overfull \hbox (1.8657pt too wide) in paragraph at lines 1111--1114
 \T1/stix2/m/n/12 aerial ve-hi-cles; UAV; drones; six-step com-mu-ta-tion; back-
 electromotive force; back-EMF;
  []
 
 
 
-[32
+[33
 
 ] (./diplomski_rad.aux)
  ***********
@@ -1955,30 +1967,34 @@ Package rerunfilecheck Warning: File `diplomski_rad.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `diplomski_rad.out':
-(rerunfilecheck)             Before: 276918A4A3C9EFA93040D15BE0602A89;4055
-(rerunfilecheck)             After:  926E2F5C16AE17FEC184D1A0C2FA918D;4236.
+(rerunfilecheck)             Before: 926E2F5C16AE17FEC184D1A0C2FA918D;4236
+(rerunfilecheck)             After:  E058C876EA223699C2A8C89BB358393F;4236.
  ) 
 Here is how much of TeX's memory you used:
- 67798 strings out of 473190
- 1727889 string characters out of 5715800
- 2496262 words of memory out of 5000000
- 90163 multiletter control sequences out of 15000+600000
+ 67835 strings out of 473190
+ 1728608 string characters out of 5715800
+ 2497330 words of memory out of 5000000
+ 90197 multiletter control sequences out of 15000+600000
  703269 words of font info for 190 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,17n,131p,767b,1383s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Bo
-ld.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/ascender/opensans/OpenSa
-ns-BoldItalic.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/ascender/open
-sans/OpenSans-Regular.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/publi
-c/stix2-type1/STIX2Math.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/pub
-lic/stix2-type1/STIX2Text-Bold.pfb></usr/local/texlive/2025/texmf-dist/fonts/ty
-pe1/public/stix2-type1/STIX2Text-BoldItalic.pfb></usr/local/texlive/2025/texmf-
-dist/fonts/type1/public/stix2-type1/STIX2Text-Italic.pfb></usr/local/texlive/20
-25/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Regular.pfb>
-Output written on diplomski_rad.pdf (35 pages, 1291405 bytes).
+
+pdfTeX warning (dest): name{chapter*.25} has been referenced but does not exist
+, replaced by a fixed one
+
+</usr/local/texlive/2025/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Bold
+.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/ascender/opensans/OpenSans
+-BoldItalic.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/ascender/opensa
+ns/OpenSans-Regular.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/
+stix2-type1/STIX2Math.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/publi
+c/stix2-type1/STIX2Text-Bold.pfb></usr/local/texlive/2025/texmf-dist/fonts/type
+1/public/stix2-type1/STIX2Text-BoldItalic.pfb></usr/local/texlive/2025/texmf-di
+st/fonts/type1/public/stix2-type1/STIX2Text-Italic.pfb></usr/local/texlive/2025
+/texmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Regular.pfb>
+Output written on diplomski_rad.pdf (36 pages, 1292695 bytes).
 PDF statistics:
- 527 PDF objects out of 1000 (max. 8388607)
- 443 compressed objects within 5 object streams
- 102 named destinations out of 1000 (max. 500000)
- 247 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 538 PDF objects out of 1000 (max. 8388607)
+ 453 compressed objects within 5 object streams
+ 105 named destinations out of 1000 (max. 500000)
+ 255 words of extra memory for PDF output out of 10000 (max. 10000000)
 

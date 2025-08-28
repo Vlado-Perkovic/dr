@@ -1,6 +1,6 @@
 INFO:  latexindent version 3.24.4, 2024-07-18, a script to indent .tex files
        latexindent lives here: /usr/local/texlive/2025/texmf-dist/scripts/latexindent/
-       Wed Aug 27 13:24:44 2025
+       Wed Aug 27 20:33:09 2025
        Filename: diplomski_rad.tex
 INFO:  Processing switches:
        -w|--overwrite: Overwrite mode active, will make a back up before overwriting
@@ -40,7 +40,9 @@ INFO:  Backup procedure (-w flag active):
        ./diplomski_rad.bak11 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./diplomski_rad.bak12 already exists, incrementing by 1 (see maxNumberOfBackUps)
        ./diplomski_rad.bak13 already exists, incrementing by 1 (see maxNumberOfBackUps)
-       Backing up diplomski_rad.tex to ./diplomski_rad.bak14...
+       ./diplomski_rad.bak14 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./diplomski_rad.bak15 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up diplomski_rad.tex to ./diplomski_rad.bak16...
        diplomski_rad.tex will be overwritten after indentation
 INFO:  Phase 1: searching for objects
 INFO:  Phase 2: finding surrounding indentation

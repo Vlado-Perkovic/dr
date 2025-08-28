@@ -21,16 +21,16 @@
 \contentsline {section}{\numberline {4.3.}Enkoder}{25}{section.4.3}%
 \contentsline {section}{\numberline {4.4.}Mjerni instrumenti}{26}{section.4.4}%
 \contentsline {section}{\numberline {4.5.}Programska podrška}{26}{section.4.5}%
-\contentsline {chapter}{\numberline {5.}Implementacija}{27}{chapter.5}%
-\contentsline {chapter}{\numberline {6.}Zaključak}{28}{chapter.6}%
-\contentsline {chapter}{Literatura}{29}{chapter*.25}%
+\contentsline {chapter}{\numberline {5.}Implementacija}{28}{chapter.5}%
+\contentsline {chapter}{\numberline {6.}Zaključak}{29}{chapter.6}%
+\contentsline {chapter}{Literatura}{30}{chapter*.26}%
 \babel@toc {croatian}{}\relax 
-\contentsline {chapter}{Sa\v {z}etak}{31}{chapter*.26}%
+\contentsline {chapter}{Sa\v {z}etak}{32}{chapter*.27}%
 \babel@toc {croatian}{}\relax 
 \babel@toc {croatian}{}\relax 
 \babel@toc {croatian}{}\relax 
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{Abstract}{32}{chapter*.27}%
+\contentsline {chapter}{Abstract}{33}{chapter*.28}%
 \babel@toc {croatian}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {croatian}{}\relax 
