@@ -37,6 +37,14 @@ O.~Solomon i P.~Famouri, ``Dynamic performance of a permanent magnet brushless
   1400--1405. \url{https://doi.org/10.1109/IECON.2006.347808}
 \BIBentrySTDinterwordspacing
 
+\bibitem{NXP_AN2355}
+\BIBentryALTinterwordspacing
+{NXP Semiconductors}, ``3-phase bldc motor control with hall sensors'', NXP
+  Semiconductors, Application Note AN2355, 2005., pristupljeno: 1. srpnja 2025.
+  [Mre\v zno]. Adresa:
+  \url{https://www.nxp.com/docs/en/application-note/AN2355.pdf}
+\BIBentrySTDinterwordspacing
+
 \bibitem{elektromotor-beskolektorski}
 \BIBentryALTinterwordspacing
 {Leksikografski zavod Miroslav Krleža}. (2007) {elektromotor, beskolektorski}.
@@ -44,10 +52,19 @@ O.~Solomon i P.~Famouri, ``Dynamic performance of a permanent magnet brushless
   \url{https://tehnicki.lzmk.hr/clanak/elektromotor-beskolektorski}
 \BIBentrySTDinterwordspacing
 
+\bibitem{cite:bldc}
+\BIBentryALTinterwordspacing
+D.~Mohanraj, R.~Aruldavid, R.~Verma, K.~Sathiyasekar, A.~B. Barnawi,
+  B.~Chokkalingam, i L.~Mihet-Popa, ``A review of bldc motor: State of art,
+  advanced control techniques, and applications'', \emph{IEEE Access}, sv.~10,
+  str. 54\,833--54\,869, 2022.
+  \url{https://doi.org/10.1109/ACCESS.2022.3175011}
+\BIBentrySTDinterwordspacing
+
 \bibitem{elektromotor-sa-stalnim-magnetima}
 \BIBentryALTinterwordspacing
-------. (2007) {elektromotor sa stalnim magnetima}. Tehnički leksikon, mrežno
-  izdanje. [Mre\v zno]. Adresa:
+{Leksikografski zavod Miroslav Krleža}. (2007) {elektromotor sa stalnim
+  magnetima}. Tehnički leksikon, mrežno izdanje. [Mre\v zno]. Adresa:
   \url{https://tehnicki.lzmk.hr/clanak/elektromotor-sa-stalnim-magnetima}
 \BIBentrySTDinterwordspacing
 
@@ -60,6 +77,10 @@ D.~van Niekerk, ``Design, development and testing of a solar-powered unmanned
   \url{https://www.researchgate.net/publication/380743096_MTECH_Dissertation_of_Daniel_van_Niekerk_Final_Version}
 \BIBentrySTDinterwordspacing
 
+\bibitem{cite:trofazni}
+{Joe Evans, Ph.D}, ``The three phase induction motor'',
+  \url{http://www.pumped101.com/motorintro.pdf}, pristupljeno: 1. srpnja 2025.
+
 \bibitem{MicrochipAN885}
 \BIBentryALTinterwordspacing
 N.~Padmaraja, ``Brushless dc (bldc) motor fundamentals'', Microchip Technology
@@ -67,10 +88,6 @@ N.~Padmaraja, ``Brushless dc (bldc) motor fundamentals'', Microchip Technology
   zno]. Adresa:
   \url{https://ww1.microchip.com/downloads/en/AppNotes/00885a.pdf}
 \BIBentrySTDinterwordspacing
-
-\bibitem{cite:trofazni}
-{Joe Evans, Ph.D}, ``The three phase induction motor'',
-  \url{http://www.pumped101.com/motorintro.pdf}, pristupljeno: 1. srpnja 2025.
 
 \bibitem{motor-ucinkovitost}
 \BIBentryALTinterwordspacing
@@ -83,23 +100,6 @@ N.~Padmaraja, ``Brushless dc (bldc) motor fundamentals'', Microchip Technology
 \BIBentryALTinterwordspacing
 {maxon group}. (2024., 3) Ec 8 brushless dc motor. [Mre\v zno]. Adresa:
   \url{https://www.maxongroup.com/medias/sys_master/root/9399220961310/Cataloge-Page-EN-203.pdf}
-\BIBentrySTDinterwordspacing
-
-\bibitem{cite:bldc}
-\BIBentryALTinterwordspacing
-D.~Mohanraj, R.~Aruldavid, R.~Verma, K.~Sathiyasekar, A.~B. Barnawi,
-  B.~Chokkalingam, i L.~Mihet-Popa, ``A review of bldc motor: State of art,
-  advanced control techniques, and applications'', \emph{IEEE Access}, sv.~10,
-  str. 54\,833--54\,869, 2022.
-  \url{https://doi.org/10.1109/ACCESS.2022.3175011}
-\BIBentrySTDinterwordspacing
-
-\bibitem{NXP_AN2355}
-\BIBentryALTinterwordspacing
-{NXP Semiconductors}, ``3-phase bldc motor control with hall sensors'', NXP
-  Semiconductors, Application Note AN2355, 2005., pristupljeno: 1. srpnja 2025.
-  [Mre\v zno]. Adresa:
-  \url{https://www.nxp.com/docs/en/application-note/AN2355.pdf}
 \BIBentrySTDinterwordspacing
 
 \bibitem{TI2015}
