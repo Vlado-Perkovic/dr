@@ -1,28 +1,24 @@
-\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ nadopuni opis rada}{3}{section*.3}%
-\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ popravi pregled poglavlja}{4}{section*.4}%
-\contentsline {todo}{Figure: umetni sliku presjeka motora}{5}{section.2.1}%
-\contentsline {todo}{Figure: a+/b-, neka je 3 navoja, 2 para magneta}{14}{section.3.1}%
-\contentsline {todo}{Figure: b-/c+, neka je 3 navoja, 2 para magneta}{15}{section.3.1}%
-\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ ovdje objasni razliku izmedju elektricnih i mehanickih stupnjeva na temelju 2 dijagrama iznad}{15}{section*.13}%
-\contentsline {todo}{Figure: slika valovitosti momenta, probat cu u matlabu odsimulirat}{15}{section*.13}%
-\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ treba ponovno evaluirat, nije bas precizno}{16}{section*.16}%
-\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ fale osi na slici, ponovi}{17}{section*.17}%
-\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ fale osi na slici}{18}{section*.19}%
-\contentsline {todo}{Figure: slika esc}{23}{section.4.1}%
-\contentsline {todo}{Figure: slika motora}{24}{section.4.2}%
-\contentsline {todo}{Figure: slika enkodera}{24}{section.4.3}%
-\contentsline {todo}{Figure: slika enkodera na motoru + kuciste}{25}{section.4.3}%
-\contentsline {todo}{Figure: Dijagram toka cjelokupnog programskog rješenja}{28}{section.5.1}%
-\contentsline {todo}{Figure: Dijagram toka programskog slijeda (Mirovanje, Poravnanje, Otvorena petlja, Zatvorena petlja)}{28}{section.5.1}%
-\contentsline {todo}{Figure: Prikaz komplementarnih PWM signala s jasno označenim mrtvim vremenom}{29}{subsection.5.2.1}%
-\contentsline {todo}{Figure: Blok dijagram sustava za detekciju PEMS-a (veza faza, komparatora i timera)}{29}{subsection.5.2.2}%
-\contentsline {todo}{Figure: Osciloskopska snimka trenutka okidanja komparatora pri različitim faktorima ispune}{29}{subsection.5.2.2}%
-\contentsline {todo}{Figure: Tablica koja definira komunikacijski protokol za zadavanje brzine i telemetriju}{30}{subsection.5.2.3}%
-\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ provjeri}{31}{section*.25}%
-\contentsline {todo}{Figure: 2 koraka za alignment}{31}{section*.25}%
-\contentsline {todo}{Figure: Tablica s komutacijskim stanjima za svih šest koraka}{31}{section*.25}%
-\contentsline {todo}{Figure: Graf procijenjene brzine motora tijekom faza pokretanja}{31}{section*.25}%
-\contentsline {todo}{Figure: Vremenski dijagram sinkronizacije komutacije (PEMS, detekcija nule, odgoda 30 stupnjeva, komutacija)}{32}{subsection.5.3.2}%
-\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ dodaj formulu za izracunavanje rpma}{33}{section*.26}%
-\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ prikazi kod od PI regulatora}{33}{section*.27}%
-\contentsline {todo}{Figure: Blok dijagram implementirane PI regulacijske petlje}{33}{section*.27}%
+\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ nadopuni opis rada}{5}{section*.3}%
+\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ popravi pregled poglavlja}{6}{section*.4}%
+\contentsline {todo}{Figure: umetni sliku presjeka motora}{7}{section.2.1}%
+\contentsline {todo}{Figure: a+/b-, neka je 3 navoja, 2 para magneta}{16}{section.3.1}%
+\contentsline {todo}{Figure: b-/c+, neka je 3 navoja, 2 para magneta}{17}{section.3.1}%
+\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ ovdje objasni razliku izmedju elektricnih i mehanickih stupnjeva na temelju 2 dijagrama iznad}{17}{section*.13}%
+\contentsline {todo}{Figure: slika valovitosti momenta, probat cu u matlabu odsimulirat}{17}{section*.13}%
+\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ treba ponovno evaluirat, nije bas precizno}{18}{section*.16}%
+\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ fale osi na slici, ponovi}{19}{section*.17}%
+\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ fale osi na slici}{20}{section*.19}%
+\contentsline {todo}{Figure: slika esc}{25}{section.4.1}%
+\contentsline {todo}{Figure: slika motora}{26}{section.4.2}%
+\contentsline {todo}{Figure: slika enkodera}{26}{section.4.3}%
+\contentsline {todo}{Figure: slika enkodera na motoru + kuciste}{27}{section.4.3}%
+\contentsline {todo}{Figure: Dijagram toka cjelokupnog programskog rješenja s prikazom glavne petlje i ključnih prekidnih rutina (\texttt {TIM1}, \texttt {TIM3}, \texttt {TIM15}, \texttt {TIM17})}{30}{section.5.1}%
+\contentsline {todo}{Figure: Dijagram programskog slijeda koji prikazuje prijelaze između stanja Mirovanje, Poravnanje, Otvorena petlja i Zatvorena petlja, s uvjetima prijelaza (npr. istek vremena, \texttt {zc\_cnt \: 3})}{30}{section.5.1}%
+\contentsline {todo}{Figure: Prikaz komplementarnih PWM signala s jasno označenim mrtvim vremenom, snimljen osciloskopom na jednom polumostu}{31}{subsection.5.2.1}%
+\contentsline {todo}{Figure: Blok dijagram sustava za detekciju PEMS-a (veza faza, virtualnog zvjezdišta, komparatora i GPIO ulaza mikrokontrolera)}{31}{subsection.5.2.2}%
+\contentsline {todo}{Figure: Osciloskopska snimka koja prikazuje PWM signal na jednoj fazi, PEMS na neopterećenoj fazi i digitalni signal koji označava trenutak uzorkovanja (okidanje TIM15 prekida)}{32}{subsection.5.2.2}%
+\contentsline {todo}{Figure: Tablica koja definira komunikacijski protokol (naredba, format podataka) za zadavanje brzine i primanje telemetrije}{32}{subsection.5.2.3}%
+\contentsline {todo}{Figure: Tablica s komutacijskim stanjima za svih šest koraka s prikazom aktivnih tranzistora i nadzirane faze}{33}{subsection.5.3.1}%
+\contentsline {todo}{Figure: Graf procijenjene brzine motora tijekom faza pokretanja, s jasno označenim fazama poravnanja, otvorene petlje i trenutka prijelaza u zatvorenu petlju}{33}{subsection.5.3.1}%
+\contentsline {todo}{Figure: Vremenski dijagram sinkronizacije komutacije (PEMS, detekcija nule, odgoda od 30 el. stupnjeva i trenutak komutacije)}{34}{subsection.5.3.2}%
+\contentsline {todo}{Figure: Blok dijagram implementirane PI regulacijske petlje}{36}{figure.caption.28}%
