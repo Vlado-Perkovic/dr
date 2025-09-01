@@ -1,22 +1,56 @@
-INFO:  latexindent version 3.20.3, 2023-02-19, a script to indent .tex files
-       latexindent lives here: /usr/share/texlive/texmf-dist/scripts/latexindent/
-       Thu Aug 28 17:33:56 2025
-       Reading input from STDIN
+INFO:  latexindent version 3.24.4, 2024-07-18, a script to indent .tex files
+       latexindent lives here: /usr/local/texlive/2025/texmf-dist/scripts/latexindent/
+       Sun Aug 31 17:30:03 2025
+       Filename: diplomski_rad.tex
 INFO:  Processing switches:
-INFO:  Directory for backup files and indent.log:
+       -w|--overwrite: Overwrite mode active, will make a back up before overwriting
+       -l|--localSettings: Read localSettings YAML file
+       -m|--modifylinebreaks: modify line breaks
+INFO:  Directory for backup files and log file indent.log:
        .
 INFO:  YAML settings read: defaultSettings.yaml
-       Reading defaultSettings.yaml from /usr/share/texlive/texmf-dist/scripts/latexindent/defaultSettings.yaml
+       Reading defaultSettings.yaml from /usr/local/texlive/2025/texmf-dist/scripts/latexindent/defaultSettings.yaml
 INFO:  YAML reading settings
-       Home directory is /home/vlado
+       Home directory is /Users/vladoperkovic
        latexindent.pl didn't find indentconfig.yaml or .indentconfig.yaml
        see all possible locations: https://latexindentpl.readthedocs.io/en/latest/sec-appendices.html#indentconfig-options)
+INFO:  YAML settings read: -l switch
+       Adding indent.yaml to YAML read paths
+INFO:  YAML settings, reading from the following files:
+       Reading USER settings from indent.yaml
+       ---
+       modifyLineBreaks:
+         condenseMultipleBlankLinesInto: '1'
+         textWrapOptions:
+           columns: '80'
+           removeBlockLineBreaks: '1'
+
+INFO:  Backup procedure (-w flag active):
+       ./diplomski_rad.bak0 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./diplomski_rad.bak1 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./diplomski_rad.bak2 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./diplomski_rad.bak3 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./diplomski_rad.bak4 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./diplomski_rad.bak5 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./diplomski_rad.bak6 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./diplomski_rad.bak7 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./diplomski_rad.bak8 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./diplomski_rad.bak9 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./diplomski_rad.bak10 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./diplomski_rad.bak11 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./diplomski_rad.bak12 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./diplomski_rad.bak13 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./diplomski_rad.bak14 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./diplomski_rad.bak15 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       ./diplomski_rad.bak16 already exists, incrementing by 1 (see maxNumberOfBackUps)
+       Backing up diplomski_rad.tex to ./diplomski_rad.bak17...
+       diplomski_rad.tex will be overwritten after indentation
 INFO:  Phase 1: searching for objects
 INFO:  Phase 2: finding surrounding indentation
 INFO:  Phase 3: indenting objects
 INFO:  Phase 4: final indentation check
 INFO:  Output routine:
-       Not outputting to file; see -w and -o switches for more options.
+       Overwriting file diplomski_rad.tex
        --------------
 INFO:  Please direct all communication/issues to:
         https://github.com/cmhughes/latexindent.pl

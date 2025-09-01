@@ -1061,46 +1061,43 @@ rotora preko sučelja UART.
 \chapter{Implementacija}
 \label{pog:implementacija}
 
-% Ovo poglavlje opisuje programsku implementaciju sustava za
-% upravljanje brzinom vrtnje motora BLDC bez osjetila položaja.
-% Prikazana je arhitektura programskog rješenja, konfiguracija korištenih
-% perifernih jedinica mikrokontrolera \textit{STM32G071RB} te programska realizacija
-% algoritma za upravljanje i regulaciju brzine. Implementacija se temelji na
-% teorijskim konceptima opisanim u prethodnim poglavljima i odnosi se na
-% sklopovlje korišteno u eksperimentalnom postavu.
-%
-% \section{Arhitektura programskog rješenja}
-% \label{sec:arhitektura_rjesenja}
-%
-% Programsko rješenje temelji se na operacijskom sustavu za rad u stvarnom
-% vremenu, FreeRTOS, koji upravlja izvršavanjem zadataka. Cjelokupna logika
-% upravljanja motorom, regulacije brzine i obrade signala smještena je unutar
-% jednog zadatka visokog prioriteta, nazvanog motor\_control\_task. Prioritet
-% zadatka postavljen je na osPriorityRealtime kako bi se osiguralo njegovo
-% pravovremeno izvršavanje.
-%
-% Sustav je vođen prekidima (eng. \textit{interrupt-driven}). Vremenski kritične
-% operacije, poput generiranja PWM signala, detekcije protuelektromotorne sile
-% (PEMS) i same komutacije, iniciraju se i obrađuju unutar prekidnih rutina
-% hardverskih tajmera. Glavna petlja zadatka motor\_control\_task služi za obradu
-% događaja signaliziranih iz prekidnih rutina putem globalnih zastavica (eng.
-% \textit{flags}). Ovakav pristup, umjesto direktnog pozivanja funkcija iz
-% prekidnih rutina, minimizira vrijeme provedeno u prekidima i omogućuje
-% složeniju obradu unutar konteksta zadatka.
-%
-% Rad sustava definiran je strojem stanja koji upravlja motorom kroz četiri
-% osnovna stanja:
-% \begin{itemize}
-% 	\item \textbf{MIROVANJE (eng. \textit{Idle}):} Početno stanje u kojem motor nije aktivan.
-% 	\item \textbf{PORAVNANJE (eng. \textit{Alignment}):} Kratkotrajno napajanje dviju faza motora kako bi se rotor postavio u poznati početni položaj.
-% 	\item \textbf{OTVORENA PETLJA (eng. \textit{Open-loop}):} Ubrzavanje motora prisilnom komutacijom prema unaprijed definiranoj vremenskoj sekvenci, bez povratne veze o položaju rotora.
-% 	\item \textbf{ZATVORENA PETLJA (eng. \textit{Closed-loop}):} Rad motora u kojem se trenutak komutacije određuje na temelju detektiranog signala PEMS-a, a brzina se regulira pomoću PI regulatora.
-% \end{itemize}
-% Prijelazi između stanja upravljani su logikom unutar zadatka motor\_control\_task, na temelju internih tajmera i broja uspješnih detekcija PEMS-a.
-%
-% \missingfigure{Dijagram toka cjelokupnog programskog rješenja}
-% \missingfigure{Dijagram glavnog stroja stanja (Mirovanje, Poravnanje, Otvorena petlja, Zatvorena petlja)}
-%
+Ovo poglavlje opisuje programsku implementaciju sustava za upravljanje brzinom
+vrtnje motora BLDC bez osjetila položaja. Prikazana je arhitektura programskog
+rješenja, konfiguracija korištenih perifernih jedinica mikrokontrolera
+\textit{STM32G071RB} te programska realizacija algoritma za upravljanje i
+regulaciju brzine. Implementacija se temelji na teorijskim konceptima opisanim
+u prethodnim poglavljima i odnosi se na sklopovlje korišteno u eksperimentalnom
+postavu.
+
+\section{Arhitektura programskog rješenja}
+\label{sec:arhitektura_rjesenja}
+
+Programsko rješenje implementirano je izravno na sklopovlju (eng.
+\textit{bare-metal}), bez korištenja operacijskog sustava. Cjelokupna
+arhitektura temelji se na beskonačnoj petlji unutar glavne `main` funkcije te
+na sustavu prekida za obradu vremenski kritičnih događaja.
+
+Sustav je vođen prekidima (eng. \textit{interrupt-driven}). Operacije koje
+zahtijevaju precizno vremensko izvršavanje, poput generiranja PWM signala,
+detekcije protuelektromotorne sile (PEMS) i same komutacije, iniciraju se i
+obrađuju unutar prekidnih rutina hardverskih tajmera. Glavna programska petlja
+služi za obradu događaja koji su signalizirani iz prekidnih rutina putem
+globalnih zastavica (eng. \textit{flags}). Ovakav pristup minimizira vrijeme
+provedeno unutar prekidnih rutina i omogućuje izvršavanje složenije obrade
+podataka u glavnom dijelu programa.
+
+Rad sustava slijedi logičan tijek kroz nekoliko faza, od pokretanja do rada u
+ustaljenom stanju:
+\begin{itemize}
+	\item \textbf{Mirovanje:} Početno stanje u kojem motor nije aktivan, a sustav čeka na naredbu za pokretanje.
+	\item \textbf{Poravnanje (eng. \textit{Alignment}):} Prvi korak pri pokretanju, gdje se kratkotrajno napajaju dvije faze motora kako bi se rotor postavio u poznati početni položaj.
+	\item \textbf{Rad u otvorenoj petlji (eng. \textit{Open-loop}):} Faza ubrzavanja motora u kojoj se komutacija izvodi prisilno, prema unaprijed definiranoj vremenskoj sekvenci i bez povratne veze o stvarnom položaju rotora.
+	\item \textbf{Rad u zatvorenoj petlji (eng. \textit{Closed-loop}):} Glavni način rada motora u kojem se trenutak komutacije određuje na temelju detektiranog signala PEMS-a. U ovoj fazi aktivna je i regulacija brzine pomoću PI regulatora.
+\end{itemize}
+Prijelazi između ovih faza rada upravljani su programskom logikom unutar glavne petlje, a uvjetovani su proteklim vremenom i brojem uspješnih detekcija PEMS-a.
+
+\missingfigure{Dijagram toka cjelokupnog programskog rješenja}
+\missingfigure{Dijagram toka programskog slijeda (Mirovanje, Poravnanje, Otvorena petlja, Zatvorena petlja)}
 % \section{Konfiguracija perifernih jedinica mikrokontrolera}
 % \label{sec:konfiguracija_periferije}
 %
