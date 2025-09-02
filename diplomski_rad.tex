@@ -489,6 +489,7 @@ momenta. Te se oscilacije pojavljuju prilikom svake komutacije \cite{TI2015}.
 
 \newpage
 \section{Upravljanje naponom i strujom pomoću PWM-a}
+\label{sec:trofazno_upravljanje}
 
 Za pogon motora BLDC koristi se trofazni mosni pretvarač (eng.
 \textit{three-phase inverter}), koji se sastoji od tri polumosta, po jedan za
@@ -886,6 +887,7 @@ za sljedeću komutaciju potrebno je pričekati vrijeme koje odgovara zakretu od
 \newpage
 
 \section{Faze pokretanja i rada motora}
+\label{sec:pokretanje}
 
 Pokretanje motora bez osjetila ne može se izvesti isključivo detektiranjem
 PEMS-a jer nije prisutan pri mirovanju i vrlo malim brzinama ili je preslab za
@@ -906,6 +908,7 @@ fiksnom vremenu, već je sinkronizirana sa stvarnim položajem rotora
 detektiranim prolaskom PEMS-a kroz nulu \cite{Recasens2021}.
 
 \section{Model regulacije brzine}
+\label{sec:model_motora}
 \begin{tikzpicture}[
 		auto,
 		node distance=1.8cm and 1.5cm, % Reduced distance between nodes (vertical and horizontal)
@@ -1088,14 +1091,14 @@ zastavica (eng. \textit{flags}). Ovakav pristup minimizira vrijeme provedeno
 unutar prekidnih rutina i omogućuje izvršavanje složenije obrade podataka u
 glavnom dijelu programa.
 
-Rad sustava slijedi logičan tijek kroz nekoliko faza, od pokretanja do rada u
-ustaljenom stanju, kako je teorijski opisano u odjeljku o fazama pokretanja i
-rada motora:
+Rad sustava sastoji se nekoliko faza, od pokretanja do rada u zatvorenoj
+petlji. Faze se temelje na odjeljku \ref{sec:pokretanje}. Implementacija
+algoritma provodi se kroz sljedeće cjeline:
 \begin{itemize}
-	\item \textbf{Mirovanje:} Početno stanje u kojem motor nije aktivan.
-	\item \textbf{Poravnanje (eng. \textit{Alignment}):} Prvi korak pri pokretanju, gdje se izvršavaju dva relativno dugačka koraka komutacije kako bi se rotor postavio u poznati početni položaj.
-	\item \textbf{Rad u otvorenoj petlji (eng. \textit{Open-loop}):} Faza ubrzavanja motora u kojoj se komutacija izvodi prisilno, prema unaprijed definiranoj vremenskoj sekvenci.
-	\item \textbf{Rad u zatvorenoj petlji (eng. \textit{Closed-loop}):} Glavni način rada motora u kojem se trenutak komutacije određuje na temelju detektiranog signala PEMS-a. U ovoj fazi aktivna je i regulacija brzine pomoću PI regulatora.
+	\item \textbf{poravnanje (eng. \textit{Alignment})}
+	\item \textbf{rad u otvorenoj petlji (eng. \textit{Open-loop})}
+	\item \textbf{prijelaz u zatvorenu petlju (eng. \textit{Closed-loop})}
+	\item \textbf{zatvorena petlja i regulacija brzine}
 \end{itemize}
 Prijelazi između ovih faza rada upravljani su programskom logikom unutar glavne
 petlje, a uvjetovani su proteklim vremenom i brojem uspješnih detekcija PEMS-a.
@@ -1106,27 +1109,25 @@ petlje, a uvjetovani su proteklim vremenom i brojem uspješnih detekcija PEMS-a.
 \section{Konfiguracija perifernih jedinica mikrokontrolera}
 \label{sec:konfiguracija_periferije}
 
-Za realizaciju sustava upravljanja korištene su ključne periferne jedinice
-mikrokontrolera: napredni tajmer (\texttt{TIM1}) za generiranje signala PWM-a,
-općenamjenski tajmeri (\texttt{TIM3}, \texttt{TIM15}, \texttt{TIM17}) za
-vremensko upravljanje i uzorkovanje, te sučelje \texttt{USART} za komunikaciju.
+Za realizaciju sustava upravljanja brzinom korištene su ključne periferne
+jedinice mikrokontrolera: napredni tajmer (\texttt{TIM1}) za generiranje
+signala PWM-a, općenamjenski tajmeri (\texttt{TIM3}, \texttt{TIM15},
+\texttt{TIM17}) za vremensko upravljanje i uzorkovanje, te sučelje
+\texttt{USART} za komunikaciju.
 
 \subsection{Generiranje signala PWM-a}
 \label{ssec:generiranje_pwm}
 
 Za upravljanje trofaznim mosnim pretvaračem, teorijski opisanim u odjeljku
-\ref{pog:bldc_upravljanje_bez_senzora}, koristi se napredni tajmer
-\texttt{TIM1}, konfiguriran za generiranje tri para komplementarnih signala
-PWM-a. Frekvencija signala PWM-a postavljena je na 30 kHz, što se postiže
-vrijednošću registra za automatsko ponovno punjenje (ARR) od 2123 pri taktu
-sistemskog sata od 64 MHz bez preskalera. Ova frekvencija predstavlja kompromis
+\ref{sec:trofazno_upravljanje}, koristi se napredni tajmer \texttt{TIM1},
+konfiguriran za generiranje tri para komplementarnih signala PWM-a. Frekvencija
+signala PWM-a postavljena je na 30 kHz. Ova frekvencija predstavlja kompromis
 između sklopnih gubitaka na tranzistorima MOSFET i izbjegavanja čujnog područja
 rada. Za sprječavanje pojave kratkog spoja (eng. \textit{shoot-through}) unutar
-polumostova pretvarača, hardverski je implementirano mrtvo vrijeme (eng.
-\textit{dead time}) u trajanju od 50 taktova sistemskog sata. Upravljanje
-pojedinim izlazima PWM-a ostvareno je direktnim upisom u registre tajmera
-unutar funkcije \texttt{motor\_step}, čime se postiže brza i precizna kontrola
-nad aktivnim fazama motora.
+polumostova pretvarača, na tajmeru je sklopovski implementirano mrtvo vrijeme
+(eng. \textit{dead time}) u trajanju od 50 taktova sistemskog sata. Upravljanje
+pojedinim izlazima PWM-a ostvareno je direktnim upisom u registre tajmera čime
+se postiže brza kontrola nad aktivnim fazama motora.
 
 \missingfigure{Prikaz komplementarnih PWM signala s jasno označenim mrtvim vremenom, snimljen osciloskopom na jednom polumostu}
 
@@ -1167,31 +1168,31 @@ omogućuje nadzor rada motora u stvarnom vremenu.
 \section{Implementacija algoritma upravljanja i regulacije}
 \label{sec:implementacija_algoritma_i_regulacije}
 
-Algoritam upravljanja objedinjuje konfigurirane periferne jedinice u jedinstven
-sustav za pokretanje i vrtnju motora. Programska logika implementira slijed
-pokretanja, prijelaz iz otvorenog u zatvoreni krug upravljanja te na kraju i
-regulaciju brzine, prateći teorijski model opisan u poglavlju
+Algoritam upravljanja objedinjuje konfigurirane periferne jedinice u sustav za
+pokretanje i vrtnju motora. Programska logika implementira slijed pokretanja,
+prijelaz iz otvorenog u zatvoreni krug upravljanja te na kraju i regulaciju
+brzine, prateći teorijski model opisan u poglavlju
 \ref{pog:bldc_upravljanje_bez_senzora}.
 
 \subsection{Pokretanje motora: Poravnanje i rad u otvorenoj petlji}
 \label{ssec:pokretanje_motora}
 
 Pokretanje motora iz mirovanja, kako je teorijski obrazloženo u odjeljku
-\ref{pog:bldc_upravljanje_bez_senzora}, izvodi se u dvije početne faze. Prva
-faza je \textbf{poravnanje rotora}. Rotor se može nalaziti u položaju koji je
-\ang{180} stupnjeva pomaknut od željenog smjera magnetskog polja, što bi
-rezultiralo neuspješnim poravnanjem. Zbog toga se izvode dva početna, vremenski
-relativno dugačka koraka komutacije. Prvi korak pozicionira rotor, a drugi
-potvrđuje njegovo usmjerenje i priprema ga za ubrzanje.
+\ref{sec:pokretanje}, započinje s poravnanjem rotora. Rotor se može nalaziti u
+položaju koji je \ang{180} stupnjeva pomaknut od željenog smjera magnetskog
+polja, što bi rezultiralo neuspješnim poravnanjem. Zbog toga se izvode dva
+početna, vremenski relativno dugačka koraka komutacije u trajanju oko 250ms.
 
-Nakon poravnanja, sustav prelazi u fazu \textbf{rada u otvorenoj petlji}. U
-ovoj fazi, komutacija se izvodi prisilno pozivima funkcije
-\texttt{motor\_step}, a vremenski razmak između koraka se postepeno smanjuje
-prema unaprijed određenoj akceleracijskoj rampi definiranoj u tablici
-\texttt{step\_times\_us}. Kako se frekvencija komutacije povećava, rotor zbog
-svoje tromosti počinje kutno zaostajati za rotirajućim magnetskim poljem
-statora. Upravo to relativno gibanje uzrokuje promjenu magnetskog toka potrebnu
-za indukciju PEMS-a koji se, nakon nekoliko koraka, može validno očitati.
+Nakon poravnanja, sustav prelazi u fazu rada u otvorenoj petlji. U ovoj fazi,
+komutacija se izvodi prisilno pozivima funkcije \texttt{motor\_step}, a
+vremenski razmak između koraka se postepeno smanjuje prema unaprijed određenoj
+akceleracijskoj rampi definiranoj u tablici \texttt{step\_times\_us}. Kako se
+frekvencija komutacije povećava, rotor zbog svoje tromosti počinje zaostajati
+za rotirajućim magnetskim poljem statora. Time se postiže poželjni kut koji
+omogućuje detekciju prolaska PEMS-a kroz nulu. Vrijedi napomenuti da kako rotor
+vremenom sve više kasni, prilika za detekciju prolaska kroz nulu traje svega
+nekoliko koraka. Stoga, važno je pouzdano detektirati i zabilježiti sve
+prolaske kroz nulu u tom periodu.
 
 \missingfigure{Tablica s komutacijskim stanjima za svih šest koraka s prikazom aktivnih tranzistora i nadzirane faze}
 \missingfigure{Graf procijenjene brzine motora tijekom faza pokretanja, s jasno označenim fazama poravnanja, otvorene petlje i trenutka prijelaza u zatvorenu petlju}
@@ -1205,20 +1206,20 @@ detektira minimalni broj uzastopnih prolazaka PEMS-a kroz nulu
 prebacuje s fiksne tablice na dinamički izračun temeljen na stvarnom položaju
 rotora.
 
-Sinkronizacija komutacije s položajem rotora u zatvorenoj petlji, temeljena na
-metodi komutacije u šest koraka (odjeljak \ref{sec:six-step}), ostvarena je
-preciznim vremenskim slijedom događaja. Ciklus započinje detekcijom prolaska
-PEMS-a kroz nulu unutar prekidne rutine tajmera \texttt{TIM15}. Tada se poziva
-funkcija \texttt{handle\_zero\_crossing} koja bilježi trenutnu vrijednost
-brojača komutacijskog tajmera \texttt{TIM3} i postavlja zastavicu
-\texttt{zc\_flag}. Na tu zastavicu reagira glavna petlja, koja izračunava
-period između dva prolaska kroz nulu te, koristeći taj podatak i empirijski
-određen koeficijent faznog pomaka, određuje vremensku odgodu do iduće
-komutacije. Izračunata vrijednost odgode upisuje se kao novi period u
-\texttt{ARR} registar tajmera \texttt{TIM3}. Po isteku zadanog vremena,
-\texttt{TIM3} generira prekid u kojem se postavlja zastavica
-\texttt{commutate\_flag}, što signalizira glavnoj petlji da izvrši sljedeći
-poziv funkcije \texttt{motor\_step} i time zatvori ciklus.
+Sinkronizacija komutacije s položajem rotora u zatvorenoj petlji, prilagođena
+prema metodi sinkronizacije opisane u dokumentu AN2355 \cite{NXP_AN2355},
+ostvarena je preciznim vremenskim slijedom događaja. Ciklus započinje
+detekcijom prolaska PEMS-a kroz nulu unutar prekidne rutine tajmera
+\texttt{TIM15}. Tada se poziva funkcija \texttt{handle\_zero\_crossing} koja
+bilježi trenutnu vrijednost brojača komutacijskog tajmera \texttt{TIM3} i
+postavlja zastavicu \texttt{zc\_flag}. Na tu zastavicu reagira glavna petlja,
+koja izračunava period između dva prolaska kroz nulu te, koristeći taj podatak
+i empirijski određen koeficijent faznog pomaka, određuje vremensku odgodu do
+iduće komutacije. Izračunata vrijednost odgode upisuje se kao novi period u
+tajmer \texttt{TIM3}. Po isteku zadanog vremena, \texttt{TIM3} generira prekid
+u kojem se postavlja zastavica \texttt{commutate\_flag}, što signalizira
+glavnoj petlji da izvrši sljedeći poziv funkcije \texttt{motor\_step} i time
+zatvori ciklus.
 
 \missingfigure{Vremenski dijagram sinkronizacije komutacije (PEMS, detekcija nule, odgoda od 30 el. stupnjeva i trenutak komutacije)}
 
@@ -1227,28 +1228,30 @@ poziv funkcije \texttt{motor\_step} i time zatvori ciklus.
 
 Tijekom naglih promjena brzine ili opterećenja, može doći do desinkronizacije.
 Implementirana su dva mehanizma za oporavak. Ako rotor urani i prolazak kroz
-nulu se dogodi \textit{prije} prozora za detekciju (stanje
-\textit{undershoot}), sustav to registrira i skraćuje trajanje trenutnog koraka
-kako bi polje statora "sustiglo" rotor. Ako rotor kasni i prolazak kroz nulu se
-ne dogodi unutar prozora (stanje \textit{overshoot}), sustav označava kraj
-prozora kao trenutak detekcije, čime se sljedeći korak produžuje i polje
-statora "čeka" rotor. Ove korekcije osiguravaju stabilnost upravljačke petlje.
+nulu se dogodi \textit{prije} prozora za detekciju, sustav to registrira te
+proglasi trenutak na početku prozora detekcije kao prolazak kroz nulu. Ovo
+efektivno skraćuje trajanje trenutnog koraka, ubrzava stator pokušava "pobjeći"
+rotoru. S druge strane, ako rotor kasni i prolazak kroz nulu se ne dogodi
+unutar prozora, sustav označava kraj prozora kao trenutak detekcije, čime se
+sljedeći korak produžuje i polje statora usporava čime "čeka" rotor. Ove
+korekcije osiguravaju stabilnost upravljačke petlje.
 
 \subsection{Regulacija brzine u zatvorenoj petlji}
 \label{ssec:regulacija_brzine}
 
 Nakon uspješnog prijelaza u zatvorenu petlju, aktivira se vanjska regulacijska
 petlja koja održava brzinu vrtnje motora na zadanoj vrijednosti, sukladno
-modelu prikazanom u poglavlju \ref{pog:bldc_upravljanje_bez_senzora}.
+modelu prikazanom u poglavlju \ref{sec:model_motora}.
 
 \subsubsection{Procjena brzine vrtnje}
 \label{sssec:procjena_brzine}
 
-Brzina rotora izračunava se na temelju perioda komutacije. Vrijeme između dvije
-uzastopne detekcije prolaska PEMS-a kroz nulu (\texttt{zc\_period}) odgovara
-periodu od 60 električnih stupnjeva. Kako bi se ublažile oscilacije,
-primijenjen je digitalni filtar tipa pomičnog prosjeka (eng. \textit{moving
-	average}). U red (\texttt{queue\_t}) veličine 6 pohranjuje se zadnjih šest
+Brzina rotora izračunava se na temelju vremena između dvije uzastopne detekcije
+prolaska PEMS-a kroz nulu. To vrijeme, spremljeno u varijablu
+\texttt{zc\_period}, odgovara periodu od 60 električnih stupnjeva. Kako bi se
+ublažile oscilacije i dobila stabilna procjena, primijenjen je digitalni filtar
+tipa pomičnog prosjeka (eng. \textit{moving average}). U red
+(\texttt{queue\_t}) kapaciteta šest elemenata pohranjuje se zadnjih šest
 izmjerenih perioda, što odgovara jednom punom električnom okretaju, te se iz
 njihovog prosjeka računa procijenjena brzina. Brzina u okretajima u minuti
 (RPM) računa se prema izrazu:
@@ -1258,9 +1261,44 @@ njihovog prosjeka računa procijenjena brzina. Brzina u okretajima u minuti
 \end{equation}
 
 gdje je $f_{timer}$ frekvencija tajmera \texttt{TIM3}, $N_{pp}$ broj parova
-polova motora (7 za A2212), a $T_{avg}$ prosječan broj taktova tajmera za jedan
-komutacijski korak. U kodu je ova jednadžba implementirana korištenjem
-konstante \texttt{RPM\_CONSTANT}.
+polova motora, a $T_{avg}$ prosječan broj taktova tajmera za jedan komutacijski
+korak. Kako bi se optimizirali proračuni u stvarnom vremenu, u kodu je
+predizračunata konstanta \texttt{RPM\_CONSTANT}:
+
+\begin{equation}
+	\texttt{RPM\_CONSTANT} = \frac{60 \cdot f_{timer}}{N_{pp} \cdot 6}
+\end{equation}
+
+Za frekvenciju tajmera $f_{timer}$ od \SI{8}{\mega\hertz} te broj parova polova
+$N_{pp}$ od 7 (za motor A2212), vrijednost konstante iznosi 11428571, kao što
+je prikazano u implementaciji na slici \ref{code:rpm_constant}.
+
+\begin{figure}[h!]
+	\begin{minted}[
+    frame=lines,      % Okvir oko koda
+    framesep=2mm,     % Udaljenost okvira od koda
+    baselinestretch=1.2, % Razmak između linija
+    fontsize=\footnotesize, % Veličina fonta
+    linenos,          % Prikaz brojeva linija
+    bgcolor=gray!5    % Lagana pozadinska boja
+]{c}
+// Definicija konstante
+const uint32_t RPM_CONSTANT = 11428571;
+
+// Izracun prosjecnog perioda (T_avg)
+current_com_period =
+    (context.last_steps.queue[0]) + (context.last_steps.queue[1]) +
+    (context.last_steps.queue[2]) + (context.last_steps.queue[3]) +
+    (context.last_steps.queue[4]) + (context.last_steps.queue[5]);
+current_com_period /= 6;
+
+// Izracun brzine pomocu konstante
+current_speed = (uint32_t)(RPM_CONSTANT / current_com_period);
+\end{minted}
+	\caption{Implementacija izračuna brzine pomoću predizračunate konstante.}
+	\label{code:rpm_constant}
+\end{figure}
+\todo{OVO JE HARDKODIRANO}
 
 \subsubsection{Digitalna implementacija PI regulatora}
 \label{sssec:pi_regulator}

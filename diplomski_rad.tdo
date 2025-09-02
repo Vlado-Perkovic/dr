@@ -16,9 +16,10 @@
 \contentsline {todo}{Figure: Dijagram programskog slijeda koji prikazuje prijelaze između stanja Mirovanje, Poravnanje, Otvorena petlja i Zatvorena petlja, s uvjetima prijelaza (npr. istek vremena, \texttt {zc\_cnt \: 3})}{30}{section.5.1}%
 \contentsline {todo}{Figure: Prikaz komplementarnih PWM signala s jasno označenim mrtvim vremenom, snimljen osciloskopom na jednom polumostu}{31}{subsection.5.2.1}%
 \contentsline {todo}{Figure: Blok dijagram sustava za detekciju PEMS-a (veza faza, virtualnog zvjezdišta, komparatora i GPIO ulaza mikrokontrolera)}{31}{subsection.5.2.2}%
-\contentsline {todo}{Figure: Osciloskopska snimka koja prikazuje PWM signal na jednoj fazi, PEMS na neopterećenoj fazi i digitalni signal koji označava trenutak uzorkovanja (okidanje TIM15 prekida)}{32}{subsection.5.2.2}%
+\contentsline {todo}{Figure: Osciloskopska snimka koja prikazuje PWM signal na jednoj fazi, PEMS na neopterećenoj fazi i digitalni signal koji označava trenutak uzorkovanja (okidanje TIM15 prekida)}{31}{subsection.5.2.2}%
 \contentsline {todo}{Figure: Tablica koja definira komunikacijski protokol (naredba, format podataka) za zadavanje brzine i primanje telemetrije}{32}{subsection.5.2.3}%
 \contentsline {todo}{Figure: Tablica s komutacijskim stanjima za svih šest koraka s prikazom aktivnih tranzistora i nadzirane faze}{33}{subsection.5.3.1}%
 \contentsline {todo}{Figure: Graf procijenjene brzine motora tijekom faza pokretanja, s jasno označenim fazama poravnanja, otvorene petlje i trenutka prijelaza u zatvorenu petlju}{33}{subsection.5.3.1}%
 \contentsline {todo}{Figure: Vremenski dijagram sinkronizacije komutacije (PEMS, detekcija nule, odgoda od 30 el. stupnjeva i trenutak komutacije)}{34}{subsection.5.3.2}%
-\contentsline {todo}{Figure: Blok dijagram implementirane PI regulacijske petlje}{36}{figure.caption.28}%
+\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ OVO JE HARDKODIRANO}{35}{section*.28}%
+\contentsline {todo}{Figure: Blok dijagram implementirane PI regulacijske petlje}{36}{figure.caption.30}%
