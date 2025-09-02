@@ -1,13 +1,14 @@
 \contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ nadopuni opis rada}{5}{section*.3}%
 \contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ popravi pregled poglavlja}{6}{section*.4}%
 \contentsline {todo}{Figure: umetni sliku presjeka motora}{7}{section.2.1}%
+\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ gdje se ne koristi}{8}{section*.5}%
 \contentsline {todo}{Figure: a+/b-, neka je 3 navoja, 2 para magneta}{16}{section.3.1}%
 \contentsline {todo}{Figure: b-/c+, neka je 3 navoja, 2 para magneta}{17}{section.3.1}%
-\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ ovdje objasni razliku izmedju elektricnih i mehanickih stupnjeva na temelju 2 dijagrama iznad}{17}{section*.13}%
-\contentsline {todo}{Figure: slika valovitosti momenta, probat cu u matlabu odsimulirat}{17}{section*.13}%
-\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ treba ponovno evaluirat, nije bas precizno}{18}{section*.16}%
-\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ fale osi na slici, ponovi}{19}{section*.17}%
-\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ fale osi na slici}{20}{section*.19}%
+\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ ovdje objasni razliku izmedju elektricnih i mehanickih stupnjeva na temelju 2 dijagrama iznad}{17}{section*.14}%
+\contentsline {todo}{Figure: slika valovitosti momenta, probat cu u matlabu odsimulirat}{17}{section*.14}%
+\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ treba ponovno evaluirat, nije bas precizno}{18}{section*.17}%
+\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ fale osi na slici, ponovi}{19}{section*.18}%
+\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ fale osi na slici}{20}{section*.20}%
 \contentsline {todo}{Figure: slika esc}{25}{section.4.1}%
 \contentsline {todo}{Figure: slika motora}{26}{section.4.2}%
 \contentsline {todo}{Figure: slika enkodera}{26}{section.4.3}%
@@ -21,5 +22,5 @@
 \contentsline {todo}{Figure: Tablica s komutacijskim stanjima za svih šest koraka s prikazom aktivnih tranzistora i nadzirane faze}{33}{subsection.5.3.1}%
 \contentsline {todo}{Figure: Graf procijenjene brzine motora tijekom faza pokretanja, s jasno označenim fazama poravnanja, otvorene petlje i trenutka prijelaza u zatvorenu petlju}{33}{subsection.5.3.1}%
 \contentsline {todo}{Figure: Vremenski dijagram sinkronizacije komutacije (PEMS, detekcija nule, odgoda od 30 el. stupnjeva i trenutak komutacije)}{34}{subsection.5.3.2}%
-\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ OVO JE HARDKODIRANO}{35}{section*.28}%
-\contentsline {todo}{Figure: Blok dijagram implementirane PI regulacijske petlje}{36}{figure.caption.30}%
+\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ OVO JE HARDKODIRANO}{35}{section*.29}%
+\contentsline {todo}{Figure: Blok dijagram implementirane PI regulacijske petlje}{36}{figure.caption.31}%

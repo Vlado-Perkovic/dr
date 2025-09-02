@@ -102,6 +102,10 @@ N.~Padmaraja, ``Brushless dc (bldc) motor fundamentals'', Microchip Technology
   \url{https://www.maxongroup.com/medias/sys_master/root/9399220961310/Cataloge-Page-EN-203.pdf}
 \BIBentrySTDinterwordspacing
 
+\bibitem{cite:pmsha}
+R.~Krishnan, \emph{Permanent Magnet Synchronous and Brushless DC Motor
+  Drives}.\hskip 1em plus 0.5em minus 0.4em\relax Boca Raton: CRC Press, 2010.
+
 \bibitem{TI2015}
 \BIBentryALTinterwordspacing
 B.~Akin i M.~Bhardwaj, ``Sensorless trapezoidal control of bldc motors'', Texas
