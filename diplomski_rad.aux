@@ -99,8 +99,8 @@
 \citation{ST_AN1946}
 \citation{MicrochipAN885}
 \citation{TI2015}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2.}Upravljanje naponom i strujom pomoću PWM-a}{18}{section.3.2}\protected@file@percent }
-\newlabel{sec:trofazno_upravljanje}{{3.2.}{18}{Upravljanje naponom i strujom pomoću PWM-a}{section.3.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2.}Upravljanje naponom i strujom signalima PWM-a}{18}{section.3.2}\protected@file@percent }
+\newlabel{sec:trofazno_upravljanje}{{3.2.}{18}{Upravljanje naponom i strujom signalima PWM-a}{section.3.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.\spacefactor \@m {}1.}{\ignorespaces Shema trofaznog mosnog spoja na motor\relax }}{18}{figure.caption.15}\protected@file@percent }
 \newlabel{fig:inverter}{{3.\spacefactor \@m {}1.}{18}{Shema trofaznog mosnog spoja na motor\relax }{figure.caption.15}{}}
 \@writefile{toc}{\contentsline {subsubsection}{Tehnike primjene PWM-a za upravljanje}{18}{section*.16}\protected@file@percent }
@@ -193,8 +193,8 @@
 \newlabel{ssec:regulacija_brzine}{{5.3.3.}{34}{Regulacija brzine u zatvorenoj petlji}{subsection.5.3.3}{}}
 \@writefile{toc}{\contentsline {subsubsection}{Procjena brzine vrtnje}{35}{section*.27}\protected@file@percent }
 \newlabel{sssec:procjena_brzine}{{5.3.3.}{35}{Procjena brzine vrtnje}{section*.27}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.\spacefactor \@m {}1.}{\ignorespaces Implementacija izračuna brzine pomoću predizračunate konstante.\relax }}{35}{figure.caption.28}\protected@file@percent }
-\newlabel{code:rpm_constant}{{5.\spacefactor \@m {}1.}{35}{Implementacija izračuna brzine pomoću predizračunate konstante.\relax }{figure.caption.28}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.\spacefactor \@m {}1.}{\ignorespaces Implementacija izračuna brzine s pomoću predizračunate konstante.\relax }}{35}{figure.caption.28}\protected@file@percent }
+\newlabel{code:rpm_constant}{{5.\spacefactor \@m {}1.}{35}{Implementacija izračuna brzine s pomoću predizračunate konstante.\relax }{figure.caption.28}{}}
 \@writefile{tdo}{\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ OVO JE HARDKODIRANO}{35}{section*.29}\protected@file@percent }
 \pgfsyspdfmark {pgfid37}{5594039}{5648525}
 \pgfsyspdfmark {pgfid40}{36577344}{5626701}
@@ -204,11 +204,43 @@
 \@writefile{tdo}{\contentsline {todo}{Figure: Blok dijagram implementirane PI regulacijske petlje}{36}{figure.caption.31}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {5.\spacefactor \@m {}2.}{\ignorespaces Implementacija PI regulatora aritmetikom s nepomičnim zarezom.\relax }}{37}{figure.caption.31}\protected@file@percent }
 \newlabel{code:pi_impl}{{5.\spacefactor \@m {}2.}{37}{Implementacija PI regulatora aritmetikom s nepomičnim zarezom.\relax }{figure.caption.31}{}}
-\bibdata{literatura}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6.}Zaključak}{38}{chapter.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {6.}Usporedba ostvarene implementacije s postojećim rješenjem}{38}{chapter.6}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{pog:zakljucak}{{6.}{38}{Digitalna implementacija PI regulatora}{chapter.6}{}}
+\newlabel{pog:usporedba}{{6.}{38}{Digitalna implementacija PI regulatora}{chapter.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1.}Metodologija testiranja}{38}{section.6.1}\protected@file@percent }
+\newlabel{sec:metodologija_testiranja}{{6.1.}{38}{Metodologija testiranja}{section.6.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2.}Maksimalna brzina vrtnje bez opterećenja}{39}{section.6.2}\protected@file@percent }
+\newlabel{sec:usporedba_brzina}{{6.2.}{39}{Maksimalna brzina vrtnje bez opterećenja}{section.6.2}{}}
+\@writefile{tdo}{\contentsline {todo}{Figure: Tablica s usporedbom maksimalne brzine vrtnje (RPM) za implementirano i komercijalno rješenje pri naponima od 8 V, 10 V i 12 V.}{39}{section.6.2}\protected@file@percent }
+\newlabel{tab:usporedba_brzine}{{6.2.}{39}{Maksimalna brzina vrtnje bez opterećenja}{section.6.2}{}}
+\@writefile{tdo}{\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ Ovdje treba dodati kratku analizu rezultata iz tablice. Npr. "Iz rezultata je vidljivo da ostvarena implementacija postiže približno jednaku (ili višu/nižu) maksimalnu brzinu vrtnje u usporedbi s komercijalnim rješenjem..."}{39}{section*.32}\protected@file@percent }
+\pgfsyspdfmark {pgfid44}{20028923}{30638116}
+\@writefile{toc}{\contentsline {section}{\numberline {6.3.}Efikasnost pri statičkom opterećenju}{39}{section.6.3}\protected@file@percent }
+\newlabel{sec:usporedba_efikasnost}{{6.3.}{39}{Efikasnost pri statičkom opterećenju}{section.6.3}{}}
+\@writefile{tdo}{\contentsline {todo}{Figure: Graf koji prikazuje ovisnost potrošnje struje (A) o brzini vrtnje (RPM) za implementirano i komercijalno rješenje.}{39}{section.6.3}\protected@file@percent }
+\newlabel{fig:usporedba_efikasnosti}{{6.3.}{39}{Efikasnost pri statičkom opterećenju}{section.6.3}{}}
+\@writefile{tdo}{\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ Ovdje analizirati graf. Npr. "Graf na slici \begingroup \ltx@LocToksA {\endgroup \old@ref {fig:usporedba_efikasnosti}}\ltx@LocToksB {\endgroup \old@ref {fig:usporedba_efikasnosti}\spacefactor \@m {}}\begingroup \let = .\relax \ltx@LocToksA {\endgroup \def {\GenericError  {               }{LaTeX Error: Can be used only in preamble}{See the LaTeX manual or LaTeX Companion for explanation.}{Your command was ignored.\MessageBreak Type  I <command> <return>  to replace it with another command,\MessageBreak or  <return>  to continue without it.}{graphics}}\afterassignment \let = }\ltx@LocToksB {\endgroup {\GenericError  {               }{LaTeX Error: \mathbffrak allowed only in math mode}{See the LaTeX manual or LaTeX Companion for explanation.}{You're in trouble here.  Try typing  <return>  to proceed.\MessageBreak If that doesn't work, type  X <return>  to quit.}{\def 7{7}}}}\futurelet \GenericError  {               }{LaTeX Error: Can be used only in preamble}{See the LaTeX manual or LaTeX Companion for explanation.}{Your command was ignored.\MessageBreak Type  I <command> <return>  to replace it with another command,\MessageBreak or  <return>  to continue without it.}{graphics} pokazuje da implementirano rješenje troši manje struje pri nižim brzinama, dok je pri višim brzinama potrošnja usporediva. To ukazuje na dobru optimizaciju algoritma za rad pri djelomičnom opterećenju..."}{39}{section*.33}\protected@file@percent }
+\pgfsyspdfmark {pgfid46}{20028923}{47892907}
+\@writefile{toc}{\contentsline {section}{\numberline {6.4.}Dinamički odziv}{40}{section.6.4}\protected@file@percent }
+\newlabel{sec:usporedba_odziv}{{6.4.}{40}{Dinamički odziv}{section.6.4}{}}
+\@writefile{tdo}{\contentsline {todo}{Figure: Tablica s usporedbom vremena odziva (u milisekundama) za ubrzanje od 20\% do 80\% maksimalne brzine.}{40}{section.6.4}\protected@file@percent }
+\@writefile{tdo}{\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ Kratka analiza rezultata odziva. Npr. "Implementirano rješenje pokazuje nešto brži (ili sporiji) odziv, što se može pripisati agresivnije (ili konzervativnije) podešenim parametrima PI regulatora..."}{40}{section*.34}\protected@file@percent }
+\pgfsyspdfmark {pgfid48}{20028923}{22801688}
+\@writefile{toc}{\contentsline {section}{\numberline {6.5.}Minimalna stabilna brzina vrtnje}{40}{section.6.5}\protected@file@percent }
+\newlabel{sec:usporedba_min_rpm}{{6.5.}{40}{Minimalna stabilna brzina vrtnje}{section.6.5}{}}
+\@writefile{tdo}{\contentsline {todo}{Figure: Tablica s usporedbom minimalne stabilne brzine vrtnje (RPM) za oba rješenja.}{40}{section.6.5}\protected@file@percent }
+\@writefile{tdo}{\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ Analiza minimalne brzine. Npr. "Rezultati pokazuju da implementirani algoritam postiže nižu minimalnu stabilnu brzinu, što ukazuje na robusnost BEMF detekcije i logike za obradu rubnih slučajeva pri malim brzinama."}{41}{section*.35}\protected@file@percent }
+\pgfsyspdfmark {pgfid50}{20028923}{40368652}
+\@writefile{toc}{\contentsline {section}{\numberline {6.6.}Sažetak usporedbe}{41}{section.6.6}\protected@file@percent }
+\newlabel{sec:sazetak_usporedbe}{{6.6.}{41}{Sažetak usporedbe}{section.6.6}{}}
+\@writefile{tdo}{\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ Ovdje dolazi završni odlomak koji sažima sve prethodne rezultate i donosi konačni zaključak o uspješnosti Vaše implementacije. Npr. "Usporedbom ključnih pokazatelja izvedbe, utvrđeno je da ostvarena implementacija pruža performanse usporedive s komercijalnim rješenjem. Posebno se ističe visoka efikasnost pri djelomičnom opterećenju, što je povoljno za primjenu u bespilotnim letjelicama. Iako komercijalno rješenje nudi nešto brži dinamički odziv, implementirani algoritam pokazuje bolju stabilnost pri niskim brzinama vrtnje. Sveukupno, rezultati potvrđuju da je razvijeno rješenje uspješno i konkurentno postojećim sustavima."}{41}{section*.36}\protected@file@percent }
+\pgfsyspdfmark {pgfid51}{20028923}{28436263}
+\bibdata{literatura}
+\@writefile{toc}{\contentsline {chapter}{\numberline {7.}Zaključak}{42}{chapter.7}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{pog:zakljucak}{{7.}{42}{Sažetak usporedbe}{chapter.7}{}}
 \bibcite{cite:primjena}{1}
 \bibcite{cite:karakteristike_motora}{2}
 \bibcite{NXP_AN2355}{3}
@@ -216,7 +248,7 @@
 \bibcite{cite:bldc}{5}
 \bibcite{elektromotor-sa-stalnim-magnetima}{6}
 \bibcite{cite:disertacija}{7}
-\@writefile{toc}{\contentsline {chapter}{Literatura}{39}{chapter*.32}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Literatura}{43}{chapter*.37}\protected@file@percent }
 \bibcite{cite:trofazni}{8}
 \bibcite{MicrochipAN885}{9}
 \bibcite{motor-ucinkovitost}{10}
@@ -226,12 +258,12 @@
 \bibcite{ST_AN1946}{14}
 \bibcite{Recasens2021}{15}
 \babel@aux{croatian}{}
-\@writefile{toc}{\contentsline {chapter}{Sa\v {z}etak}{41}{chapter*.33}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Sa\v {z}etak}{45}{chapter*.38}\protected@file@percent }
 \babel@aux{croatian}{}
 \babel@aux{croatian}{}
 \babel@aux{croatian}{}
 \babel@aux{english}{}
-\@writefile{toc}{\contentsline {chapter}{Abstract}{42}{chapter*.34}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Abstract}{46}{chapter*.39}\protected@file@percent }
 \babel@aux{croatian}{}
 \babel@aux{english}{}
 \babel@aux{croatian}{}
@@ -239,4 +271,4 @@
   default.pygstyle,
   FCF65A1C0EAD4556EEFC2811D9FB02D326A757C8A9BDE9D7CE432A33768EFB30.pygtex,
   1F8CE3E031F7DD4C3CBADBDA5291927326A757C8A9BDE9D7CE432A33768EFB30.pygtex}
-\gdef \@abspage@last{45}
+\gdef \@abspage@last{49}
