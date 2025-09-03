@@ -1378,93 +1378,72 @@ int32_t PID_calculate(PIDController *pid, int32_t setpoint,
 
 Kako bi se vrednovala uspješnost ostvarene implementacije, provedena je
 usporedba njezinih radnih karakteristika s komercijalno dostupnim elektroničkim
-sklopom za upravljanje brzinom. Za potrebe usporedbe korišten je popularni ESC
-\textit{SimonK 30A}. Usporedba se temelji na mjerenju vanjskih pokazatelja
-izvedbe u identičnim uvjetima.
+sklopom za upravljanje brzinom. Cilj ove usporedbe nije proglasiti jedno
+rješenje boljim od drugog, već objektivno prikazati i dokumentirati razlike u
+izvedbi koje proizlaze iz različitih sklopovskih i programskih pristupa.
 
+% Za potrebe usporedbe korištena su dva sklopa:
+% \begin{itemize}
+% 	\item \textbf{ESC A:} Komercijalno dostupan sklop \textit{SimonK 30A}, koji radi na frekvenciji PWM-a od \SI{8}{\kilo\hertz}.
+% 	\item \textbf{ESC B:} U sklopu ovog rada implementirano rješenje, koje radi na frekvenciji PWM-a od \SI{30}{\kilo\hertz}.
+% \end{itemize}
+% Usporedba se temelji na mjerenju vanjskih pokazatelja izvedbe u identičnim uvjetima.
+%
 % \section{Metodologija testiranja}
 % \label{sec:metodologija_testiranja}
 %
 % Sva mjerenja provedena su na eksperimentalnom postavu opisanom u poglavlju
 % \ref{pog:postav}, koristeći isti elektromotor (\textit{A2212/13T 1000KV}) i
-% laboratorijski izvor napajanja. Za svako mjerenje, napon napajanja je
-% postavljen na fiksnu vrijednost kako bi se osigurali ponovljivi uvjeti. Brzina
-% vrtnje mjerena je pomoću apsolutnog enkodera, a struja je mjerena preciznim
-% digitalnim multimetrom spojenim u seriju s izvorom napajanja.
+% laboratorijski izvor napajanja postavljen na konstantan napon od
+% \SI{7.4}{\volt}. Brzina vrtnje mjerena je pomoću apsolutnog enkodera, a za
+% vizualizaciju naponskih oblika korišten je digitalni osciloskop.
 %
-% Usporedba je provedena kroz nekoliko ključnih testova koji ocjenjuju različite
-% aspekte izvedbe:
-% \begin{itemize}
-% 	\item Maksimalna brzina vrtnje bez opterećenja
-% 	\item Efikasnost pri statičkom opterećenju
-% 	\item Dinamički odziv na promjenu upravljačkog signala
-% 	\item Minimalna stabilna brzina vrtnje
-% \end{itemize}
+% \section{Analiza faznog napona i potvrda metode upravljanja}
+% \label{sec:analiza_napona}
 %
-% \section{Maksimalna brzina vrtnje bez opterećenja}
-% \label{sec:usporedba_brzina}
+% Prvi korak u usporedbi bila je vizualna analiza valnog oblika napona na jednoj
+% od faza motora tijekom rada. Snimke s osciloskopa, prikazane na slikama
+% \ref{fig:esc_a_valni} i \ref{fig:esc_b_valni}, služe za potvrdu metode
+% upravljanja i uočavanje razlika koje proizlaze iz različitih frekvencija PWM-a.
 %
-% Prvi test uspoređuje sposobnost oba rješenja da postignu maksimalnu brzinu
-% vrtnje motora bez opterećenja (bez propelera). Ovaj test primarno pokazuje
-% učinkovitost komutacijske logike i sposobnost upravljačkog sklopa da iskoristi
-% puni potencijal motora pri zadanom naponu. Mjerenja su provedena pri tri
-% različite razine istosmjernog napona, a rezultati su prikazani u tablici
-% \ref{tab:usporedba_brzine}.
+% \missingfigure{Snimka zaslona osciloskopa: valni oblik faznog napona za ESC A pri srednjoj brzini vrtnje.}
+% \label{fig:esc_a_valni}
 %
-% \missingfigure{Tablica s usporedbom maksimalne brzine vrtnje (RPM) za implementirano i komercijalno rješenje pri naponima od 8 V, 10 V i 12 V.}
-% \label{tab:usporedba_brzine}
+% \missingfigure{Snimka zaslona osciloskopa: valni oblik faznog napona za ESC B pri srednjoj brzini vrtnje.}
+% \label{fig:esc_b_valni}
 %
-% \todo[inline]{Ovdje treba dodati kratku analizu rezultata iz tablice. Npr. "Iz rezultata je vidljivo da ostvarena implementacija postiže približno jednaku (ili višu/nižu) maksimalnu brzinu vrtnje u usporedbi s komercijalnim rješenjem..."}
+% Iz priloženih slika vidljivo je da oba sklopa koriste trapeznu metodu
+% upravljanja, što se očituje u karakterističnom valnom obliku napona s periodima
+% visoke impedancije. Glavna uočljiva razlika je u gustoći preklapanja PWM-a. Na
+% slici \ref{fig:esc_a_valni} jasno je vidljiv grublji valni oblik, posljedica
+% niže frekvencije od \SI{8}{\kilo\hertz}. Suprotno tome, slika
+% \ref{fig:esc_b_valni} prikazuje znatno finiji valni oblik s manje izraženim
+% šumom, što je rezultat više frekvencije od \SI{30}{\kilo\hertz} korištene u
+% rješenju ESC B.
 %
-% \section{Efikasnost pri statičkom opterećenju}
-% \label{sec:usporedba_efikasnost}
+% \section{Usporedba radnog područja i sekvence pokretanja}
+% \label{sec:usporedba_radnog_podrucja}
 %
-% Efikasnost je jedan od najvažnijih parametara za primjenu u bespilotnim
-% letjelicama jer izravno utječe na vrijeme leta. U ovom testu, na motor je
-% postavljen standardni propeler kako bi se stvorilo statičko opterećenje.
-% Mjerena je ulazna električna snaga (napon $\times$ struja) potrebna za
-% postizanje određenih brzina vrtnje. Niža potrošnja struje za istu brzinu vrtnje
-% implicira veću efikasnost.
+% Radno područje definirano je minimalnom i maksimalnom stabilnom brzinom vrtnje
+% koju sklop može postići bez opterećenja. Mjerenja su provedena pri naponu
+% napajanja od \SI{12}{\volt}, a rezultati su sažeti u tablici
+% \ref{tab:usporedba_brzina}.
+
+% esc A : 6520 rpm @ 100%
+% esc A : 5900 rpm @ 50%
+% esc A : 3800 rpm @ 20%
+% esc A : 1400 rpm @ 10%
+
+% PROPELER
 %
-% Mjerenja su provedena pri konstantnom naponu od \SI{12}{\volt}, a rezultati su
-% prikazani na slici \ref{fig:usporedba_efikasnosti}.
-%
-% \missingfigure{Graf koji prikazuje ovisnost potrošnje struje (A) o brzini vrtnje (RPM) za implementirano i komercijalno rješenje.}
-% \label{fig:usporedba_efikasnosti}
-%
-% \todo[inline]{Ovdje analizirati graf. Npr. "Graf na slici \ref{fig:usporedba_efikasnosti} pokazuje da implementirano rješenje troši manje struje pri nižim brzinama, dok je pri višim brzinama potrošnja usporediva. To ukazuje na dobru optimizaciju algoritma za rad pri djelomičnom opterećenju..."}
-%
-% \section{Dinamički odziv}
-% \label{sec:usporedba_odziv}
-%
-% Brzina odziva na promjenu upravljačkog signala ključna je za agilnost i
-% stabilnost bespilotne letjelice. U ovom testu mjereno je vrijeme potrebno da
-% motor ubrza od niske brzine vrtnje (npr. 20\% od maksimuma) do visoke brzine
-% (npr. 80\% od maksimuma) nakon skokovite promjene upravljačkog signala. Vrijeme
-% odziva praćeno je analizom promjene frekvencije signala na jednoj od faza
-% motora pomoću osciloskopa.
-%
-% \missingfigure{Tablica s usporedbom vremena odziva (u milisekundama) za ubrzanje od 20\% do 80\% maksimalne brzine.}
-%
-% \todo[inline]{Kratka analiza rezultata odziva. Npr. "Implementirano rješenje pokazuje nešto brži (ili sporiji) odziv, što se može pripisati agresivnije (ili konzervativnije) podešenim parametrima PI regulatora..."}
-%
-% \section{Minimalna stabilna brzina vrtnje}
-% \label{sec:usporedba_min_rpm}
-%
-% Sposobnost održavanja stabilne vrtnje pri vrlo malim brzinama pokazatelj je
-% kvalitete algoritma za pokretanje i upravljanje u zatvorenoj petlji pri niskim
-% PEMS signalima. U ovom testu, postepeno je smanjivan upravljački signal te je
-% zabilježena najniža brzina vrtnje (RPM) pri kojoj motor radi glatko, bez
-% zastajkivanja i desinkronizacije.
-%
-% \missingfigure{Tablica s usporedbom minimalne stabilne brzine vrtnje (RPM) za oba rješenja.}
-%
-% \todo[inline]{Analiza minimalne brzine. Npr. "Rezultati pokazuju da implementirani algoritam postiže nižu minimalnu stabilnu brzinu, što ukazuje na robusnost BEMF detekcije i logike za obradu rubnih slučajeva pri malim brzinama."}
-%
-% \section{Sažetak usporedbe}
-% \label{sec:sazetak_usporedbe}
-%
-% \todo[inline]{Ovdje dolazi završni odlomak koji sažima sve prethodne rezultate i donosi konačni zaključak o uspješnosti Vaše implementacije. Npr. "Usporedbom ključnih pokazatelja izvedbe, utvrđeno je da ostvarena implementacija pruža performanse usporedive s komercijalnim rješenjem. Posebno se ističe visoka efikasnost pri djelomičnom opterećenju, što je povoljno za primjenu u bespilotnim letjelicama. Iako komercijalno rješenje nudi nešto brži dinamički odziv, implementirani algoritam pokazuje bolju stabilnost pri niskim brzinama vrtnje. Sveukupno, rezultati potvrđuju da je razvijeno rješenje uspješno i konkurentno postojećim sustavima."}
+% esc A : 6520 rpm @ 63.5% -> maxout
+% esc A : 3106-3153 rpm @ 50%
+% esc A : 1495-1510 rpm @ 20%
+% esc A : 714-730 rpm @ 10%
+
+\missingfigure{Tablica s usporedbom minimalne i maksimalne brzine vrtnje (RPM) za ESC A i ESC B.}
+\label{tab:usporedba_brzina}
+
 %--- ZAKLJUČAK / CONCLUSION ----------------------------------------------------
 \chapter{Zaključak}
 \label{pog:zakljucak}

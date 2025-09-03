@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2025.6.22)  2 SEP 2025 17:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2025.6.22)  3 SEP 2025 17:52
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1544,7 +1544,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-di
 st/fonts/enc/dvips/opensans/a_jg4h6q.enc}]
-<hr_0036535500_90.pdf, id=145, 598.235pt x 845.1575pt>
+<hr_0036535500_90.pdf, id=161, 598.235pt x 845.1575pt>
 File: hr_0036535500_90.pdf Graphic file (type pdf)
 <use hr_0036535500_90.pdf>
 Package pdftex.def Info: hr_0036535500_90.pdf  used on input line 67.
@@ -1553,7 +1553,7 @@ File: hr_0036535500_90.pdf Graphic file (type pdf)
 <use hr_0036535500_90.pdf>
 Package pdftex.def Info: hr_0036535500_90.pdf  used on input line 67.
 (pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
-<hr_0036535500_90.pdf, id=148, page=1, 598.235pt x 845.1575pt>
+<hr_0036535500_90.pdf, id=164, page=1, 598.235pt x 845.1575pt>
 File: hr_0036535500_90.pdf Graphic file (type pdf)
 <use hr_0036535500_90.pdf, page 1>
 Package pdftex.def Info: hr_0036535500_90.pdf , page1 used on input line 67.
@@ -1591,7 +1591,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.28 ...elektromotorne sile}{31}{subsection.5.2.2}
+l.28 ...elektromotorne sile}{32}{subsection.5.2.2}
                                                   % [1
 
 
@@ -1616,7 +1616,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.21 ...rimanje telemetrije}{32}{subsection.5.2.3}
+l.21 ...rimanje telemetrije}{33}{subsection.5.2.3}
                                                   % [3
 
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}])
@@ -1685,7 +1685,7 @@ romotive force, Back-electromotive force, back-
 
 [11] [12{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathex
 .enc}] [13]
-<Figures/microchip_torque_speed.png, id=367, 1063.975pt x 611.28375pt>
+<Figures/microchip_torque_speed.png, id=393, 1063.975pt x 611.28375pt>
 File: Figures/microchip_torque_speed.png Graphic file (type png)
 <use Figures/microchip_torque_speed.png>
 Package pdftex.def Info: Figures/microchip_torque_speed.png  used on input line
@@ -1708,24 +1708,24 @@ e 606.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
 (Font)              scaled to size 12.0pt on input line 606.
 [18]
-<Figures/hard_chopping1.png, id=415, 1548.78625pt x 837.1275pt>
+<Figures/hard_chopping1.png, id=441, 1548.78625pt x 837.1275pt>
 File: Figures/hard_chopping1.png Graphic file (type png)
 <use Figures/hard_chopping1.png>
 Package pdftex.def Info: Figures/hard_chopping1.png  used on input line 637.
 (pdftex.def)             Requested size: 418.96548pt x 226.44897pt.
  [19 <./Figures/hard_chopping1.png>]
-<Figures/soft_chopping.png, id=424, 1622.06pt x 757.83125pt>
+<Figures/soft_chopping.png, id=451, 1622.06pt x 757.83125pt>
 File: Figures/soft_chopping.png Graphic file (type png)
 <use Figures/soft_chopping.png>
 Package pdftex.def Info: Figures/soft_chopping.png  used on input line 655.
 (pdftex.def)             Requested size: 418.96548pt x 195.73636pt.
-<Figures/soft_chopping_new.png, id=428, 1921.1775pt x 1057.9525pt>
+<Figures/soft_chopping_new.png, id=455, 1921.1775pt x 1057.9525pt>
 File: Figures/soft_chopping_new.png Graphic file (type png)
 <use Figures/soft_chopping_new.png>
 Package pdftex.def Info: Figures/soft_chopping_new.png  used on input line 674.
 
 (pdftex.def)             Requested size: 211.68661pt x 116.56885pt.
-<Figures/comp_pwm_new.png, id=429, 1922.18124pt x 1059.96pt>
+<Figures/comp_pwm_new.png, id=456, 1922.18124pt x 1059.96pt>
 File: Figures/comp_pwm_new.png Graphic file (type png)
 <use Figures/comp_pwm_new.png>
 Package pdftex.def Info: Figures/comp_pwm_new.png  used on input line 680.
@@ -1738,7 +1738,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Figures/pwm_sum.png, id=442, 1848.9075pt x 1030.85126pt>
+<Figures/pwm_sum.png, id=468, 1848.9075pt x 1030.85126pt>
 File: Figures/pwm_sum.png Graphic file (type png)
 <use Figures/pwm_sum.png>
 Package pdftex.def Info: Figures/pwm_sum.png  used on input line 855.
@@ -1747,7 +1747,7 @@ Package pdftex.def Info: Figures/pwm_sum.png  used on input line 855.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [21 <./Figures/soft_chopping_new.png> <./Figures/comp_pwm_new.png>]
-<Figures/pwm_drive_deg.png, id=453, 1847.90375pt x 1015.795pt>
+<Figures/pwm_drive_deg.png, id=479, 1847.90375pt x 1015.795pt>
 File: Figures/pwm_drive_deg.png Graphic file (type png)
 <use Figures/pwm_drive_deg.png>
 Package pdftex.def Info: Figures/pwm_drive_deg.png  used on input line 876.
@@ -1813,75 +1813,11 @@ Underfull \hbox (badness 3601) in paragraph at lines 1376--1376
 \T1/opensans-TLF/b/n/18 men-ta-cije s pos-to-je-�im rje-�e-
  []
 
-
-LaTeX Warning: Reference `tab:usporedba_brzine' on page 38 undefined on input l
-ine 1413.
-
 [38
 
 ]
-
-LaTeX Warning: Reference `fig:usporedba_efikasnosti' on page 39 undefined on in
-put line 1431.
-
-! Undefined control sequence.
-\ltx@ifnextchar@nospace ...let \LTXcmds@CharToken 
-                                                  = #1\relax \ltx@LocToksA {...
-l.1436 ...a rad pri djelomičnom opterećenju..."}
-                                                  
-? q
-OK, entering \batchmode...
-! Undefined control sequence.
-\next ->\@nil 
-              
-l.1436 ...a rad pri djelomičnom opterećenju..."}
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-\next ->\@nil 
-              
-l.1436 ...a rad pri djelomičnom opterećenju..."}
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<argument> ...afterassignment \next \let \scratch 
-                                                  = 
-l.1436 ...a rad pri djelomičnom opterećenju..."}
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-\ltx@ifnextchar@nospace ...elet \LTXcmds@LetToken 
-                                                  \LTXcmds@ifnextchar@nospace 
-l.1436 ...a rad pri djelomičnom opterećenju..."}
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-LaTeX Warning: Reference `fig:usporedba_efikasnosti' on page 39 undefined on in
-put line 1436.
-
- [39] [40] [41]
 Poglavlje 7..
- (./diplomski_rad.bbl [42
+(./diplomski_rad.bbl [39
 
 ]
 Underfull \hbox (badness 1803) in paragraph at lines 28--31
@@ -1889,17 +1825,17 @@ Underfull \hbox (badness 1803) in paragraph at lines 28--31
  UAVS De-sign, De-ve-lop-ment and De-
  []
 
- [43
+[40
 
-]) [44] [45
+]) [41] [42
 
 ]
-Overfull \hbox (1.8657pt too wide) in paragraph at lines 1521--1524
+Overfull \hbox (1.8657pt too wide) in paragraph at lines 1499--1502
 \T1/stix2/m/n/12 aerial ve-hi-cles; UAV; drones; six-step com-mu-ta-tion; back-
 electromotive force; back-EMF;
  []
 
- [46
+[43
 
 ] (./diplomski_rad.aux)
 
@@ -2073,9 +2009,6 @@ diplomski_rad.bbl
  ***********
 
 
-LaTeX Warning: There were undefined references.
-
-
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 
@@ -2084,29 +2017,29 @@ Package rerunfilecheck Warning: File `diplomski_rad.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `diplomski_rad.out':
-(rerunfilecheck)             Before: 64A7CE6E3CB14AFA55DF3D85B3875CF1;6697
-(rerunfilecheck)             After:  3E7D98D2D23D600C65EA88FA9CE0B1D1;8258.
+(rerunfilecheck)             Before: A5F4FC33949484CB059D98D8D3ECC1A5;7863
+(rerunfilecheck)             After:  C36FE9133F0D74A12966C647F3AC76D8;7059.
 runsystem(rm diplomski_rad.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 68688 strings out of 476034
- 1735927 string characters out of 5792864
- 2503285 words of memory out of 6000000
- 88120 multiletter control sequences out of 15000+600000
+ 68603 strings out of 476034
+ 1733649 string characters out of 5792864
+ 2502666 words of memory out of 6000000
+ 88049 multiletter control sequences out of 15000+600000
  658286 words of font info for 191 fonts, out of 8000000 for 9000
  1137 hyphenation exceptions out of 8191
- 99i,17n,131p,1580b,1378s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,17n,131p,767b,1378s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-pdfTeX warning (dest): name{chapter*.34} has been referenced but does not exist
+pdfTeX warning (dest): name{section.6.3} has been referenced but does not exist
 , replaced by a fixed one
 
 
-pdfTeX warning (dest): name{chapter*.33} has been referenced but does not exist
+pdfTeX warning (dest): name{section.6.2} has been referenced but does not exist
 , replaced by a fixed one
 
 
-pdfTeX warning (dest): name{chapter*.32} has been referenced but does not exist
+pdfTeX warning (dest): name{section.6.1} has been referenced but does not exist
 , replaced by a fixed one
 
 </usr/share/texlive/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Bold.pfb>
@@ -2121,10 +2054,10 @@ e1/STIX2Text-Regular.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-s
 uper/sfit1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sf
 tt1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sftt1200.
 pfb>
-Output written on diplomski_rad.pdf (49 pages, 1413022 bytes).
+Output written on diplomski_rad.pdf (46 pages, 1406849 bytes).
 PDF statistics:
- 727 PDF objects out of 1000 (max. 8388607)
- 620 compressed objects within 7 object streams
- 150 named destinations out of 1000 (max. 500000)
- 332 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 721 PDF objects out of 1000 (max. 8388607)
+ 617 compressed objects within 7 object streams
+ 136 named destinations out of 1000 (max. 500000)
+ 364 words of extra memory for PDF output out of 10000 (max. 10000000)
 
