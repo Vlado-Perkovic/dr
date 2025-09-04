@@ -35,15 +35,19 @@
 \contentsline {subsubsection}{Procjena brzine vrtnje}{35}{section*.27}%
 \contentsline {subsubsection}{Digitalna implementacija PI regulatora}{36}{section*.30}%
 \contentsline {chapter}{\numberline {6.}Usporedba ostvarene implementacije s postojećim rješenjem}{38}{chapter.6}%
-\contentsline {chapter}{\numberline {7.}Zaključak}{39}{chapter.7}%
-\contentsline {chapter}{Literatura}{40}{chapter*.32}%
+\contentsline {section}{\numberline {6.1.}Metodologija testiranja}{38}{section.6.1}%
+\contentsline {section}{\numberline {6.2.}Analiza faznog napona}{38}{section.6.2}%
+\contentsline {section}{\numberline {6.3.}Usporedba radnih karakteristika}{39}{section.6.3}%
+\contentsline {section}{\numberline {6.4.}Sažetak usporedbe}{40}{section.6.4}%
+\contentsline {chapter}{\numberline {7.}Zaključak}{41}{chapter.7}%
+\contentsline {chapter}{Literatura}{42}{chapter*.33}%
 \babel@toc {croatian}{}\relax 
-\contentsline {chapter}{Sa\v {z}etak}{42}{chapter*.33}%
+\contentsline {chapter}{Sa\v {z}etak}{44}{chapter*.34}%
 \babel@toc {croatian}{}\relax 
 \babel@toc {croatian}{}\relax 
 \babel@toc {croatian}{}\relax 
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{Abstract}{43}{chapter*.34}%
+\contentsline {chapter}{Abstract}{45}{chapter*.35}%
 \babel@toc {croatian}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {croatian}{}\relax 

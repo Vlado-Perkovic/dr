@@ -1376,59 +1376,101 @@ int32_t PID_calculate(PIDController *pid, int32_t setpoint,
 \chapter{Usporedba ostvarene implementacije s postojećim rješenjem}
 \label{pog:usporedba}
 
-Kako bi se vrednovala uspješnost ostvarene implementacije, provedena je
+Kako bi se dobio dojam o performansama ostvarene implementacije, provedena je
 usporedba njezinih radnih karakteristika s komercijalno dostupnim elektroničkim
-sklopom za upravljanje brzinom. Cilj ove usporedbe nije proglasiti jedno
-rješenje boljim od drugog, već objektivno prikazati i dokumentirati razlike u
+sklopom za upravljanje brzinom. Cilj je ove usporedbe dokumentirati razlike u
 izvedbi koje proizlaze iz različitih sklopovskih i programskih pristupa.
 
-% Za potrebe usporedbe korištena su dva sklopa:
-% \begin{itemize}
-% 	\item \textbf{ESC A:} Komercijalno dostupan sklop \textit{SimonK 30A}, koji radi na frekvenciji PWM-a od \SI{8}{\kilo\hertz}.
-% 	\item \textbf{ESC B:} U sklopu ovog rada implementirano rješenje, koje radi na frekvenciji PWM-a od \SI{30}{\kilo\hertz}.
-% \end{itemize}
-% Usporedba se temelji na mjerenju vanjskih pokazatelja izvedbe u identičnim uvjetima.
-%
-% \section{Metodologija testiranja}
-% \label{sec:metodologija_testiranja}
-%
-% Sva mjerenja provedena su na eksperimentalnom postavu opisanom u poglavlju
-% \ref{pog:postav}, koristeći isti elektromotor (\textit{A2212/13T 1000KV}) i
-% laboratorijski izvor napajanja postavljen na konstantan napon od
-% \SI{7.4}{\volt}. Brzina vrtnje mjerena je pomoću apsolutnog enkodera, a za
-% vizualizaciju naponskih oblika korišten je digitalni osciloskop.
-%
-% \section{Analiza faznog napona i potvrda metode upravljanja}
-% \label{sec:analiza_napona}
-%
-% Prvi korak u usporedbi bila je vizualna analiza valnog oblika napona na jednoj
-% od faza motora tijekom rada. Snimke s osciloskopa, prikazane na slikama
-% \ref{fig:esc_a_valni} i \ref{fig:esc_b_valni}, služe za potvrdu metode
-% upravljanja i uočavanje razlika koje proizlaze iz različitih frekvencija PWM-a.
-%
-% \missingfigure{Snimka zaslona osciloskopa: valni oblik faznog napona za ESC A pri srednjoj brzini vrtnje.}
-% \label{fig:esc_a_valni}
-%
-% \missingfigure{Snimka zaslona osciloskopa: valni oblik faznog napona za ESC B pri srednjoj brzini vrtnje.}
-% \label{fig:esc_b_valni}
-%
-% Iz priloženih slika vidljivo je da oba sklopa koriste trapeznu metodu
-% upravljanja, što se očituje u karakterističnom valnom obliku napona s periodima
-% visoke impedancije. Glavna uočljiva razlika je u gustoći preklapanja PWM-a. Na
-% slici \ref{fig:esc_a_valni} jasno je vidljiv grublji valni oblik, posljedica
-% niže frekvencije od \SI{8}{\kilo\hertz}. Suprotno tome, slika
-% \ref{fig:esc_b_valni} prikazuje znatno finiji valni oblik s manje izraženim
-% šumom, što je rezultat više frekvencije od \SI{30}{\kilo\hertz} korištene u
-% rješenju ESC B.
-%
-% \section{Usporedba radnog područja i sekvence pokretanja}
-% \label{sec:usporedba_radnog_podrucja}
-%
-% Radno područje definirano je minimalnom i maksimalnom stabilnom brzinom vrtnje
-% koju sklop može postići bez opterećenja. Mjerenja su provedena pri naponu
-% napajanja od \SI{12}{\volt}, a rezultati su sažeti u tablici
-% \ref{tab:usporedba_brzina}.
+Za potrebe usporedbe korišteni su komercijalno dostupan sklop
+\textit{SimonK 30A}, koji radi na frekvenciji signala PWM-a od
+\SI{8}{\kilo\hertz}, te sklop korišten u ovom radu, koji radi na frekvenciji
+PWM-a od \SI{30}{\kilo\hertz}.
 
+Usporedba se temelji na mjerenju vanjskih pokazatelja izvedbe u identičnim
+uvjetima.
+
+\section{Metodologija testiranja}
+\label{sec:metodologija_testiranja}
+
+Sva mjerenja provedena su na eksperimentalnom postavu opisanom u poglavlju
+\ref{pog:postav}, koristeći isti elektromotor (\textit{A2212/13T 1000KV}) i
+laboratorijski izvor napajanja postavljen na konstantan napon od
+\SI{7.4}{\volt}, s ograničenjem struje od \SI{3.23}{\ampere}. Brzina vrtnje
+mjerena je pomoću osciloskopa očitavanjem perioda jednog komutacijskog koraka.
+Testovi su provedeni sa standardnim propelerom oznake \textit{1045} i bez
+njega.
+
+\section{Analiza faznog napona}
+\label{sec:analiza_napona}
+
+Vizualna analiza valnog oblika napona na jednoj od faza motora potvrđuje da oba
+sklopa koriste trapeznu metodu upravljanja. Glavna uočljiva razlika, prikazana
+na slikama \ref{fig:esc_a_valni} i \ref{fig:esc_b_valni}, jest u gustoći
+preklapanja PWM-a. Valni oblik komercijalnog rješenja je grublji, što je
+posljedica niže frekvencije od \SI{8}{\kilo\hertz}. Suprotno tome, rješenje
+razvijeno u ovom radu, s frekvencijom od \SI{30}{\kilo\hertz}, generira znatno
+finiji valni oblik s manje izraženim šumom.
+
+\missingfigure{Snimka zaslona osciloskopa: valni oblik faznog napona za sklop \textit{SimonK 30A}.}
+\label{fig:esc_a_valni}
+
+\missingfigure{Snimka zaslona osciloskopa: valni oblik faznog napona za implementirano rješenje.}
+\label{fig:esc_b_valni}
+
+\section{Usporedba radnih karakteristika}
+\label{sec:usporedba_karakteristika}
+
+Radne karakteristike oba sklopa uspoređene su mjerenjem brzine vrtnje pri
+različitim faktorima ispune, sa i bez opterećenja. Rezultati su sažeti u
+tablici \ref{tab:usporedba_brzina}.
+
+\begin{table}[h!]
+	\centering
+	\caption{Usporedba brzine vrtnje (RPM) za komercijalni i implementirani sklop}
+	\label{tab:usporedba_brzina}
+	\begin{tabular}{|l|c|c|c|c|}
+		\hline
+		\textbf{Stanje}            & \multicolumn{2}{c|}{\textbf{Bez propelera}} & \multicolumn{2}{c|}{\textbf{S propelerom 1045}}                                              \\ \hline
+		\textbf{Faktor ispune}     & \textbf{SimonK}                             & \textbf{Implementirani}                         & \textbf{SimonK}  & \textbf{Implementirani} \\ \hline
+		\textbf{Minimalna brzina}  & \num{1400}                                  & \num{307}                                       & $\sim$\num{720}  & \num{309}               \\ \hline
+		10\%                       & \num{1400}                                  & \num{703}                                       & $\sim$\num{720}  & \num{484}               \\ \hline
+		20\%                       & \num{3800}                                  & \num{1270}                                      & $\sim$\num{1500} & \num{1096}              \\ \hline
+		50\%                       & \num{5900}                                  & \num{3203}                                      & $\sim$\num{3130} & \num{2607}              \\ \hline
+		\textbf{Maksimalna brzina} & \num{6520}                                  & \num{5714}                                      & \num{6520}*      & \num{3650}*             \\ \hline
+		\multicolumn{5}{l}{\footnotesize{*Maksimalna brzina postignuta prije nego je dosegnuto ograničenje struje napajanja.}}
+	\end{tabular}
+\end{table}
+
+Iz rezultata je vidljivo da komercijalno rješenje \textit{SimonK} postiže višu
+maksimalnu brzinu vrtnje, posebice pod opterećenjem. Međutim, implementirano
+rješenje pokazuje značajno šire radno područje pri niskim brzinama. Minimalna
+stabilna brzina vrtnje za implementirano rješenje iznosi oko 300 RPM, dok
+\textit{SimonK} ne može stabilno raditi ispod 700 RPM s opterećenjem.
+Sposobnost rada pri vrlo malim brzinama ukazuje na robusnost implementiranog
+algoritma za detekciju PEMS-a.
+
+Također, primjetno je da je odziv brzine na promjenu faktora ispune kod
+implementiranog rješenja linearniji, dok kod sklopa \textit{SimonK} dolazi do
+naglog skoka brzine na samom početku radnog područja. Ova linearnost omogućuje
+finiju i precizniju kontrolu potiska.
+
+Treba napomenuti da su maksimalne brzine pod opterećenjem ograničene strujom
+izvora napajanja od \SI{3.23}{\ampere}. \textit{SimonK} je dosegnuo limit pri
+\SI{63.5}{\%} faktora ispune, dok ga je implementirano rješenje doseglo pri
+\SI{77}{\%}, što ukazuje na razlike u efikasnosti i načinu upravljanja snagom.
+
+\section{Sažetak usporedbe}
+\label{sec:sazetak_usporedbe}
+
+Usporedbom ključnih pokazatelja izvedbe utvrđeno je da ostvarena implementacija
+nudi značajne prednosti u preciznosti upravljanja i radu pri niskim brzinama.
+Iako komercijalno rješenje postiže višu vršnu brzinu, rješenje razvijeno u ovom
+radu pruža superiornu stabilnost i linearnost u donjem dijelu radnog područja.
+Viša frekvencija PWM-a rezultira čišćim faznim naponom, a mogućnost podešavanja
+PI regulatora, za razliku od "crne kutije" komercijalnog sklopa, omogućuje fino
+prilagođavanje dinamičkog odziva specifičnim zahtjevima. Sveukupno, rezultati
+potvrđuju da je razvijeno rješenje uspješna i konkurentna implementacija
+bezosjetilnog upravljanja.
 % esc A : 6520 rpm @ 100%
 % esc A : 5900 rpm @ 50%
 % esc A : 3800 rpm @ 20%
@@ -1455,13 +1497,10 @@ izvedbi koje proizlaze iz različitih sklopovskih i programskih pristupa.
 
 % ubrzanje enkoder
 %
-% esc A : 4900 @ 26% duty cycle -> snimljeno ubrzanje sa 1300 @ 8% na 4900 @ 26% 0409_8
-% esc A : 6700 @ 100% duty cycle -> snimljeno ubrzanje sa 1300 @ 8% na 6700 @ 100% 0409_9
+% esc A : 4900 @ 26% duty cycle -> snimljeno ubrzanje sa 1300 @ 8% na 4900 @ 26% 0409_8.csv
+% esc A : 6700 @ 100% duty cycle -> snimljeno ubrzanje sa 1300 @ 8% na 6700 @ 100% 0409_9.csv
 
-% esc B : 4400 @ 70% duty cycle -> snimljeno ubrzanje sa 1500 @ 23% na 4400 @ 26% 0409_15
-
-\missingfigure{Tablica s usporedbom minimalne i maksimalne brzine vrtnje (RPM) za ESC A i ESC B.}
-\label{tab:usporedba_brzina}
+% esc B : 4400 @ 70% duty cycle -> snimljeno ubrzanje sa 1500 @ 23% na 4400 @ 26% 0409_15.csv
 
 %--- ZAKLJUČAK / CONCLUSION ----------------------------------------------------
 \chapter{Zaključak}

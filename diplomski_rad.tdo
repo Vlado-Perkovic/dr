@@ -24,4 +24,5 @@
 \contentsline {todo}{Figure: Vremenski dijagram sinkronizacije komutacije (PEMS, detekcija nule, odgoda od 30 el. stupnjeva i trenutak komutacije)}{34}{subsection.5.3.2}%
 \contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ OVO JE HARDKODIRANO}{35}{section*.29}%
 \contentsline {todo}{Figure: Blok dijagram implementirane PI regulacijske petlje}{36}{figure.caption.31}%
-\contentsline {todo}{Figure: Tablica s usporedbom minimalne i maksimalne brzine vrtnje (RPM) za ESC A i ESC B.}{38}{chapter.6}%
+\contentsline {todo}{Figure: Snimka zaslona osciloskopa: valni oblik faznog napona za sklop \textit {SimonK 30A}.}{39}{section.6.2}%
+\contentsline {todo}{Figure: Snimka zaslona osciloskopa: valni oblik faznog napona za implementirano rješenje.}{39}{section.6.2}%
