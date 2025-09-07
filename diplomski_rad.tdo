@@ -9,20 +9,20 @@
 \contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ treba ponovno evaluirat, nije bas precizno}{18}{section*.17}%
 \contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ fale osi na slici, ponovi}{19}{section*.18}%
 \contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ fale osi na slici}{20}{section*.20}%
-\contentsline {todo}{Figure: slika esc}{25}{section.4.1}%
-\contentsline {todo}{Figure: slika motora}{26}{section.4.2}%
-\contentsline {todo}{Figure: slika enkodera}{26}{section.4.3}%
-\contentsline {todo}{Figure: slika enkodera na motoru + kuciste}{27}{section.4.3}%
-\contentsline {todo}{Figure: Dijagram toka cjelokupnog programskog rješenja s prikazom glavne petlje i ključnih prekidnih rutina (\texttt {TIM1}, \texttt {TIM3}, \texttt {TIM15}, \texttt {TIM17})}{30}{section.5.1}%
-\contentsline {todo}{Figure: Dijagram programskog slijeda koji prikazuje prijelaze između stanja Mirovanje, Poravnanje, Otvorena petlja i Zatvorena petlja, s uvjetima prijelaza (npr. istek vremena, \texttt {zc\_cnt \: 3})}{30}{section.5.1}%
-\contentsline {todo}{Figure: Prikaz komplementarnih PWM signala s jasno označenim mrtvim vremenom, snimljen osciloskopom na jednom polumostu}{31}{subsection.5.2.1}%
-\contentsline {todo}{Figure: Blok dijagram sustava za detekciju PEMS-a (veza faza, virtualnog zvjezdišta, komparatora i GPIO ulaza mikrokontrolera)}{31}{subsection.5.2.2}%
-\contentsline {todo}{Figure: Osciloskopska snimka koja prikazuje PWM signal na jednoj fazi, PEMS na neopterećenoj fazi i digitalni signal koji označava trenutak uzorkovanja (okidanje TIM15 prekida)}{31}{subsection.5.2.2}%
-\contentsline {todo}{Figure: Tablica koja definira komunikacijski protokol (naredba, format podataka) za zadavanje brzine i primanje telemetrije}{32}{subsection.5.2.3}%
-\contentsline {todo}{Figure: Tablica s komutacijskim stanjima za svih šest koraka s prikazom aktivnih tranzistora i nadzirane faze}{33}{subsection.5.3.1}%
-\contentsline {todo}{Figure: Graf procijenjene brzine motora tijekom faza pokretanja, s jasno označenim fazama poravnanja, otvorene petlje i trenutka prijelaza u zatvorenu petlju}{33}{subsection.5.3.1}%
-\contentsline {todo}{Figure: Vremenski dijagram sinkronizacije komutacije (PEMS, detekcija nule, odgoda od 30 el. stupnjeva i trenutak komutacije)}{34}{subsection.5.3.2}%
-\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ OVO JE HARDKODIRANO}{35}{section*.29}%
-\contentsline {todo}{Figure: Blok dijagram implementirane PI regulacijske petlje}{36}{figure.caption.31}%
-\contentsline {todo}{Figure: Snimka zaslona osciloskopa: valni oblik faznog napona za sklop \textit {SimonK 30A}.}{39}{section.6.2}%
-\contentsline {todo}{Figure: Snimka zaslona osciloskopa: valni oblik faznog napona za implementirano rješenje.}{39}{section.6.2}%
+\contentsline {todo}{Figure: slika esc}{26}{section.4.1}%
+\contentsline {todo}{Figure: slika motora}{27}{section.4.2}%
+\contentsline {todo}{Figure: slika enkodera}{27}{section.4.3}%
+\contentsline {todo}{Figure: slika enkodera na motoru + kuciste}{28}{section.4.3}%
+\contentsline {todo}{Figure: Dijagram toka cjelokupnog programskog rješenja s prikazom glavne petlje i ključnih prekidnih rutina (\texttt {TIM1}, \texttt {TIM3}, \texttt {TIM15}, \texttt {TIM17})}{31}{section.5.1}%
+\contentsline {todo}{Figure: Dijagram programskog slijeda koji prikazuje prijelaze između stanja Mirovanje, Poravnanje, Otvorena petlja i Zatvorena petlja, s uvjetima prijelaza (npr. istek vremena, \texttt {zc\_cnt \: 3})}{31}{section.5.1}%
+\contentsline {todo}{Figure: Prikaz komplementarnih PWM signala s jasno označenim mrtvim vremenom, snimljen osciloskopom na jednom polumostu}{32}{subsection.5.2.1}%
+\contentsline {todo}{Figure: Blok dijagram sustava za detekciju PEMS-a (veza faza, virtualnog zvjezdišta, komparatora i GPIO ulaza mikrokontrolera)}{32}{subsection.5.2.2}%
+\contentsline {todo}{Figure: Osciloskopska snimka koja prikazuje PWM signal na jednoj fazi, PEMS na neopterećenoj fazi i digitalni signal koji označava trenutak uzorkovanja (okidanje TIM15 prekida)}{32}{subsection.5.2.2}%
+\contentsline {todo}{Figure: Tablica koja definira komunikacijski protokol (naredba, format podataka) za zadavanje brzine i primanje telemetrije}{33}{subsection.5.2.3}%
+\contentsline {todo}{Figure: Tablica s komutacijskim stanjima za svih šest koraka s prikazom aktivnih tranzistora i nadzirane faze}{34}{subsection.5.3.1}%
+\contentsline {todo}{Figure: Graf procijenjene brzine motora tijekom faza pokretanja, s jasno označenim fazama poravnanja, otvorene petlje i trenutka prijelaza u zatvorenu petlju}{34}{subsection.5.3.1}%
+\contentsline {todo}{Figure: Vremenski dijagram sinkronizacije komutacije (PEMS, detekcija nule, odgoda od 30 el. stupnjeva i trenutak komutacije)}{35}{subsection.5.3.2}%
+\contentsline {todo}{\fcolorbox {black}{orange}{\textcolor {orange}{o}}\ OVO JE HARDKODIRANO}{36}{section*.30}%
+\contentsline {todo}{Figure: Blok dijagram implementirane PI regulacijske petlje}{37}{figure.caption.32}%
+\contentsline {todo}{Figure: Snimka zaslona osciloskopa: valni oblik faznog napona za sklop \textit {SimonK 30A}.}{40}{section.6.2}%
+\contentsline {todo}{Figure: Snimka zaslona osciloskopa: valni oblik faznog napona za implementirano rješenje.}{40}{section.6.2}%
