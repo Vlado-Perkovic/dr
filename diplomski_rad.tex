@@ -9,6 +9,7 @@
 \usepackage{subcaption}
 \usepackage{enumitem}
 \usepackage{amsmath}
+\usepackage{booktabs}
 \usepackage{minted}
 \usepackage[colorinlistoftodos]{todonotes}
 \usetikzlibrary{shapes, calc, positioning, arrows.meta}
@@ -86,13 +87,13 @@
 \label{pog:uvod}
 
 % --- KRATKI UVOD U TEMATIKU ---
-Bespilotne letjelice (eng. \textit{Unmanned Aerial Vehicle, UAV}), popularno
+Bespilotne letjelice (eng. \textit{unmanned aerial vehicle}, UAV), popularno
 zvane dronovi, danas se široko primjenjuju u brojnim industrijama, od filmske
 produkcije i poljoprivrede do dostave i rekreacijskog letenja
 \cite{cite:primjena}. Iako postoje različite konstrukcije, poput bespilotnih
 letjelica s fiksnim krilima, višerotorske bespilotne letjelice prevladavaju u
 modernim primjenama. Osnovu njihovog pogona čini istosmjerni motor bez četkica
-(eng. \textit{Brushless DC motor, BLDC}), čije karakteristike poput visoke
+(eng. \textit{brushless DC motor}, BLDC), čije karakteristike poput visoke
 učinkovitosti, pouzdanosti i dobrog omjera snage i mase omogućuju razvoj
 agilnih i energetski učinkovitih letjelica. Radne karakteristike drona,
 uključujući stabilnost, vrijeme leta i agilnost, izravno ovise o sposobnosti
@@ -114,23 +115,29 @@ vektorskog upravljanja, koriste algoritme za estimaciju položaja rotora jer
 nemaju mogućnost izravnog mjerenja PEMS-a \cite{NXP_AN2355}.
 
 % --- OPIS RADA I CILJA ---
-\todo[inline]{nadopuni opis rada}
+
 Ovaj rad bavi se analizom, modeliranjem, simulacijom i implementacijom sustava
 za upravljanje brzinom vrtnje motora BLDC s naglaskom na primjenu kod
 bespilotnih letjelica. Cilj je istražiti i implementirati sustav upravljanja
-bez korištenja osjetila temeljen na metodi komutacije u šest koraka. Kroz
-rad će se analizirati i temeljni kompromisi u dizajnu motora, poput izbora
-konfiguracije namotaja, kako bi se razumio njihov utjecaj na konačne
-radne karakteristike.
+bez korištenja osjetila položaja temeljen na metodi komutacije u šest koraka.
+Kroz rad će se analizirati i temeljni kompromisi u dizajnu motora, poput izbora
+konfiguracije namotaja, kako bi se razumio njihov utjecaj na konačne radne
+karakteristike. Detaljno je razrađena metoda detekcije protuelektromotorne sile
+kao ključnog elementa za procjenu položaja rotora te je implementiran
+cjelokupni slijed pokretanja motora, od početnog poravnanja do stabilnog rada u
+zatvorenoj petlji s PI regulacijom. Sustav je praktično realiziran na
+eksperimentalnom postavu s mikrokontrolerom STM32G071RB, a uspješnost
+implementacije vrednovana je usporedbom radnih karakteristika s komercijalno
+dostupnim elektroničkim sklopom.
 
 Drugo poglavlje daje teorijsku podlogu o motorima BLDC. Treće poglavlje
-detaljno opisuje upravljanje motorom BLDC bez osjetila položaja, s fokusom na komutaciju
-u šest koraka. Četvrto poglavlje prikazuje eksperimentalni postav, uključujući
-odabrani elektronički sklop za upravljanje brzinom i motor. Peto poglavlje
-opisuje programsku implementaciju razvijenog algoritma. Šesto poglavlje
-uspoređuje radne karakteristike implementiranog rješenja s komercijalno
-dostupnim sklopom, dok sedmo poglavlje donosi konačni zaključak i sažima
-rezultate rada.
+detaljno opisuje upravljanje motorom BLDC bez osjetila položaja, s fokusom na
+komutaciju u šest koraka. Četvrto poglavlje prikazuje eksperimentalni postav,
+uključujući odabrani elektronički sklop za upravljanje brzinom i motor. Peto
+poglavlje opisuje programsku implementaciju razvijenog algoritma. Šesto
+poglavlje uspoređuje radne karakteristike implementiranog rješenja s
+komercijalno dostupnim sklopom, dok sedmo poglavlje donosi konačni zaključak i
+sažima rezultate rada.
 %-------------------------------------------------------------------------------
 \chapter{Istosmjerni elektromotor bez četkica}
 \label{pog:bldc}
@@ -147,14 +154,20 @@ koji djeluju kao elektromagneti, dok su na rotoru stalni magneti
 \cite{elektromotor-beskolektorski}. Postoji unutarnji ili \textit{inrunner}
 motor kod kojeg se rotor nalazi unutar statora. Takvi motori općenito imaju
 manji moment tromosti i sposobni su za veće brzine vrtnje \cite{cite:bldc}.
-Isto tako postoji i vanjski ili \textit{outrunner} motor kojem je rotor izvana
-i okružuje stator. Ovakvi motori obično daju veći okretni moment pri nižim
-brzinama vrtnje \cite{cite:bldc}.
+Isto tako postoji i vanjski ili \textit{outrunner} motor (slika
+\ref{fig:presjek_motora}) kojem je rotor izvana i okružuje stator. Ovakvi
+motori obično daju veći okretni moment pri nižim brzinama vrtnje
+\cite{cite:bldc}.
 
-\missingfigure{umetni sliku presjeka motora}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\textwidth]{Figures/presjek.jpg}
+	\caption{Presjek vanjskog motora BLDC (prilagođeno prema: Medvedev, Wikimedia Commons, CC BY-SA 3.0)}
+	\label{fig:presjek_motora}
+\end{figure}
 
 Valja spomenuti kako uz motore BLDC usko se vežu sinkroni elektromotori sa
-stalnim magnetima (\textit{Permanent Magnet Synchronous Motor, PMSM}). Takvi
+stalnim magnetima (\textit{permanent magnet synchronous motor}, PMSM). Takvi
 motori također su vrsta elektromotora sa stalnim magnetima, a glavna je razlika
 u valnom obliku protuelektromotorne sile gdje motor BLDC ima trapezni oblik, a
 motor PMSM ima sinusni oblik. U nastavku rada razmatrat će se motori BLDC, iako
@@ -179,8 +192,14 @@ pouzdanosti, učinkovitosti često i preko 80\% \cite{motor-ucinkovitost} i
 mogućnosti postizanja iznimno velikih brzina (preko 70 000 okretaja u minuti
 \cite{motor-rpm}), beskolektorski se motori danas široko primjenjuju u
 sustavima kao što su bespilotne letjelice, servopogoni, pogoni tvrdih diskova u
-računalima, medicinski uređaji i moderni alatni strojevi. \todo{gdje se ne
-	koristi} \newpage
+računalima, medicinski uređaji i moderni alatni strojevi.
+
+Unatoč svojim prednostima, motori BLDC nisu uvijek optimalan izbor zbog potrebe
+za složenim i skupim elektroničkim upravljačkim sklopom. Stoga se u cjenovno
+osjetljivim primjenama koje ne zahtijevaju visoku preciznost, poput igračaka,
+prednost daje jednostavnijim motorima s četkicama \cite{HughesDrury2013}.
+
+\newpage
 
 \section{Matematički model motora}
 \label{sec:mat_model}
@@ -202,20 +221,18 @@ pri čemu su:
 Ako se pretpostavi da su faze simetrične i da magnetska reluktancija ne ovisi o
 električnom kutu rotora, tada su tri vlastita induktiviteta jednaka, a šest
 međusobnih induktiviteta također je međusobno jednako:
-\begin{equation}
-	L_{aa} = L_{bb} = L_{cc} = L_v \tag{2.4}
-\end{equation}
-\begin{equation}
-	L_{ab} = L_{ba} = L_{ac} = L_{ca} = L_{bc} = L_{cb} = M \tag{2.5}
-\end{equation}
+\begin{align}
+	L_{aa} & = L_{bb} = L_{cc} = L_v                          \\
+	L_{ab} & = L_{ba} = L_{ac} = L_{ca} = L_{bc} = L_{cb} = M
+\end{align}
 Ekvivalentni induktivitet $L$ može se izračunati kao:
-\begin{equation}
-	L = L_v - M \tag{2.6}
-\end{equation}
+\begin{align}
+	L = L_v - M
+\end{align}
 Uz pretpostavku simetričnih faznih struja, vrijedi:
-\begin{equation}
-	i_a + i_b + i_c = 0 \tag{2.7}
-\end{equation}
+\begin{align}
+	i_a + i_b + i_c = 0
+\end{align}
 Tada se električni odnosi mogu pojednostavniti, a motor BLDC modelirati na
 sljedeći način:
 \begin{align}
@@ -259,8 +276,8 @@ sljedeći način:
 \newpage
 
 \section{Protuelektromotorna sila}
-Protuelektromotorna sila (eng. \textit {Counter-electromotive force,
-	Back-electromotive force, back-EMF}) je napon koji se stvara u zavojnicama
+Protuelektromotorna sila (eng. \textit {counter-electromotive force,
+	back-electromotive force, back-EMF}) je napon koji se stvara u zavojnicama
 statora prilikom vrtnje rotora, a suprotstavlja se naponu napajanja. Ovaj se
 napon inducira u skladu s Faradayevim zakonom elektromagnetske indukcije.
 
@@ -315,38 +332,40 @@ konfiguracije:
 
 U \textbf{zvjezdastom spoju (eng. \textit{wye, star connection})} tri zavojnice
 spojene su u zajedničkoj središnjoj točki, zvjezdištu (točka $n$ na slici
-\ref{fig:wye}). Fazni napon, $V_{faza}$ [V], niži je od mrežnog napona,
-$V_{\text{mreža}}$ [V], prema izrazu $V_{faza} = V_{\text{mreža}} / \sqrt{3}$,
-a fazna struja, $I_{faza}$ [A], jednaka je mrežnoj struji.
+\ref{fig:wye}). Fazni napon, $V_{\text{faza}}$ [V], niži je od mrežnog napona,
+$V_{\text{mreža}}$ [V], prema izrazu $V_{\text{faza}} = V_{\text{mreža}} /
+	\sqrt{3}$, a fazna struja, $I_{\text{faza}}$ [A], jednaka je mrežnoj struji.
 
 U \textbf{trokutnom spoju (eng. \textit{delta connection})} zavojnice su
-spojene međusobno u trokut (slika \ref{fig:delta}). Fazni napon, $V_{faza}$
-[V], jednak je mrežnom naponu, $V_{\text{mreža}}$ [V], a fazna struja,
-$I_{faza}$ [A], niža je od mrežne struje, $I_{\text{mreža}}$ [A], prema izrazu
-$I_{faza} = I_{\text{mreža}} / \sqrt{3}$.
+spojene međusobno u trokut (slika \ref{fig:delta}). Fazni napon,
+$V_{\text{faza}}$ [V], jednak je mrežnom naponu, $V_{\text{mreža}}$ [V], a
+fazna struja, $I_{\text{faza}}$ [A], niža je od mrežne struje,
+$I_{\text{mreža}}$ [A], prema izrazu $I_{\text{faza}} = I_{\text{mreža}} /
+	\sqrt{3}$.
 
 Zbog ove razlike u faznim naponima, za dva motora s ovim konfiguracijama i
 pripadnim konstantama motora $K_{t, Z}$ i $K_{t, T}$ za proizvesti jednak
 moment vrijedi:
 
-Moment, $\tau$ [Nm], može se izraziti preko izraza $\tau = K_t \cdot I_{faza}$,
-gdje je $K_t$ konstanta momenta [Nm/A], a $I_{faza}$ fazna struja [A]. Odnos
-konstanti momenta je $K_{t, T} = K_{t, Z} / \sqrt{3}$ \cite{cite:disertacija}.
+Moment, $\tau$ [Nm], može se izraziti preko izraza $\tau = K_t \cdot
+	I_{\text{faza}}$, gdje je $K_t$ konstanta momenta [Nm/A], a $I_{\text{faza}}$
+fazna struja [A]. Odnos konstanti momenta je $K_{t, T} = K_{t, Z} / \sqrt{3}$
+\cite{cite:disertacija}.
 
 Da bi se proizveo jednak moment, odnos faznih struja mora biti:
 
 \begin{align*}
-	K_{t,Z} \cdot I_{faza,Z}  & = K_{t,T} \cdot I_{faza,T}                                 \\
-	K_{t,Z} \cdot I_{faza,Z}  & = \left( \frac{K_{t,Z}}{\sqrt{3}} \right) \cdot I_{faza,T} \\
-	\sqrt{3} \cdot I_{faza,Z} & = I_{faza,T}
+	K_{t,Z} \cdot I_{\text{faza},Z}  & = K_{t,T} \cdot I_{\text{faza},T}                                 \\
+	K_{t,Z} \cdot I_{\text{faza},Z}  & = \left( \frac{K_{t,Z}}{\sqrt{3}} \right) \cdot I_{\text{faza},T} \\
+	\sqrt{3} \cdot I_{\text{faza},Z} & = I_{\text{faza},T}
 \end{align*}
 Ovaj rezultat pokazuje da za isti moment, fazna struja u trokutnom spoju mora biti $\sqrt{3}$ puta veća od fazne struje u zvjezdastom spoju.
 Koristeći ovaj odnos, sada se mogu usporediti linijske struje ($I_L$) koje motori vuku iz izvora napajanja.
 \begin{align*}
-	I_{L,T} & = \sqrt{3} \cdot I_{faza,T}                  &  & \text{(Definicija linijske struje za trokut)}       \\
-	        & = \sqrt{3} \cdot (\sqrt{3} \cdot I_{faza,Z}) &  & \text{(Uvrštavanje odnosa faznih struja)}           \\
-	        & = 3 \cdot I_{faza,Z}                                                                                  \\
-	        & = 3 \cdot I_{L,Z}                            &  & \text{(Budući da je } I_{faza,Z} = I_{L,Z} \text{)}
+	I_{L,T} & = \sqrt{3} \cdot I_{\text{faza},T}                  &  & \text{(Definicija linijske struje za trokut)}              \\
+	        & = \sqrt{3} \cdot (\sqrt{3} \cdot I_{\text{faza},Z}) &  & \text{(Uvrštavanje odnosa faznih struja)}                  \\
+	        & = 3 \cdot I_{\text{faza},Z}                                                                                         \\
+	        & = 3 \cdot I_{L,Z}                                   &  & \text{(Budući da je } I_{\text{faza},Z} = I_{L,Z} \text{)}
 \end{align*}
 
 Izvod pokazuje da za proizvodnju istog momenta, motor spojen u trokut zahtijeva
@@ -404,15 +423,15 @@ momenta i brzine vrtnje.
 
 S jedne strane, okretni moment ($\tau$) izravno je proporcionalan struji ($I$)
 prema izrazu $\tau = K_t \cdot I$ (odjeljak \ref{sec:konfiguracija_namotaja}).
-S druge strane, rotacijom se inducira PEMS ($V_{pems}$) koji se suprotstavlja
-naponu napajanja i proporcionalan je kutnoj brzini ($\omega$) prema izrazu
-$V_{pems} = K_e \cdot \omega$. Porast brzine uzrokuje porast $V_{pems}$, što
-smanjuje efektivni napon na namotajima, a time i struju i raspoloživi moment.
-Motor dostiže svoju maksimalnu brzinu, odnosno brzinu praznog hoda, kada se
-$V_{pems}$ približi naponu napajanja, čime se moment smanjuje na nulu
-(zanemarujući trenje) što se može vidjeti na slici \ref{fig:torque_speed}. U
-zoni kontinuiranog momenta, porast brzine ne utječe na moment i to područje je
-omeđeno nazivnim momentom i nazivnom brzinom.
+S druge strane, rotacijom se inducira PEMS ($V_{\text{pems}}$) koji se
+suprotstavlja naponu napajanja i proporcionalan je kutnoj brzini ($\omega$)
+prema izrazu $V_{\text{pems}} = K_e \cdot \omega$. Porast brzine uzrokuje
+porast $V_{\text{pems}}$, što smanjuje efektivni napon na namotajima, a time i
+struju i raspoloživi moment. Motor dostiže svoju maksimalnu brzinu, odnosno
+brzinu praznog hoda, kada se $V_{\text{pems}}$ približi naponu napajanja, čime
+se moment smanjuje na nulu (zanemarujući trenje) što se može vidjeti na slici
+\ref{fig:torque_speed}. U zoni kontinuiranog momenta, porast brzine ne utječe
+na moment i to područje je omeđeno nazivnim momentom i nazivnom brzinom.
 
 \begin{figure}[h!]
 	\centering
@@ -481,11 +500,37 @@ Ovaj se proces nastavlja kroz preostala četiri koraka (C->A, B->A, B->C, A->C),
 
 Budući da se magnetsko polje mijenja u diskretnim koracima, generirani moment
 nije u potpunosti gladak, već sadrži male oscilacije poznate kao valovitost
-momenta. Te se oscilacije pojavljuju prilikom svake komutacije \cite{TI2015}.
-\label{trap:torque-ripple} \missingfigure{slika valovitosti momenta, probat cu
-	u matlabu odsimulirat}
-
+momenta vidljive na slici \ref{fig:valovitost momenta}. Te se oscilacije
+pojavljuju prilikom svake komutacije \cite{TI2015}. \label{trap:torque-ripple}
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+				title={Valovitost momenta},
+				xlabel={Korak komutacije},
+				xtick={30, 90, 150, 210, 270, 330},
+				xticklabels={1, 2, 3, 4, 5, 6},
+				extra x ticks={0, 60, 120, 180, 240, 300, 360},
+				extra x tick labels={}, % Skrivamo dodatne numeričke oznake (0, 60, ...)
+				extra x tick style={
+						grid=major, % Kažemo da se za ove oznake iscrta glavna mreža (linije)
+						grid style={dashed, gray, thin} % Stil linija (puna, siva, tanka)
+					},
+				ylabel={Moment}, % Prilagođeno naslovu
+				ytick=\empty,      % Uklanja sve oznake i brojeve s y-osi
+				domain=0:360,
+				samples=401,
+				ymin=0,
+				enlarge x limits=false,
+			]
+			\addplot[thick, black, smooth] {1 + 0.1*abs(sin(3*x))};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Valovitost momenta po koracima komutacije}
+	\label{fig:valovitost_momenta}
+\end{figure}
 \newpage
+
 \section{Upravljanje naponom i strujom signalima PWM-a}
 \label{sec:trofazno_upravljanje}
 
@@ -526,19 +571,19 @@ omogućuju spajanje faze na pozitivni ili negativni pol napajanja (slika
 			\ctikzset{tripoles/mos style/arrows}
 			\draw node[nmos,scale=0.59,xscale=1,yscale=1,rotate=0](Q25) at (10.0,-10.0) {} node[anchor=west,scale=0.9] at (Q25.text){}
 			node[left=5mm,scale=0.9] at (Q25.text) {$S_{6}$};
-			\draw (Q25.C) -- ++(0.6,0) to[D,invert,*-*, /tikz/circuitikz/bipoles/length=0.9cm] ++(0,-0.9) -- (Q25.E);
+			\draw (Q25.C) -- ++(0.6,0) to[D, l=$D_{6}$, invert,*-*, /tikz/circuitikz/bipoles/length=0.9cm] ++(0,-0.9) -- (Q25.E);
 			\draw[short](Q25.C)to(10.0,-9.5);
 			\draw[short](Q25.E)to(10.0,-10.5);
 			\ctikzset{tripoles/mos style/arrows}
 			\draw node[nmos,scale=0.59,xscale=1,yscale=1,rotate=0](Q26) at (10.0,-5.0) {} node[anchor=west,scale=0.9] at (Q26.text){}
 			node[left=5mm,scale=0.9] at (Q26.text) {$S_{5}$};
-			\draw (Q26.C) -- ++(0.6,0) to[D,invert,*-*, /tikz/circuitikz/bipoles/length=0.9cm] ++(0,-0.9) -- (Q26.E);
+			\draw (Q26.C) -- ++(0.6,0) to[D, l=$D_{5}$,invert,*-*, /tikz/circuitikz/bipoles/length=0.9cm] ++(0,-0.9) -- (Q26.E);
 			\draw[short](Q26.C)to(10.0,-4.5);
 			\draw[short](Q26.E)to(10.0,-5.5);
 			\ctikzset{tripoles/mos style/arrows}
 			\draw node[nmos,scale=0.59,xscale=1,yscale=1,rotate=0](Q27) at (7.5,-5.0) {} node[anchor=west,scale=0.9] at (Q27.text){}
 			node[left=5mm,scale=0.9] at (Q27.text) {$S_{3}$};
-			\draw (Q27.C) -- ++(0.6,0) to[D,invert,*-*, /tikz/circuitikz/bipoles/length=0.9cm] ++(0,-0.9) -- (Q27.E);
+			\draw (Q27.C) -- ++(0.6,0) to[D, l=$D_{3}$,invert,*-*, /tikz/circuitikz/bipoles/length=0.9cm] ++(0,-0.9) -- (Q27.E);
 			\draw[short](Q27.C)to(7.5,-4.5);
 			\draw[short](Q27.E)to(7.5,-5.5);
 			\ctikzset{tripoles/mos style/arrows}
@@ -548,13 +593,13 @@ omogućuju spajanje faze na pozitivni ili negativni pol napajanja (slika
 			\ctikzset{tripoles/mos style/arrows}
 			\draw node[nmos,scale=0.59,xscale=1,yscale=1,rotate=0](Q29) at (7.5,-10.0) {} node[anchor=west,scale=0.9] at (Q29.text){}
 			node[left=5mm,scale=0.9] at (Q29.text) {$S_{4}$};
-			\draw (Q29.C) -- ++(0.6,0) to[D,invert,*-*, /tikz/circuitikz/bipoles/length=0.9cm] ++(0,-0.9) -- (Q29.E);
+			\draw (Q29.C) -- ++(0.6,0) to[D, l=$D_{4}$,invert,*-*, /tikz/circuitikz/bipoles/length=0.9cm] ++(0,-0.9) -- (Q29.E);
 			\draw[short](Q29.C)to(7.5,-9.5);
 			\draw[short](Q29.E)to(7.5,-10.5);
 			\ctikzset{tripoles/mos style/arrows}
 			\draw node[nmos,scale=0.59,xscale=1,yscale=1,rotate=0](Q30) at (5.0,-10.0) {} node[anchor=west,scale=0.9] at (Q30.text){}
 			node[left=5mm,scale=0.9] at (Q30.text) {$S_{2}$};
-			\draw (Q30.C) -- ++(0.6,0) to[D,invert,*-*, /tikz/circuitikz/bipoles/length=0.9cm] ++(0,-0.9) -- (Q30.E);
+			\draw (Q30.C) -- ++(0.6,0) to[D, l=$D_{2}$,invert,*-*, /tikz/circuitikz/bipoles/length=0.9cm] ++(0,-0.9) -- (Q30.E);
 			\draw[short](Q30.C)to(5.0,-9.5);
 			\draw[short](Q30.E)to(5.0,-10.5);
 			\ctikzset{tripoles/mos style/arrows}
@@ -564,7 +609,7 @@ omogućuju spajanje faze na pozitivni ili negativni pol napajanja (slika
 			\ctikzset{tripoles/mos style/arrows}
 			\draw node[nmos,scale=0.59,xscale=1,yscale=1,rotate=0](Q32) at (5.0,-5.0) {} node[anchor=west,scale=0.9] at (Q32.text){}
 			node[left=5mm,scale=0.9] at (Q32.text) {$S_{1}$};
-			\draw (Q32.C) -- ++(0.6,0) to[D,invert,*-*, /tikz/circuitikz/bipoles/length=0.9cm] ++(0,-0.9) -- (Q32.E);
+			\draw (Q32.C) -- ++(0.6,0) to[D, l=$D_{1}$,invert,*-*, /tikz/circuitikz/bipoles/length=0.9cm] ++(0,-0.9) -- (Q32.E);
 			\draw[short](Q32.C)to(5.0,-4.5);
 			\draw[short](Q32.E)to(5.0,-5.5);
 			\draw node[ground] (G33) at (5.0, -10.5) {} node[anchor=north] at ([yshift=-0.6cm]G33.text){};
@@ -602,65 +647,59 @@ omogućuju spajanje faze na pozitivni ili negativni pol napajanja (slika
 
 Brzina vrtnje i moment motora upravljaju se regulacijom srednje vrijednosti
 napona ili struje na namotajima, što se postiže primjenom pulsno-širinske
-modulacije (eng. \textit{Pulse-Width Modulation, PWM}). Umjesto stalnog napona,
+modulacije (eng. \textit{pulse-width modulation}, PWM). Umjesto stalnog napona,
 na sklopke pretvarača dovodi se signal PWM-a visoke frekvencije. Promjenom
 faktora ispune (eng. \textit{duty cycle}) tog signala mijenja se efektivni
 napon na motoru, a time i struja koja teče kroz namotaje.
 
 \subsubsection{Tehnike primjene signala PWM-a za upravljanje}
 \label{sss:pwm}
-\todo[inline]{treba ponovno evaluirat, nije bas precizno}
+Za regulaciju struje kroz namotaje motora unutar jednog ciklusa signala PWM-a,
+koriste se različite tehnike sklapanja tranzistora u mosnom pretvaraču. Dvije
+osnovne metode su:
+
 \begin{itemize}
-
 	\item \textbf{Oštro preklapanje (eng. \textit{hard chopping}):}
-
-	      Signal PWM-a primjenjuje se istovremeno na gornju sklopku jedne aktivne faze
-	      (npr. $S_1$ na slici \ref{fig:inverter}) i na donju sklopku druge aktivne faze
-	      (npr. $S_4$ na slici \ref{fig:inverter}). Obje sklopke se uključuju i
-	      isključuju u isto vrijeme. Kada je signal PWM-a visok, struja teče kroz $S_1$
-	      pa preko motora do $S_4$. Kada je nizak, obje se sklopke istovremeno
-	      isključuju. Zbog induktivnosti namota, struja nastavlja teći, ali sada
-	      recirkulira kroz poredne diode (eng. \textit{freewheeling diodes}) suprotnih
-	      sklopki (diodu uz $S_2$ i diodu uz $S_3$) natrag prema istosmjernom izvoru.
-	      Ovakav način rada rezultira većom valovitošću struje u usporedbi s metodom
-	      glatkog preklapanja, no nudi jednostavnu izvedbu \cite{TI2015}.
+	      Signal PWM-a primjenjuje se na gornju sklopku jedne aktivne faze (npr. $S_1$ na slici
+	      \ref{fig:inverter} i donju sklopku druge aktivne faze (npr. $S_4$). Kada je signal PWM-a nizak, obje se sklopke istovremeno isključuju. Zbog induktivnosti namota,
+	      struja nastavlja teći, ali sada recirkulira kroz poredne diode ($D_2$ i $D_3$) natrag
+	      prema izvoru napajanja. Budući da je cijeli napon izvora suprotstavljen struji,
+	      ona brzo opada, što rezultira velikom valovitošću struje. Ova je metoda
+	      jednostavna, ali energetski neučinkovita \cite{TI2015}.
 
 	\item \textbf{Glatko preklapanje (eng. \textit{soft chopping}):}
+	      Ova metoda smanjuje valovitost struje tako što u neaktivnom dijelu PWM
+	      ciklusa omogućuje recirkulaciju struje kroz put niske impedancije. To se
+	      može postići na dva načina:
+	      \begin{itemize}
+		      \item \textbf{Recirkulacija kroz diodu:} Signal PWM-a primjenjuje se na
+		            gornju sklopku ($S_1$), dok je donja sklopka druge faze ($S_4$) stalno
+		            uključena. Kada se $S_1$ isključi, struja recirkulira kroz diodu donje
+		            sklopke u istom polumostu ($D_2$) i donju sklopku druge faze ($S_4$).
+		            Struja cirkulira u donjem dijelu kruga, zbog čega opada sporije \cite{TI2015}. Ovo je
+		            prikazano na slici \ref{fig:hard_chopping}.
+		            \begin{figure}[h!]
+			            \centering
+			            \includegraphics[width=0.95\textwidth]{Figures/hard_chopping1.png}
+			            \caption{Glatko preklapanje u alatu LTspice}
+			            \label{fig:hard_chopping}
+		            \end{figure}
 
-	      Signal PWM-a primjenjuje se na gornju sklopku jedne aktivne faze (npr. $S_1$ na
-	      slici \ref{fig:inverter}), dok je donja sklopka druge aktivne faze (npr. $S_4$
-	      na slici \ref{fig:inverter}) stalno uključena. Kada je signal PWM-a visok,
-	      struja teče kroz $S_1$ pa preko motora do $S_4$. Kada je nizak, struja
-	      recirkulira kroz diodu uparenu uz $S_2$, što dovodi do manjih promjena struje u
-	      usporedbi s metodom oštrog preklapanja jer je pad napona duplo manji. Na slici
-	      \ref{fig:hard_chopping} prikazan je odnos signala PWM-a na tranzistorima $S_1$
-	      u zelenoj boji i $S_2$ u crvenoj boji. Za vrijeme niskog signala PWM-a, $S_2$
-	      ostaje nisko \cite{TI2015}. \todo[inline]{fale osi na slici, ponovi}
-	      \begin{figure}[h!]
-		      \centering
-		      \includegraphics[width=0.95\textwidth]{Figures/hard_chopping1.png}
-		      \caption{Glatko preklapanje u alatu LTspice}
-		      \label{fig:hard_chopping}
-	      \end{figure}
+		      \item \textbf{Sinkrona rektifikacija:} Koristi se komplementarni signal
+		            PWM-a. Kada se gornja sklopka ($S_1$) isključi (uz kratko mrtvo
+		            vrijeme), donja sklopka u istom polumostu ($S_2$) se aktivno uključuje.
+		            Struja tada recirkulira kroz tranzistor $S_2$ koji ima manji pad napona
+		            od diode, čime se dodatno smanjuju gubici i valovitost struje \cite{TI2015}. Ovo je
+		            energetski najučinkovitija metoda i prikazana je na slici
+		            \ref{fig:soft_chopping}.
+		            \begin{figure}[h!]
+			            \centering
+			            \includegraphics[width=0.95\textwidth]{Figures/soft_chopping.png}
+			            \caption{Komplementarni signal PWM-a u alatu LTspice}
+			            \label{fig:soft_chopping}
+		            \end{figure}
 
-	\item \textbf{Komplementarni signal PWM-a:}
-
-	      Isti scenarij kao i na prošlom primjeru, ali na nizak signal PWM-a struja
-	      recirkulira kroz tranzistor $S_2$, a kada je signal PWM-a nizak, uključuje se
-	      donja sklopka u istom polumostu što se može vidjeti na slici
-	      \ref{fig:soft_chopping}. Kada se zeleni signal na tranzistoru $S_1$ spusti u
-	      nisko stanje, crveni signal na tranzistoru $S_2$ s malom stankom podigne se u
-	      visoko stanje. Ova mala stanka naziva se mrtvo vrijeme (eng. \textit{dead
-		      time}) i sprječava kratki spoj na polumostu (eng. \textit{shoot-through}).
-	      Uključivanjem donjeg tranzistora na ovaj način postiže se da struja recirkulira
-	      kroz tranzistor \cite{TI2015}. \todo[inline]{fale osi na slici}
-	      \begin{figure}[h!]
-		      \centering
-		      \includegraphics[width=0.95\textwidth]{Figures/soft_chopping.png}
-		      \caption{Komplementarni signal PWM-a u alatu LTspice}
-		      \label{fig:soft_chopping}
-	      \end{figure}
-
+	      \end{itemize}
 \end{itemize}
 
 Izbor metode upravljanja strujom u ciklusu signala PWM-a utječe na dinamiku
@@ -701,22 +740,23 @@ U sustavima bez osjetila, informacija o položaju rotora dobiva se mjerenjem
 napona protuelektromotorne sile na neopterećenoj fazi.
 
 U konfiguraciji sa zvjezdastim spojem, PEMS se mjeri u odnosu na potencijal
-zvjezdišta. Budući da zvjezdište motora najčešće nije fizički dostupno za
-mjerenje, njegov se potencijal mora rekonstruirati. To se postiže stvaranjem
-virtualnog zvjezdišta (slika \ref{fig:rekonstrukcija}). Tri otpornika jednakog,
-visokog otpora $R_v$ spajaju se u zvijezdu, pri čemu je svaki otpornik spojen
-na po jednu fazu motora. Zajednička točka ta tri otpornika stvara virtualno
-zvjezdište $V_{virtual}$ čiji je potencijal jednak aritmetičkoj sredini napona
-sve tri faze. Taj se stabilni referentni napon tada koristi za usporedbu s
-naponom neopterećene faze \cite{ST_AN1946}.
+zvjezdišta (u modelu na slici \ref{fig:rekonstrukcija} označeno kao neutralna
+točka $V_{\text{neutral}}$). Budući da zvjezdište motora najčešće nije fizički
+dostupno za mjerenje, njegov se potencijal mora rekonstruirati. To se postiže
+stvaranjem virtualnog zvjezdišta. Tri otpornika jednakog, visokog otpora $R_v$
+spajaju se u zvijezdu, pri čemu je svaki otpornik spojen na po jednu fazu
+motora. Zajednička točka ta tri otpornika stvara virtualno zvjezdište
+$V_{\text{virtual}}$ čiji je potencijal jednak aritmetičkoj sredini napona sve
+tri faze. Taj se stabilni referentni napon tada koristi za usporedbu s naponom
+neopterećene faze \cite{ST_AN1946}.
 
 \begin{figure}[h]
 	\centering
 	\resizebox{\textwidth}{!}{
 		\begin{circuitikz}[european, cute inductors]
-			\draw[R={$R_a$},/tikz/circuitikz/bipoles/length=1.1cm](13.0,-6.0)to(14.5,-6.0);
-			\draw[R={$R_b$},/tikz/circuitikz/bipoles/length=1.1cm](13.0,-8.0)to(14.5,-8.0);
-			\draw[R={$R_c$},/tikz/circuitikz/bipoles/length=1.1cm](13.0,-10.0)to(14.5,-10.0);
+			\draw[R={$R$},/tikz/circuitikz/bipoles/length=1.1cm](13.0,-6.0)to(14.5,-6.0);
+			\draw[R={$R$},/tikz/circuitikz/bipoles/length=1.1cm](13.0,-8.0)to(14.5,-8.0);
+			\draw[R={$R$},/tikz/circuitikz/bipoles/length=1.1cm](13.0,-10.0)to(14.5,-10.0);
 			\draw[short={}](14.5,-6.0)to(14.5,-6.0);
 			\draw[short={}](13.0,-10.0)to(13.0,-12.0);
 			\draw[short={}](13.0,-12.0)to(13.0,-12.0);
@@ -823,9 +863,9 @@ naponom neopterećene faze \cite{ST_AN1946}.
 			\draw[short={}](8.0,-10.5)to(8.5,-10.5);
 			\draw[short={}](8.0,-11.5)to(8.5,-11.5);
 			\draw[short={}](8.5,-11.5)to(8.5,-11.5);
-			\draw[L={$L_a$},/tikz/circuitikz/bipoles/length=1.1cm](15.0,-6.0)to(16.0,-6.0);
-			\draw[L={$L_b$},/tikz/circuitikz/bipoles/length=1.1cm](15.0,-8.0)to(16.0,-8.0);
-			\draw[L={$L_c$},/tikz/circuitikz/bipoles/length=1.1cm](15.0,-10.0)to(16.0,-10.0);
+			\draw[L={$L$},/tikz/circuitikz/bipoles/length=1.1cm](15.0,-6.0)to(16.0,-6.0);
+			\draw[L={$L$},/tikz/circuitikz/bipoles/length=1.1cm](15.0,-8.0)to(16.0,-8.0);
+			\draw[L={$L$},/tikz/circuitikz/bipoles/length=1.1cm](15.0,-10.0)to(16.0,-10.0);
 			\draw[V<={$e_a$},/tikz/circuitikz/bipoles/length=1.1cm](16.5,-6.0)to(17.5,-6.0);
 			\draw[V<={$e_b$},/tikz/circuitikz/bipoles/length=1.1cm](16.5,-8.0)to(17.5,-8.0);
 			\draw[V<={$e_c$},/tikz/circuitikz/bipoles/length=1.1cm](16.5,-10.0)to(17.5,-10.0);
@@ -995,13 +1035,13 @@ komponente korištene u radu.
 
 Središnji element eksperimentalnog postava je elektronički sklop za upravljanje
 brzinom motora. On objedinjuje digitalnu upravljačku logiku i pogonski sklop na
-dvije odvojene tiskane pločice (eng. \textit{Printed Circuit Board, PCB}).
+dvije odvojene tiskane pločice (eng. \textit{printed circuit board}, PCB).
 
 Digitalna upravljačka logika implementirana je na razvojnoj pločici
 \texttt{Nucleo G071RB}, čija je središnja komponenta mikrokontroler
 \texttt{STM32G071RB}. Njegova zadaća je izvršavanje upravljačkog algoritma što
 obuhvaća generiranje signala pulsno-širinske modulacije (eng.
-\textit{Pulse-Width Modulation}, PWM) za upravljanje tranzistorima snage te
+\textit{pulse-width modulation}, PWM) za upravljanje tranzistorima snage te
 akviziciju i obradu signala protuelektromotorne sile za određivanje položaja
 rotora.
 
@@ -1028,23 +1068,44 @@ vanjskom motoru konstante brzine od \texttt{1000 KV}, što specificira da motor
 teoretski, u neopterećenom stanju, postiže brzinu vrtnje od \num{1000} okretaja
 u minuti za svaki volt napona napajanja. Oznaka \texttt{13T} odnosi se na broj
 namotaja na svakom polu statora, što utječe na njegove momentne i brzinske
-karakteristike. \missingfigure{slika motora}
+karakteristike.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\textwidth]{Figures/motor.png}
+	\caption{slika motora \texttt{A2212/13T} (slika zaslona sa: https://www.rhydolabz.com/documents/26/BLDC\_A2212\_13T.pdf)}
+	\label{fig:enkoder}
+\end{figure}
 
 \section{Enkoder}
 \label{sec:enkoder}
 
 Za precizno mjerenje stvarne brzine vrtnje i položaja rotora motora korišten je
-apsolutni magnetski enkoder \texttt{CUI Devices AMT223C-V}. Iako se primarni
-algoritam upravljanja opisan u ovom radu temelji na metodi bez osjetila
-položaja, enkoder je u eksperimentalnom postavu imao ulogu referentnog mjernog
-uređaja. Podaci dobiveni s enkodera služili su za praćenje kuta između statora
-i rotora, za praćenje trajanja pojedinog koraka te za praćenje trenutaka
-detektiranih prolazaka kroz nulu. \missingfigure{slika enkodera}
+apsolutni magnetski enkoder \texttt{CUI Devices AMT223C-V} (slika
+\ref{fig:enkoder}). Iako se primarni algoritam upravljanja opisan u ovom radu
+temelji na metodi bez osjetila položaja, enkoder je u eksperimentalnom postavu
+imao ulogu referentnog mjernog uređaja. Podaci dobiveni s enkodera služili su
+za praćenje kuta između statora i rotora, za praćenje trajanja pojedinog koraka
+te za praćenje trenutaka detektiranih prolazaka kroz nulu.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\textwidth]{Figures/enkoder.png}
+	\caption{slika zaslona 3D modela enkodera AMT223C-V (slika zaslona sa: https://www.sameskydevices.com/product/resource/3dmodel/amt22-series)}
+	\label{fig:enkoder}
+\end{figure}
 
 Kako bi se osigurala mehanička stabilnost i pouzdano centriranje enkodera na
 osovinu motora, s pomoću tehnologije 3D tiska izrađeno je prilagođeno kućište
-koje fiksira enkoder i motor u koaksijalan položaj. \missingfigure{slika
-	enkodera na motoru + kuciste}
+koje fiksira enkoder i motor u koaksijalan položaj prikazano na slici
+\ref{fig:enkoder_kuciste}.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\textwidth]{Figures/enkoder_kuciste.jpeg}
+	\caption{fotografija 3D tiskanog kućišta i enkodera AMT223C-V}
+	\label{fig:enkoder_kuciste}
+\end{figure}
 
 \section{Mjerni instrumenti}
 \label{sec:mjerni_instrumenti}
@@ -1056,11 +1117,11 @@ istosmjerni napon. Za analizu signala korišteni su digitalni osciloskop i
 logički analizator. Digitalnim osciloskopom obavljena je vizualizacija i
 mjerenje analognih signala, kao što su valni oblici faznih napona, signali
 protuelektromotorne sile i izlazi komparatora. Za praćenje i analizu digitalnih
-signala upotrijebljen je logički analizator \textit{Saleae}, primarno za
-dekodiranje podataka o položaju s enkodera te praćenje pomoćnih signala tijekom
-otklanjanja pogrešaka. Uz navedene instrumente, digitalni multimetar korišten
-je za osnovna mjerenja istosmjernog napona, struje i otpora prilikom
-sastavljanja i provjere ispravnosti elektroničkog sklopa.
+signala upotrijebljen je logički analizator Saleae, primarno za dekodiranje
+podataka o položaju s enkodera te praćenje pomoćnih signala tijekom otklanjanja
+pogrešaka. Uz navedene instrumente, digitalni multimetar korišten je za osnovna
+mjerenja istosmjernog napona, struje i otpora prilikom sastavljanja i provjere
+ispravnosti elektroničkog sklopa.
 
 \section{Programska podrška}
 \label{sec:programska_podrska}
@@ -1069,15 +1130,15 @@ Uz sklopovske komponente i mjerne instrumente, u radu je korištena i programska
 podrška za simulaciju elektroničkih krugova, za obradu i vizualizaciju mjernih
 podataka te za pojednostavljeno upravljanje brzinom vrtnje. U fazi istraživanja
 teme, ponašanje ključnih dijelova pogonskog sklopa simulirano je u alatu
-\textit{LTspice}. To je omogućilo bolje razumijevanje koncepata poput ponašanja
-struje pri različitim tehnikama primjene signala PWM-a na upravljanje (odjeljak
+LTspice. To je omogućilo bolje razumijevanje koncepata poput ponašanja struje
+pri različitim tehnikama primjene signala PWM-a na upravljanje (odjeljak
 \ref{sss:pwm}).
 
 Podaci prikupljeni s enkodera su uvezeni, obrađeni i vizualizirani s pomoću
-programskog paketa \textit{MATLAB}. Obrada u \textit{MATLAB}-u omogućila je
-uvid u promjene kuta kroz vrijeme, trajanje svakog pojedinačnog koraka,
-trenutke detektiranog prolaska kroz nulu te odziv brzine kroz vrijeme što je
-olakšalo i ubrzalo proces razvoja algoritma.
+programskog paketa MATLAB. Obrada u MATLAB-u omogućila je uvid u promjene kuta
+kroz vrijeme, trajanje svakog pojedinačnog koraka, trenutke detektiranog
+prolaska kroz nulu te odziv brzine kroz vrijeme što je olakšalo i ubrzalo
+proces razvoja algoritma.
 
 Za upravljanje brzinom vrtnje korištena je jednostavna skripta napisana u
 jeziku Python za slanje tražene brzine na sklop ESC te primanje trenutačne
@@ -1117,17 +1178,64 @@ Rad sustava sastoji se nekoliko faza, od pokretanja do rada u zatvorenoj
 petlji. Faze se temelje na odjeljku \ref{sec:pokretanje}. Implementacija
 algoritma provodi se kroz sljedeće cjeline:
 \begin{itemize}
-	\item \textbf{poravnanje (eng. \textit{Alignment})}
-	\item \textbf{rad u otvorenoj petlji (eng. \textit{Open-loop})}
-	\item \textbf{prijelaz u zatvorenu petlju (eng. \textit{Closed-loop})}
+	\item \textbf{poravnanje}
+	\item \textbf{rad u otvorenoj petlji}
+	\item \textbf{prijelaz u zatvorenu petlju}
 	\item \textbf{zatvorena petlja i regulacija brzine}
 \end{itemize}
 Prijelazi između ovih faza rada upravljani su programskom logikom unutar glavne
 petlje, a uvjetovani su proteklim vremenom i brojem uspješnih detekcija PEMS-a.
 
-\missingfigure{Dijagram toka cjelokupnog programskog rješenja s prikazom glavne petlje i ključnih prekidnih rutina (\texttt{TIM1}, \texttt{TIM3}, \texttt{TIM15}, \texttt{TIM17})}
-\missingfigure{Dijagram programskog slijeda koji prikazuje prijelaze između stanja Mirovanje, Poravnanje, Otvorena petlja i Zatvorena petlja, s uvjetima prijelaza (npr. istek vremena, \texttt{zc\_cnt \> 3})}
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}[
+			node distance=1.2cm and 1.5cm,
+			process/.style={
+					rectangle,
+					draw,
+					fill=blue!10,
+					minimum height=1cm,
+					text width=3.5cm,
+					align=center
+				},
+			decision/.style={
+					diamond,
+					draw,
+					fill=green!10,
+					aspect=1.5,
+					text width=2.5cm,
+					align=center
+				},
+			terminator/.style={
+					rectangle,
+					rounded corners,
+					draw,
+					fill=gray!20,
+					minimum height=1cm,
+					align=center
+				},
+			arrow/.style={
+					thick,
+					->,
+					>=Latex
+				}
+		]
 
+		\node (init)   [terminator]                {Inicijalizacija sustava};
+		\node (align)  [process, below=of init]    {Poravnanje rotora};
+		\node (open)   [process, below=of align]   {Otvorena petlja};
+		\node (check)  [decision, below=of open, yshift=-0.8cm] {Detektirana 3 prolaska kroz nulu?};
+		\node (closed) [process, below=of check, yshift=-0.8cm] {Zatvorena petlja};
+
+		\draw [arrow] (init) -- (align);
+		\draw [arrow] (align) -- (open);
+		\draw [arrow] (open) -- (check);
+		\draw [arrow] (check) -- node[left, pos=0.4] {Da} (closed);
+
+		\draw [arrow] (check.east) -- ++(2.5,0) |- node[near start, right] {Ne} (open);
+
+	\end{tikzpicture}
+\end{figure}
 \section{Konfiguracija perifernih jedinica mikrokontrolera}
 \label{sec:konfiguracija_periferije}
 
@@ -1163,7 +1271,7 @@ u intervalu niske razine signala PWM-a, teorijski opisana u odjeljku
 \ref{text:pwm_off}, primijenjena je metoda sinkroniziranog uzorkovanja. Glavni
 tajmer signala PWM-a, \texttt{TIM1}, nakon svakog ciklusa okida pomoćni tajmer
 \texttt{TIM15}, koji je konfiguriran u jednokratnom modu rada (eng.
-\textit{One-Pulse Mode}). Prekidna rutina tajmera \texttt{TIM15} izvršava se
+\textit{one-pulse mode}). Prekidna rutina tajmera \texttt{TIM15} izvršava se
 pred sam kraj neaktivnog dijela ciklusa signala PWM-a. U tom trenutku, kada
 nema aktivnog sklapanja, struja recirkulira kroz donji tranzistor polumosta i
 inducirani napon je najstabilniji za mjerenje. Unutar te prekidne rutine
@@ -1171,7 +1279,6 @@ očitava se stanje na odgovarajućem \texttt{GPIO} pinu (\texttt{CMP1\_Pin},
 \texttt{CMP2\_Pin} ili \texttt{CMP3\_Pin}), ovisno o trenutačnom komutacijskom
 koraku.
 
-\missingfigure{Blok dijagram sustava za detekciju PEMS-a (veza faza, virtualnog zvjezdišta, komparatora i GPIO ulaza mikrokontrolera)}
 \missingfigure{Osciloskopska snimka koja prikazuje PWM signal na jednoj fazi, PEMS na neopterećenoj fazi i digitalni signal koji označava trenutak uzorkovanja (okidanje TIM15 prekida)}
 
 \subsection{Komunikacijsko sučelje}
@@ -1179,16 +1286,14 @@ koraku.
 
 Za komunikaciju sa sustavom koristi se sučelje \texttt{USART2}, konfigurirano
 za rad pri brzini od \SI{115200}{bit\per\second}. Prijenos podataka je
-automatiziran korištenjem direktnog pristupa memoriji (eng. \textit{Direct
-	Memory Access, DMA}). Sustav je konfiguriran da preko kanala DMA kontinuirano
+automatiziran korištenjem direktnog pristupa memoriji (eng. \textit{direct
+	memory access}, DMA). Sustav je konfiguriran da preko kanala DMA kontinuirano
 prima dva bajta podataka. Nakon primitka, u prekidnoj rutini
 \texttt{HAL\_UART\_RxCpltCallback} ta dva bajta se spajaju u 16-bitnu
 vrijednost koja predstavlja novu zadanu brzinu vrtnje. Istovremeno, sustav
 periodično šalje trenutačnu procijenjenu brzinu vrtnje nazad prema nadređenom
 sustavu, također koristeći DMA, čime se omogućuje nadzor rada motora u stvarnom
 vremenu.
-
-\missingfigure{Tablica koja definira komunikacijski protokol (naredba, format podataka) za zadavanje brzine i primanje telemetrije}
 
 \section{Implementacija algoritma upravljanja i regulacije}
 \label{sec:implementacija_algoritma_i_regulacije}
@@ -1199,7 +1304,7 @@ prijelaz iz otvorenog u zatvoreni krug upravljanja te na kraju i regulaciju
 brzine, prateći teorijski model opisan u poglavlju
 \ref{pog:bldc_upravljanje_bez_senzora}.
 
-\subsection{Pokretanje motora: Poravnanje i rad u otvorenoj petlji}
+\subsection{Poravnanje i rad u otvorenoj petlji}
 \label{ssec:pokretanje_motora}
 
 Pokretanje motora iz mirovanja, kako je teorijski obrazloženo u odjeljku
@@ -1220,8 +1325,7 @@ rotor s vremenom sve više kasni, prilika za detekciju prolaska kroz nulu traje
 svega nekoliko koraka. Stoga je bitno pouzdano detektirati i zabilježiti sve
 prolaske kroz nulu u tom periodu.
 
-\missingfigure{Tablica s komutacijskim stanjima za svih šest koraka s prikazom aktivnih tranzistora i nadzirane faze}
-\missingfigure{Graf procijenjene brzine motora tijekom faza pokretanja, s jasno označenim fazama poravnanja, otvorene petlje i trenutka prijelaza u zatvorenu petlju}
+\missingfigure{Graf kuta rotora tijekom faza pokretanja, s jasno označenim fazama poravnanja i otvorene petlje}
 
 \subsection{Prijelaz u zatvorenu petlju i sinkronizacija komutacije}
 \label{ssec:prijelaz_u_zatvorenu_petlju}
@@ -1247,7 +1351,7 @@ u kojem se postavlja zastavica \texttt{commutate\_flag}, što signalizira
 glavnoj petlji da izvrši sljedeći poziv funkcije \texttt{motor\_step} i time
 zatvori ciklus.
 
-\missingfigure{Vremenski dijagram sinkronizacije komutacije (PEMS, detekcija nule, odgoda od 30 el. stupnjeva i trenutak komutacije)}
+\missingfigure{graf kuta (PEMS, detekcija nule, odgoda od 30 el. stupnjeva i trenutak komutacije)}
 
 \subsubsection{Obrada rubnih slučajeva}
 \label{sssec:rubni_slucajevi}
@@ -1324,13 +1428,12 @@ current_speed = (uint32_t)(RPM_CONSTANT / current_com_period);
 	\caption{Implementacija izračuna brzine s pomoću predizračunate konstante.}
 	\label{code:rpm_constant}
 \end{figure}
-\todo{OVO JE HARDKODIRANO}
 
 \subsubsection{Digitalna implementacija PI regulatora}
 \label{sssec:pi_regulator}
 
 Budući da mikrokontroler \texttt{STM32G071RB} nema jedinicu za računanje s
-pomičnim zarezom (eng. \textit{Floating-Point Unit, FPU}), regulator je
+pomičnim zarezom (eng. \textit{floating-point unit}, FPU), regulator je
 implementiran korištenjem aritmetike s nepomičnim zarezom (eng.
 \textit{fixed-point}). Korišten je format Q12, gdje se 32-bitni cijeli broj
 interpretira tako da 12 najnižih bitova predstavlja decimalni dio, kao što je
@@ -1395,8 +1498,6 @@ int32_t PID_calculate(PIDController *pid, int32_t setpoint,
 	\label{code:pi_impl}
 \end{figure}
 
-\missingfigure{Blok dijagram implementirane PI regulacijske petlje}
-
 %--- USPOREDBA / COMPARISON----------------------------------------------------
 
 \chapter{Usporedba ostvarene implementacije s postojećim rješenjem}
@@ -1408,10 +1509,9 @@ elektroničkim sklopom za upravljanje brzinom. Cilj je ove usporedbe
 dokumentirati razlike u izvedbi koje proizlaze iz različitih sklopovskih i
 programskih pristupa.
 
-Za potrebe usporedbe korišteni su komercijalno dostupan sklop \textit{SimonK
-	30A}, koji radi na frekvenciji signala PWM-a od \SI{8}{\kilo\hertz}, te sklop
-korišten u ovom radu, koji radi na frekvenciji signala PWM-a od
-\SI{30}{\kilo\hertz}.
+Za potrebe usporedbe korišteni su komercijalno dostupan sklop SimonK 30A, koji
+radi na frekvenciji signala PWM-a od \SI{8}{\kilo\hertz}, te sklop korišten u
+ovom radu, koji radi na frekvenciji signala PWM-a od \SI{30}{\kilo\hertz}.
 
 Usporedba se temelji na mjerenju vanjskih pokazatelja izvedbe u identičnim
 uvjetima.
@@ -1420,11 +1520,11 @@ uvjetima.
 \label{sec:metodologija_testiranja}
 
 Sva mjerenja provedena su na eksperimentalnom postavu opisanom u poglavlju
-\ref{pog:postav}, koristeći isti elektromotor (\textit{A2212/13T 1000KV}) i
+\ref{pog:postav}, koristeći isti elektromotor (\texttt{A2212/13T 1000KV}) i
 laboratorijski izvor napajanja postavljen na konstantan napon od
 \SI{7.4}{\volt}, s ograničenjem struje od \SI{3.23}{\ampere}. Brzina vrtnje
 mjerena je pomoću osciloskopa očitavanjem perioda jednog komutacijskog koraka.
-Testovi su provedeni sa standardnim propelerom oznake \textit{1045} i bez
+Testovi su provedeni sa standardnim propelerom oznake \texttt{1045} i bez
 njega.
 
 \section{Analiza faznog napona}
@@ -1438,7 +1538,7 @@ je posljedica niže frekvencije od \SI{8}{\kilo\hertz}. Suprotno tome, rješenje
 razvijeno u ovom radu, s frekvencijom od \SI{30}{\kilo\hertz}, generira znatno
 finiji valni oblik s manje izraženim šumom.
 
-\missingfigure{Snimka zaslona osciloskopa: valni oblik faznog napona za sklop \textit{SimonK 30A}.}
+\missingfigure{Snimka zaslona osciloskopa: valni oblik faznog napona za sklop SimonK 30A.}
 \label{fig:esc_a_valni}
 
 \missingfigure{Snimka zaslona osciloskopa: valni oblik faznog napona za implementirano rješenje.}
@@ -1457,50 +1557,49 @@ tablici \ref{tab:usporedba_brzina}.
 	\label{tab:usporedba_brzina}
 	\begin{tabular}{|l|c|c|c|c|}
 		\hline
-		\textbf{Stanje}            & \multicolumn{2}{c|}{\textbf{Bez propelera}} & \multicolumn{2}{c|}{\textbf{S propelerom 1045}}                                              \\ \hline
-		\textbf{Faktor ispune}     & \textbf{SimonK}                             & \textbf{Implementirani}                         & \textbf{SimonK}  & \textbf{Implementirani} \\ \hline
-		\textbf{Minimalna brzina}  & \num{1400}                                  & \num{307}                                       & $\sim$\num{720}  & \num{309}               \\ \hline
-		10\%                       & \num{1400}                                  & \num{703}                                       & $\sim$\num{720}  & \num{484}               \\ \hline
-		20\%                       & \num{3800}                                  & \num{1270}                                      & $\sim$\num{1500} & \num{1096}              \\ \hline
-		50\%                       & \num{5900}                                  & \num{3203}                                      & $\sim$\num{3130} & \num{2607}              \\ \hline
-		\textbf{Maksimalna brzina} & \num{6520}                                  & \num{5714}                                      & \num{6520}*      & \num{3650}*             \\ \hline
+		\textbf{Stanje}            & \multicolumn{2}{c|}{\textbf{Bez propelera}} & \multicolumn{2}{c|}{\textbf{S propelerom \texttt{1045}}}                                              \\ \hline
+		\textbf{Faktor ispune}     & \textbf{SimonK}                             & \textbf{Implementirani}                                  & \textbf{SimonK}  & \textbf{Implementirani} \\ \hline
+		\textbf{Minimalna brzina}  & \num{1400}                                  & \num{307}                                                & $\sim$\num{720}  & \num{309}               \\ \hline
+		10\%                       & \num{1400}                                  & \num{703}                                                & $\sim$\num{720}  & \num{484}               \\ \hline
+		20\%                       & \num{3800}                                  & \num{1270}                                               & $\sim$\num{1500} & \num{1096}              \\ \hline
+		50\%                       & \num{5900}                                  & \num{3203}                                               & $\sim$\num{3130} & \num{2607}              \\ \hline
+		\textbf{Maksimalna brzina} & \num{6520}                                  & \num{5714}                                               & \num{6520}*      & \num{3650}*             \\ \hline
 		\multicolumn{5}{l}{\footnotesize{*Maksimalna brzina postignuta prije nego je dosegnuto ograničenje struje napajanja.}}
 	\end{tabular}
 \end{table}
 
-Iz rezultata je vidljivo da komercijalno rješenje \textit{SimonK} postiže višu
+Iz rezultata je vidljivo da komercijalno rješenje SimonK postiže višu
 maksimalnu brzinu vrtnje, posebice pod opterećenjem. Međutim, implementirano
 rješenje pokazuje značajno šire radno područje pri niskim brzinama. Minimalna
 stabilna brzina vrtnje za implementirano rješenje iznosi oko 300 RPM, dok
-\textit{SimonK} ne može stabilno raditi ispod 700 RPM s opterećenjem.
+SimonK ne može stabilno raditi ispod 700 RPM s opterećenjem.
 
 Također, primjetno je da je odziv brzine na promjenu faktora ispune kod
-implementiranog rješenja linearniji, dok kod sklopa \textit{SimonK} dolazi do
-naglog skoka brzine na samom početku radnog područja.
+implementiranog rješenja linearniji, dok kod sklopa SimonK dolazi do naglog
+skoka brzine na samom početku radnog područja.
 
 Treba napomenuti da su maksimalne brzine pod opterećenjem ograničene strujom
-izvora napajanja od \SI{3.23}{\ampere}. \textit{SimonK} je dosegnuo limit pri
+izvora napajanja od \SI{3.23}{\ampere}. SimonK je dosegnuo limit pri
 \SI{63.5}{\%} faktora ispune, dok ga je implementirano rješenje doseglo pri
-\SI{77}{\%}. Uzme li se u obzir postignuta maksimalna brzina gdje sklop
-\textit{SimonK} postiže skoro dvostruko veću brzinu od implementiranog
-rješenja, može se donijeti zaključak da je sklop \textit{SimonK} znatno
-efikasniji.
+\SI{77}{\%}. Uzme li se u obzir postignuta maksimalna brzina gdje sklop SimonK
+postiže skoro dvostruko veću brzinu od implementiranog rješenja, može se
+donijeti zaključak da je sklop SimonK znatno efikasniji.
 
 \section{Sažetak usporedbe}
 
 \label{sec:sazetak_usporedbe}
 
 Usporedbom ključnih pokazatelja izvedbe, utvrđeno je da komercijalno rješenje
-\textit{SimonK} nudi znatno bolje radne karakteristike u pogledu maksimalne
-brzine vrtnje i efikasnosti. Pod opterećenjem, \textit{SimonK} postiže gotovo
-dvostruko veću brzinu pri istom strujnom ograničenju, što ukazuje na znatno
-efikasniju pretvorbu električne u mehaničku snagu. Glavni uzrok ove razlike
-leži u radnoj frekvenciji signala PWM-a. Niža frekvencija od
-\SI{8}{\kilo\hertz} kod komercijalnog sklopa rezultira manjim sklopnim gubicima
-na tranzistorima, što je ključno za efikasnost pri visokim opterećenjima. S
-druge strane, viša frekvencija od \SI{30}{\kilo\hertz}, korištena u ovom radu,
-iako osigurava finiji valni oblik napona i bolju linearnost, uzrokuje veće
-sklopne gubitke koji umanjuju ukupnu iskoristivost sustava.
+SimonK nudi znatno bolje radne karakteristike u pogledu maksimalne brzine
+vrtnje i efikasnosti. Pod opterećenjem, SimonK postiže gotovo dvostruko veću
+brzinu pri istom strujnom ograničenju, što ukazuje na znatno efikasniju
+pretvorbu električne u mehaničku snagu. Glavni uzrok ove razlike leži u radnoj
+frekvenciji signala PWM-a. Niža frekvencija od \SI{8}{\kilo\hertz} kod
+komercijalnog sklopa rezultira manjim sklopnim gubicima na tranzistorima, što
+je ključno za efikasnost pri visokim opterećenjima. S druge strane, viša
+frekvencija od \SI{30}{\kilo\hertz}, korištena u ovom radu, iako osigurava
+finiji valni oblik napona i bolju linearnost, uzrokuje veće sklopne gubitke
+koji umanjuju ukupnu iskoristivost sustava.
 
 Implementirano rješenje jest pokazalo određene prednosti, poput stabilnijeg
 rada pri vrlo niskim brzinama vrtnje i linearnijeg odziva na promjenu
@@ -1555,8 +1654,8 @@ pokazao je punu funkcionalnost. Ostvaren je pouzdan slijed pokretanja motora,
 od početnog poravnanja rotora, preko ubrzanja u otvorenoj petlji, do stabilnog
 rada u zatvorenoj petlji s PI regulacijom brzine.
 
-Provedena usporedba s komercijalno dostupnim rješenjem \textit{SimonK 30A} dala
-je ključan uvid u radne karakteristike ostvarene implementacije. Komercijalno
+Provedena usporedba s komercijalno dostupnim rješenjem SimonK 30A dala je
+ključan uvid u radne karakteristike ostvarene implementacije. Komercijalno
 rješenje postiglo je višu maksimalnu brzinu i bolju iskoristivost, što se
 primarno pripisuje radu na nižoj frekvenciji signala PWM-a
 (\SI{8}{\kilo\hertz}) i posljedično manjim sklopnim gubicima. S druge strane,
