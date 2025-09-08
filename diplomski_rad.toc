@@ -1,53 +1,53 @@
 \babel@toc {croatian}{}\relax 
 \babel@toc {croatian}{}\relax 
 \babel@toc {croatian}{}\relax 
-\contentsline {chapter}{\numberline {1.}Uvod}{4}{chapter.1}%
-\contentsline {chapter}{\numberline {2.}Istosmjerni elektromotor bez četkica}{6}{chapter.2}%
-\contentsline {section}{\numberline {2.1.}Osnove i konstrukcija}{6}{section.2.1}%
-\contentsline {section}{\numberline {2.2.}Matematički model motora}{8}{section.2.2}%
-\contentsline {section}{\numberline {2.3.}Protuelektromotorna sila}{10}{section.2.3}%
-\contentsline {section}{\numberline {2.4.}Konfiguracija namotaja na statoru}{11}{section.2.4}%
-\contentsline {section}{\numberline {2.5.}Odnos momenta i brzine vrtnje}{13}{section.2.5}%
-\contentsline {chapter}{\numberline {3.}Upravljanje motorom BLDC bez osjetila položaja}{15}{chapter.3}%
-\contentsline {section}{\numberline {3.1.}Metoda komutacije u šest koraka}{15}{section.3.1}%
+\contentsline {chapter}{\numberline {1.}Uvod}{3}{chapter.1}%
+\contentsline {chapter}{\numberline {2.}Istosmjerni elektromotor bez četkica}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1.}Osnove i konstrukcija}{5}{section.2.1}%
+\contentsline {section}{\numberline {2.2.}Matematički model motora}{7}{section.2.2}%
+\contentsline {section}{\numberline {2.3.}Protuelektromotorna sila}{9}{section.2.3}%
+\contentsline {section}{\numberline {2.4.}Konfiguracija namotaja na statoru}{10}{section.2.4}%
+\contentsline {section}{\numberline {2.5.}Odnos momenta i brzine vrtnje}{12}{section.2.5}%
+\contentsline {chapter}{\numberline {3.}Upravljanje motorom BLDC bez osjetila položaja}{14}{chapter.3}%
+\contentsline {section}{\numberline {3.1.}Metoda komutacije u šest koraka}{14}{section.3.1}%
 \contentsline {section}{\numberline {3.2.}Upravljanje naponom i strujom signalima PWM-a}{17}{section.3.2}%
-\contentsline {subsubsection}{Tehnike primjene signala PWM-a za upravljanje}{17}{section*.11}%
-\contentsline {section}{\numberline {3.3.}Detekcija položaja rotora s pomoću PEMS-a}{21}{section.3.3}%
-\contentsline {section}{\numberline {3.4.}Faze pokretanja i rada motora}{23}{section.3.4}%
-\contentsline {section}{\numberline {3.5.}Model regulacije brzine}{24}{section.3.5}%
-\contentsline {chapter}{\numberline {4.}Eksperimentalni postav}{25}{chapter.4}%
-\contentsline {section}{\numberline {4.1.}Elektronički sklop za upravljanje brzinom}{25}{section.4.1}%
-\contentsline {section}{\numberline {4.2.}Elektromotor \texttt {A2212/13T 1000KV}}{26}{section.4.2}%
-\contentsline {section}{\numberline {4.3.}Enkoder}{27}{section.4.3}%
+\contentsline {subsubsection}{Tehnike primjene signala PWM-a za upravljanje}{17}{section*.12}%
+\contentsline {section}{\numberline {3.3.}Detekcija položaja rotora s pomoću PEMS-a}{20}{section.3.3}%
+\contentsline {section}{\numberline {3.4.}Faze pokretanja i rada motora}{22}{section.3.4}%
+\contentsline {section}{\numberline {3.5.}Model regulacije brzine}{23}{section.3.5}%
+\contentsline {chapter}{\numberline {4.}Eksperimentalni postav}{24}{chapter.4}%
+\contentsline {section}{\numberline {4.1.}Elektronički sklop za upravljanje brzinom}{24}{section.4.1}%
+\contentsline {section}{\numberline {4.2.}Elektromotor \texttt {A2212/13T 1000KV}}{25}{section.4.2}%
+\contentsline {section}{\numberline {4.3.}Enkoder}{25}{section.4.3}%
 \contentsline {section}{\numberline {4.4.}Mjerni instrumenti}{27}{section.4.4}%
-\contentsline {section}{\numberline {4.5.}Programska podrška}{28}{section.4.5}%
-\contentsline {chapter}{\numberline {5.}Implementacija}{30}{chapter.5}%
-\contentsline {section}{\numberline {5.1.}Arhitektura programskog rješenja}{30}{section.5.1}%
-\contentsline {section}{\numberline {5.2.}Konfiguracija perifernih jedinica mikrokontrolera}{31}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1.}Generiranje signala PWM-a}{32}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2.}Akvizicija signala protuelektromotorne sile}{32}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3.}Komunikacijsko sučelje}{33}{subsection.5.2.3}%
-\contentsline {section}{\numberline {5.3.}Implementacija algoritma upravljanja i regulacije}{33}{section.5.3}%
+\contentsline {section}{\numberline {4.5.}Programska podrška}{27}{section.4.5}%
+\contentsline {chapter}{\numberline {5.}Implementacija}{29}{chapter.5}%
+\contentsline {section}{\numberline {5.1.}Arhitektura programskog rješenja}{29}{section.5.1}%
+\contentsline {section}{\numberline {5.2.}Konfiguracija perifernih jedinica mikrokontrolera}{30}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1.}Generiranje signala PWM-a}{31}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2.}Akvizicija signala protuelektromotorne sile}{31}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3.}Komunikacijsko sučelje}{32}{subsection.5.2.3}%
+\contentsline {section}{\numberline {5.3.}Implementacija algoritma upravljanja i regulacije}{32}{section.5.3}%
 \contentsline {subsection}{\numberline {5.3.1.}Poravnanje i rad u otvorenoj petlji}{33}{subsection.5.3.1}%
 \contentsline {subsection}{\numberline {5.3.2.}Prijelaz u zatvorenu petlju i sinkronizacija komutacije}{34}{subsection.5.3.2}%
-\contentsline {subsubsection}{Obrada rubnih slučajeva}{35}{section*.23}%
+\contentsline {subsubsection}{Obrada rubnih slučajeva}{35}{section*.30}%
 \contentsline {subsection}{\numberline {5.3.3.}Regulacija brzine u zatvorenoj petlji}{35}{subsection.5.3.3}%
-\contentsline {subsubsection}{Procjena brzine vrtnje}{35}{section*.24}%
-\contentsline {subsubsection}{Digitalna implementacija PI regulatora}{36}{section*.26}%
-\contentsline {chapter}{\numberline {6.}Usporedba ostvarene implementacije s postojećim rješenjem}{38}{chapter.6}%
-\contentsline {section}{\numberline {6.1.}Metodologija testiranja}{38}{section.6.1}%
-\contentsline {section}{\numberline {6.2.}Analiza faznog napona}{38}{section.6.2}%
-\contentsline {section}{\numberline {6.3.}Usporedba radnih karakteristika}{39}{section.6.3}%
-\contentsline {section}{\numberline {6.4.}Sažetak usporedbe}{40}{section.6.4}%
-\contentsline {chapter}{\numberline {7.}Zaključak}{41}{chapter.7}%
-\contentsline {chapter}{Literatura}{43}{chapter*.29}%
+\contentsline {subsubsection}{Procjena brzine vrtnje}{36}{section*.33}%
+\contentsline {subsubsection}{Digitalna implementacija PI regulatora}{37}{section*.35}%
+\contentsline {chapter}{\numberline {6.}Usporedba ostvarene implementacije s postojećim rješenjem}{40}{chapter.6}%
+\contentsline {section}{\numberline {6.1.}Metodologija testiranja}{40}{section.6.1}%
+\contentsline {section}{\numberline {6.2.}Analiza faznog napona}{40}{section.6.2}%
+\contentsline {section}{\numberline {6.3.}Usporedba radnih karakteristika}{42}{section.6.3}%
+\contentsline {section}{\numberline {6.4.}Sažetak usporedbe}{42}{section.6.4}%
+\contentsline {chapter}{\numberline {7.}Zaključak}{44}{chapter.7}%
+\contentsline {chapter}{Literatura}{46}{chapter*.39}%
 \babel@toc {croatian}{}\relax 
-\contentsline {chapter}{Sa\v {z}etak}{46}{chapter*.30}%
+\contentsline {chapter}{Sa\v {z}etak}{49}{chapter*.40}%
 \babel@toc {croatian}{}\relax 
 \babel@toc {croatian}{}\relax 
 \babel@toc {croatian}{}\relax 
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{Abstract}{47}{chapter*.31}%
+\contentsline {chapter}{Abstract}{50}{chapter*.41}%
 \babel@toc {croatian}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {croatian}{}\relax 

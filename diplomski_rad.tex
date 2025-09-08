@@ -8,11 +8,12 @@
 \usepackage{tikz}
 \usepackage{subcaption}
 \usepackage{enumitem}
+\usepackage{svg}
 \usepackage{amsmath}
 \usepackage{booktabs}
 \usepackage{minted}
 \usepackage[colorinlistoftodos]{todonotes}
-\usetikzlibrary{shapes, calc, positioning, arrows.meta}
+\usetikzlibrary{shapes, calc, positioning, arrows.meta, bending}
 \usepackage{pgfplots}
 % \usepackage[T1]{fontenc} % Ensures proper font encoding
 % \usepackage[utf8]{inputenc} % For UTF-8 input encoding (if not already using LuaLaTeX/XeLaTeX)
@@ -79,7 +80,6 @@
 
 % Sadržaj se automatski generira / Table of contents is automatically generated
 \tableofcontents
-\listoftodos{}
 \newpage
 
 %--- UVOD / INTRODUCTION -------------------------------------------------------
@@ -481,23 +481,291 @@ ciklus rotacije sastoji se od šest ovakvih koraka, pri čemu se vektor
 magnetskog polja statora zakreće za 60 električnih stupnjeva pri svakom
 prijelazu \cite{cite:bldc, NXP_AN2355}.
 
+\subsection*{Razlika između električnih i mehaničkih stupnjeva}
+
+Prije detaljnijeg opisa koraka, važno je pojasniti razliku između mehaničkih i električnih stupnjeva.
+Mehanički stupnjevi ($\theta_m$) predstavljaju stvarni, fizički zakret osovine motora, pri čemu puni krug uvijek iznosi \SI{360}{\degree}.
+Električni stupnjevi ($\theta_e$) odnose se na ciklus elektromagnetskog polja. Jedan puni ciklus komutacije, koji obuhvaća promjenu polariteta na svim fazama, uvijek iznosi \num{360} električnih stupnjeva.
+
+Odnos između ove dvije mjere ovisi o konstrukciji motora, točnije o broju parova polova ($p$) stalnih magneta na rotoru.
+\begin{align}
+	\theta_e = p \cdot \theta_m
+\end{align}
+Tako kod motora s dva para polova (ukupno četiri pola), kao što se vidi na slikama \ref{fig:aub} i \ref{fig:cub}, jedan puni električni ciklus od \SI{360}{\degree} rezultira zakretom rotora za samo \SI{180}{\degree} mehaničkih stupnjeva. Za potpunu mehaničku rotaciju od \SI{360}{\degree} u tom je slučaju potrebno proći kroz dva puna električna ciklusa. U kontekstu metode u šest koraka, jedan puni slijed od šest komutacija uvijek odgovara jednom električnom ciklusu.
+
+\bigskip % Dodaje malo vertikalnog razmaka
 Slijed komutacije osmišljen je tako da magnetsko polje rotora, odnosno stalni
 magneti, uvijek zaostaje za poljem statora, što stvara moment koji pokreće
 rotor. Za ilustraciju, prva dva koraka u tipičnom slijedu su:
 
 \begin{itemize}
-	\item \textbf{Korak 1:} Struja teče iz faze A u fazu B. Faza C je neopterećena. Magnetsko polje statora zauzima određeni položaj.
-	      \missingfigure{a+/b-, neka je 3 navoja, 2 para magneta}
+	\item \textbf{Korak 1:} Struja teče iz faze A (crveni zub statora na slici \ref{fig:aub}) u fazu B (zeleni zub statora na slici \ref{fig:aub}). Faza C je neopterećena. Magnetsko polje statora zauzima određeni položaj prikazan crnom strelicom na slici \ref{fig:aub}. Magnetsko polje statora privlači južni pol stalnog magneta na rotoru te time pomiče rotor za \SI{30}{\degree}.
 
-	\item \textbf{Korak 2:} Struja teče iz faze C u fazu B. Faza A je sada neopterećena. Magnetsko polje statora zakreće se za 60 električnih stupnjeva u odnosu na prethodni korak.
-	      \missingfigure{b-/c+, neka je 3 navoja, 2 para magneta}
+	      \begin{figure}[h!]
+		      \centering
+
+		      \begin{tikzpicture}[
+				      stator yoke/.style={draw=gray!80, line width=2pt},
+				      stator tooth/.style={draw=gray!80, line width=1.5pt},
+				      rotor yoke/.style={draw=gray!80, fill=gray!30, line width=8pt},
+				      magnet N/.style={draw=red!30, line width=10pt},
+				      magnet S/.style={draw=blue!40, line width=10pt},
+				      windingA/.style={fill=red!80},
+				      windingB/.style={fill=green!60!black},
+				      windingC/.style={fill=blue!80},
+				      flux vector/.style={draw=black, line width=2pt, -stealth}
+			      ]
+			      \def\rotorAngle{105}
+
+			      \def\statorOuterRadius{4}
+			      \def\statorInnerRadius{3}
+			      \def\toothTipRadius{3}
+			      \def\statorYokeRadius{1.2}
+			      \def\rotorYokeRadius{1.5}
+			      \def\magnetRadius{3.75}
+
+			      \def\toothWidthAngle{30}  % Angular width of the tooth body
+			      \def\toothTipAngle{45}    % Angular width of the tooth tip/shoe
+			      \def\magnetAngle{60}      % Angular width of the magnets
+			      \def\arcThickness{0.1}    % Thickness of the arc on the tooth face (1mm = 0.1cm)
+
+			      \def\statorFluxAngle{240}   % Adjust this angle to rotate the stator flux vector
+			      \def\fluxVectorLength{5}    % Adjust this length for the vector arrow
+
+			      \draw[stator yoke] (0,0) circle (\statorOuterRadius);
+
+			      \foreach \angle/\phaseStyle in {90/windingA, 210/windingB, 330/windingC}
+				      {
+					      \begin{scope}[rotate=\angle]
+						      \def\toothPath{
+							      (-\toothWidthAngle/2:\statorYokeRadius)
+							      -- (-\toothWidthAngle/2:\toothTipRadius)
+							      -- (-\toothTipAngle/2:\toothTipRadius)
+							      arc (-\toothTipAngle/2:\toothTipAngle/2:\toothTipRadius)
+							      -- (\toothWidthAngle/2:\toothTipRadius)
+							      -- (\toothWidthAngle/2:\statorYokeRadius)
+							      -- cycle
+						      }
+
+						      % use style=<macro> so TikZ applies it as a style, not as a color
+						      \path[stator tooth, style=\phaseStyle] \toothPath;
+
+						      % \fill[style=\phaseStyle, opacity=0.4] % lighter shade of the winding
+						      %     (-\toothTipAngle/2:{\statorInnerRadius - \arcThickness})
+						      %     arc (-\toothTipAngle/2:\toothTipAngle/2:{\statorInnerRadius - \arcThickness})
+						      %     -- (\toothTipAngle/2:\statorInnerRadius)
+						      %     arc (\toothTipAngle/2:-\toothTipAngle/2:\statorInnerRadius)
+						      %     -- cycle;
+					      \end{scope}
+				      }
+
+			      \begin{scope}[rotate=\rotorAngle]
+				      \draw[rotor yoke] (0,0) circle (\rotorYokeRadius);
+
+				      \foreach \angle [count=\i] in {45, 135, 225, 315}
+					      {
+						      \pgfmathsetmacro{\startAngle}{\angle - \magnetAngle/2}
+						      \pgfmathsetmacro{\endAngle}{\angle + \magnetAngle/2}
+
+						      \ifodd\i
+							      \draw[magnet N] (\startAngle:\magnetRadius) arc (\startAngle:\endAngle:\magnetRadius);
+						      \else
+							      \draw[magnet S] (\startAngle:\magnetRadius) arc (\startAngle:\endAngle:\magnetRadius);
+						      \fi
+					      }
+			      \end{scope}
+
+			      \draw[flux vector] (0,0) -- (\statorFluxAngle:\fluxVectorLength);
+
+
+		      \end{tikzpicture}
+		      \caption{Dijagram motora konfiguracije \texttt{3s4p} kada struja teče iz faze A u fazu B}
+		      \label{fig:aub}
+	      \end{figure}
+
+	\item \textbf{Korak 2:} Struja teče iz faze C (plavi zub statora na slici \ref{fig:cub}) u fazu B. Faza A je sada neopterećena. Magnetsko polje statora zakreće se za 60 električnih stupnjeva u odnosu na prethodni korak prikazano na slici \ref{fig:cub_1}. Magnetsko polje rotora počinje pratiti magnetsko polje statora i ako prođe dovoljno vremena, sustiže ga kao što je prikazano na slici \ref{fig:cub_2}.
+	      \begin{figure}[h!]
+		      \centering
+
+		      \begin{subfigure}[b]{0.4\textwidth}%
+			      \resizebox{\linewidth}{!}{%
+				      \begin{tikzpicture}[
+					      stator yoke/.style={draw=gray!80, line width=2pt},
+					      stator tooth/.style={draw=gray!80, line width=1.5pt},
+					      rotor yoke/.style={draw=gray!80, fill=gray!30, line width=8pt},
+					      magnet N/.style={draw=red!30, line width=10pt},
+					      magnet S/.style={draw=blue!40, line width=10pt},
+					      windingA/.style={fill=red!80},
+					      windingB/.style={fill=green!60!black},
+					      windingC/.style={fill=blue!80},
+					      flux vector/.style={draw=black, line width=2pt, -stealth},
+					      angle arrow/.style={draw=black, line width=1pt, -{Stealth[length=2mm, width=2mm]}, shorten >=1pt},
+					      angle text/.style={font=\small, fill=white, inner sep=1pt} % Style for the angle label
+					      ]
+					      \def\rotorAngle{105}
+
+					      \def\statorOuterRadius{4}
+					      \def\statorInnerRadius{3}
+					      \def\toothTipRadius{3}
+					      \def\statorYokeRadius{1.2}
+					      \def\rotorYokeRadius{1.5}
+					      \def\magnetRadius{3.75}
+
+					      \def\toothWidthAngle{30}  % Angular width of the tooth body
+					      \def\toothTipAngle{45}    % Angular width of the tooth tip/shoe
+					      \def\magnetAngle{60}      % Angular width of the magnets
+					      \def\arcThickness{0.1}    % Thickness of the arc on the tooth face (1mm = 0.1cm)
+
+					      \def\statorFluxAngle{180}   % Adjust this angle to rotate the stator flux vector
+					      \def\fluxVectorLength{5}    % Adjust this length for the vector arrow
+					      \def\previousFluxAngle{240}      % Previous (or reference) stator flux vector angle (120 - 60 = 60)
+					      \def\angleArcRadius{0.8}        % Radius for the angle arc
+					      \def\angleTextOffset{0.2}       % Offset for the angle label from the arc
+
+					      \draw[stator yoke] (0,0) circle (\statorOuterRadius);
+
+					      \foreach \angle/\phaseStyle in {90/windingA, 210/windingB, 330/windingC}
+						      {
+							      \begin{scope}[rotate=\angle]
+								      \def\toothPath{
+									      (-\toothWidthAngle/2:\statorYokeRadius)
+									      -- (-\toothWidthAngle/2:\toothTipRadius)
+									      -- (-\toothTipAngle/2:\toothTipRadius)
+									      arc (-\toothTipAngle/2:\toothTipAngle/2:\toothTipRadius)
+									      -- (\toothWidthAngle/2:\toothTipRadius)
+									      -- (\toothWidthAngle/2:\statorYokeRadius)
+									      -- cycle
+								      }
+
+								      % use style=<macro> so TikZ applies it as a style, not as a color
+								      \path[stator tooth, style=\phaseStyle] \toothPath;
+
+								      % \fill[style=\phaseStyle, opacity=0.4] % lighter shade of the winding
+								      %     (-\toothTipAngle/2:{\statorInnerRadius - \arcThickness})
+								      %     arc (-\toothTipAngle/2:\toothTipAngle/2:{\statorInnerRadius - \arcThickness})
+								      %     -- (\toothTipAngle/2:\statorInnerRadius)
+								      %     arc (\toothTipAngle/2:-\toothTipAngle/2:\statorInnerRadius)
+								      %     -- cycle;
+							      \end{scope}
+						      }
+
+					      \begin{scope}[rotate=\rotorAngle]
+						      \draw[rotor yoke] (0,0) circle (\rotorYokeRadius);
+
+						      \foreach \angle [count=\i] in {45, 135, 225, 315}
+							      {
+								      \pgfmathsetmacro{\startAngle}{\angle - \magnetAngle/2}
+								      \pgfmathsetmacro{\endAngle}{\angle + \magnetAngle/2}
+
+								      \ifodd\i
+									      \draw[magnet N] (\startAngle:\magnetRadius) arc (\startAngle:\endAngle:\magnetRadius);
+								      \else
+									      \draw[magnet S] (\startAngle:\magnetRadius) arc (\startAngle:\endAngle:\magnetRadius);
+								      \fi
+							      }
+					      \end{scope}
+
+					      \draw[flux vector] (0,0) -- (\statorFluxAngle:\fluxVectorLength);
+					      \draw[flux vector, dashed, gray] (0,0) -- node[below left] {} (\previousFluxAngle:\fluxVectorLength) coordinate (previousFlux);
+
+					      \draw[angle arrow] (\previousFluxAngle:\angleArcRadius) arc (\previousFluxAngle:\statorFluxAngle:\angleArcRadius);
+					      \pgfmathsetmacro{\midAngle}{(\statorFluxAngle + \previousFluxAngle) / 2}
+					      \node[angle text] at (\midAngle:\angleArcRadius + \angleTextOffset) {$60^\circ$};
+
+				      \end{tikzpicture}
+			      }
+			      \subcaption{Trenutak promjene koraka}
+			      \label{fig:cub_1}
+		      \end{subfigure}
+		      \hfill
+		      \begin{subfigure}[b]{0.4\textwidth}%
+			      \centering
+			      \resizebox{\linewidth}{!}{%
+				      \begin{tikzpicture}[
+						      stator yoke/.style={draw=gray!80, line width=2pt},
+						      stator tooth/.style={draw=gray!80, line width=1.5pt},
+						      rotor yoke/.style={draw=gray!80, fill=gray!30, line width=8pt},
+						      magnet N/.style={draw=red!30, line width=10pt},
+						      magnet S/.style={draw=blue!40, line width=10pt},
+						      windingA/.style={fill=red!80},
+						      windingB/.style={fill=green!60!black},
+						      windingC/.style={fill=blue!80},
+						      flux vector/.style={draw=black, line width=2pt, -stealth}
+					      ]
+					      \def\rotorAngle{45}
+
+					      \def\statorOuterRadius{4}
+					      \def\statorInnerRadius{3}
+					      \def\toothTipRadius{3}
+					      \def\statorYokeRadius{1.2}
+					      \def\rotorYokeRadius{1.5}
+					      \def\magnetRadius{3.75}
+
+					      \def\toothWidthAngle{30}  % Angular width of the tooth body
+					      \def\toothTipAngle{45}    % Angular width of the tooth tip/shoe
+					      \def\magnetAngle{60}      % Angular width of the magnets
+					      \def\arcThickness{0.1}    % Thickness of the arc on the tooth face (1mm = 0.1cm)
+
+					      \def\statorFluxAngle{180}   % Adjust this angle to rotate the stator flux vector
+					      \def\fluxVectorLength{5}    % Adjust this length for the vector arrow
+
+					      \draw[stator yoke] (0,0) circle (\statorOuterRadius);
+
+					      \foreach \angle/\phaseStyle in {90/windingA, 210/windingB, 330/windingC}
+						      {
+							      \begin{scope}[rotate=\angle]
+								      \def\toothPath{
+									      (-\toothWidthAngle/2:\statorYokeRadius)
+									      -- (-\toothWidthAngle/2:\toothTipRadius)
+									      -- (-\toothTipAngle/2:\toothTipRadius)
+									      arc (-\toothTipAngle/2:\toothTipAngle/2:\toothTipRadius)
+									      -- (\toothWidthAngle/2:\toothTipRadius)
+									      -- (\toothWidthAngle/2:\statorYokeRadius)
+									      -- cycle
+								      }
+
+								      % use style=<macro> so TikZ applies it as a style, not as a color
+								      \path[stator tooth, style=\phaseStyle] \toothPath;
+
+								      % \fill[style=\phaseStyle, opacity=0.4] % lighter shade of the winding
+								      %     (-\toothTipAngle/2:{\statorInnerRadius - \arcThickness})
+								      %     arc (-\toothTipAngle/2:\toothTipAngle/2:{\statorInnerRadius - \arcThickness})
+								      %     -- (\toothTipAngle/2:\statorInnerRadius)
+								      %     arc (\toothTipAngle/2:-\toothTipAngle/2:\statorInnerRadius)
+								      %     -- cycle;
+							      \end{scope}
+						      }
+
+					      \begin{scope}[rotate=\rotorAngle]
+						      \draw[rotor yoke] (0,0) circle (\rotorYokeRadius);
+
+						      \foreach \angle [count=\i] in {45, 135, 225, 315}
+							      {
+								      \pgfmathsetmacro{\startAngle}{\angle - \magnetAngle/2}
+								      \pgfmathsetmacro{\endAngle}{\angle + \magnetAngle/2}
+
+								      \ifodd\i
+									      \draw[magnet N] (\startAngle:\magnetRadius) arc (\startAngle:\endAngle:\magnetRadius);
+								      \else
+									      \draw[magnet S] (\startAngle:\magnetRadius) arc (\startAngle:\endAngle:\magnetRadius);
+								      \fi
+							      }
+					      \end{scope}
+
+					      \draw[flux vector] (0,0) -- (\statorFluxAngle:\fluxVectorLength);
+
+
+				      \end{tikzpicture}
+			      }
+			      \subcaption{Trenutak kada rotor dostiže magnetsko polje statora}
+			      \label{fig:cub_2}
+		      \end{subfigure}
+		      \caption{Dijagram motora konfiguracije \texttt{3s4p} kada struja teče iz faze C u fazu B}
+	      \end{figure}
 \end{itemize}
 
 Ovaj se proces nastavlja kroz preostala četiri koraka (C->A, B->A, B->C, A->C),
-čime se zatvara puni električni ciklus od 360 stupnjeva. \todo[inline]{ovdje
-	objasni razliku izmedju elektricnih i mehanickih stupnjeva na temelju 2
-	dijagrama iznad}
-
+čime se zatvara puni električni ciklus od 360 stupnjeva.
 Budući da se magnetsko polje mijenja u diskretnim koracima, generirani moment
 nije u potpunosti gladak, već sadrži male oscilacije poznate kao valovitost
 momenta vidljive na slici \ref{fig:valovitost momenta}. Te se oscilacije
@@ -1047,13 +1315,18 @@ rotora.
 
 Pogonski sklop, zadužen za isporuku energije motoru, realiziran je na zasebnoj,
 ručno zalemljenoj tiskanoj pločici\footnote{Dizajn tiskane pločice za potrebe
-	ovog rada ustupio je Boris Šnajder}. Njegovu osnovu čine tri polumosta koja
+	ovog rada ustupio je Boris Šnajder} vidljivoj na slici \ref{fig:esc}. Njegovu osnovu čine tri polumosta koja
 pogone tri faze motora. Svaki polumost sastoji se od para komplementarnih
 tranzistora snage tipa MOSFET. Na istoj pločici nalaze se i sklopovi za
 kondicioniranje signala koji obavljaju filtriranje i prilagodbu naponskih
 razina faznih napona. Sklop komparatora koristi se za detekciju trenutka
 prolaska signala PEMS-a kroz referentni napon virtualnog zvjezdišta.
-\missingfigure{slika esc}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\textwidth]{Figures/esc.jpeg}
+	\caption{slika sklopa ESC}
+	\label{fig:esc}
+\end{figure}
 
 \section{Elektromotor \texttt{A2212/13T 1000KV}}
 \label{sec:motor}
@@ -1250,7 +1523,7 @@ signala PWM-a, općenamjenski tajmeri (\texttt{TIM3}, \texttt{TIM15},
 
 Za upravljanje trofaznim mosnim pretvaračem, teorijski opisanim u odjeljku
 \ref{sec:trofazno_upravljanje}, koristi se napredni tajmer \texttt{TIM1},
-konfiguriran za generiranje tri para komplementarnih signala PWM-a. Frekvencija
+konfiguriran za generiranje tri para komplementarnih signala PWM-a. Jedan par komplementarnih signala prikazan na slici \ref{fig:comp_scope}. Frekvencija
 signala PWM-a postavljena je na \SI{30}{\kilo\hertz}. Ova frekvencija
 predstavlja kompromis između sklopnih gubitaka na tranzistorima MOSFET i
 izbjegavanja čujnog područja rada. Za sprječavanje pojave kratkog spoja (eng.
@@ -1259,8 +1532,14 @@ implementirano mrtvo vrijeme (eng. \textit{dead time}) u trajanju od 50 taktova
 sistemskog sata. Upravljanje pojedinim izlazima signala PWM-a ostvareno je
 direktnim upisom u registre tajmera čime se postiže brza kontrola nad aktivnim
 fazama motora.
+\begin{figure}[h!]
+	\centering
+	% \includesvg[width=\textwidth]{csv/Untitled.svg}
+	\includegraphics[width=\textwidth]{csv/comp.pdf}
+	\caption{Komplementarni signal PWM-a na jednom polumostu snimljeno osciloskopom}
+	\label{fig:comp_scope}
+\end{figure}
 
-\missingfigure{Prikaz komplementarnih PWM signala s jasno označenim mrtvim vremenom, snimljen osciloskopom na jednom polumostu}
 
 \subsection{Akvizicija signala protuelektromotorne sile}
 \label{ssec:akvizicija_pems}
@@ -1279,7 +1558,12 @@ očitava se stanje na odgovarajućem \texttt{GPIO} pinu (\texttt{CMP1\_Pin},
 \texttt{CMP2\_Pin} ili \texttt{CMP3\_Pin}), ovisno o trenutačnom komutacijskom
 koraku.
 
-\missingfigure{Osciloskopska snimka koja prikazuje PWM signal na jednoj fazi, PEMS na neopterećenoj fazi i digitalni signal koji označava trenutak uzorkovanja (okidanje TIM15 prekida)}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{csv/zc.pdf}
+	\caption{Snimka neopterećene faze i virtualnog zvjezdišta sa osciloskopom}
+	\label{fig:zc}
+\end{figure}
 
 \subsection{Komunikacijsko sučelje}
 \label{ssec:komunikacija}
@@ -1325,7 +1609,12 @@ rotor s vremenom sve više kasni, prilika za detekciju prolaska kroz nulu traje
 svega nekoliko koraka. Stoga je bitno pouzdano detektirati i zabilježiti sve
 prolaske kroz nulu u tom periodu.
 
-\missingfigure{Graf kuta rotora tijekom faza pokretanja, s jasno označenim fazama poravnanja i otvorene petlje}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{csv/pokretanje.pdf}
+	\caption{Graf kuta rotora u vremenu pri pokretanju motora}
+	\label{fig:pokretanje}
+\end{figure}
 
 \subsection{Prijelaz u zatvorenu petlju i sinkronizacija komutacije}
 \label{ssec:prijelaz_u_zatvorenu_petlju}
@@ -1334,7 +1623,14 @@ Prijelaz iz otvorene u zatvorenu petlju događa se nakon što sustav uspješno
 detektira minimalni broj uzastopnih prolazaka PEMS-a kroz nulu
 (\texttt{ZC\_CNT\_MIN = 3}). U tom trenutku, upravljanje vremenom komutacije se
 prebacuje s fiksne tablice na dinamički izračun temeljen na stvarnom položaju
-rotora.
+rotora prikazano na slici \ref{fig:closed_loop}.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{csv/closed_loop.pdf}
+	\caption{Graf kuta rotora u vremenu pri prelasku motora u zatvorenu petlju}
+	\label{fig:closed_loop}
+\end{figure}
 
 Sinkronizacija komutacije s položajem rotora u zatvorenoj petlji, prilagođena
 prema metodi sinkronizacije opisane u dokumentu AN2355 \cite{NXP_AN2355},
@@ -1345,13 +1641,18 @@ bilježi trenutačnu vrijednost brojača komutacijskog tajmera \texttt{TIM3} i
 postavlja zastavicu \texttt{zc\_flag}. Na tu zastavicu reagira glavna petlja,
 koja izračunava period između dva prolaska kroz nulu te, koristeći taj podatak
 i empirijski određen koeficijent faznog pomaka, određuje vremensku odgodu do
-iduće komutacije. Izračunata vrijednost odgode upisuje se kao novi period u
+iduće komutacije što je prikazano na slici \ref{fig:closed_loop_zc}. Izračunata vrijednost odgode upisuje se kao novi period u
 tajmer \texttt{TIM3}. Po isteku zadanog vremena, \texttt{TIM3} generira prekid
 u kojem se postavlja zastavica \texttt{commutate\_flag}, što signalizira
 glavnoj petlji da izvrši sljedeći poziv funkcije \texttt{motor\_step} i time
 zatvori ciklus.
 
-\missingfigure{graf kuta (PEMS, detekcija nule, odgoda od 30 el. stupnjeva i trenutak komutacije)}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{csv/closed_loop_zc.pdf}
+	\caption{Vremenski dijagram detekcije prolaska kroz nulu (prilagođeno prema \cite{NXP_AN2355})}
+	\label{fig:closed_loop_zc}
+\end{figure}
 
 \subsubsection{Obrada rubnih slučajeva}
 \label{sssec:rubni_slucajevi}
@@ -1359,12 +1660,24 @@ zatvori ciklus.
 Tijekom naglih promjena brzine ili opterećenja, može doći do desinkronizacije.
 Implementirana su dva mehanizma za oporavak. Ako rotor urani i prolazak kroz
 nulu se dogodi \textit{prije} prozora za detekciju, sustav to registrira te
-proglasi trenutak na početku prozora detekcije kao prolazak kroz nulu. Ovo
+proglasi trenutak na početku prozora detekcije kao prolazak kroz nulu (slika \ref{fig:closed_loop_undershoot}). Ovo
 efektivno skraćuje trajanje trenutačnog koraka, čime se stator ubrzava i
 pokušava "pobjeći" rotoru. S druge strane, ako rotor kasni i prolazak kroz nulu
 se ne dogodi unutar prozora, sustav označava kraj prozora kao trenutak
-detekcije, čime se sljedeći korak produžuje, a polje statora usporava i "čeka"
+detekcije (slika \ref{fig:closed_loop_overshoot}), čime se sljedeći korak produžuje, a polje statora usporava i "čeka"
 rotor. Ove korekcije osiguravaju stabilnost upravljačke petlje.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{csv/closed_loop_undershoot.pdf}
+	\caption{Vremenski dijagram rubnog slučaja ranjenja (prilagođeno prema \cite{NXP_AN2355})}
+	\label{fig:closed_loop_undershoot}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{csv/closed_loop_overshoot.pdf}
+	\caption{Vremenski dijagram rubnog slučaja kašnjenja (prilagođeno prema \cite{NXP_AN2355})}
+	\label{fig:closed_loop_overshoot}
+\end{figure}
 
 \subsection{Regulacija brzine u zatvorenoj petlji}
 \label{ssec:regulacija_brzine}
@@ -1532,18 +1845,25 @@ njega.
 
 Vizualna analiza valnog oblika napona na jednoj od faza motora potvrđuje da oba
 sklopa koriste trapeznu metodu upravljanja. Glavna uočljiva razlika, prikazana
-na slikama \ref{fig:esc_a_valni} i \ref{fig:esc_b_valni}, jest u gustoći
+na slikama \ref{fig:moj_50} i \ref{fig:simon_50}, jest u gustoći
 preklapanja signala PWM-a. Valni oblik komercijalnog rješenja je grublji, što
 je posljedica niže frekvencije od \SI{8}{\kilo\hertz}. Suprotno tome, rješenje
 razvijeno u ovom radu, s frekvencijom od \SI{30}{\kilo\hertz}, generira znatno
 finiji valni oblik s manje izraženim šumom.
-
-\missingfigure{Snimka zaslona osciloskopa: valni oblik faznog napona za sklop SimonK 30A.}
-\label{fig:esc_a_valni}
-
-\missingfigure{Snimka zaslona osciloskopa: valni oblik faznog napona za implementirano rješenje.}
-\label{fig:esc_b_valni}
-
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[b]{0.9\textwidth}
+		\includegraphics[width=\textwidth]{csv/simon_50.pdf}
+		\caption{Valni oblik napona\footnote{Napon je negativan jer sklop funkcionira na taj način, ovdje je graf zrcaljen radi lakšeg uočavanja sličnosti} sklopa SimonK}
+		\label{fig:simon_50}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.9\textwidth}
+		\includegraphics[width=\textwidth]{csv/moj_50.pdf}
+		\caption{Valni oblik napona implementiranog rješenja}
+		\label{fig:moj_50}
+	\end{subfigure}
+\end{figure}
+\newpage
 \section{Usporedba radnih karakteristika}
 \label{sec:usporedba_karakteristika}
 

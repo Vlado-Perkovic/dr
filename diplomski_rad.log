@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2025.6.22)  7 SEP 2025 22:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2025.6.22)  8 SEP 2025 23:17
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -998,87 +998,29 @@ Package: enumitem 2019/06/20 v3.9 Customized lists
 \enit@count@id=\count358
 \enitdp@description=\count359
 )
-(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
-Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen317
-\lightrulewidth=\dimen318
-\cmidrulewidth=\dimen319
-\belowrulesep=\dimen320
-\belowbottomsep=\dimen321
-\aboverulesep=\dimen322
-\abovetopsep=\dimen323
-\cmidrulesep=\dimen324
-\cmidrulekern=\dimen325
-\defaultaddspace=\dimen326
-\@cmidla=\count360
-\@cmidlb=\count361
-\@aboverulesep=\dimen327
-\@belowrulesep=\dimen328
-\@thisruleclass=\count362
-\@lastruleclass=\count363
-\@thisrulewidth=\dimen329
-)
-(/usr/share/texlive/texmf-dist/tex/latex/minted/minted.sty
-Package: minted 2022/12/12 v2.7 Yet another Pygments shim for LaTeX
+(/usr/share/texlive/texmf-dist/tex/latex/svg/svg.sty
+Package: svg 2020/11/26 v2.02k (include SVG pictures)
 
-(/usr/share/texlive/texmf-dist/tex/latex/fvextra/fvextra.sty
-Package: fvextra 2022/11/30 v1.5 fvextra - extensions and patches for fancyvrb
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrbase.sty
+Package: scrbase 2022/10/12 v3.38 KOMA-Script package (KOMA-Script-independent 
+basics and keyval usage)
 
-(/usr/share/texlive/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
-Package: fancyvrb 2023/01/19 4.5a verbatim text (tvz,hv)
-\FV@CodeLineNo=\count364
-\FV@InFile=\read4
-\FV@TabBox=\box78
-\c@FancyVerbLine=\count365
-\FV@StepNumber=\count366
-\FV@OutFile=\write4
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlfile.sty
+Package: scrlfile 2022/10/12 v3.38 KOMA-Script package (file load hooks)
+
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlfile-hook.sty
+Package: scrlfile-hook 2022/10/12 v3.38 KOMA-Script package (using LaTeX hooks)
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlogo.sty
+Package: scrlogo 2022/10/12 v3.38 KOMA-Script package (logo)
+)))
+Applying: [2021/05/01] Usage of raw or classic option list on input line 252.
+Already applied: [0000/00/00] Usage of raw or classic option list on input line
+ 368.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/upquote/upquote.sty
-Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
-tim
-)
-(/usr/share/texlive/texmf-dist/tex/latex/lineno/lineno.sty
-Package: lineno 2023/01/19 line numbers on paragraphs v5.1
-\linenopenalty=\count367
-\output=\toks45
-\linenoprevgraf=\count368
-\linenumbersep=\dimen330
-\linenumberwidth=\dimen331
-\c@linenumber=\count369
-\c@pagewiselinenumber=\count370
-\c@LN@truepage=\count371
-\c@internallinenumber=\count372
-\c@internallinenumbers=\count373
-\quotelinenumbersep=\dimen332
-\bframerule=\dimen333
-\bframesep=\dimen334
-\bframebox=\box79
-\linenoamsmath@ams@eqpen=\count374
-LaTeX Info: Redefining \\ on input line 3131.
-)
-\c@FV@TrueTabGroupLevel=\count375
-\c@FV@TrueTabCounter=\count376
-\FV@TabBox@Group=\box80
-\FV@TmpLength=\skip60
-\c@FV@HighlightLinesStart=\count377
-\c@FV@HighlightLinesStop=\count378
-\FV@LoopCount=\count379
-\FV@NCharsBox=\box81
-\FV@BreakIndent=\dimen335
-\FV@BreakIndentNChars=\count380
-\FV@BreakSymbolSepLeft=\dimen336
-\FV@BreakSymbolSepLeftNChars=\count381
-\FV@BreakSymbolSepRight=\dimen337
-\FV@BreakSymbolSepRightNChars=\count382
-\FV@BreakSymbolIndentLeft=\dimen338
-\FV@BreakSymbolIndentLeftNChars=\count383
-\FV@BreakSymbolIndentRight=\dimen339
-\FV@BreakSymbolIndentRightNChars=\count384
-\c@FancyVerbLineBreakLast=\count385
-\FV@LineBox=\box82
-\FV@LineIndentBox=\box83
-\c@FV@BreakBufferDepth=\count386
-\FV@LineWidth=\dimen340
+(/usr/share/texlive/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 )
 (/usr/share/texlive/texmf-dist/tex/latex/tools/shellesc.sty
 Package: shellesc 2019/11/08 v1.0c unified shell escape interface for LaTeX
@@ -1097,6 +1039,98 @@ runsystem(uname -s > "diplomski_rad.w18")...executed.
 runsystem(rm -- "diplomski_rad.w18")...executed.
 
 )
+\c@svg@param@lastpage=\count360
+\svg@box=\box78
+\c@svg@param@currpage=\count361
+)
+(/usr/share/texlive/texmf-dist/tex/latex/transparent/transparent.sty
+Package: transparent 2022-10-27 v1.5 Transparency with color stacks
+
+(/usr/share/texlive/texmf-dist/tex/latex/transparent/transparent-nometadata.sty
+Package: transparent-nometadata 2022-10-27 v1.5 Transparency via pdfTeX's color
+ stack (HO)
+)) (/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen317
+\lightrulewidth=\dimen318
+\cmidrulewidth=\dimen319
+\belowrulesep=\dimen320
+\belowbottomsep=\dimen321
+\aboverulesep=\dimen322
+\abovetopsep=\dimen323
+\cmidrulesep=\dimen324
+\cmidrulekern=\dimen325
+\defaultaddspace=\dimen326
+\@cmidla=\count362
+\@cmidlb=\count363
+\@aboverulesep=\dimen327
+\@belowrulesep=\dimen328
+\@thisruleclass=\count364
+\@lastruleclass=\count365
+\@thisrulewidth=\dimen329
+)
+(/usr/share/texlive/texmf-dist/tex/latex/minted/minted.sty
+Package: minted 2022/12/12 v2.7 Yet another Pygments shim for LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/latex/fvextra/fvextra.sty
+Package: fvextra 2022/11/30 v1.5 fvextra - extensions and patches for fancyvrb
+
+(/usr/share/texlive/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2023/01/19 4.5a verbatim text (tvz,hv)
+\FV@CodeLineNo=\count366
+\FV@InFile=\read4
+\FV@TabBox=\box79
+\c@FancyVerbLine=\count367
+\FV@StepNumber=\count368
+\FV@OutFile=\write4
+)
+(/usr/share/texlive/texmf-dist/tex/latex/upquote/upquote.sty
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
+)
+(/usr/share/texlive/texmf-dist/tex/latex/lineno/lineno.sty
+Package: lineno 2023/01/19 line numbers on paragraphs v5.1
+\linenopenalty=\count369
+\output=\toks45
+\linenoprevgraf=\count370
+\linenumbersep=\dimen330
+\linenumberwidth=\dimen331
+\c@linenumber=\count371
+\c@pagewiselinenumber=\count372
+\c@LN@truepage=\count373
+\c@internallinenumber=\count374
+\c@internallinenumbers=\count375
+\quotelinenumbersep=\dimen332
+\bframerule=\dimen333
+\bframesep=\dimen334
+\bframebox=\box80
+\linenoamsmath@ams@eqpen=\count376
+LaTeX Info: Redefining \\ on input line 3131.
+)
+\c@FV@TrueTabGroupLevel=\count377
+\c@FV@TrueTabCounter=\count378
+\FV@TabBox@Group=\box81
+\FV@TmpLength=\skip60
+\c@FV@HighlightLinesStart=\count379
+\c@FV@HighlightLinesStop=\count380
+\FV@LoopCount=\count381
+\FV@NCharsBox=\box82
+\FV@BreakIndent=\dimen335
+\FV@BreakIndentNChars=\count382
+\FV@BreakSymbolSepLeft=\dimen336
+\FV@BreakSymbolSepLeftNChars=\count383
+\FV@BreakSymbolSepRight=\dimen337
+\FV@BreakSymbolSepRightNChars=\count384
+\FV@BreakSymbolIndentLeft=\dimen338
+\FV@BreakSymbolIndentLeftNChars=\count385
+\FV@BreakSymbolIndentRight=\dimen339
+\FV@BreakSymbolIndentRightNChars=\count386
+\c@FancyVerbLineBreakLast=\count387
+\FV@LineBox=\box83
+\FV@LineIndentBox=\box84
+\c@FV@BreakBufferDepth=\count388
+\FV@LineWidth=\dimen340
+)
 (/usr/share/texlive/texmf-dist/tex/latex/framed/framed.sty
 Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \OuterFrameSep=\skip61
@@ -1107,19 +1141,19 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 )
 (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count387
+\c@float@type=\count389
 \float@exts=\toks46
-\float@box=\box84
+\float@box=\box85
 \@float@everytoks=\toks47
-\@floatcapt=\box85
+\@floatcapt=\box86
 )
 \minted@appexistsfile=\read5
-\minted@bgbox=\box86
+\minted@bgbox=\box87
 \minted@code=\write5
-\c@minted@FancyVerbLineTemp=\count388
-\c@minted@pygmentizecounter=\count389
+\c@minted@FancyVerbLineTemp=\count390
+\c@minted@pygmentizecounter=\count391
 \@float@every@listing=\toks48
-\c@listing=\count390
+\c@listing=\count392
 )
 runsystem(mkdir -p _minted-diplomski_rad)...executed.
 
@@ -1132,7 +1166,7 @@ Package: todonotes 2023/01/31
 zlibrarypositioning.code.tex
 File: tikzlibrarypositioning.code.tex 2023-01-15 v3.1.10 (3.1.10)
 )
-\c@@todonotes@numberoftodonotes=\count391
+\c@@todonotes@numberoftodonotes=\count393
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
 zlibraryshapes.code.tex
@@ -1181,26 +1215,26 @@ File: tikzlibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshape
 s.multipart.code.tex
 File: pgflibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfnodepartlowerbox=\box87
-\pgfnodeparttwobox=\box88
-\pgfnodepartthreebox=\box89
-\pgfnodepartfourbox=\box90
-\pgfnodeparttwentybox=\box91
-\pgfnodepartnineteenbox=\box92
-\pgfnodeparteighteenbox=\box93
-\pgfnodepartseventeenbox=\box94
-\pgfnodepartsixteenbox=\box95
-\pgfnodepartfifteenbox=\box96
-\pgfnodepartfourteenbox=\box97
-\pgfnodepartthirteenbox=\box98
-\pgfnodeparttwelvebox=\box99
-\pgfnodepartelevenbox=\box100
-\pgfnodeparttenbox=\box101
-\pgfnodepartninebox=\box102
-\pgfnodeparteightbox=\box103
-\pgfnodepartsevenbox=\box104
-\pgfnodepartsixbox=\box105
-\pgfnodepartfivebox=\box106
+\pgfnodepartlowerbox=\box88
+\pgfnodeparttwobox=\box89
+\pgfnodepartthreebox=\box90
+\pgfnodepartfourbox=\box91
+\pgfnodeparttwentybox=\box92
+\pgfnodepartnineteenbox=\box93
+\pgfnodeparteighteenbox=\box94
+\pgfnodepartseventeenbox=\box95
+\pgfnodepartsixteenbox=\box96
+\pgfnodepartfifteenbox=\box97
+\pgfnodepartfourteenbox=\box98
+\pgfnodepartthirteenbox=\box99
+\pgfnodeparttwelvebox=\box100
+\pgfnodepartelevenbox=\box101
+\pgfnodeparttenbox=\box102
+\pgfnodepartninebox=\box103
+\pgfnodeparteightbox=\box104
+\pgfnodepartsevenbox=\box105
+\pgfnodepartsixbox=\box106
+\pgfnodepartfivebox=\box107
 )))
 (/usr/share/texlive/texmf-dist/tex/latex/pgfplots/pgfplots.sty
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.revision.tex)
@@ -1212,8 +1246,8 @@ Package: pgfplots 2021/05/15 v1.18.1 Data Visualization (1.18.1)
 \t@pgfplots@tokb=\toks50
 \t@pgfplots@tokc=\toks51
 \pgfplots@tmpa=\dimen345
-\c@pgfplots@coordindex=\count392
-\c@pgfplots@scanlineindex=\count393
+\c@pgfplots@coordindex=\count394
+\c@pgfplots@scanlineindex=\count395
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/sys/pgfplotssysgeneric.code
 .tex))
@@ -1235,13 +1269,13 @@ tructure.code.tex)
 tructureext.code.tex)
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsarray
 .code.tex
-\c@pgfplotsarray@tmp=\count394
+\c@pgfplotsarray@tmp=\count396
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsmatri
 x.code.tex)
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/numtable/pgfplotstableshare
 d.code.tex
-\c@pgfplotstable@counta=\count395
+\c@pgfplotstable@counta=\count397
 \t@pgfplotstable@a=\toks55
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsdeque
@@ -1254,7 +1288,7 @@ de.tex))
 .tex)
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/libs/pgflibrarypgfplots.sur
 fshading.code.tex
-\c@pgfplotslibrarysurf@no=\count396
+\c@pgfplotslibrarysurf@no=\count398
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/sys/pgflibrarypgfplots.surf
 shading.pgfsys-pdftex.def)))
@@ -1286,11 +1320,11 @@ e.tex
 \pgfdecoratedinputsegmentcompleteddistance=\dimen348
 \pgfdecoratedinputsegmentremainingdistance=\dimen349
 \pgf@decorate@distancetomove=\dimen350
-\pgf@decorate@repeatstate=\count397
+\pgf@decorate@repeatstate=\count399
 \pgfdecorationsegmentamplitude=\dimen351
 \pgfdecorationsegmentlength=\dimen352
 )
-\tikz@lib@dec@box=\box107
+\tikz@lib@dec@box=\box108
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
 zlibrarydecorations.pathmorphing.code.tex
@@ -1302,7 +1336,7 @@ zlibrarydecorations.pathreplacing.code.tex
 decorations.pathreplacing.code.tex))
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/libs/tikzlibrarypgfplots.co
 ntourlua.code.tex)
-\pgfplots@numplots=\count398
+\pgfplots@numplots=\count400
 \pgfplots@xmin@reg=\dimen353
 \pgfplots@xmax@reg=\dimen354
 \pgfplots@ymin@reg=\dimen355
@@ -1332,14 +1366,14 @@ runsystem(which pygmentize && touch diplomski_rad.aex)...executed.
 runsystem(rm diplomski_rad.aex)...executed.
 
 LaTeX Font Info:    Trying to load font information for T1+stix2 on input line 
-59.
+60.
 (/usr/share/texlive/texmf-dist/tex/latex/stix2-type1/t1stix2.fd
 File: t1stix2.fd 2018/04/02 v2.0.0-latex stix2 T1 font definitions
 )
 (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count399
-\l__pdf_internal_box=\box108
+\l__color_backend_stack_int=\count401
+\l__pdf_internal_box=\box109
 )
 (./diplomski_rad.aux
 
@@ -1348,41 +1382,41 @@ LaTeX Warning: Label `fig:enkoder' multiply defined.
 )
 \openout1 = `diplomski_rad.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for LS1/stix2/m/n on input line 59.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for LS1/stix2/m/n on input line 60.
 LaTeX Font Info:    Trying to load font information for LS1+stix2 on input line
- 59.
+ 60.
  (/usr/share/texlive/texmf-dist/tex/latex/stix2-type1/ls1stix2.fd
 File: ls1stix2.fd 2018/04/02 v2.0.0-latex stix2 LS1 font definitions
 )
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for LS2/stix2/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for LS2/stix2/m/n on input line 60.
 LaTeX Font Info:    Trying to load font information for LS2+stix2 on input line
- 59.
+ 60.
 
 (/usr/share/texlive/texmf-dist/tex/latex/stix2-type1/ls2stix2.fd
 File: ls2stix2.fd 2018/04/02 v2.0.0-latex stix2 LS2 font definitions
 )
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-\c@mv@tabular=\count400
-\c@mv@boldtabular=\count401
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+\c@mv@tabular=\count402
+\c@mv@boldtabular=\count403
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1420,16 +1454,16 @@ LaTeX Font Info:    ... okay on input line 59.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count402
+\scratchcounter=\count404
 \scratchdimen=\dimen359
-\scratchbox=\box109
-\nofMPsegments=\count403
-\nofMParguments=\count404
+\scratchbox=\box110
+\nofMPsegments=\count405
+\nofMParguments=\count406
 \everyMPshowfont=\toks56
-\MPscratchCnt=\count405
+\MPscratchCnt=\count407
 \MPscratchDim=\dimen360
-\MPnumerator=\count406
-\makeMPintoPDFobject=\count407
+\MPnumerator=\count408
+\makeMPintoPDFobject=\count409
 \everyMPtoPDFconversion=\toks57
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -1456,16 +1490,16 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Info: Command `\dddot' is already robust on input line 59.
-LaTeX Info: Command `\ddddot' is already robust on input line 59.
-Package hyperref Info: Link coloring OFF on input line 59.
+LaTeX Info: Command `\dddot' is already robust on input line 60.
+LaTeX Info: Command `\ddddot' is already robust on input line 60.
+Package hyperref Info: Link coloring OFF on input line 60.
 
 (./diplomski_rad.out) (./diplomski_rad.out)
 \@outlinefile=\write6
 \openout6 = `diplomski_rad.out'.
 
 Package translations Info: no dictionary file `translations-basic-dictionary-se
-rbocroatian.trsl' found. on input line 59.
+rbocroatian.trsl' found. on input line 60.
 
 (/usr/share/texlive/texmf-dist/tex/latex/translations/translations-basic-dictio
 nary-english.trsl
@@ -1473,92 +1507,92 @@ File: translations-basic-dictionary-english.trsl (english translation file `tra
 nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `english'. on input line 59.
+or `english'. on input line 60.
 
 
 Package todonotes Warning: The length marginparwidth is less than 2cm and will 
 most likely cause issues with the appearance of inserted todonotes. The issue c
 an be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to 
-loading the todonotes package. on input line 59.
+loading the todonotes package. on input line 60.
 
 Package pgfplots notification 'compat/show suggested version=true': document ha
 s been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
 
 LaTeX Font Info:    Trying to load font information for T1+opensans-TLF on inpu
-t line 62.
+t line 63.
 (/usr/share/texlive/texmf-dist/tex/latex/opensans/T1opensans-TLF.fd
 File: T1opensans-TLF.fd 2019/06/24 Font definitions for T1/opensans-TLF.
 )
 LaTeX Font Info:    Font shape `T1/opensans-TLF/m/n' will be
-(Font)              scaled to size 14.0pt on input line 62.
+(Font)              scaled to size 14.0pt on input line 63.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <14> not availabl
 e
 (Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input lin
-e 62.
+e 63.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
-(Font)              scaled to size 14.0pt on input line 62.
+(Font)              scaled to size 14.0pt on input line 63.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <20> not availabl
 e
 (Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input lin
-e 62.
+e 63.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
-(Font)              scaled to size 20.0pt on input line 62.
-LaTeX Font Info:    Calculating math sizes for size <14> on input line 62.
+(Font)              scaled to size 20.0pt on input line 63.
+LaTeX Font Info:    Calculating math sizes for size <14> on input line 63.
 LaTeX Font Info:    Trying to load font information for LS1+stix2scr on input l
-ine 62.
+ine 63.
 
 (/usr/share/texlive/texmf-dist/tex/latex/stix2-type1/ls1stix2scr.fd
 File: ls1stix2scr.fd 2018/04/02 v2.0.0-latex stix2 script LS1 font definitions
 )
 LaTeX Font Info:    Trying to load font information for LS2+stix2ex on input li
-ne 62.
+ne 63.
 
 (/usr/share/texlive/texmf-dist/tex/latex/stix2-type1/ls2stix2ex.fd
 File: ls2stix2ex.fd 2018/04/02 v2.0.0-latex stix2 extentions LS2 font definitio
 ns
 )
 LaTeX Font Info:    Trying to load font information for LS1+stix2frak on input 
-line 62.
+line 63.
 
 (/usr/share/texlive/texmf-dist/tex/latex/stix2-type1/ls1stix2frak.fd
 File: ls1stix2frak.fd 2018/04/02 v2.0.0-latex stix2 fraktur LS1 font definition
 s
 )
 LaTeX Font Info:    Trying to load font information for LS1+stix2bb on input li
-ne 62.
+ne 63.
 
 (/usr/share/texlive/texmf-dist/tex/latex/stix2-type1/ls1stix2bb.fd
 File: ls1stix2bb.fd 2018/04/02 v2.0.0-latex stix2 blackboard LS1 font definitio
 ns
 )
 LaTeX Font Info:    Trying to load font information for LS2+stix2cal on input l
-ine 62.
+ine 63.
 
 (/usr/share/texlive/texmf-dist/tex/latex/stix2-type1/ls2stix2cal.fd
 File: ls2stix2cal.fd 2018/04/02 v2.0.0-latex stix2 calligraphic LS2 font defini
 tions
 )
 LaTeX Font Info:    Trying to load font information for LS1+stix2sf on input li
-ne 62.
+ne 63.
 
 (/usr/share/texlive/texmf-dist/tex/latex/stix2-type1/ls1stix2sf.fd
 File: ls1stix2sf.fd 2018/04/02 v2.0.0-latex stix2 sans-serif LS1 font definitio
 ns
 )
 LaTeX Font Info:    Trying to load font information for LS2+stix2tt on input li
-ne 62.
+ne 63.
 
 (/usr/share/texlive/texmf-dist/tex/latex/stix2-type1/ls2stix2tt.fd
 File: ls2stix2tt.fd 2018/04/02 v2.0.0-latex stix2 typewriter LS2 font definitio
 ns
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 62.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 63.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 62.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 63.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -1570,45 +1604,45 @@ st/fonts/enc/dvips/opensans/a_jg4h6q.enc}]
 <hr_0036535500_90.pdf, id=165, 598.235pt x 845.1575pt>
 File: hr_0036535500_90.pdf Graphic file (type pdf)
 <use hr_0036535500_90.pdf>
-Package pdftex.def Info: hr_0036535500_90.pdf  used on input line 68.
+Package pdftex.def Info: hr_0036535500_90.pdf  used on input line 69.
 (pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
 File: hr_0036535500_90.pdf Graphic file (type pdf)
 <use hr_0036535500_90.pdf>
-Package pdftex.def Info: hr_0036535500_90.pdf  used on input line 68.
+Package pdftex.def Info: hr_0036535500_90.pdf  used on input line 69.
 (pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
 <hr_0036535500_90.pdf, id=168, page=1, 598.235pt x 845.1575pt>
 File: hr_0036535500_90.pdf Graphic file (type pdf)
 <use hr_0036535500_90.pdf, page 1>
-Package pdftex.def Info: hr_0036535500_90.pdf , page1 used on input line 68.
+Package pdftex.def Info: hr_0036535500_90.pdf , page1 used on input line 69.
 (pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
 File: hr_0036535500_90.pdf Graphic file (type pdf)
 <use hr_0036535500_90.pdf, page 1>
-Package pdftex.def Info: hr_0036535500_90.pdf , page1 used on input line 68.
+Package pdftex.def Info: hr_0036535500_90.pdf , page1 used on input line 69.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
 File: hr_0036535500_90.pdf Graphic file (type pdf)
 <use hr_0036535500_90.pdf, page 1>
-Package pdftex.def Info: hr_0036535500_90.pdf , page1 used on input line 68.
+Package pdftex.def Info: hr_0036535500_90.pdf , page1 used on input line 69.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
 File: hr_0036535500_90.pdf Graphic file (type pdf)
 <use hr_0036535500_90.pdf, page 1>
-Package pdftex.def Info: hr_0036535500_90.pdf , page1 used on input line 68.
+Package pdftex.def Info: hr_0036535500_90.pdf , page1 used on input line 69.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
 File: hr_0036535500_90.pdf Graphic file (type pdf)
 <use hr_0036535500_90.pdf, page 1>
-Package pdftex.def Info: hr_0036535500_90.pdf , page1 used on input line 68.
+Package pdftex.def Info: hr_0036535500_90.pdf , page1 used on input line 69.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
  [2 <./hr_0036535500_90.pdf>]
 LaTeX Font Info:    Font shape `T1/stix2/m/sl' in size <12> not available
-(Font)              Font shape `T1/stix2/m/it' tried instead on input line 72.
+(Font)              Font shape `T1/stix2/m/it' tried instead on input line 73.
  [3
 
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-t1.enc}]
 LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <18> not availabl
 e
 (Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input lin
-e 81.
+e 82.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
-(Font)              scaled to size 18.0pt on input line 81.
+(Font)              scaled to size 18.0pt on input line 82.
  (./diplomski_rad.toc
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 2
 0.
@@ -1620,7 +1654,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.28 ...elektromotorne sile}{32}{subsection.5.2.2}
+l.28 ...elektromotorne sile}{31}{subsection.5.2.2}
                                                   % [1
 
 
@@ -1633,24 +1667,18 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.82 \listoftodos{
-                  } [2] (./diplomski_rad.tdo)
-\tf@tdo=\write8
-\openout8 = `diplomski_rad.tdo'.
-
+l.83 \newpage
+              [2]
+Poglavlje 1..
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.83 \newpage
-              [3
+l.132 
+       [3
 
-]
-Poglavlje 1..
-[4
-
-] [5]
+] [4]
 Poglavlje 2..
 
 Underfull \hbox (badness 10000) in paragraph at lines 142--142
@@ -1663,7 +1691,7 @@ e
 e 144.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
 (Font)              scaled to size 16.0pt on input line 144.
-<Figures/presjek.jpg, id=285, 163.42462pt x 136.18718pt>
+<Figures/presjek.jpg, id=261, 163.42462pt x 136.18718pt>
 File: Figures/presjek.jpg Graphic file (type jpg)
 <use Figures/presjek.jpg>
 Package pdftex.def Info: Figures/presjek.jpg  used on input line 164.
@@ -1671,51 +1699,49 @@ Package pdftex.def Info: Figures/presjek.jpg  used on input line 164.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[6
+[5
 
-] [7 <./Figures/presjek.jpg>]
+] [6 <./Figures/presjek.jpg>]
 LaTeX Font Info:    Trying to load font information for TS1+stix2 on input line
  214.
 
 (/usr/share/texlive/texmf-dist/tex/latex/stix2-type1/ts1stix2.fd
 File: ts1stix2.fd 2018/04/02 v2.0.0-latex stix2 TS1 font definitions
-) [8{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathit.enc
+) [7{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathit.enc
 }{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathrm.enc}{/
 usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathscr.enc}{/us
-r/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-ts1.enc}] [9]
+r/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-ts1.enc}] [8]
 Overfull \hbox (0.17366pt too wide) in paragraph at lines 279--283
 \T1/stix2/m/n/12 Protuelektromotorna sila (eng. \T1/stix2/m/it/12 counter-elect
 romotive force, back-electromotive force, back-
  []
 
-[10] [11{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathex
-.enc}] [12]
-<Figures/microchip_torque_speed.png, id=365, 1063.975pt x 611.28375pt>
+[9] [10{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathex.
+enc}] [11]
+<Figures/microchip_torque_speed.png, id=342, 1063.975pt x 611.28375pt>
 File: Figures/microchip_torque_speed.png Graphic file (type png)
 <use Figures/microchip_torque_speed.png>
 Package pdftex.def Info: Figures/microchip_torque_speed.png  used on input line
  438.
 (pdftex.def)             Requested size: 441.01773pt x 253.37022pt.
- [13 <./Figures/microchip_torque_speed.png>] [14]
+ [12 <./Figures/microchip_torque_speed.png>] [13]
 Poglavlje 3..
-Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
-ine 490.
-[15
+[14
 
 ]
 
+LaTeX Warning: Reference `fig:cub' on page 15 undefined on input line 494.
+
+
+LaTeX Warning: Reference `fig:cub' on page 15 undefined on input line 586.
+
+[15]
+
 LaTeX Warning: Reference `fig:valovitost momenta' on page 16 undefined on input
- line 503.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+ line 771.
 
 [16]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Overfull \hbox (3.3971pt too wide) in paragraph at lines 648--654
+Overfull \hbox (3.3971pt too wide) in paragraph at lines 916--922
 \T1/stix2/m/n/12 ili struje na na-mo-ta-jima, ²to se pos-tiºe pri-mje-nom pulsn
 o-²irinske mo-du-la-cije (eng. \T1/stix2/m/it/12 pulse-
  []
@@ -1723,179 +1749,273 @@ o-²irinske mo-du-la-cije (eng. \T1/stix2/m/it/12 pulse-
 LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <12> not availabl
 e
 (Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input lin
-e 655.
+e 923.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
-(Font)              scaled to size 12.0pt on input line 655.
+(Font)              scaled to size 12.0pt on input line 923.
 [17]
-Overfull \hbox (0.61653pt too wide) in paragraph at lines 670--675
+Overfull \hbox (0.61653pt too wide) in paragraph at lines 938--943
 []\T1/stix2/b/n/12 Glatko prek-la-pa-nje (eng. \T1/stix2/b/it/12 soft chop-ping
 \T1/stix2/b/n/12 ): \T1/stix2/m/n/12 Ova me-toda sma-njuje va-lo-vi-tost struje
 
  []
 
-<Figures/hard_chopping1.png, id=411, 1548.78625pt x 837.1275pt>
+<Figures/hard_chopping1.png, id=402, 1548.78625pt x 837.1275pt>
 File: Figures/hard_chopping1.png Graphic file (type png)
 <use Figures/hard_chopping1.png>
-Package pdftex.def Info: Figures/hard_chopping1.png  used on input line 683.
+Package pdftex.def Info: Figures/hard_chopping1.png  used on input line 951.
 (pdftex.def)             Requested size: 418.96548pt x 226.44897pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<Figures/soft_chopping.png, id=414, 1622.06pt x 757.83125pt>
+<Figures/soft_chopping.png, id=405, 1622.06pt x 757.83125pt>
 File: Figures/soft_chopping.png Graphic file (type png)
 <use Figures/soft_chopping.png>
-Package pdftex.def Info: Figures/soft_chopping.png  used on input line 697.
+Package pdftex.def Info: Figures/soft_chopping.png  used on input line 965.
 (pdftex.def)             Requested size: 418.96548pt x 195.73636pt.
-[18]
-<Figures/soft_chopping_new.png, id=423, 1921.1775pt x 1057.9525pt>
+[18 <./Figures/hard_chopping1.png>]
+<Figures/soft_chopping_new.png, id=415, 1921.1775pt x 1057.9525pt>
 File: Figures/soft_chopping_new.png Graphic file (type png)
 <use Figures/soft_chopping_new.png>
-Package pdftex.def Info: Figures/soft_chopping_new.png  used on input line 717.
+Package pdftex.def Info: Figures/soft_chopping_new.png  used on input line 985.
 
 (pdftex.def)             Requested size: 211.68661pt x 116.56885pt.
-<Figures/comp_pwm_new.png, id=424, 1922.18124pt x 1059.96pt>
+<Figures/comp_pwm_new.png, id=416, 1922.18124pt x 1059.96pt>
 File: Figures/comp_pwm_new.png Graphic file (type png)
 <use Figures/comp_pwm_new.png>
-Package pdftex.def Info: Figures/comp_pwm_new.png  used on input line 723.
+Package pdftex.def Info: Figures/comp_pwm_new.png  used on input line 991.
 (pdftex.def)             Requested size: 211.68661pt x 116.72534pt.
- [19 <./Figures/hard_chopping1.png> <./Figures/soft_chopping.png>] [20 <./Figur
-es/soft_chopping_new.png> <./Figures/comp_pwm_new.png>]
-<Figures/pwm_sum.png, id=443, 1848.9075pt x 1030.85126pt>
+ [19 <./Figures/soft_chopping.png> <./Figures/soft_chopping_new.png> <./Figures
+/comp_pwm_new.png>]
+<Figures/pwm_sum.png, id=430, 1848.9075pt x 1030.85126pt>
 File: Figures/pwm_sum.png Graphic file (type png)
 <use Figures/pwm_sum.png>
-Package pdftex.def Info: Figures/pwm_sum.png  used on input line 899.
+Package pdftex.def Info: Figures/pwm_sum.png  used on input line 1167.
 (pdftex.def)             Requested size: 418.96548pt x 233.58311pt.
- [21]
-<Figures/pwm_drive_deg.png, id=451, 1847.90375pt x 1015.795pt>
+ [20]
+<Figures/pwm_drive_deg.png, id=438, 1847.90375pt x 1015.795pt>
 File: Figures/pwm_drive_deg.png Graphic file (type png)
 <use Figures/pwm_drive_deg.png>
-Package pdftex.def Info: Figures/pwm_drive_deg.png  used on input line 920.
+Package pdftex.def Info: Figures/pwm_drive_deg.png  used on input line 1188.
 (pdftex.def)             Requested size: 418.96548pt x 230.29549pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[22 <./Figures/pwm_sum.png>] [23 <./Figures/pwm_drive_deg.png>]
-Overfull \hbox (23.26628pt too wide) in paragraph at lines 1020--1021
+[21 <./Figures/pwm_sum.png>] [22 <./Figures/pwm_drive_deg.png>]
+Overfull \hbox (23.26628pt too wide) in paragraph at lines 1288--1289
  [][] 
  []
 
-[24]
+[23]
 Poglavlje 4..
+<Figures/esc.jpeg, id=463, 2915.89375pt x 3045.3775pt>
+File: Figures/esc.jpeg Graphic file (type jpg)
+<use Figures/esc.jpeg>
+Package pdftex.def Info: Figures/esc.jpeg  used on input line 1326.
+(pdftex.def)             Requested size: 220.50887pt x 230.29868pt.
 
-Overfull \hbox (1.34448pt too wide) in paragraph at lines 1048--1056
+Overfull \hbox (1.34448pt too wide) in paragraph at lines 1316--1330
 []\T1/stix2/m/n/12 Pogonski sklop, za-du-ºen za is-po-ruku ener-gije mo-toru, r
 e-ali-zi-ran je na za-seb-noj, ru£no
  []
 
-[25
 
-]
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <16> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 1058.
-
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 1331.
 
 LaTeX Font Warning: Font shape `T1/cmtt/m/n' in size <16> not available
-(Font)              size <17.28> substituted on input line 1058.
+(Font)              size <17.28> substituted on input line 1331.
 
-<Figures/motor.png, id=480, 307.1475pt x 363.3575pt>
+[24
+
+]
+<Figures/motor.png, id=470, 307.1475pt x 363.3575pt>
 File: Figures/motor.png Graphic file (type png)
 <use Figures/motor.png>
-Package pdftex.def Info: Figures/motor.png  used on input line 1075.
+Package pdftex.def Info: Figures/motor.png  used on input line 1348.
 (pdftex.def)             Requested size: 220.50887pt x 260.86314pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1076--1076
-[]\T1/stix2/b/n/10.95 Slika 4.1. |\T1/stix2/m/n/10.95 slika mo-tora \T1/cmtt/m/
+Underfull \hbox (badness 10000) in paragraph at lines 1349--1349
+[]\T1/stix2/b/n/10.95 Slika 4.2. |\T1/stix2/m/n/10.95 slika mo-tora \T1/cmtt/m/
 n/10.95 A2212/13T \T1/stix2/m/n/10.95 (slika zas-lona sa: ht-
  []
 
-[26 <./Figures/motor.png>]
-<Figures/enkoder.png, id=490, 439.6425pt x 485.815pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<Figures/enkoder.png, id=472, 439.6425pt x 485.815pt>
 File: Figures/enkoder.png Graphic file (type png)
 <use Figures/enkoder.png>
-Package pdftex.def Info: Figures/enkoder.png  used on input line 1093.
+Package pdftex.def Info: Figures/enkoder.png  used on input line 1366.
 (pdftex.def)             Requested size: 220.50887pt x 243.66302pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1094--1094
-[]\T1/stix2/b/n/10.95 Slika 4.2. |\T1/stix2/m/n/10.95 slika zas-lona 3D mo-dela
+Underfull \hbox (badness 10000) in paragraph at lines 1367--1367
+[]\T1/stix2/b/n/10.95 Slika 4.3. |\T1/stix2/m/n/10.95 slika zas-lona 3D mo-dela
  en-ko-dera AMT223C-V (slika zas-lona sa:
  []
 
-<Figures/enkoder_kuciste.jpeg, id=492, 539.3751pt x 373.8768pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[25 <./Figures/esc.jpeg>]
+<Figures/enkoder_kuciste.jpeg, id=480, 539.3751pt x 373.8768pt>
 File: Figures/enkoder_kuciste.jpeg Graphic file (type jpg)
 <use Figures/enkoder_kuciste.jpeg>
-Package pdftex.def Info: Figures/enkoder_kuciste.jpeg  used on input line 1105.
+Package pdftex.def Info: Figures/enkoder_kuciste.jpeg  used on input line 1378.
 
 (pdftex.def)             Requested size: 352.81552pt x 244.56877pt.
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Overfull \hbox (1.96904pt too wide) in paragraph at lines 1113--1125
+Overfull \hbox (1.96904pt too wide) in paragraph at lines 1386--1398
 \T1/stix2/m/n/12 Tijekom ra-zvoja, tes-ti-ra-nja i ana-lize sus-tava ko-ri-²ten
 a je stan-dardna la-bo-ra-to-rij-ska mjerna
  []
 
-[27 <./Figures/enkoder.png>] [28 <./Figures/enkoder_kuciste.jpeg>] [29]
+[26 <./Figures/motor.png> <./Figures/enkoder.png>] [27 <./Figures/enkoder_kucis
+te.jpeg>] [28]
 Poglavlje 5..
-[30
+[29
 
-] [31] [32] [33] [34] [35]
+]
+<csv/comp.pdf, id=507, 1183.42125pt x 626.34pt>
+File: csv/comp.pdf Graphic file (type pdf)
+<use csv/comp.pdf>
+Package pdftex.def Info: csv/comp.pdf  used on input line 1538.
+(pdftex.def)             Requested size: 441.01773pt x 233.41467pt.
+ [30] [31 <./csv/comp.pdf>]
+<csv/zc.pdf, id=537, 1201.48875pt x 648.4225pt>
+File: csv/zc.pdf Graphic file (type pdf)
+<use csv/zc.pdf>
+Package pdftex.def Info: csv/zc.pdf  used on input line 1563.
+(pdftex.def)             Requested size: 441.01773pt x 238.0129pt.
+ [32 <./csv/zc.pdf>]
+<csv/pokretanje.pdf, id=563, 1045.9075pt x 645.41125pt>
+File: csv/pokretanje.pdf Graphic file (type pdf)
+<use csv/pokretanje.pdf>
+Package pdftex.def Info: csv/pokretanje.pdf  used on input line 1614.
+(pdftex.def)             Requested size: 441.01773pt x 272.14433pt.
+ [33 <./csv/pokretanje.pdf>]
+<csv/closed_loop.pdf, id=590, 1445.4pt x 675.52374pt>
+File: csv/closed_loop.pdf Graphic file (type pdf)
+<use csv/closed_loop.pdf>
+Package pdftex.def Info: csv/closed_loop.pdf  used on input line 1630.
+(pdftex.def)             Requested size: 441.01773pt x 206.11174pt.
+
+
+pdfTeX warning: pdflatex (file ./csv/closed_loop_zc.pdf): PDF inclusion: found 
+PDF version <1.7>, but at most version <1.5> allowed
+<csv/closed_loop_zc.pdf, id=593, 465.65968pt x 327.14218pt>
+File: csv/closed_loop_zc.pdf Graphic file (type pdf)
+<use csv/closed_loop_zc.pdf>
+Package pdftex.def Info: csv/closed_loop_zc.pdf  used on input line 1652.
+(pdftex.def)             Requested size: 441.01773pt x 309.82986pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+
+pdfTeX warning: pdflatex (file ./csv/closed_loop_undershoot.pdf): PDF inclusion
+: found PDF version <1.7>, but at most version <1.5> allowed
+<csv/closed_loop_undershoot.pdf, id=598, 465.65968pt x 327.14218pt>
+File: csv/closed_loop_undershoot.pdf Graphic file (type pdf)
+<use csv/closed_loop_undershoot.pdf>
+Package pdftex.def Info: csv/closed_loop_undershoot.pdf  used on input line 167
+1.
+(pdftex.def)             Requested size: 441.01773pt x 309.82986pt.
+
+
+pdfTeX warning: pdflatex (file ./csv/closed_loop_overshoot.pdf): PDF inclusion:
+ found PDF version <1.7>, but at most version <1.5> allowed
+<csv/closed_loop_overshoot.pdf, id=601, 543.95218pt x 327.14218pt>
+File: csv/closed_loop_overshoot.pdf Graphic file (type pdf)
+<use csv/closed_loop_overshoot.pdf>
+Package pdftex.def Info: csv/closed_loop_overshoot.pdf  used on input line 1677
+.
+(pdftex.def)             Requested size: 441.01773pt x 265.23828pt.
+[34 <./csv/closed_loop.pdf>]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[35 <./csv/closed_loop_zc.pdf>]
+Overfull \vbox (7.48105pt too high) has occurred while \output is active []
+
+
+[36 <./csv/closed_loop_undershoot.pdf> <./csv/closed_loop_overshoot.pdf>]
 \openout4 = `diplomski_rad.pyg'.
 
- (./_minted-diplomski_rad/default.pygstyle)
+
+(./_minted-diplomski_rad/default.pygstyle)
 (./_minted-diplomski_rad/FCF65A1C0EAD4556EEFC2811D9FB02D326A757C8A9BDE9D7CE432A
 33768EFB30.pygtex
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 3.
-) [36]
+) [37]
 \openout4 = `diplomski_rad.pyg'.
 
 
 (./_minted-diplomski_rad/1F8CE3E031F7DD4C3CBADBDA5291927326A757C8A9BDE9D7CE432A
-33768EFB30.pygtex) [37]
+33768EFB30.pygtex)
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[38] [39]
 Poglavlje 6..
 
-Underfull \hbox (badness 10000) in paragraph at lines 1503--1503
+Underfull \hbox (badness 10000) in paragraph at lines 1816--1816
 []\T1/opensans-TLF/b/n/18 Usporedba os-tva-rene im-ple-
  []
 
 
-Underfull \hbox (badness 3601) in paragraph at lines 1503--1503
+Underfull \hbox (badness 3601) in paragraph at lines 1816--1816
 \T1/opensans-TLF/b/n/18 men-ta-cije s pos-to-je-¢im rje-²e-
  []
 
-[38
+<csv/simon_50.pdf, id=683, 1178.4025pt x 645.41125pt>
+File: csv/simon_50.pdf Graphic file (type pdf)
+<use csv/simon_50.pdf>
+Package pdftex.def Info: csv/simon_50.pdf  used on input line 1856.
+(pdftex.def)             Requested size: 396.91325pt x 217.3885pt.
+<csv/moj_50.pdf, id=685, 996.72375pt x 692.5875pt>
+File: csv/moj_50.pdf Graphic file (type pdf)
+<use csv/moj_50.pdf>
+Package pdftex.def Info: csv/moj_50.pdf  used on input line 1861.
+(pdftex.def)             Requested size: 396.91325pt x 275.79362pt.
+[40
 
-]
+] [41 <./csv/simon_50.pdf> <./csv/moj_50.pdf>]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 1560.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 1880.
 
-Overfull \hbox (2.92203pt too wide) in paragraph at lines 1558--1569
+Overfull \hbox (2.92203pt too wide) in paragraph at lines 1878--1889
  [][] 
  []
 
-[39] [40]
+[42] [43]
 Poglavlje 7..
-(./diplomski_rad.bbl [41
+(./diplomski_rad.bbl [44
 
-] [42]
+] [45]
 Underfull \hbox (badness 1803) in paragraph at lines 28--31
 []\T1/stix2/m/n/12 R. Aus-tin, \T1/stix2/m/it/12 Un-man-ned Air-craft Sys-tems:
  UAVS De-sign, De-ve-lop-ment and De-
  []
 
-[43
+[46
 
-] [44]) [45] [46
+] [47]) [48] [49
 
 ]
-Overfull \hbox (1.8657pt too wide) in paragraph at lines 1724--1727
+Overfull \hbox (1.8657pt too wide) in paragraph at lines 2044--2047
 \T1/stix2/m/n/12 aerial ve-hi-cles; UAV; drones; six-step com-mu-ta-tion; back-
 electromotive force; back-EMF;
  []
 
-[47
+[50
 
 ] (./diplomski_rad.aux)
 
@@ -2007,6 +2127,20 @@ CN)
    array.sty    2022/09/04 v2.5g Tabular extension package (FMi)
 subcaption.sty    2023/02/19 v1.6 Sub-captions (AR)
 enumitem.sty    2019/06/20 v3.9 Customized lists
+     svg.sty    2020/11/26 v2.02k (include SVG pictures)
+ scrbase.sty    2022/10/12 v3.38 KOMA-Script package (KOMA-Script-independent b
+asics and keyval usage)
+scrlfile.sty    2022/10/12 v3.38 KOMA-Script package (file load hooks)
+scrlfile-hook.sty    2022/10/12 v3.38 KOMA-Script package (using LaTeX hooks)
+ scrlogo.sty    2022/10/12 v3.38 KOMA-Script package (logo)
+trimspaces.sty    2009/09/17 v1.1 Trim spaces around a token list
+shellesc.sty    2019/11/08 v1.0c unified shell escape interface for LaTeX
+ifplatform.sty    2017/10/13 v0.4a Testing for the operating system
+catchfile.sty    2019/12/09 v1.8 Catch the contents of a file (HO)
+"diplomski_rad.w18"
+transparent.sty    2022-10-27 v1.5 Transparency with color stacks
+transparent-nometadata.sty    2022-10-27 v1.5 Transparency via pdfTeX's color s
+tack (HO)
 booktabs.sty    2020/01/12 v1.61803398 Publication quality tables
   minted.sty    2022/12/12 v2.7 Yet another Pygments shim for LaTeX
  fvextra.sty    2022/11/30 v1.5 fvextra - extensions and patches for fancyvrb
@@ -2014,10 +2148,6 @@ fancyvrb.sty    2023/01/19 4.5a verbatim text (tvz,hv)
  upquote.sty    2012/04/19 v1.3 upright-quote and grave-accent glyphs in verbat
 im
   lineno.sty    2023/01/19 line numbers on paragraphs v5.1
-shellesc.sty    2019/11/08 v1.0c unified shell escape interface for LaTeX
-ifplatform.sty    2017/10/13 v0.4a Testing for the operating system
-catchfile.sty    2019/12/09 v1.8 Catch the contents of a file (HO)
-"diplomski_rad.w18"
   framed.sty    2011/10/22 v 0.96: framed or shaded text with page breaks
    float.sty    2001/11/08 v1.3d Float enhancements (AL)
 todonotes.sty    2023/01/31
@@ -2062,14 +2192,24 @@ Figures/soft_chopping_new.png
 Figures/comp_pwm_new.png
 Figures/pwm_sum.png
 Figures/pwm_drive_deg.png
+Figures/esc.jpeg
 Figures/motor.png
 Figures/enkoder.png
 Figures/enkoder_kuciste.jpeg
+csv/comp.pdf
+  csv/zc.pdf
+csv/pokretanje.pdf
+csv/closed_loop.pdf
+csv/closed_loop_zc.pdf
+csv/closed_loop_undershoot.pdf
+csv/closed_loop_overshoot.pdf
 "_minted-diplomski_rad/default.pygstyle"
 _minted-diplomski_rad/FCF65A1C0EAD4556EEFC2811D9FB02D326A757C8A9BDE9D7CE432A337
 68EFB30.pygtex
 _minted-diplomski_rad/1F8CE3E031F7DD4C3CBADBDA5291927326A757C8A9BDE9D7CE432A337
 68EFB30.pygtex
+csv/simon_50.pdf
+csv/moj_50.pdf
 diplomski_rad.bbl
  ***********
 
@@ -2084,18 +2224,18 @@ LaTeX Warning: There were undefined references.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `diplomski_rad.out' has not changed.
-(rerunfilecheck)             Checksum: 442B0CA7E9A7718DEDE995760D5A0DD3;7659.
+(rerunfilecheck)             Checksum: DE58E79A6C61ED4C26FE673637A2874E;7659.
 runsystem(rm diplomski_rad.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 69217 strings out of 476034
- 1750589 string characters out of 5792864
- 2578277 words of memory out of 6000000
- 88646 multiletter control sequences out of 15000+600000
- 658018 words of font info for 191 fonts, out of 8000000 for 9000
+ 70330 strings out of 476034
+ 1775290 string characters out of 5792864
+ 2623810 words of memory out of 6000000
+ 89708 multiletter control sequences out of 15000+600000
+ 665719 words of font info for 192 fonts, out of 8000000 for 9000
  1137 hyphenation exceptions out of 8191
- 99i,17n,131p,767b,2145s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,17n,131p,767b,2153s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Bold.pf
 b></usr/share/texlive/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Regular
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/public/stix2-type1/STIX2Math.pf
@@ -2108,10 +2248,10 @@ TIX2Text-Regular.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super
 00.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/public/cm-super/sftt1728.pfb>
-Output written on diplomski_rad.pdf (50 pages, 3303329 bytes).
+Output written on diplomski_rad.pdf (53 pages, 5495148 bytes).
 PDF statistics:
- 737 PDF objects out of 1000 (max. 8388607)
- 621 compressed objects within 7 object streams
- 143 named destinations out of 1000 (max. 500000)
- 392 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 917 PDF objects out of 1000 (max. 8388607)
+ 741 compressed objects within 8 object streams
+ 158 named destinations out of 1000 (max. 500000)
+ 442 words of extra memory for PDF output out of 10000 (max. 10000000)
 
