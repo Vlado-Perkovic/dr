@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2025.6.22)  8 SEP 2025 23:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2025.6.22)  9 SEP 2025 18:40
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1375,11 +1375,7 @@ File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count401
 \l__pdf_internal_box=\box109
 )
-(./diplomski_rad.aux
-
-LaTeX Warning: Label `fig:enkoder' multiply defined.
-
-)
+(./diplomski_rad.aux)
 \openout1 = `diplomski_rad.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 60.
@@ -1399,7 +1395,8 @@ LaTeX Font Info:    ... okay on input line 60.
 LaTeX Font Info:    Checking defaults for LS1/stix2/m/n on input line 60.
 LaTeX Font Info:    Trying to load font information for LS1+stix2 on input line
  60.
- (/usr/share/texlive/texmf-dist/tex/latex/stix2-type1/ls1stix2.fd
+
+(/usr/share/texlive/texmf-dist/tex/latex/stix2-type1/ls1stix2.fd
 File: ls1stix2.fd 2018/04/02 v2.0.0-latex stix2 LS1 font definitions
 )
 LaTeX Font Info:    ... okay on input line 60.
@@ -1675,22 +1672,22 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.132 
+l.133 
        [3
 
 ] [4]
 Poglavlje 2..
 
-Underfull \hbox (badness 10000) in paragraph at lines 142--142
+Underfull \hbox (badness 10000) in paragraph at lines 143--143
 []\T1/opensans-TLF/b/n/18 Istosmjerni elek-tro-mo-tor bez
  []
 
 LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <16> not availabl
 e
 (Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input lin
-e 144.
+e 145.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
-(Font)              scaled to size 16.0pt on input line 144.
+(Font)              scaled to size 16.0pt on input line 145.
 <Figures/presjek.jpg, id=261, 163.42462pt x 136.18718pt>
 File: Figures/presjek.jpg Graphic file (type jpg)
 <use Figures/presjek.jpg>
@@ -1703,45 +1700,29 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 ] [6 <./Figures/presjek.jpg>]
 LaTeX Font Info:    Trying to load font information for TS1+stix2 on input line
- 214.
+ 215.
 
 (/usr/share/texlive/texmf-dist/tex/latex/stix2-type1/ts1stix2.fd
 File: ts1stix2.fd 2018/04/02 v2.0.0-latex stix2 TS1 font definitions
 ) [7{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathit.enc
 }{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathrm.enc}{/
 usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathscr.enc}{/us
-r/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-ts1.enc}] [8]
-Overfull \hbox (0.17366pt too wide) in paragraph at lines 279--283
-\T1/stix2/m/n/12 Protuelektromotorna sila (eng. \T1/stix2/m/it/12 counter-elect
-romotive force, back-electromotive force, back-
- []
-
-[9] [10{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathex.
-enc}] [11]
+r/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-ts1.enc}] [8] [9] 
+[10{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathex.enc}
+] [11]
 <Figures/microchip_torque_speed.png, id=342, 1063.975pt x 611.28375pt>
 File: Figures/microchip_torque_speed.png Graphic file (type png)
 <use Figures/microchip_torque_speed.png>
 Package pdftex.def Info: Figures/microchip_torque_speed.png  used on input line
- 438.
+ 439.
 (pdftex.def)             Requested size: 441.01773pt x 253.37022pt.
  [12 <./Figures/microchip_torque_speed.png>] [13]
 Poglavlje 3..
 [14
 
-]
-
-LaTeX Warning: Reference `fig:cub' on page 15 undefined on input line 494.
-
-
-LaTeX Warning: Reference `fig:cub' on page 15 undefined on input line 586.
-
-[15]
-
-LaTeX Warning: Reference `fig:valovitost momenta' on page 16 undefined on input
- line 771.
-
-[16]
-Overfull \hbox (3.3971pt too wide) in paragraph at lines 916--922
+] [15] [16{/usr/share/texlive/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-math
+sf.enc}]
+Overfull \hbox (3.3971pt too wide) in paragraph at lines 928--934
 \T1/stix2/m/n/12 ili struje na na-mo-ta-jima, ²to se pos-tiºe pri-mje-nom pulsn
 o-²irinske mo-du-la-cije (eng. \T1/stix2/m/it/12 pulse-
  []
@@ -1749,69 +1730,68 @@ o-²irinske mo-du-la-cije (eng. \T1/stix2/m/it/12 pulse-
 LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <12> not availabl
 e
 (Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input lin
-e 923.
+e 935.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
-(Font)              scaled to size 12.0pt on input line 923.
+(Font)              scaled to size 12.0pt on input line 935.
 [17]
-Overfull \hbox (0.61653pt too wide) in paragraph at lines 938--943
+Overfull \hbox (0.61653pt too wide) in paragraph at lines 950--955
 []\T1/stix2/b/n/12 Glatko prek-la-pa-nje (eng. \T1/stix2/b/it/12 soft chop-ping
 \T1/stix2/b/n/12 ): \T1/stix2/m/n/12 Ova me-toda sma-njuje va-lo-vi-tost struje
 
  []
 
-<Figures/hard_chopping1.png, id=402, 1548.78625pt x 837.1275pt>
-File: Figures/hard_chopping1.png Graphic file (type png)
-<use Figures/hard_chopping1.png>
-Package pdftex.def Info: Figures/hard_chopping1.png  used on input line 951.
-(pdftex.def)             Requested size: 418.96548pt x 226.44897pt.
-<Figures/soft_chopping.png, id=405, 1622.06pt x 757.83125pt>
-File: Figures/soft_chopping.png Graphic file (type png)
-<use Figures/soft_chopping.png>
-Package pdftex.def Info: Figures/soft_chopping.png  used on input line 965.
-(pdftex.def)             Requested size: 418.96548pt x 195.73636pt.
-[18 <./Figures/hard_chopping1.png>]
-<Figures/soft_chopping_new.png, id=415, 1921.1775pt x 1057.9525pt>
+<csv/comp_ltspice.pdf, id=407, 1037.8775pt x 626.34pt>
+File: csv/comp_ltspice.pdf Graphic file (type pdf)
+<use csv/comp_ltspice.pdf>
+Package pdftex.def Info: csv/comp_ltspice.pdf  used on input line 976.
+(pdftex.def)             Requested size: 441.01773pt x 266.14796pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<Figures/soft_chopping_new.png, id=411, 1921.1775pt x 1057.9525pt>
 File: Figures/soft_chopping_new.png Graphic file (type png)
 <use Figures/soft_chopping_new.png>
-Package pdftex.def Info: Figures/soft_chopping_new.png  used on input line 985.
+Package pdftex.def Info: Figures/soft_chopping_new.png  used on input line 996.
 
 (pdftex.def)             Requested size: 211.68661pt x 116.56885pt.
-<Figures/comp_pwm_new.png, id=416, 1922.18124pt x 1059.96pt>
+<Figures/comp_pwm_new.png, id=412, 1922.18124pt x 1059.96pt>
 File: Figures/comp_pwm_new.png Graphic file (type png)
 <use Figures/comp_pwm_new.png>
-Package pdftex.def Info: Figures/comp_pwm_new.png  used on input line 991.
+Package pdftex.def Info: Figures/comp_pwm_new.png  used on input line 1002.
 (pdftex.def)             Requested size: 211.68661pt x 116.72534pt.
- [19 <./Figures/soft_chopping.png> <./Figures/soft_chopping_new.png> <./Figures
-/comp_pwm_new.png>]
-<Figures/pwm_sum.png, id=430, 1848.9075pt x 1030.85126pt>
-File: Figures/pwm_sum.png Graphic file (type png)
-<use Figures/pwm_sum.png>
-Package pdftex.def Info: Figures/pwm_sum.png  used on input line 1167.
-(pdftex.def)             Requested size: 418.96548pt x 233.58311pt.
- [20]
-<Figures/pwm_drive_deg.png, id=438, 1847.90375pt x 1015.795pt>
-File: Figures/pwm_drive_deg.png Graphic file (type png)
-<use Figures/pwm_drive_deg.png>
-Package pdftex.def Info: Figures/pwm_drive_deg.png  used on input line 1188.
-(pdftex.def)             Requested size: 418.96548pt x 230.29549pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[18] [19 <./csv/comp_ltspice.pdf> <./Figures/soft_chopping_new.png> <./Figures/
+comp_pwm_new.png>]
+<csv/pwm_sum_ltspice.pdf, id=448, 1192.455pt x 637.38126pt>
+File: csv/pwm_sum_ltspice.pdf Graphic file (type pdf)
+<use csv/pwm_sum_ltspice.pdf>
+Package pdftex.def Info: csv/pwm_sum_ltspice.pdf  used on input line 1178.
+(pdftex.def)             Requested size: 441.01773pt x 235.73012pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[21 <./Figures/pwm_sum.png>] [22 <./Figures/pwm_drive_deg.png>]
-Overfull \hbox (23.26628pt too wide) in paragraph at lines 1288--1289
- [][] 
- []
+[20]
+<csv/faza_ltspice.pdf, id=457, 1176.395pt x 640.3925pt>
+File: csv/faza_ltspice.pdf Graphic file (type pdf)
+<use csv/faza_ltspice.pdf>
+Package pdftex.def Info: csv/faza_ltspice.pdf  used on input line 1199.
+(pdftex.def)             Requested size: 441.01773pt x 240.07819pt.
+ [21 <./csv/pwm_sum_ltspice.pdf> <./csv/faza_ltspice.pdf>]
 
-[23]
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[22] [23]
 Poglavlje 4..
-<Figures/esc.jpeg, id=463, 2915.89375pt x 3045.3775pt>
+<Figures/esc.jpeg, id=514, 2915.89375pt x 3045.3775pt>
 File: Figures/esc.jpeg Graphic file (type jpg)
 <use Figures/esc.jpeg>
-Package pdftex.def Info: Figures/esc.jpeg  used on input line 1326.
+Package pdftex.def Info: Figures/esc.jpeg  used on input line 1338.
 (pdftex.def)             Requested size: 220.50887pt x 230.29868pt.
 
-Overfull \hbox (1.34448pt too wide) in paragraph at lines 1316--1330
+Overfull \hbox (1.34448pt too wide) in paragraph at lines 1327--1342
 []\T1/stix2/m/n/12 Pogonski sklop, za-du-ºen za is-po-ruku ener-gije mo-toru, r
 e-ali-zi-ran je na za-seb-noj, ru£no
  []
@@ -1820,35 +1800,41 @@ e-ali-zi-ran je na za-seb-noj, ru£no
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <16> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 1331.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 1343.
 
 LaTeX Font Warning: Font shape `T1/cmtt/m/n' in size <16> not available
-(Font)              size <17.28> substituted on input line 1331.
+(Font)              size <17.28> substituted on input line 1343.
 
-[24
-
-]
-<Figures/motor.png, id=470, 307.1475pt x 363.3575pt>
+<Figures/motor.png, id=516, 307.1475pt x 363.3575pt>
 File: Figures/motor.png Graphic file (type png)
 <use Figures/motor.png>
-Package pdftex.def Info: Figures/motor.png  used on input line 1348.
+Package pdftex.def Info: Figures/motor.png  used on input line 1359.
 (pdftex.def)             Requested size: 220.50887pt x 260.86314pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1349--1349
+Underfull \hbox (badness 10000) in paragraph at lines 1360--1360
 []\T1/stix2/b/n/10.95 Slika 4.2. |\T1/stix2/m/n/10.95 slika mo-tora \T1/cmtt/m/
 n/10.95 A2212/13T \T1/stix2/m/n/10.95 (slika zas-lona sa: ht-
  []
 
 
+Overfull \hbox (15.7375pt too wide) in paragraph at lines 1346--1363
+\T1/stix2/m/n/12 U eks-pe-ri-mentu je ko-ri-²ten ko-mer-ci-jalno dos-tu-pan tro
+-fazni mo-tor BLDC mo-dela \T1/cmtt/m/n/12 A2212/13T
+ []
+
+[24
+
+]
+
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Figures/enkoder.png, id=472, 439.6425pt x 485.815pt>
+<Figures/enkoder.png, id=524, 439.6425pt x 485.815pt>
 File: Figures/enkoder.png Graphic file (type png)
 <use Figures/enkoder.png>
-Package pdftex.def Info: Figures/enkoder.png  used on input line 1366.
+Package pdftex.def Info: Figures/enkoder.png  used on input line 1377.
 (pdftex.def)             Requested size: 220.50887pt x 243.66302pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1367--1367
+Underfull \hbox (badness 10000) in paragraph at lines 1378--1378
 []\T1/stix2/b/n/10.95 Slika 4.3. |\T1/stix2/m/n/10.95 slika zas-lona 3D mo-dela
  en-ko-dera AMT223C-V (slika zas-lona sa:
  []
@@ -1857,10 +1843,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 1367--1367
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [25 <./Figures/esc.jpeg>]
-<Figures/enkoder_kuciste.jpeg, id=480, 539.3751pt x 373.8768pt>
+<Figures/enkoder_kuciste.jpeg, id=533, 539.3751pt x 373.8768pt>
 File: Figures/enkoder_kuciste.jpeg Graphic file (type jpg)
 <use Figures/enkoder_kuciste.jpeg>
-Package pdftex.def Info: Figures/enkoder_kuciste.jpeg  used on input line 1378.
+Package pdftex.def Info: Figures/enkoder_kuciste.jpeg  used on input line 1389.
 
 (pdftex.def)             Requested size: 352.81552pt x 244.56877pt.
 
@@ -1868,7 +1854,7 @@ Package pdftex.def Info: Figures/enkoder_kuciste.jpeg  used on input line 1378.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Overfull \hbox (1.96904pt too wide) in paragraph at lines 1386--1398
+Overfull \hbox (1.96904pt too wide) in paragraph at lines 1397--1409
 \T1/stix2/m/n/12 Tijekom ra-zvoja, tes-ti-ra-nja i ana-lize sus-tava ko-ri-²ten
 a je stan-dardna la-bo-ra-to-rij-ska mjerna
  []
@@ -1876,40 +1862,55 @@ a je stan-dardna la-bo-ra-to-rij-ska mjerna
 [26 <./Figures/motor.png> <./Figures/enkoder.png>] [27 <./Figures/enkoder_kucis
 te.jpeg>] [28]
 Poglavlje 5..
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 [29
 
-]
-<csv/comp.pdf, id=507, 1183.42125pt x 626.34pt>
+] [30]
+<csv/comp.pdf, id=567, 1183.42125pt x 626.34pt>
 File: csv/comp.pdf Graphic file (type pdf)
 <use csv/comp.pdf>
-Package pdftex.def Info: csv/comp.pdf  used on input line 1538.
+Package pdftex.def Info: csv/comp.pdf  used on input line 1548.
 (pdftex.def)             Requested size: 441.01773pt x 233.41467pt.
- [30] [31 <./csv/comp.pdf>]
-<csv/zc.pdf, id=537, 1201.48875pt x 648.4225pt>
+ [31 <./csv/comp.pdf>]
+<csv/zc.pdf, id=596, 1201.48875pt x 648.4225pt>
 File: csv/zc.pdf Graphic file (type pdf)
 <use csv/zc.pdf>
-Package pdftex.def Info: csv/zc.pdf  used on input line 1563.
+Package pdftex.def Info: csv/zc.pdf  used on input line 1575.
 (pdftex.def)             Requested size: 441.01773pt x 238.0129pt.
- [32 <./csv/zc.pdf>]
-<csv/pokretanje.pdf, id=563, 1045.9075pt x 645.41125pt>
+<csv/zc_zoom.pdf, id=597, 1047.915pt x 645.41125pt>
+File: csv/zc_zoom.pdf Graphic file (type pdf)
+<use csv/zc_zoom.pdf>
+Package pdftex.def Info: csv/zc_zoom.pdf  used on input line 1582.
+(pdftex.def)             Requested size: 441.01773pt x 271.62238pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[32 <./csv/zc.pdf>] [33 <./csv/zc_zoom.pdf>]
+<csv/pokretanje.pdf, id=656, 1045.9075pt x 645.41125pt>
 File: csv/pokretanje.pdf Graphic file (type pdf)
 <use csv/pokretanje.pdf>
-Package pdftex.def Info: csv/pokretanje.pdf  used on input line 1614.
+Package pdftex.def Info: csv/pokretanje.pdf  used on input line 1635.
 (pdftex.def)             Requested size: 441.01773pt x 272.14433pt.
- [33 <./csv/pokretanje.pdf>]
-<csv/closed_loop.pdf, id=590, 1445.4pt x 675.52374pt>
+<csv/closed_loop.pdf, id=658, 1445.4pt x 675.52374pt>
 File: csv/closed_loop.pdf Graphic file (type pdf)
 <use csv/closed_loop.pdf>
-Package pdftex.def Info: csv/closed_loop.pdf  used on input line 1630.
+Package pdftex.def Info: csv/closed_loop.pdf  used on input line 1651.
 (pdftex.def)             Requested size: 441.01773pt x 206.11174pt.
 
 
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[34 <./csv/pokretanje.pdf>]
+
 pdfTeX warning: pdflatex (file ./csv/closed_loop_zc.pdf): PDF inclusion: found 
 PDF version <1.7>, but at most version <1.5> allowed
-<csv/closed_loop_zc.pdf, id=593, 465.65968pt x 327.14218pt>
+<csv/closed_loop_zc.pdf, id=686, 465.65968pt x 327.14218pt>
 File: csv/closed_loop_zc.pdf Graphic file (type pdf)
 <use csv/closed_loop_zc.pdf>
-Package pdftex.def Info: csv/closed_loop_zc.pdf  used on input line 1652.
+Package pdftex.def Info: csv/closed_loop_zc.pdf  used on input line 1673.
 (pdftex.def)             Requested size: 441.01773pt x 309.82986pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -1918,43 +1919,42 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 pdfTeX warning: pdflatex (file ./csv/closed_loop_undershoot.pdf): PDF inclusion
 : found PDF version <1.7>, but at most version <1.5> allowed
-<csv/closed_loop_undershoot.pdf, id=598, 465.65968pt x 327.14218pt>
+<csv/closed_loop_undershoot.pdf, id=691, 465.65968pt x 327.14218pt>
 File: csv/closed_loop_undershoot.pdf Graphic file (type pdf)
 <use csv/closed_loop_undershoot.pdf>
-Package pdftex.def Info: csv/closed_loop_undershoot.pdf  used on input line 167
-1.
+Package pdftex.def Info: csv/closed_loop_undershoot.pdf  used on input line 169
+3.
 (pdftex.def)             Requested size: 441.01773pt x 309.82986pt.
 
 
 pdfTeX warning: pdflatex (file ./csv/closed_loop_overshoot.pdf): PDF inclusion:
  found PDF version <1.7>, but at most version <1.5> allowed
-<csv/closed_loop_overshoot.pdf, id=601, 543.95218pt x 327.14218pt>
+<csv/closed_loop_overshoot.pdf, id=694, 543.95218pt x 327.14218pt>
 File: csv/closed_loop_overshoot.pdf Graphic file (type pdf)
 <use csv/closed_loop_overshoot.pdf>
-Package pdftex.def Info: csv/closed_loop_overshoot.pdf  used on input line 1677
+Package pdftex.def Info: csv/closed_loop_overshoot.pdf  used on input line 1699
 .
 (pdftex.def)             Requested size: 441.01773pt x 265.23828pt.
-[34 <./csv/closed_loop.pdf>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[35 <./csv/closed_loop_zc.pdf>]
-Overfull \vbox (7.48105pt too high) has occurred while \output is active []
+[35 <./csv/closed_loop.pdf>]
 
+LaTeX Warning: Text page 36 contains only floats.
 
-[36 <./csv/closed_loop_undershoot.pdf> <./csv/closed_loop_overshoot.pdf>]
+[36 <./csv/closed_loop_zc.pdf> <./csv/closed_loop_undershoot.pdf>] [37 <./csv/c
+losed_loop_overshoot.pdf>]
 \openout4 = `diplomski_rad.pyg'.
 
-
-(./_minted-diplomski_rad/default.pygstyle)
+ (./_minted-diplomski_rad/default.pygstyle)
 (./_minted-diplomski_rad/FCF65A1C0EAD4556EEFC2811D9FB02D326A757C8A9BDE9D7CE432A
 33768EFB30.pygtex
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 3.
-) [37]
+)
 \openout4 = `diplomski_rad.pyg'.
 
 
@@ -1966,36 +1966,31 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [38] [39]
 Poglavlje 6..
 
-Underfull \hbox (badness 10000) in paragraph at lines 1816--1816
+Underfull \hbox (badness 10000) in paragraph at lines 1837--1837
 []\T1/opensans-TLF/b/n/18 Usporedba os-tva-rene im-ple-
  []
 
 
-Underfull \hbox (badness 3601) in paragraph at lines 1816--1816
+Underfull \hbox (badness 3601) in paragraph at lines 1837--1837
 \T1/opensans-TLF/b/n/18 men-ta-cije s pos-to-je-¢im rje-²e-
  []
 
-<csv/simon_50.pdf, id=683, 1178.4025pt x 645.41125pt>
+<csv/simon_50.pdf, id=771, 1178.4025pt x 645.41125pt>
 File: csv/simon_50.pdf Graphic file (type pdf)
 <use csv/simon_50.pdf>
-Package pdftex.def Info: csv/simon_50.pdf  used on input line 1856.
+Package pdftex.def Info: csv/simon_50.pdf  used on input line 1877.
 (pdftex.def)             Requested size: 396.91325pt x 217.3885pt.
-<csv/moj_50.pdf, id=685, 996.72375pt x 692.5875pt>
+<csv/moj_50.pdf, id=773, 996.72375pt x 692.5875pt>
 File: csv/moj_50.pdf Graphic file (type pdf)
 <use csv/moj_50.pdf>
-Package pdftex.def Info: csv/moj_50.pdf  used on input line 1861.
+Package pdftex.def Info: csv/moj_50.pdf  used on input line 1882.
 (pdftex.def)             Requested size: 396.91325pt x 275.79362pt.
 [40
 
 ] [41 <./csv/simon_50.pdf> <./csv/moj_50.pdf>]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 1880.
-
-Overfull \hbox (2.92203pt too wide) in paragraph at lines 1878--1889
- [][] 
- []
-
-[42] [43]
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 1901.
+ [42] [43]
 Poglavlje 7..
 (./diplomski_rad.bbl [44
 
@@ -2010,7 +2005,7 @@ Underfull \hbox (badness 1803) in paragraph at lines 28--31
 ] [47]) [48] [49
 
 ]
-Overfull \hbox (1.8657pt too wide) in paragraph at lines 2044--2047
+Overfull \hbox (1.8657pt too wide) in paragraph at lines 2069--2072
 \T1/stix2/m/n/12 aerial ve-hi-cles; UAV; drones; six-step com-mu-ta-tion; back-
 electromotive force; back-EMF;
  []
@@ -2186,18 +2181,18 @@ hr_0036535500_90.pdf    Graphic file (type pdf)
 Figures/presjek.jpg
 ts1stix2.fd    2018/04/02 v2.0.0-latex stix2 TS1 font definitions
 Figures/microchip_torque_speed.png
-Figures/hard_chopping1.png
-Figures/soft_chopping.png
+csv/comp_ltspice.pdf
 Figures/soft_chopping_new.png
 Figures/comp_pwm_new.png
-Figures/pwm_sum.png
-Figures/pwm_drive_deg.png
+csv/pwm_sum_ltspice.pdf
+csv/faza_ltspice.pdf
 Figures/esc.jpeg
 Figures/motor.png
 Figures/enkoder.png
 Figures/enkoder_kuciste.jpeg
 csv/comp.pdf
   csv/zc.pdf
+csv/zc_zoom.pdf
 csv/pokretanje.pdf
 csv/closed_loop.pdf
 csv/closed_loop_zc.pdf
@@ -2217,22 +2212,16 @@ diplomski_rad.bbl
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.28pt have occurred.
 
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
 Package rerunfilecheck Info: File `diplomski_rad.out' has not changed.
 (rerunfilecheck)             Checksum: DE58E79A6C61ED4C26FE673637A2874E;7659.
 runsystem(rm diplomski_rad.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 70330 strings out of 476034
- 1775290 string characters out of 5792864
- 2623810 words of memory out of 6000000
- 89708 multiletter control sequences out of 15000+600000
+ 70344 strings out of 476034
+ 1775632 string characters out of 5792864
+ 2623416 words of memory out of 6000000
+ 89721 multiletter control sequences out of 15000+600000
  665719 words of font info for 192 fonts, out of 8000000 for 9000
  1137 hyphenation exceptions out of 8191
  99i,17n,131p,767b,2153s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -2248,10 +2237,10 @@ TIX2Text-Regular.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super
 00.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/public/cm-super/sftt1728.pfb>
-Output written on diplomski_rad.pdf (53 pages, 5495148 bytes).
+Output written on diplomski_rad.pdf (53 pages, 5532507 bytes).
 PDF statistics:
- 917 PDF objects out of 1000 (max. 8388607)
- 741 compressed objects within 8 object streams
+ 1008 PDF objects out of 1200 (max. 8388607)
+ 806 compressed objects within 9 object streams
  158 named destinations out of 1000 (max. 500000)
  442 words of extra memory for PDF output out of 10000 (max. 10000000)
 

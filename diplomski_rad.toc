@@ -12,9 +12,9 @@
 \contentsline {section}{\numberline {3.1.}Metoda komutacije u šest koraka}{14}{section.3.1}%
 \contentsline {section}{\numberline {3.2.}Upravljanje naponom i strujom signalima PWM-a}{17}{section.3.2}%
 \contentsline {subsubsection}{Tehnike primjene signala PWM-a za upravljanje}{17}{section*.12}%
-\contentsline {section}{\numberline {3.3.}Detekcija položaja rotora s pomoću PEMS-a}{20}{section.3.3}%
+\contentsline {section}{\numberline {3.3.}Detekcija položaja rotora s pomoću PEMS-a}{19}{section.3.3}%
 \contentsline {section}{\numberline {3.4.}Faze pokretanja i rada motora}{22}{section.3.4}%
-\contentsline {section}{\numberline {3.5.}Model regulacije brzine}{23}{section.3.5}%
+\contentsline {section}{\numberline {3.5.}Model regulacije brzine}{22}{section.3.5}%
 \contentsline {chapter}{\numberline {4.}Eksperimentalni postav}{24}{chapter.4}%
 \contentsline {section}{\numberline {4.1.}Elektronički sklop za upravljanje brzinom}{24}{section.4.1}%
 \contentsline {section}{\numberline {4.2.}Elektromotor \texttt {A2212/13T 1000KV}}{25}{section.4.2}%
@@ -27,13 +27,13 @@
 \contentsline {subsection}{\numberline {5.2.1.}Generiranje signala PWM-a}{31}{subsection.5.2.1}%
 \contentsline {subsection}{\numberline {5.2.2.}Akvizicija signala protuelektromotorne sile}{31}{subsection.5.2.2}%
 \contentsline {subsection}{\numberline {5.2.3.}Komunikacijsko sučelje}{32}{subsection.5.2.3}%
-\contentsline {section}{\numberline {5.3.}Implementacija algoritma upravljanja i regulacije}{32}{section.5.3}%
+\contentsline {section}{\numberline {5.3.}Implementacija algoritma upravljanja i regulacije}{33}{section.5.3}%
 \contentsline {subsection}{\numberline {5.3.1.}Poravnanje i rad u otvorenoj petlji}{33}{subsection.5.3.1}%
 \contentsline {subsection}{\numberline {5.3.2.}Prijelaz u zatvorenu petlju i sinkronizacija komutacije}{34}{subsection.5.3.2}%
 \contentsline {subsubsection}{Obrada rubnih slučajeva}{35}{section*.30}%
 \contentsline {subsection}{\numberline {5.3.3.}Regulacija brzine u zatvorenoj petlji}{35}{subsection.5.3.3}%
-\contentsline {subsubsection}{Procjena brzine vrtnje}{36}{section*.33}%
-\contentsline {subsubsection}{Digitalna implementacija PI regulatora}{37}{section*.35}%
+\contentsline {subsubsection}{Procjena brzine vrtnje}{37}{section*.33}%
+\contentsline {subsubsection}{Digitalna implementacija PI regulatora}{38}{section*.35}%
 \contentsline {chapter}{\numberline {6.}Usporedba ostvarene implementacije s postojećim rješenjem}{40}{chapter.6}%
 \contentsline {section}{\numberline {6.1.}Metodologija testiranja}{40}{section.6.1}%
 \contentsline {section}{\numberline {6.2.}Analiza faznog napona}{40}{section.6.2}%
