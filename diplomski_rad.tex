@@ -1,4 +1,4 @@
-\documentclass[diplomskirad]{fer}
+\documentclass[diplomskirad, upload]{fer}
 % Dodaj opciju upload za generiranje konačne verzije koja se učitava na FERWeb
 % Add the option upload to generate the final version which is uploaded to FERWeb
 
@@ -86,7 +86,6 @@
 \chapter{Uvod}
 \label{pog:uvod}
 
-% --- KRATKI UVOD U TEMATIKU ---
 Bespilotne letjelice (eng. \textit{unmanned aerial vehicles}, UAV), popularno
 zvane dronovi, danas se široko primjenjuju u brojnim industrijama, od filmske
 produkcije i poljoprivrede do dostave i rekreacijskog letenja
@@ -100,7 +99,6 @@ uključujući stabilnost, vrijeme leta i agilnost, izravno ovise o sposobnosti
 preciznog i brzog upravljanja brzinom vrtnje ovih motora
 \cite{cite:karakteristike_motora}.
 
-% --- UPRAVLJANJE BRZINOM VRTNJE ---
 
 Upravljanje brzinom vrtnje motora BLDC postiže se održavanjem kuta između
 magnetskih polja rotora i statora. Za to upravljački sklop mora poznavati
@@ -115,7 +113,6 @@ rotora praćenjem PEMS-a koji se inducira u neopterećenoj fazi (odjeljak
 vektorskog upravljanja, koriste algoritme za estimaciju položaja rotora jer
 nemaju mogućnost izravnog mjerenja PEMS-a \cite{NXP_AN2355}.
 
-% --- OPIS RADA I CILJA ---
 
 Ovaj rad bavi se analizom, modeliranjem i implementacijom sustava za
 upravljanje brzinom vrtnje motora BLDC s naglaskom na primjenu kod bespilotnih
@@ -166,7 +163,7 @@ Ovakvi motori obično daju veći okretni moment pri nižim brzinama vrtnje
 	\label{fig:presjek_motora}
 \end{figure}
 
-Valja spomenuti kako uz motore BLDC usko se vežu sinkroni elektromotori sa
+Valja spomenuti kako se uz motore BLDC usko vežu sinkroni elektromotori sa
 stalnim magnetima (\textit{permanent magnet synchronous motor}, PMSM). Takvi
 motori također su vrsta elektromotora sa stalnim magnetima, a glavna je razlika
 u valnom obliku protuelektromotorne sile gdje motor BLDC ima trapezni oblik, a
@@ -281,16 +278,17 @@ Protuelektromotorna sila je napon koji se stvara u zavojnicama statora prilikom
 vrtnje rotora, a suprotstavlja se naponu napajanja. Ovaj se napon inducira u
 skladu s Faradayevim zakonom elektromagnetske indukcije.
 
-Oblik protuelektromotorne sile ovisi o mehaničkoj konstrukciji motora,
-ponajviše o raspodjeli i obliku permanentnih magneta na rotoru te o izvedbi
-statorskih namota. Ovisno o tome, postoje trapezni valni oblik (slika
-\ref{fig:trapezoid}) i sinusni valni oblik (slika \ref{fig:sine})
-protuelektromotorne sile.
+Oblik PEMS-a ovisi o mehaničkoj konstrukciji motora, ponajviše o raspodjeli i
+obliku permanentnih magneta na rotoru te o izvedbi statorskih namota. Ovisno o
+tome, postoje trapezni valni oblik (slika \ref{fig:trapezoid}) i sinusni valni
+oblik (slika \ref{fig:sine}) PEMS-a.
 
-Poznavanje valnog oblika protuelektromotorne sile važno je pri upravljanju
-motorom jer se za minimalnu valovitost momenta, valni oblici pogonskog signala
-i PEMS-a moraju poklapati (odjeljak \ref{trap:torque-ripple})
-\cite{MicrochipAN885}.
+Poznavanje valnog oblika PEMS-a važno je pri upravljanju motorom jer se za
+minimalnu valovitost momenta, valni oblici pogonskog signala i PEMS-a moraju
+poklapati (odjeljak \ref{trap:torque-ripple}) \cite{MicrochipAN885}. Ipak, u
+primjenama poput dronova gdje minimalna valovitost momenta nije prioritet,
+često se susreće praksa da se motori sa sinusnim PEMS-om pogone jednostavnijim
+trapeznim signalom.
 
 \begin{figure}[h!]
 	\centering
@@ -343,9 +341,6 @@ fazna struja, $I_{\text{faza}}$ [A], niža je od mrežne struje,
 $I_{\text{mreža}}$ [A], prema izrazu $I_{\text{faza}} = I_{\text{mreža}} /
 	\sqrt{3}$.
 
-% Zbog ove razlike u faznim naponima, za dva motora s ovim konfiguracijama i
-% pripadnim konstantama motora $K_{t, Z}$ i $K_{t, T}$ za proizvesti jednak
-% moment vrijedi:
 Ova razlika u faznim naponima odražava se i na konstante momenta motora.
 Moment, $\tau$ [\SI{}{\newton\metre}], može se izraziti preko izraza $\tau =
 	K_t \cdot I_{\text{faza}}$, gdje je $K_t$ konstanta momenta
@@ -506,7 +501,7 @@ je slučaju potrebno proći kroz dva puna električna ciklusa. U kontekstu metod
 u šest koraka, jedan puni slijed od šest komutacija uvijek odgovara jednom
 električnom ciklusu.
 
-\bigskip % Dodaje malo vertikalnog razmaka
+\bigskip
 Slijed komutacije osmišljen je tako da magnetsko polje rotora, odnosno stalni
 magneti, uvijek zaostaje za poljem statora, što stvara moment koji pokreće
 rotor. Za ilustraciju, prva dva koraka u tipičnom slijedu su:
@@ -526,9 +521,10 @@ rotor. Za ilustraciju, prva dva koraka u tipičnom slijedu su:
 				      windingA/.style={fill=red!80},
 				      windingB/.style={fill=green!60!black},
 				      windingC/.style={fill=blue!80},
-				      flux vector/.style={draw=black, line width=2pt, -stealth}
+				      flux vector/.style={draw=black, line width=2pt, -stealth},
+				      % --- New style for the vague lines ---
+				      vague line/.style={draw=gray, thin}
 			      ]
-			      \def\rotorAngle{105}
 
 			      \def\statorOuterRadius{4}
 			      \def\statorInnerRadius{3}
@@ -541,9 +537,13 @@ rotor. Za ilustraciju, prva dva koraka u tipičnom slijedu su:
 			      \def\toothTipAngle{45}    % Angular width of the tooth tip/shoe
 			      \def\magnetAngle{60}      % Angular width of the magnets
 			      \def\arcThickness{0.1}    % Thickness of the arc on the tooth face (1mm = 0.1cm)
+			      \def\rotorAngle{105}
 
 			      \def\statorFluxAngle{240}   % Adjust this angle to rotate the stator flux vector
 			      \def\fluxVectorLength{5}    % Adjust this length for the vector arrow
+
+			      % --- New variable for the starting angle of the vague lines ---
+			      \def\firstLineAngle{0}      % Adjust this for the first line's angle
 
 			      \draw[stator yoke] (0,0) circle (\statorOuterRadius);
 
@@ -563,12 +563,6 @@ rotor. Za ilustraciju, prva dva koraka u tipičnom slijedu su:
 						      % use style=<macro> so TikZ applies it as a style, not as a color
 						      \path[stator tooth, style=\phaseStyle] \toothPath;
 
-						      % \fill[style=\phaseStyle, opacity=0.4] % lighter shade of the winding
-						      %     (-\toothTipAngle/2:{\statorInnerRadius - \arcThickness})
-						      %     arc (-\toothTipAngle/2:\toothTipAngle/2:{\statorInnerRadius - \arcThickness})
-						      %     -- (\toothTipAngle/2:\statorInnerRadius)
-						      %     arc (\toothTipAngle/2:-\toothTipAngle/2:\statorInnerRadius)
-						      %     -- cycle;
 					      \end{scope}
 				      }
 
@@ -589,6 +583,12 @@ rotor. Za ilustraciju, prva dva koraka u tipičnom slijedu su:
 			      \end{scope}
 
 			      \draw[flux vector] (0,0) -- (\statorFluxAngle:\fluxVectorLength);
+
+			      % --- Added loop to draw 6 vague lines on top of the picture ---
+			      \foreach \i in {0, 1, ..., 5} {
+					      \pgfmathsetmacro{\lineAngle}{\firstLineAngle + \i * 60}
+					      \draw[vague line] (0,0) -- (\lineAngle:\statorOuterRadius);
+				      }
 
 		      \end{tikzpicture}
 		      \caption{Dijagram motora konfiguracije \texttt{3s4p} kada struja teče iz faze A u fazu B}
@@ -612,7 +612,8 @@ rotor. Za ilustraciju, prva dva koraka u tipičnom slijedu su:
 					      windingC/.style={fill=blue!80},
 					      flux vector/.style={draw=black, line width=2pt, -stealth},
 					      angle arrow/.style={draw=black, line width=1pt, -{Stealth[length=2mm, width=2mm]}, shorten >=1pt},
-					      angle text/.style={font=\small, fill=white, inner sep=1pt} % Style for the angle label
+					      angle text/.style={font=\small, fill=white, inner sep=1pt},
+					      vague line/.style={draw=gray, thin}
 					      ]
 					      \def\rotorAngle{105}
 
@@ -633,6 +634,7 @@ rotor. Za ilustraciju, prva dva koraka u tipičnom slijedu su:
 					      \def\previousFluxAngle{240}      % Previous (or reference) stator flux vector angle (120 - 60 = 60)
 					      \def\angleArcRadius{0.8}        % Radius for the angle arc
 					      \def\angleTextOffset{0.2}       % Offset for the angle label from the arc
+					      \def\firstLineAngle{0}      % Adjust this for the first line's angle
 
 					      \draw[stator yoke] (0,0) circle (\statorOuterRadius);
 
@@ -683,6 +685,10 @@ rotor. Za ilustraciju, prva dva koraka u tipičnom slijedu su:
 					      \draw[angle arrow] (\previousFluxAngle:\angleArcRadius) arc (\previousFluxAngle:\statorFluxAngle:\angleArcRadius);
 					      \pgfmathsetmacro{\midAngle}{(\statorFluxAngle + \previousFluxAngle) / 2}
 					      \node[angle text] at (\midAngle:\angleArcRadius + \angleTextOffset) {$60^\circ$};
+					      \foreach \i in {0, 1, ..., 5} {
+							      \pgfmathsetmacro{\lineAngle}{\firstLineAngle + \i * 60}
+							      \draw[vague line] (0,0) -- (\lineAngle:\statorOuterRadius);
+						      }
 
 				      \end{tikzpicture}
 			      }
@@ -694,17 +700,20 @@ rotor. Za ilustraciju, prva dva koraka u tipičnom slijedu su:
 			      \centering
 			      \resizebox{\linewidth}{!}{%
 				      \begin{tikzpicture}[
-						      stator yoke/.style={draw=gray!80, line width=2pt},
-						      stator tooth/.style={draw=gray!80, line width=1.5pt},
-						      rotor yoke/.style={draw=gray!80, fill=gray!30, line width=8pt},
-						      magnet N/.style={draw=red!30, line width=10pt},
-						      magnet S/.style={draw=blue!40, line width=10pt},
-						      windingA/.style={fill=red!80},
-						      windingB/.style={fill=green!60!black},
-						      windingC/.style={fill=blue!80},
-						      flux vector/.style={draw=black, line width=2pt, -stealth}
+					      stator yoke/.style={draw=gray!80, line width=2pt},
+					      stator tooth/.style={draw=gray!80, line width=1.5pt},
+					      rotor yoke/.style={draw=gray!80, fill=gray!30, line width=8pt},
+					      magnet N/.style={draw=red!30, line width=10pt},
+					      magnet S/.style={draw=blue!40, line width=10pt},
+					      windingA/.style={fill=red!80},
+					      windingB/.style={fill=green!60!black},
+					      windingC/.style={fill=blue!80},
+					      flux vector/.style={draw=black, line width=2pt, -stealth},
+					      angle arrow/.style={draw=black, line width=1pt, -{Stealth[length=2mm, width=2mm]}, shorten >=1pt},
+					      angle text/.style={font=\small, fill=white, inner sep=1pt},
+					      vague line/.style={draw=gray, thin}
 					      ]
-					      \def\rotorAngle{45}
+					      \def\rotorAngle{75}
 
 					      \def\statorOuterRadius{4}
 					      \def\statorInnerRadius{3}
@@ -720,6 +729,10 @@ rotor. Za ilustraciju, prva dva koraka u tipičnom slijedu su:
 
 					      \def\statorFluxAngle{180}   % Adjust this angle to rotate the stator flux vector
 					      \def\fluxVectorLength{5}    % Adjust this length for the vector arrow
+					      \def\previousFluxAngle{240}      % Previous (or reference) stator flux vector angle (120 - 60 = 60)
+					      \def\angleArcRadius{0.8}        % Radius for the angle arc
+					      \def\angleTextOffset{0.2}       % Offset for the angle label from the arc
+					      \def\firstLineAngle{0}      % Adjust this for the first line's angle
 
 					      \draw[stator yoke] (0,0) circle (\statorOuterRadius);
 
@@ -765,6 +778,15 @@ rotor. Za ilustraciju, prva dva koraka u tipičnom slijedu su:
 					      \end{scope}
 
 					      \draw[flux vector] (0,0) -- (\statorFluxAngle:\fluxVectorLength);
+					      % \draw[flux vector, dashed, gray] (0,0) -- node[below left] {} (\previousFluxAngle:\fluxVectorLength) coordinate (previousFlux);
+					      %
+					      % \draw[angle arrow] (\previousFluxAngle:\angleArcRadius) arc (\previousFluxAngle:\statorFluxAngle:\angleArcRadius);
+					      % \pgfmathsetmacro{\midAngle}{(\statorFluxAngle + \previousFluxAngle) / 2}
+					      % \node[angle text] at (\midAngle:\angleArcRadius + \angleTextOffset) {$60^\circ$};
+					      \foreach \i in {0, 1, ..., 5} {
+							      \pgfmathsetmacro{\lineAngle}{\firstLineAngle + \i * 60}
+							      \draw[vague line] (0,0) -- (\lineAngle:\statorOuterRadius);
+						      }
 
 				      \end{tikzpicture}
 			      }
@@ -957,12 +979,6 @@ osnovne metode su:
 		            uključena. Kada se $S_1$ isključi, struja recirkulira kroz diodu donje
 		            sklopke u istom polumostu ($D_2$) i donju sklopku druge faze ($S_4$).
 		            Struja cirkulira u donjem dijelu kruga, zbog čega opada sporije \cite{TI2015}.
-		            % \begin{figure}[h!]
-		            %  \centering
-		            %  \includegraphics[width=0.95\textwidth]{Figures/hard_chopping1.png}
-		            %  \caption{Glatko preklapanje u alatu LTspice}
-		            %  \label{fig:hard_chopping}
-		            % \end{figure}
 
 		      \item \textbf{Sinkrona rektifikacija:} Koristi se komplementarni signal
 		            PWM-a. Kada se gornja sklopka ($S_1$) isključi (uz kratko mrtvo
@@ -1343,17 +1359,21 @@ zvjezdišta.
 \section{Elektromotor \texttt{A2212/13T 1000KV}}
 \label{sec:motor}
 
-U eksperimentu je korišten komercijalno dostupan trofazni motor BLDC modela
-\texttt{A2212/13T} prikazan na slici \ref{fig:motor}. Oznaka \texttt{A2212/13T}
-odnosi se na njegove konstrukcijske značajke. Oznaka \texttt{2212} specificira
-dimenzije statora: promjer od \SI{22}{\milli\metre} i visinu od
-\SI{12}{\milli\metre}. Motor ima 14 magnetskih polova na rotoru i 12 utora na
-statoru, što odgovara uobičajenoj konfiguraciji \texttt{14P12N} za ovu vrstu
-motora. Riječ je o vanjskom motoru konstante brzine od \texttt{1000 KV}, što
-specificira da motor teoretski, u neopterećenom stanju, postiže brzinu vrtnje
-od \num{1000} okretaja u minuti za svaki volt napona napajanja. Oznaka
-\texttt{13T} odnosi se na broj namotaja na svakom polu statora, što utječe na
-njegove momentne i brzinske karakteristike.
+U eksperimentu je korišten komercijalno dostupan trofazni motor
+PMSM\footnote{Mnogi proizvođači ne pridržavaju se službene terminologije. Iako
+	u opisu proizvoda piše da je riječ o motoru BLDC, testiranje osciloskopom
+	pokazalo je da motor zapravo ima sinusni valni oblik PEMS-a, karakterističan za
+	motore PMSM. Kao što je već rečeno, korištenje takvog motora za ovaj rad u
+	potpunosti je prihvatljivo.} modela \texttt{A2212/13T} prikazan na slici
+\ref{fig:motor}. Oznaka \texttt{A2212/13T} odnosi se na njegove konstrukcijske
+značajke. Oznaka \texttt{2212} specificira dimenzije statora: promjer od
+\SI{22}{\milli\metre} i visinu od \SI{12}{\milli\metre}. Motor ima 14
+magnetskih polova na rotoru i 12 utora na statoru, što odgovara uobičajenoj
+konfiguraciji \texttt{14P12N} za ovu vrstu motora. Riječ je o vanjskom motoru
+konstante brzine od \texttt{1000 KV}, što specificira da motor teoretski, u
+neopterećenom stanju, postiže brzinu vrtnje od \num{1000} okretaja u minuti za
+svaki volt napona napajanja. Oznaka \texttt{13T} odnosi se na broj namotaja na
+svakom polu statora, što utječe na njegove momentne i brzinske karakteristike.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.5\textwidth]{Figures/motor.png}
@@ -1499,7 +1519,7 @@ petlje, a uvjetovani su proteklim vremenom i brojem uspješnih detekcija PEMS-a.
 		% Definicija čvorova (nodes)
 		\node (start)      [terminator]                             {Pokreni motor};
 		\node (align)      [process, below=of start, yshift=-0.5cm] {Poravnanje rotora};
-		\node (align_time) [decision, below=of align, yshift=-0.5cm]{Prošlo utitravanja?};
+		\node (align_time) [decision, below=of align, yshift=-0.5cm]{Prošlo vrijeme utitravanja?};
 		\node (open_loop)  [process, below=of align_time, yshift=-0.5cm] {Otvorena petlja + prikupljanje PEMS-a}; % Prilagođen naziv
 		\node (comm_done)  [decision, below=of open_loop, yshift=-0.5cm] {Detektirana 3 prolaska kroz nulu?}; % Prilagođen naziv
 		\node (running)    [process, below=of comm_done, yshift=-0.5cm] {Zatvorena petlja}; % Prilagođen naziv
@@ -1544,7 +1564,6 @@ pojedinim izlazima signala PWM-a ostvareno je direktnim upisom u registre
 tajmera čime se postiže brza kontrola nad aktivnim fazama motora.
 \begin{figure}[h!]
 	\centering
-	% \includesvg[width=\textwidth]{csv/Untitled.svg}
 	\includegraphics[width=\textwidth]{csv/comp.pdf}
 	\caption{Komplementarni signal PWM-a na jednom polumostu snimljeno osciloskopom}
 	\label{fig:comp_scope}
